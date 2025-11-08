@@ -482,11 +482,6 @@ export default function ROICalculator() {
     }
 
     const validation = validateRequiredFields()
-    // Declare positiveReplies and leads here
-    const positiveReplies = Math.round(
-      (mailboxes * emailsPerDay * workingDays * sequenceSteps * (openRate / 100) * (replyRate / 100)) / ratioPerReply,
-    )
-    const leads = positiveReplies // Leads are now positive replies
 
     setCalculations((prev) => ({
       ...prev,
@@ -495,33 +490,48 @@ export default function ROICalculator() {
     }))
     setIsValidated(validation.isValid) // Update validation state
 
-    // Cold Email Calculations
-    const emailsPerMonth = mailboxes * emailsPerDay * workingDays
-    const totalEmails = emailsPerMonth * sequenceSteps
-    const delivered = Math.round(totalEmails * (1 - bounceRate / 100)) // Calculate delivered emails
-    const opens = Math.round(delivered * (openRate / 100)) // Calculate opens based on delivered
-    const clickRate = 1.0 // Placeholder, assuming clickRate is not directly set. This should ideally be a state variable or a derived value.
-    const clicks = Math.round(opens * (clickRate / 100)) // Placeholder for clicks calculation
-    const conversionRate = positiveReplyRate // Using positiveReplyRate for conversion rate in this context. This should also ideally be a state variable or derived.
-    const opportunities = Math.round(clicks * (conversionRate / 100)) // Recalculating opportunities based on clicks
-    const meetings = Math.round(opportunities * 0.75) // Keep existing meeting conversion logic
-    const deals = Math.round(meetings * (closeRate / 100))
+    // Cold Email Calculations - REFERENCE IMPLEMENTATION (tools.coldiq.com)
+    // Step 1: Total emails sent across all mailboxes
+    const totalEmailsAllMailboxes = mailboxes * emailsPerDay * workingDays
 
+    // Step 2: Unique prospects (divide by sequence steps, not multiply!)
+    const totalProspects = Math.floor(totalEmailsAllMailboxes / sequenceSteps)
+
+    // Step 3: Opportunities (divide by ratio, not multiply!)
+    const opportunities = Math.floor(totalProspects / ratioPerReply)
+
+    // Step 4: Meetings (76% conversion rate to match reference)
+    const meetings = Math.floor(opportunities * 0.76)
+
+    // Step 5: Deals
+    const deals = Math.floor(meetings * (closeRate / 100))
+
+    // Step 6: Revenue
     const revenue = deals * ltv
 
-    console.log("[v0] ===== CALCULATION BREAKDOWN =====")
+    // For compatibility with rest of code, calculate these metrics
+    const emailsPerMonth = totalEmailsAllMailboxes
+    const totalEmails = totalEmailsAllMailboxes
+    const delivered = Math.round(totalEmails * (1 - bounceRate / 100))
+    const opens = Math.round(delivered * (openRate / 100))
+    const emailsReplied = Math.round(totalEmails * (replyRate / 100))
+
+    // Leads are defined as positive replies (opportunities in this context)
+    const positiveReplies = opportunities
+    const leads = positiveReplies
+
+    // Prospects are unique contacts (same as totalProspects in reference)
+    const prospects = totalProspects
+
+    console.log("[v0] ===== CALCULATION BREAKDOWN (REFERENCE METHOD) =====")
     console.log("[v0] Revenue Setup:", { domains, mailboxes, emailsPerDay, workingDays, sequenceSteps })
     console.log("[v0] Performance Metrics:", { ratioPerReply, closeRate, ltv })
-    console.log("[v0] Advanced Metrics:", { openRate, replyRate, positiveReplyRate })
     console.log("[v0] Email Funnel:")
-    console.log("[v0]   emailsPerMonth =", mailboxes, "×", emailsPerDay, "×", workingDays, "=", emailsPerMonth)
-    console.log("[v0]   totalEmails =", emailsPerMonth, "×", sequenceSteps, "=", totalEmails)
-    console.log("[v0]   delivered =", totalEmails, "× (1 - ", bounceRate, "/ 100) =", delivered)
-    console.log("[v0]   opens =", delivered, "× (", openRate, "/ 100) =", opens)
-    console.log("[v0]   clicks =", opens, "× (", clickRate, "/ 100) =", clicks)
-    console.log("[v0]   opportunities =", clicks, "× (", conversionRate, "/ 100) =", opportunities)
-    console.log("[v0]   meetings =", opportunities, "× 0.75 =", meetings)
-    console.log("[v0]   deals =", meetings, "× (", closeRate, "/ 100) =", deals)
+    console.log("[v0]   totalEmailsAllMailboxes =", mailboxes, "×", emailsPerDay, "×", workingDays, "=", totalEmailsAllMailboxes)
+    console.log("[v0]   totalProspects = Math.floor(", totalEmailsAllMailboxes, "÷", sequenceSteps, ") =", totalProspects)
+    console.log("[v0]   opportunities = Math.floor(", totalProspects, "÷", ratioPerReply, ") =", opportunities)
+    console.log("[v0]   meetings = Math.floor(", opportunities, "× 0.76) =", meetings)
+    console.log("[v0]   deals = Math.floor(", meetings, "× (", closeRate, "/ 100)) =", deals)
     console.log("[v0]   revenue =", deals, "×", ltv, "=", revenue)
     console.log("[v0] ===== END BREAKDOWN =====")
 
@@ -608,7 +618,7 @@ export default function ROICalculator() {
     setCalculations({
       emailsPerMonth,
       totalEmails,
-      prospects: Math.round(totalEmails * (openRate / 100)), // Recalculating prospects based on opens
+      prospects: prospects, // Using totalProspects from reference calculation
       leads: leads, // Leads are now positive replies
       opportunities,
       meetings,
