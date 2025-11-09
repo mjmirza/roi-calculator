@@ -79,29 +79,29 @@ Calculate after-tax income with corporate tax rates for 11 countries:
 
 ### Installation
 
-```bash
+\`\`\`bash
 npm install
-```
+\`\`\`
 
 ### Development
 
-```bash
+\`\`\`bash
 npm run dev
-```
+\`\`\`
 
 Open [http://localhost:3000](http://localhost:3000) to view the calculator.
 
 ### Build
 
-```bash
+\`\`\`bash
 npm run build
-```
+\`\`\`
 
 ### Production
 
-```bash
+\`\`\`bash
 npm start
-```
+\`\`\`
 
 ## Testing
 
@@ -119,9 +119,9 @@ All test reports are available in the `/docs` folder:
 
 ### Run Tests
 
-```bash
+\`\`\`bash
 node test-combined-metrics.js
-```
+\`\`\`
 
 ## Documentation
 

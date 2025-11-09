@@ -186,12 +186,12 @@ If a user opens any of these sections (Cold Calling, LinkedIn, Referrals, or Cal
 **Recommended Fix:**
 Add the following lines to the `resetToDefaults` function after line 1005:
 
-```typescript
+\`\`\`typescript
 setShowColdCalling(false)
 setShowLinkedIn(false)
 setShowReferrals(false)
 setShowCalculationBreakdown(false)
-```
+\`\`\`
 
 ---
 
@@ -353,13 +353,13 @@ The localStorage is properly cleared at the end of the reset function. This ensu
 
 Add the missing visibility state resets to the `resetToDefaults` function. Insert after line 1005:
 
-```typescript
+\`\`\`typescript
 // Reset additional visibility states
 setShowColdCalling(false)
 setShowLinkedIn(false)
 setShowReferrals(false)
 setShowCalculationBreakdown(false)
-```
+\`\`\`
 
 ### Priority 2 - ENHANCEMENT
 
@@ -394,7 +394,7 @@ The reset function works correctly for the tax feature and all input values, but
 
 ### Line-by-Line Reset Function Analysis
 
-```typescript
+\`\`\`typescript
 967:  const resetToDefaults = () => {
 968:    setDomains(20)                           // Revenue Setup ✓
 969:    setMailboxes(40)                         // Revenue Setup ✓
@@ -462,7 +462,7 @@ MISSING:
 - setShowLinkedIn(false)                        // Visibility ✗
 - setShowReferrals(false)                       // Visibility ✗
 - setShowCalculationBreakdown(false)            // Visibility ✗
-```
+\`\`\`
 
 ---
 

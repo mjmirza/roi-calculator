@@ -40,7 +40,7 @@ All 11 currencies, including the newly added UAE Dirham (AED), have been success
 **Function Location:** Line 1052-1060
 
 **Implementation:**
-```javascript
+\`\`\`javascript
 const formatCurrency = (value: number) => {
   const currencyInfo = CURRENCIES[currency]
   const convertedValue = value * currencyInfo.rate
@@ -52,7 +52,7 @@ const formatCurrency = (value: number) => {
     maximumFractionDigits: 2,
   }).format(convertedValue).replace('$', currencyInfo.symbol)
 }
-```
+\`\`\`
 
 **Verified:**
 - ✅ Uses `CURRENCIES[currency]` to retrieve currency info
@@ -87,9 +87,9 @@ const formatCurrency = (value: number) => {
 - ✅ AED tax rate correctly set to 9% (UAE corporate tax above AED 375k threshold)
 
 **UI Integration (Line 1382):**
-```javascript
+\`\`\`javascript
 Include Tax ({(CORPORATE_TAX_RATES[currency] * 100).toFixed(1)}%)
-```
+\`\`\`
 - ✅ Tax rate dynamically displays based on selected currency
 
 ---
@@ -97,7 +97,7 @@ Include Tax ({(CORPORATE_TAX_RATES[currency] * 100).toFixed(1)}%)
 ### 4. UI INTEGRATION (Lines 1363-1378) ✅ PASS
 
 **Currency Selector Implementation:**
-```javascript
+\`\`\`javascript
 <Select value={currency} onValueChange={(value) => setCurrency(value as CurrencyCode)}>
   <SelectTrigger className="w-[180px] bg-background">
     <SelectValue placeholder="Select currency" />
@@ -114,7 +114,7 @@ Include Tax ({(CORPORATE_TAX_RATES[currency] * 100).toFixed(1)}%)
     ))}
   </SelectContent>
 </Select>
-```
+\`\`\`
 
 **Verified:**
 - ✅ All 11 currencies displayed in selector
@@ -162,12 +162,12 @@ Include Tax ({(CORPORATE_TAX_RATES[currency] * 100).toFixed(1)}%)
 ### 6. LOCALSTORAGE PERSISTENCE ✅ PASS
 
 **Load Implementation (Line 308):**
-```javascript
+\`\`\`javascript
 setCurrency(data.currency ?? "USD")
-```
+\`\`\`
 
 **Save Implementation (Lines 387, 422):**
-```javascript
+\`\`\`javascript
 const data = {
   // ... other fields
   currency,
@@ -175,7 +175,7 @@ const data = {
   // ... other fields
 }
 localStorage.setItem("roiCalculatorData", JSON.stringify(data))
-```
+\`\`\`
 
 **Dependencies (Lines 423-471):**
 - ✅ Currency included in useEffect dependency array

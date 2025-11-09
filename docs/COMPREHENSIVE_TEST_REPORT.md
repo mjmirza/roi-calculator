@@ -57,13 +57,13 @@ All corporate tax rates match expected values:
 #### Formula Verification (5/5)
 All tax calculation formulas are mathematically correct:
 
-```typescript
+\`\`\`typescript
 ✅ taxRate = CORPORATE_TAX_RATES[currency]
 ✅ netIncomeBeforeTax = totalRevenueAllChannels - totalCostAllChannels - commission
 ✅ taxAmount = enableTax && netIncomeBeforeTax > 0 ? netIncomeBeforeTax * taxRate : 0
 ✅ netIncomeAfterTax = netIncomeBeforeTax - taxAmount
 ✅ afterTaxROI = (netIncomeAfterTax / totalCostAllChannels) × 100
-```
+\`\`\`
 
 #### Edge Cases Tested (4/4)
 - ✅ Tax = $0 when disabled
@@ -74,40 +74,40 @@ All tax calculation formulas are mathematically correct:
 #### Test Scenarios (4/4)
 
 **Scenario 1: USA (21% tax) - Positive Profit**
-```
+\`\`\`
 Revenue: $100,000
 Costs: $60,000
 Commission: $5,000
 Net Before Tax: $35,000
 Tax (21%): $7,350 ✅
 Net After Tax: $27,650 ✅
-```
+\`\`\`
 
 **Scenario 2: UAE (9% tax) - Positive Profit**
-```
+\`\`\`
 Revenue: AED 200,000
 Costs: AED 120,000
 Commission: AED 10,000
 Net Before Tax: AED 70,000
 Tax (9%): AED 6,300 ✅
 Net After Tax: AED 63,700 ✅
-```
+\`\`\`
 
 **Scenario 3: Tax Disabled**
-```
+\`\`\`
 Revenue: $100,000
 Costs: $60,000
 Tax: $0 ✅ (disabled)
-```
+\`\`\`
 
 **Scenario 4: Negative Profit**
-```
+\`\`\`
 Revenue: $50,000
 Costs: $80,000
 Commission: $10,000
 Net Before Tax: -$40,000
 Tax: $0 ✅ (no tax on losses)
-```
+\`\`\`
 
 ---
 
@@ -214,12 +214,12 @@ $1,000 USD converted to all currencies:
 #### Recommended Fix
 Add 4 lines to `resetToDefaults` function after line 1005:
 
-```typescript
+\`\`\`typescript
 setShowColdCalling(false)
 setShowLinkedIn(false)
 setShowReferrals(false)
 setShowCalculationBreakdown(false)
-```
+\`\`\`
 
 ---
 
@@ -258,21 +258,21 @@ setShowCalculationBreakdown(false)
 #### Channel Toggle Cost Verification
 
 **Cold Calling (Line 609):**
-```typescript
+\`\`\`typescript
 const callCost = enableColdCalling ? callingSoftwareCost + callerSalaryCost : 0
-```
+\`\`\`
 ✅ Cost = $0 when disabled
 
 **LinkedIn (Line 621):**
-```typescript
+\`\`\`typescript
 const linkedInCost = enableLinkedIn ? linkedInToolCost + linkedInManagerCost : 0
-```
+\`\`\`
 ✅ Cost = $0 when disabled
 
 **Referrals (Line 630):**
-```typescript
+\`\`\`typescript
 const referralCost = enableReferrals ? referralProgramCost + referralDeals * referralIncentiveCost : 0
-```
+\`\`\`
 ✅ Cost = $0 when disabled
 
 #### Toggle Persistence Tests (5/5)

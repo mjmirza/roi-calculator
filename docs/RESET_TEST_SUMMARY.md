@@ -20,12 +20,12 @@ When users click "Reset to Defaults", these UI sections will remain open/visible
 ### Quick Fix:
 Add these 4 lines to the `resetToDefaults` function after line 1005:
 
-```typescript
+\`\`\`typescript
 setShowColdCalling(false)
 setShowLinkedIn(false)
 setShowReferrals(false)
 setShowCalculationBreakdown(false)
-```
+\`\`\`
 
 ### Test Coverage:
 - Total State Variables: 61
