@@ -6,25 +6,25 @@ This document provides a quick overview of the translation dictionary structure 
 
 ## File Organization
 
-```
+\`\`\`
 translations/
 ├── README.md           # Comprehensive documentation
 ├── STRUCTURE.md        # This file - quick reference
 ├── TEMPLATE.json       # Template for new translations
 ├── en.json            # English (base language)
 └── [language].json    # Additional language files
-```
+\`\`\`
 
 ## Dictionary Structure Overview
 
 ### Top Level
-```json
+\`\`\`json
 {
   "[language_code]": {
     // All sections here
   }
 }
-```
+\`\`\`
 
 ### Main Sections (28 total)
 
@@ -64,36 +64,36 @@ translations/
 ## Key Naming Conventions
 
 ### Pattern 1: Field + Tooltip
-```json
+\`\`\`json
 {
   "fieldName": "Field Label",
   "fieldNameTooltip": "Helpful explanation for the field"
 }
-```
+\`\`\`
 
 ### Pattern 2: Title + Description
-```json
+\`\`\`json
 {
   "title": "Section Title",
   "description": "Section description or subtitle"
 }
-```
+\`\`\`
 
 ### Pattern 3: State Labels
-```json
+\`\`\`json
 {
   "enabled": "Enabled",
   "disabled": "Disabled"
 }
-```
+\`\`\`
 
 ### Pattern 4: Metric Labels
-```json
+\`\`\`json
 {
   "metricName": "Metric Display Name",
   "metricDescription": "What this metric means"
 }
-```
+\`\`\`
 
 ## Translation Priority
 
@@ -126,30 +126,30 @@ translations/
 
 ### Percentages
 Keep the `%` symbol after the number:
-```json
+\`\`\`json
 "openRate": "Open rate (%)"  // ✓ Correct
 "openRate": "Open rate %"    // ✗ Incorrect
-```
+\`\`\`
 
 ### Tooltips
 Tooltips should be complete sentences:
-```json
+\`\`\`json
 "domainsTooltip": "Number of unique domains you'll use for sending emails."  // ✓ Correct
 "domainsTooltip": "Unique domains for sending"  // ✗ Too brief
-```
+\`\`\`
 
 ### Metrics with Units
 Include the unit in parentheses:
-```json
+\`\`\`json
 "salesCycleLength": "Sales cycle length (days)"  // ✓ Correct
 "salesCycleLength": "Sales cycle length"         // ✗ Missing unit
-```
+\`\`\`
 
 ### Labels with Context
-```json
+\`\`\`json
 "monthlyRetainer": "Agency monthly retainer"     // ✓ Context included
 "monthlyRetainer": "Monthly retainer"            // ✗ Missing context
-```
+\`\`\`
 
 ## Technical Terms to Preserve
 
@@ -164,86 +164,86 @@ These terms should generally remain in English or use widely-accepted translatio
 ## Currency Handling
 
 Currency symbols are defined in code and don't need translation:
-```javascript
+\`\`\`javascript
 // In code - DO NOT TRANSLATE
 CURRENCIES = {
   USD: { symbol: "$", name: "US Dollar" },  // Translate "US Dollar" only
   EUR: { symbol: "€", name: "Euro" },       // Translate "Euro" only
   // etc.
 }
-```
+\`\`\`
 
 In translation files, only translate currency names:
-```json
+\`\`\`json
 {
   "currencies": {
     "USD": "[Translate: US Dollar]",
     "EUR": "[Translate: Euro]"
   }
 }
-```
+\`\`\`
 
 ## Validation Messages
 
 Validation messages follow this pattern:
-```json
+\`\`\`json
 {
   "fieldName": "Field name (min: X)",
   "fieldNameDescription": "Detailed explanation"
 }
-```
+\`\`\`
 
 Example:
-```json
+\`\`\`json
 {
   "sendingMailboxesMin": "Sending mailboxes (min: 1)",
   "sendingMailboxesTooltip": "Total number of email accounts..."
 }
-```
+\`\`\`
 
 ## Contextual Variations
 
 Some strings have multiple variations for different contexts:
 
 ### Commission Type Descriptions
-```json
+\`\`\`json
 {
   "commissionTypePercentageDesc": "Sales reps earn a percentage...",
   "commissionTypeFlatDesc": "Sales reps earn a fixed amount..."
 }
-```
+\`\`\`
 
 ### ROI Labels
-```json
+\`\`\`json
 {
   "overallROI": "Overall ROI (All Channels)",
   "coldEmailROI": "Cold Email ROI:",
   "roi": "ROI"  // Short form for tables
 }
-```
+\`\`\`
 
 ## Step-by-Step Breakdown
 
 The calculation breakdown has a special structure:
-```json
+\`\`\`json
 {
   "step1Title": "Total Emails Sent",
   "step1Description": "mailboxes × emails/day × working days",
   "step1Result": "emails"
 }
-```
+\`\`\`
 
 Each step (1-8) follows this pattern with Title, Description, and Result.
 
 ## Suggestions Structure
 
 Suggestions have message + action pairs:
-```json
+\`\`\`json
 {
   "campaignLoss": "Your campaign is operating at a loss...",
   "campaignLossAction": "Reduce costs or improve conversion rates..."
 }
-```
+\`\`\`
 
 ## Multi-Language Testing Checklist
 
@@ -261,7 +261,7 @@ When adding a new language:
 
 ## Example Complete Section
 
-```json
+\`\`\`json
 {
   "es": {
     "revenueSetup": {
@@ -280,7 +280,7 @@ When adding a new language:
     }
   }
 }
-```
+\`\`\`
 
 ## Quick Start for Translators
 

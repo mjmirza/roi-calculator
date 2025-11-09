@@ -160,11 +160,11 @@
 | AED | 9.0% | د.إ | ✅ PASS |
 
 **Tax Calculation Formula:**
-```
+\`\`\`
 grossProfit = revenue - totalCost
 taxAmount = grossProfit × CORPORATE_TAX_RATES[currency]
 netProfit = grossProfit - taxAmount
-```
+\`\`\`
 
 **Status**: ✅ PASS - All 11 currencies have tax rates defined
 
@@ -281,7 +281,7 @@ netProfit = grossProfit - taxAmount
 ### 3.1 Component Imports ✅
 
 **All Required Components Imported:**
-```typescript
+\`\`\`typescript
 ✅ Card, CardContent, CardDescription, CardHeader, CardTitle
 ✅ Input
 ✅ Label
@@ -289,7 +289,7 @@ netProfit = grossProfit - taxAmount
 ✅ Button
 ✅ Select, SelectContent, SelectItem, SelectTrigger, SelectValue
 ✅ Switch
-```
+\`\`\`
 
 **Status**: ✅ PASS - All UI components imported (verified in source)
 
@@ -414,12 +414,12 @@ netProfit = grossProfit - taxAmount
 ### 5.2 Validation Function ✅
 
 **Implementation:**
-```typescript
+\`\`\`typescript
 validateRequiredFields() ✅
 - Returns { isValid, missingFields } ✅
 - Updates calculations state ✅
 - Triggers validation on input change ✅
-```
+\`\`\`
 
 **Status**: ✅ PASS - Validation system complete
 
@@ -497,11 +497,11 @@ validateRequiredFields() ✅
 
 ### 7.1 Build Success ✅
 
-```
+\`\`\`
 ✓ Compiled successfully in 1655.8ms
 ✓ Generating static pages (3/3) in 311.7ms
 ✓ Finalizing page optimization
-```
+\`\`\`
 
 **Status**: ✅ PASS - Clean build, no errors
 

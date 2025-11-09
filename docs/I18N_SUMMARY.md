@@ -23,13 +23,13 @@ A complete internationalization (i18n) system has been successfully implemented 
 - Fallback mechanism (selected language → English → key)
 
 **Key Exports**:
-```typescript
+\`\`\`typescript
 - SUPPORTED_LANGUAGES: Language metadata with flags
 - loadTranslation(language): Load translation JSON
 - createTranslateFunction(): Create translation function with fallback
 - applyRTLStyles(isRTL): Apply RTL to document
 - getStoredLanguage() / setStoredLanguage(): localStorage persistence
-```
+\`\`\`
 
 ---
 
@@ -46,14 +46,14 @@ A complete internationalization (i18n) system has been successfully implemented 
 - Language switching with persistence
 
 **Key Exports**:
-```typescript
+\`\`\`typescript
 - LanguageProvider: Context provider component
 - useLanguage(): Hook for full language context
 - useTranslation(): Convenience hook for t() function only
-```
+\`\`\`
 
 **Context Value**:
-```typescript
+\`\`\`typescript
 {
   language: LanguageCode;        // Current language
   setLanguage: (lang) => void;   // Change language
@@ -61,7 +61,7 @@ A complete internationalization (i18n) system has been successfully implemented 
   isLoading: boolean;            // Loading state
   isRTL: boolean;                // RTL flag
 }
-```
+\`\`\`
 
 ---
 
@@ -117,22 +117,22 @@ A complete internationalization (i18n) system has been successfully implemented 
 - Ensures language context available throughout app
 
 **Before**:
-```typescript
+\`\`\`typescript
 <body>
   {children}
   <Analytics />
 </body>
-```
+\`\`\`
 
 **After**:
-```typescript
+\`\`\`typescript
 <body>
   <LanguageProvider>
     {children}
     <Analytics />
   </LanguageProvider>
 </body>
-```
+\`\`\`
 
 ---
 
@@ -142,15 +142,15 @@ A complete internationalization (i18n) system has been successfully implemented 
 **Changes**: 30+ string replacements with translation calls
 
 **Imports Added**:
-```typescript
+\`\`\`typescript
 import { useLanguage } from "@/contexts/LanguageContext"
 import { LanguageSelector } from "@/components/language/LanguageSelector"
-```
+\`\`\`
 
 **Hook Usage**:
-```typescript
+\`\`\`typescript
 const { t } = useLanguage()
-```
+\`\`\`
 
 **Sections Translated**:
 
@@ -241,7 +241,7 @@ const { t } = useLanguage()
 ## Technical Implementation Details
 
 ### Architecture:
-```
+\`\`\`
 ┌─────────────────────────────────────┐
 │         App (layout.tsx)            │
 │    ┌─────────────────────────┐     │
@@ -253,23 +253,23 @@ const { t } = useLanguage()
 │    │  └──────────────────┘   │     │
 │    └─────────────────────────┘     │
 └─────────────────────────────────────┘
-```
+\`\`\`
 
 ### Data Flow:
-```
+\`\`\`
 1. User selects language → setLanguage()
 2. Context loads translation JSON
 3. Translation function (t) updated
 4. Components re-render with new text
 5. Language saved to localStorage
 6. RTL applied if Arabic
-```
+\`\`\`
 
 ### Type Safety:
-```typescript
+\`\`\`typescript
 LanguageCode: 'en' | 'es' | 'pt' | ... // Prevents typos
 TranslateFunction: (key: string, fallback?: string) => string
-```
+\`\`\`
 
 ### Performance:
 - Translation function memoized with `useMemo`
@@ -305,21 +305,21 @@ When Arabic is selected:
 - Falls back to English if browser language unsupported
 
 ### Storage Example:
-```javascript
+\`\`\`javascript
 localStorage.getItem('roi-calculator-language') // "es"
-```
+\`\`\`
 
 ---
 
 ## Build & Testing
 
 ### Build Status: ✅ **SUCCESSFUL**
-```bash
+\`\`\`bash
 npm run build
 # ✓ Compiled successfully
 # ✓ Generating static pages (3/3)
 # ○  (Static)  prerendered as static content
-```
+\`\`\`
 
 ### Type Checking: ✅ **PASSED**
 - No TypeScript errors
@@ -339,26 +339,26 @@ npm run build
 ## Usage Examples
 
 ### Basic Translation:
-```typescript
+\`\`\`typescript
 const { t } = useLanguage()
 
 return <h1>{t("header.title")}</h1>
-```
+\`\`\`
 
 ### With Fallback:
-```typescript
+\`\`\`typescript
 <p>{t("some.key", "Default text if key missing")}</p>
-```
+\`\`\`
 
 ### Dynamic Values:
-```typescript
+\`\`\`typescript
 <p>{t("revenue.prefix")} {revenue} {t("revenue.suffix")}</p>
-```
+\`\`\`
 
 ### Conditional Translation:
-```typescript
+\`\`\`typescript
 {isValidated ? t("status.valid") : t("status.invalid")}
-```
+\`\`\`
 
 ---
 
@@ -446,9 +446,9 @@ To translate remaining sections:
 2. **Find** hardcoded strings (e.g., `"Sales Commission"`)
 
 3. **Replace** with translation calls:
-   ```typescript
+   \`\`\`typescript
    <CardTitle>{t("salesCommission.title")}</CardTitle>
-   ```
+   \`\`\`
 
 4. **Verify** translation key exists in all JSON files
 

@@ -4,7 +4,7 @@ Complete index of all stress testing files and reports for the ROI Calculator's 
 
 ## 📁 File Structure
 
-```
+\`\`\`
 roi-calculator/
 ├── 🧪 Test Suite Files
 │   ├── multi-language-stress-test.html          Interactive browser test suite
@@ -35,7 +35,7 @@ roi-calculator/
     ├── TEMPLATE.json
     ├── README.md
     └── STRUCTURE.md
-```
+\`\`\`
 
 ## 🧪 Test Suite Files
 
@@ -53,14 +53,14 @@ roi-calculator/
 - Character set validation
 
 **How to Use:**
-```bash
+\`\`\`bash
 # Option 1: Direct open
 open multi-language-stress-test.html
 
 # Option 2: Local server
 npx serve .
 # Navigate to: http://localhost:3000/multi-language-stress-test.html
-```
+\`\`\`
 
 **Test Categories:**
 - ✅ Language Switching (10 languages)
@@ -87,13 +87,13 @@ npx serve .
 - Character set verification
 
 **How to Use:**
-```bash
+\`\`\`bash
 # Run all tests
 node generate-ml-test-report.js
 
 # View exit code (0 = success, 1 = failures)
 echo $?
-```
+\`\`\`
 
 **Output:**
 - Console summary
@@ -117,10 +117,10 @@ echo $?
 **Purpose:** Quick access to latest test report
 
 **How to Use:**
-```bash
+\`\`\`bash
 chmod +x view-test-report.sh
 ./view-test-report.sh
-```
+\`\`\`
 
 **What it does:**
 - Finds the most recent HTML report
@@ -250,7 +250,7 @@ chmod +x view-test-report.sh
 **Purpose:** Machine-readable data
 
 **Structure:**
-```json
+\`\`\`json
 {
   "timestamp": "...",
   "summary": { ... },
@@ -260,7 +260,7 @@ chmod +x view-test-report.sh
   "recommendations": [ ... ],
   "browserCompatibility": { ... }
 }
-```
+\`\`\`
 
 **Use cases:**
 - CI/CD integration
@@ -307,7 +307,7 @@ chmod +x view-test-report.sh
 
 ### First Time Setup
 
-```bash
+\`\`\`bash
 # 1. Ensure Node.js is installed
 node --version
 
@@ -317,11 +317,11 @@ cd /path/to/roi-calculator
 # 3. Make scripts executable
 chmod +x generate-ml-test-report.js
 chmod +x view-test-report.sh
-```
+\`\`\`
 
 ### Running Tests
 
-```bash
+\`\`\`bash
 # Quick test (automated)
 node generate-ml-test-report.js
 
@@ -330,11 +330,11 @@ node generate-ml-test-report.js
 
 # Interactive testing
 open multi-language-stress-test.html
-```
+\`\`\`
 
 ### Reading Reports
 
-```bash
+\`\`\`bash
 # Quick summary (text)
 cat ML_TESTING_SUMMARY.txt
 
@@ -343,31 +343,31 @@ cat MULTI_LANGUAGE_STRESS_TEST_REPORT.md
 
 # Latest HTML report
 open test-reports/ml-test-report-*.html
-```
+\`\`\`
 
 ### Common Workflows
 
 **1. Daily Testing:**
-```bash
+\`\`\`bash
 node generate-ml-test-report.js
 ./view-test-report.sh
-```
+\`\`\`
 
 **2. Pre-Deployment:**
-```bash
+\`\`\`bash
 node generate-ml-test-report.js
 # Review MULTI_LANGUAGE_STRESS_TEST_REPORT.md
 # Complete manual testing checklist
-```
+\`\`\`
 
 **3. Adding New Language:**
-```bash
+\`\`\`bash
 # 1. Copy TEMPLATE.json to translations/XX.json
 # 2. Translate all strings
 # 3. Add 'XX' to LANGUAGES array in scripts
 # 4. Run tests
 node generate-ml-test-report.js
-```
+\`\`\`
 
 ---
 

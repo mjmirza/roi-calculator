@@ -4,7 +4,7 @@ This directory contains translation files for the ROI Calculator application. Th
 
 ## File Structure
 
-```
+\`\`\`
 translations/
 ├── README.md          # This file
 ├── en.json           # English (base language)
@@ -12,7 +12,7 @@ translations/
 ├── fr.json           # French (to be added)
 ├── de.json           # German (to be added)
 └── [other languages] # Add as needed
-```
+\`\`\`
 
 ## Translation Dictionary Structure
 
@@ -76,7 +76,7 @@ The translation dictionary is organized into logical sections that correspond to
 ## Example Translation
 
 English (en.json):
-```json
+\`\`\`json
 {
   "en": {
     "header": {
@@ -85,10 +85,10 @@ English (en.json):
     }
   }
 }
-```
+\`\`\`
 
 Spanish (es.json):
-```json
+\`\`\`json
 {
   "es": {
     "header": {
@@ -97,7 +97,7 @@ Spanish (es.json):
     }
   }
 }
-```
+\`\`\`
 
 ## Translation Coverage
 

@@ -69,14 +69,14 @@
 **Status:** PASS - All variables and formulas verified
 
 **Calculation Chain:**
-```typescript
+\`\`\`typescript
 totalEmails = mailboxes × emailsPerDay × workingDays ✅
 prospects = totalEmails ÷ sequenceSteps ✅
 opportunities = prospects ÷ ratioPerReply ✅
 meetings = opportunities × 0.76 ✅
 deals = meetings × (closeRate ÷ 100) ✅
 revenue = deals × ltv ✅
-```
+\`\`\`
 
 **All Variables Verified:**
 - emailsPerMonth ✅
@@ -95,7 +95,7 @@ revenue = deals × ltv ✅
 #### 1.2 Multi-Channel Calculations ✅
 
 **Cold Calling Channel (8/8)** ✅
-```typescript
+\`\`\`typescript
 callsPerMonth = callsPerDay × callingDaysPerMonth ✅
 callConnections = callsPerMonth × (callConnectRate ÷ 100) ✅
 callMeetings = callConnections × (callToMeetingRate ÷ 100) ✅
@@ -104,10 +104,10 @@ callRevenue = callDeals × ltv ✅
 callCost = callingSoftwareCost + callerSalaryCost ✅
 callROI = ((callRevenue - callCost) ÷ callCost) × 100 ✅
 callCAC = callCost ÷ callDeals ✅
-```
+\`\`\`
 
 **LinkedIn Outreach Channel (9/9)** ✅
-```typescript
+\`\`\`typescript
 linkedInConnectionsPerMonth = linkedInConnectionsPerDay × workingDays ✅
 linkedInAccepted = connectionsPerMonth × (acceptRate ÷ 100) ✅
 linkedInReplies = accepted × (replyRate ÷ 100) ✅
@@ -117,27 +117,27 @@ linkedInRevenue = deals × ltv ✅
 linkedInCost = toolCost + managerCost ✅
 linkedInROI = ((revenue - cost) ÷ cost) × 100 ✅
 linkedInCAC = cost ÷ deals ✅
-```
+\`\`\`
 
 **Referral Program Channel (6/6)** ✅
-```typescript
+\`\`\`typescript
 referralMeetings = referralsPerMonth × (conversionRate ÷ 100) ✅
 referralDeals = meetings × (closeRate ÷ 100) ✅
 referralRevenue = deals × ltv ✅
 referralCost = incentiveCost + programCost ✅
 referralROI = ((revenue - cost) ÷ cost) × 100 ✅
 referralCAC = cost ÷ deals ✅
-```
+\`\`\`
 
 **Combined Multi-Channel Metrics (6/6)** ✅
-```typescript
+\`\`\`typescript
 totalMeetingsAllChannels = sum of all channel meetings ✅
 totalDealsAllChannels = sum of all channel deals ✅
 totalRevenueAllChannels = sum of all channel revenues ✅
 totalCostAllChannels = sum of all channel costs ✅
 combinedROI = ((totalRevenue - totalCost) ÷ totalCost) × 100 ✅
 combinedCAC = totalCost ÷ totalDeals ✅
-```
+\`\`\`
 
 #### 1.3 Commission Calculations ✅ (6/6)
 
@@ -172,11 +172,11 @@ combinedCAC = totalCost ÷ totalDeals ✅
 | UAE Dirham | AED | د.إ | 9.0% | ✅ PASS |
 
 **Tax Calculation Formula:**
-```typescript
+\`\`\`typescript
 grossProfit = revenue - totalCost
 taxAmount = grossProfit × CORPORATE_TAX_RATES[currency]
 netProfit = grossProfit - taxAmount
-```
+\`\`\`
 
 **All tax rates are based on 2024-2025 corporate tax data** ✅
 
@@ -256,9 +256,9 @@ netProfit = grossProfit - taxAmount
 #### 2.5 Currency State ✅
 
 **Implementation:**
-```typescript
+\`\`\`typescript
 const [currency, setCurrency] = useState<CurrencyCode>("USD") ✅
-```
+\`\`\`
 
 **Behavior:**
 - Type-safe currency selection ✅
@@ -301,7 +301,7 @@ const [currency, setCurrency] = useState<CurrencyCode>("USD") ✅
 #### 3.1 Component Imports ✅
 
 **All UI Components Present (lines 4-10):**
-```typescript
+\`\`\`typescript
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card" ✅
 import { Input } from "@/components/ui/input" ✅
 import { Label } from "@/components/ui/label" ✅
@@ -309,7 +309,7 @@ import { Separator } from "@/components/ui/separator" ✅
 import { Button } from "@/components/ui/button" ✅
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select" ✅
 import { Switch } from "@/components/ui/switch" ✅
-```
+\`\`\`
 
 #### 3.2 Icon Library ✅ (11/11)
 
@@ -357,13 +357,13 @@ import { Switch } from "@/components/ui/switch" ✅
 #### 4.1 localStorage Save ✅
 
 **Implementation:**
-```typescript
+\`\`\`typescript
 useEffect(() => {
   if (!isClient) return
   const data = { /* all states */ }
   localStorage.setItem("roiCalculatorData", JSON.stringify(data))
 }, [/* 40+ dependencies */])
-```
+\`\`\`
 
 **Features:**
 - Auto-save on any state change ✅
@@ -385,7 +385,7 @@ useEffect(() => {
 #### 4.2 localStorage Load ✅
 
 **Implementation:**
-```typescript
+\`\`\`typescript
 useEffect(() => {
   setIsClient(true)
   const saved = localStorage.getItem("roiCalculatorData")
@@ -398,7 +398,7 @@ useEffect(() => {
     }
   }
 }, [])
-```
+\`\`\`
 
 **Features:**
 - Loads on component mount ✅
@@ -420,13 +420,13 @@ useEffect(() => {
 - enableLinkedIn: saves & loads ✅
 
 **Pattern Verified:**
-```typescript
+\`\`\`typescript
 // Save
 data.fieldName
 
 // Load
 setFieldName(data.fieldName ?? defaultValue)
-```
+\`\`\`
 
 **Result:** All states persist correctly across page reloads ✅
 
@@ -437,7 +437,7 @@ setFieldName(data.fieldName ?? defaultValue)
 #### 5.1 Validation Function ✅
 
 **Implementation:**
-```typescript
+\`\`\`typescript
 const validateRequiredFields = () => {
   const missing: string[] = []
   if (mailboxes < 1) missing.push("Sending mailboxes (min: 1)")
@@ -452,7 +452,7 @@ const validateRequiredFields = () => {
     missingFields: missing,
   }
 }
-```
+\`\`\`
 
 #### 5.2 Required Fields (6/6) ✅
 
@@ -481,11 +481,11 @@ const validateRequiredFields = () => {
 #### 5.4 Validation State ✅
 
 **State Variables:**
-```typescript
+\`\`\`typescript
 isValid: boolean ✅
 missingFields: string[] ✅
 isValidated: boolean ✅
-```
+\`\`\`
 
 **Integration:**
 - Prevents invalid calculations ✅
@@ -514,7 +514,7 @@ isValidated: boolean ✅
 #### 7.1 All 11 Currencies Defined ✅
 
 **CURRENCIES Object:**
-```typescript
+\`\`\`typescript
 const CURRENCIES = {
   USD: { symbol: "$", name: "US Dollar", rate: 1.0 },
   EUR: { symbol: "€", name: "Euro", rate: 0.92 },
@@ -528,7 +528,7 @@ const CURRENCIES = {
   SGD: { symbol: "S$", name: "Singapore Dollar", rate: 1.34 },
   AED: { symbol: "د.إ", name: "UAE Dirham", rate: 3.67 },
 } as const
-```
+\`\`\`
 
 #### 7.2 Currency Properties ✅
 
@@ -609,9 +609,9 @@ const CURRENCIES = {
 
 #### 9.1 Next.js Compliance ✅
 
-```typescript
+\`\`\`typescript
 "use client" ✅ (Line 1)
-```
+\`\`\`
 
 **Features:**
 - Proper directive placement ✅
@@ -621,11 +621,11 @@ const CURRENCIES = {
 #### 9.2 TypeScript Types ✅
 
 **Type Definitions:**
-```typescript
+\`\`\`typescript
 type CurrencyCode = keyof typeof CURRENCIES ✅
 const CURRENCIES = { ... } as const ✅
 const CORPORATE_TAX_RATES = { ... } as const ✅
-```
+\`\`\`
 
 **Type Safety:**
 - Proper type annotations ✅
@@ -644,14 +644,14 @@ const CORPORATE_TAX_RATES = { ... } as const ✅
 #### 9.4 Error Handling ✅
 
 **Implementation:**
-```typescript
+\`\`\`typescript
 try {
   const data = JSON.parse(saved)
   // ... load data
 } catch (e) {
   console.error("Failed to load saved data", e) ✅
 }
-```
+\`\`\`
 
 **Features:**
 - Try-catch for localStorage ✅
@@ -665,12 +665,12 @@ try {
 
 #### 10.1 Build Success ✅
 
-```bash
+\`\`\`bash
 npm run build
-```
+\`\`\`
 
 **Output:**
-```
+\`\`\`
 ✓ Compiled successfully in 1655.8ms
 ✓ Generating static pages (3/3) in 311.7ms
 ✓ Finalizing page optimization
@@ -680,15 +680,15 @@ Route (app)
 └ ○ /_not-found
 
 ○  (Static)  prerendered as static content
-```
+\`\`\`
 
 **Result:** Clean build with ZERO errors ✅
 
 #### 10.2 Dev Server ✅
 
-```bash
+\`\`\`bash
 npm run dev
-```
+\`\`\`
 
 **Status:**
 - Server started successfully ✅
@@ -799,7 +799,7 @@ npm run dev
 6. Test each language thoroughly
 
 **Example Structure:**
-```
+\`\`\`
 /locales
   /en
     common.json
@@ -810,7 +810,7 @@ npm run dev
   /fr
     common.json
     calculator.json
-```
+\`\`\`
 
 **Expected Translation Keys:**
 - header.title
@@ -856,10 +856,10 @@ npm run dev
    - Enable all → Verify combined metrics
 
 **Implementation:**
-```bash
+\`\`\`bash
 npm install -D @playwright/test
 npx playwright install
-```
+\`\`\`
 
 ---
 
@@ -877,7 +877,7 @@ npx playwright install
 - Component rendering: 70%+
 
 **Key Functions to Test:**
-```typescript
+\`\`\`typescript
 // Test calculation formulas
 calculateColdEmailROI(inputs) -> expected outputs
 calculateColdCallingROI(inputs) -> expected outputs
@@ -893,12 +893,12 @@ calculateTax(profit, currency) -> taxAmount
 
 // Test commission calculations
 calculateCommission(revenue, type, rate) -> commissionCost
-```
+\`\`\`
 
 **Implementation:**
-```bash
+\`\`\`bash
 npm install -D jest @testing-library/react @testing-library/jest-dom
-```
+\`\`\`
 
 ---
 
@@ -918,7 +918,7 @@ npm install -D jest @testing-library/react @testing-library/jest-dom
 - Web Vitals
 
 **Optimization Opportunities:**
-```typescript
+\`\`\`typescript
 // Memoize expensive calculations
 const calculations = useMemo(() => {
   // ... calculation logic
@@ -936,7 +936,7 @@ const debouncedSave = useMemo(
   }, 1000),
   []
 )
-```
+\`\`\`
 
 ---
 
@@ -958,9 +958,9 @@ const debouncedSave = useMemo(
 - Lighthouse Accessibility Audit
 
 **Implementation:**
-```bash
+\`\`\`bash
 npm install -D @axe-core/react
-```
+\`\`\`
 
 ---
 
@@ -1118,7 +1118,7 @@ However, static analysis shows excellent code quality and structure, giving high
 
 ### Test Execution Command
 
-```bash
+\`\`\`bash
 # Run automated tests
 node test-calculator.js
 
@@ -1128,7 +1128,7 @@ npm run build
 # Runtime test
 npm run dev
 # Navigate to http://localhost:3000
-```
+\`\`\`
 
 ### Contact & Support
 

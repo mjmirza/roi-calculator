@@ -38,7 +38,7 @@ This document describes the complete internationalization (i18n) implementation 
 
 ## File Structure
 
-```
+\`\`\`
 /Users/mirzaiqbal/roi-calculator/
 ├── lib/
 │   └── i18n.ts                          # Translation utilities
@@ -62,7 +62,7 @@ This document describes the complete internationalization (i18n) implementation 
 │   ├── layout.tsx                       # App wrapped with LanguageProvider
 │   └── page.tsx                         # Main page with translated strings
 └── I18N_IMPLEMENTATION.md              # This file
-```
+\`\`\`
 
 ## Core Implementation
 
@@ -70,7 +70,7 @@ This document describes the complete internationalization (i18n) implementation 
 
 The `i18n.ts` file provides:
 
-```typescript
+\`\`\`typescript
 // Language types
 export type LanguageCode = 'en' | 'es' | 'pt' | 'de' | 'fr' | 'zh' | 'ja' | 'ar' | 'hi' | 'ru';
 
@@ -87,13 +87,13 @@ export const SUPPORTED_LANGUAGES: Record<LanguageCode, LanguageMetadata> = {
 - applyRTLStyles(isRTL): Apply RTL styles to document
 - getStoredLanguage(): Get saved language from localStorage
 - setStoredLanguage(language): Save language to localStorage
-```
+\`\`\`
 
 ### 2. Language Context (`contexts/LanguageContext.tsx`)
 
 Provides app-wide language state:
 
-```typescript
+\`\`\`typescript
 // Context value
 interface LanguageContextValue {
   language: LanguageCode;
@@ -106,13 +106,13 @@ interface LanguageContextValue {
 // Hooks
 export const useLanguage = () => { ... }
 export const useTranslation = () => { ... }  // Convenience hook
-```
+\`\`\`
 
 ### 3. Usage in Components
 
 #### In the main component:
 
-```typescript
+\`\`\`typescript
 import { useLanguage } from "@/contexts/LanguageContext"
 
 export default function ROICalculator() {
@@ -125,21 +125,21 @@ export default function ROICalculator() {
     </div>
   )
 }
-```
+\`\`\`
 
 #### Language Selector:
 
-```typescript
+\`\`\`typescript
 import { LanguageSelector } from "@/components/language/LanguageSelector"
 
 <LanguageSelector />
-```
+\`\`\`
 
 ## Translation Keys Structure
 
 All translations follow a consistent nested structure:
 
-```json
+\`\`\`json
 {
   "en": {
     "header": {
@@ -163,7 +163,7 @@ All translations follow a consistent nested structure:
     // ... etc
   }
 }
-```
+\`\`\`
 
 ## Features & Functionality
 
@@ -246,17 +246,17 @@ The translation files contain keys for all sections:
 To translate additional sections in `page.tsx`:
 
 1. **Find the hardcoded string:**
-   ```typescript
+   \`\`\`typescript
    <CardTitle>Some Title</CardTitle>
-   ```
+   \`\`\`
 
 2. **Replace with translation call:**
-   ```typescript
+   \`\`\`typescript
    <CardTitle>{t("section.title")}</CardTitle>
-   ```
+   \`\`\`
 
 3. **Ensure translation key exists in all JSON files:**
-   ```json
+   \`\`\`json
    {
      "en": {
        "section": {
@@ -264,47 +264,47 @@ To translate additional sections in `page.tsx`:
        }
      }
    }
-   ```
+   \`\`\`
 
 ### Pattern for Common Elements:
 
 **Card Headers:**
-```typescript
+\`\`\`typescript
 <CardTitle>{t("section.title")}</CardTitle>
 <CardDescription>{t("section.description")}</CardDescription>
-```
+\`\`\`
 
 **Labels with Tooltips:**
-```typescript
+\`\`\`typescript
 <LabelWithTooltip
   htmlFor="fieldId"
   label={t("section.fieldLabel")}
   tooltip={t("section.fieldTooltip")}
 />
-```
+\`\`\`
 
 **Text Content:**
-```typescript
+\`\`\`typescript
 <p>{t("section.textContent")}</p>
-```
+\`\`\`
 
 **Dynamic Text:**
-```typescript
+\`\`\`typescript
 {t("section.prefix")} {dynamicValue} {t("section.suffix")}
-```
+\`\`\`
 
 ## Testing the Implementation
 
 ### 1. Build Test
-```bash
+\`\`\`bash
 npm run build
-```
+\`\`\`
 ✅ Build completes successfully without errors
 
 ### 2. Runtime Test
-```bash
+\`\`\`bash
 npm run dev
-```
+\`\`\`
 Then:
 1. Open http://localhost:3000
 2. Click language selector in header

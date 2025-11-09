@@ -95,18 +95,18 @@
 ### Required Steps:
 
 1. **Install i18n Library**
-   ```bash
+   \`\`\`bash
    npm install next-intl
    # or
    npm install react-i18next i18next
-   ```
+   \`\`\`
 
 2. **Create Translation Files**
-   ```
+   \`\`\`
    /locales/en/common.json
    /locales/es/common.json
    /locales/fr/common.json
-   ```
+   \`\`\`
 
 3. **Replace Hardcoded Text**
    - Extract all strings to translation files
@@ -114,9 +114,9 @@
    - Add language switcher
 
 4. **Re-run This Test Suite**
-   ```bash
+   \`\`\`bash
    node test-calculator.js
-   ```
+   \`\`\`
 
 ---
 

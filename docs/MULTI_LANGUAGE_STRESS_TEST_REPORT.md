@@ -412,23 +412,23 @@ Ensure `lang` attribute updates dynamically when switching languages.
 ## How to Run Tests
 
 ### Interactive Browser Test
-```bash
+\`\`\`bash
 # Open in browser
 open multi-language-stress-test.html
 
 # Or serve with local server
 npx serve .
 # Then navigate to http://localhost:3000/multi-language-stress-test.html
-```
+\`\`\`
 
 ### Automated Test Suite
-```bash
+\`\`\`bash
 # Run all tests
 node generate-ml-test-report.js
 
 # View reports
 open test-reports/ml-test-report-*.html
-```
+\`\`\`
 
 ---
 

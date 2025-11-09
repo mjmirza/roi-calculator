@@ -5,25 +5,25 @@ This directory contains comprehensive stress testing tools for the ROI Calculato
 ## 📋 Quick Start
 
 ### Run All Tests (Automated)
-```bash
+\`\`\`bash
 node generate-ml-test-report.js
-```
+\`\`\`
 
 ### View Test Report
-```bash
+\`\`\`bash
 ./view-test-report.sh
 # Or manually open: test-reports/ml-test-report-*.html
-```
+\`\`\`
 
 ### Interactive Browser Testing
-```bash
+\`\`\`bash
 # Option 1: Direct open (if using a local server)
 open multi-language-stress-test.html
 
 # Option 2: Use a local server
 npx serve .
 # Then navigate to http://localhost:3000/multi-language-stress-test.html
-```
+\`\`\`
 
 ---
 
@@ -138,7 +138,7 @@ Reports are saved in `/test-reports/` directory:
 
 ### JSON Report Structure
 
-```json
+\`\`\`json
 {
   "timestamp": "ISO-8601 timestamp",
   "summary": {
@@ -161,7 +161,7 @@ Reports are saved in `/test-reports/` directory:
     // Action items
   ]
 }
-```
+\`\`\`
 
 ---
 
@@ -187,13 +187,13 @@ Reports are saved in `/test-reports/` directory:
 ## 🚀 Running Specific Tests
 
 ### Test Only One Language
-```javascript
+\`\`\`javascript
 // Edit generate-ml-test-report.js
 const LANGUAGES = ['en', 'es']; // Test only English and Spanish
-```
+\`\`\`
 
 ### Test Only Performance
-```javascript
+\`\`\`javascript
 // In generate-ml-test-report.js, comment out other test functions:
 // testLanguageSwitching(translations);
 // testRTL(translations);
@@ -201,7 +201,7 @@ const LANGUAGES = ['en', 'es']; // Test only English and Spanish
 // testCombinedFeatures(translations);
 testPerformance(translations); // Only this one
 // testEdgeCases(translations);
-```
+\`\`\`
 
 ### Rapid Switch Test (Interactive)
 1. Open `multi-language-stress-test.html`
@@ -214,27 +214,27 @@ testPerformance(translations); // Only this one
 
 ### Issue: "Translation file not found"
 **Solution:** Ensure all language files exist in `/translations/` directory:
-```bash
+\`\`\`bash
 ls translations/*.json
-```
+\`\`\`
 
 ### Issue: "Tests passing but UI broken"
 **Solution:** Run interactive browser tests for visual validation:
-```bash
+\`\`\`bash
 open multi-language-stress-test.html
-```
+\`\`\`
 
 ### Issue: "Japanese character test failing"
 **Note:** This is a known issue. Japanese uses Kanji (CJK) instead of pure Hiragana/Katakana. The test expects Hiragana but Japanese legitimately uses Kanji. This is a test validation issue, not a functionality problem.
 
 **Fix:** Update the regex in `generate-ml-test-report.js`:
-```javascript
+\`\`\`javascript
 // Change:
 'ja': { pattern: /[\u3040-\u309f\u30a0-\u30ff]/, ... }
 
 // To:
 'ja': { pattern: /[\u3040-\u309f\u30a0-\u30ff\u4e00-\u9fff]/, ... }
-```
+\`\`\`
 
 ### Issue: "Long words in German/Russian"
 **Solution:** This is expected. German compounds words and Russian has long technical terms. Manual UI testing recommended to check for overflow.
@@ -300,7 +300,7 @@ open multi-language-stress-test.html
 
 ### Run Tests on Every Commit
 Add to your CI/CD pipeline:
-```bash
+\`\`\`bash
 # .github/workflows/test.yml (GitHub Actions)
 - name: Run Multi-Language Tests
   run: node generate-ml-test-report.js
@@ -310,13 +310,13 @@ Add to your CI/CD pipeline:
   with:
     name: ml-test-reports
     path: test-reports/
-```
+\`\`\`
 
 ### Weekly Performance Checks
-```bash
+\`\`\`bash
 # Cron job to track bundle size over time
 0 0 * * 0 cd /path/to/roi-calculator && node generate-ml-test-report.js
-```
+\`\`\`
 
 ---
 
@@ -330,7 +330,7 @@ Add to your CI/CD pipeline:
 
 ### Add New Test Category
 In `generate-ml-test-report.js`:
-```javascript
+\`\`\`javascript
 // Add category to results structure
 results.categories.myNewCategory = {
   tests: [],
@@ -347,7 +347,7 @@ function testMyNewCategory(translations) {
 
 // Call in runTests()
 testMyNewCategory(translations);
-```
+\`\`\`
 
 ---
 

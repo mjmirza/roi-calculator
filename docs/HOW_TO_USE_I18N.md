@@ -18,35 +18,35 @@
 
 At the top of your component:
 
-```typescript
+\`\`\`typescript
 import { useLanguage } from "@/contexts/LanguageContext"
 
 export default function MyComponent() {
   const { t } = useLanguage()
   // ...
 }
-```
+\`\`\`
 
 ### Step 2: Replace Hardcoded Strings
 
 **Before:**
-```typescript
+\`\`\`typescript
 <h1>ROI Calculator</h1>
 <p>Calculate your return on investment</p>
-```
+\`\`\`
 
 **After:**
-```typescript
+\`\`\`typescript
 <h1>{t("header.title")}</h1>
 <p>{t("header.subtitle")}</p>
-```
+\`\`\`
 
 ### Step 3: Ensure Translation Keys Exist
 
 Check that the key exists in all translation files:
 
 **File: `/translations/en.json`**
-```json
+\`\`\`json
 {
   "en": {
     "header": {
@@ -55,10 +55,10 @@ Check that the key exists in all translation files:
     }
   }
 }
-```
+\`\`\`
 
 **File: `/translations/es.json`**
-```json
+\`\`\`json
 {
   "es": {
     "header": {
@@ -67,23 +67,23 @@ Check that the key exists in all translation files:
     }
   }
 }
-```
+\`\`\`
 
 ## Common Patterns
 
 ### Pattern 1: Simple Text
 
-```typescript
+\`\`\`typescript
 // Hardcoded
 <CardTitle>Revenue Setup</CardTitle>
 
 // Translated
 <CardTitle>{t("revenueSetup.title")}</CardTitle>
-```
+\`\`\`
 
 ### Pattern 2: Text with Variables
 
-```typescript
+\`\`\`typescript
 // Dynamic content
 const deals = 10
 const revenue = 50000
@@ -93,54 +93,54 @@ const revenue = 50000
   {t("summary.prefix")} {deals} {t("summary.deals")}
   {t("summary.generated")} {formatCurrency(revenue)}
 </p>
-```
+\`\`\`
 
 ### Pattern 3: Conditional Text
 
-```typescript
+\`\`\`typescript
 // Show different text based on condition
 {isValidated
   ? <p>{t("status.validated")}</p>
   : <p>{t("status.incomplete")}</p>
 }
-```
+\`\`\`
 
 ### Pattern 4: Props with Translations
 
-```typescript
+\`\`\`typescript
 <LabelWithTooltip
   htmlFor="emailsPerDay"
   label={t("revenueSetup.emailsPerDay")}
   tooltip={t("revenueSetup.emailsPerDayTooltip")}
   required
 />
-```
+\`\`\`
 
 ### Pattern 5: Button Text
 
-```typescript
+\`\`\`typescript
 <Button onClick={handleReset}>
   <RotateCcw className="h-4 w-4" />
   {t("header.reset")}
 </Button>
-```
+\`\`\`
 
 ### Pattern 6: Placeholder Text
 
-```typescript
+\`\`\`typescript
 <Input
   placeholder={t("input.enterValue")}
   aria-label={t("input.emailsPerDayLabel")}
 />
-```
+\`\`\`
 
 ## Translation Key Naming Convention
 
 Follow this structure for consistency:
 
-```
+\`\`\`
 section.element.property
-```
+\`\`\`
 
 ### Examples:
 
@@ -163,7 +163,7 @@ section.element.property
 - `warning` - Warning message
 
 **Complete Examples:**
-```
+\`\`\`
 header.title
 header.subtitle
 revenueSetup.title
@@ -174,7 +174,7 @@ performanceMetrics.closeRateTooltip
 validation.requiredFieldsMissing
 common.enabled
 common.disabled
-```
+\`\`\`
 
 ## Adding a New Language
 
@@ -182,15 +182,15 @@ common.disabled
 
 Create a new file in `/translations/`:
 
-```bash
+\`\`\`bash
 touch translations/it.json  # For Italian
-```
+\`\`\`
 
 ### Step 2: Add Language Metadata
 
 Edit `/lib/i18n.ts` and add to `SUPPORTED_LANGUAGES`:
 
-```typescript
+\`\`\`typescript
 export const SUPPORTED_LANGUAGES: Record<LanguageCode, LanguageMetadata> = {
   // ... existing languages
   it: {
@@ -201,21 +201,21 @@ export const SUPPORTED_LANGUAGES: Record<LanguageCode, LanguageMetadata> = {
     isRTL: false,
   },
 };
-```
+\`\`\`
 
 ### Step 3: Update Type Definition
 
 Add the language code to the type:
 
-```typescript
+\`\`\`typescript
 export type LanguageCode = 'en' | 'es' | 'pt' | 'de' | 'fr' | 'zh' | 'ja' | 'ar' | 'hi' | 'ru' | 'it';
-```
+\`\`\`
 
 ### Step 4: Create Translation Content
 
 Copy English file and translate:
 
-```json
+\`\`\`json
 {
   "it": {
     "header": {
@@ -225,7 +225,7 @@ Copy English file and translate:
     // ... translate all keys
   }
 }
-```
+\`\`\`
 
 ### Step 5: Test
 
@@ -241,7 +241,7 @@ Copy English file and translate:
 **Cause**: Translation key doesn't exist in the JSON file
 
 **Fix**: Add the key to the translation file:
-```json
+\`\`\`json
 {
   "en": {
     "header": {
@@ -249,24 +249,24 @@ Copy English file and translate:
     }
   }
 }
-```
+\`\`\`
 
 ### Issue: Translation not updating
 
 **Cause**: Component not re-rendering or using wrong hook
 
 **Fix**: Ensure you're using `useLanguage()` hook:
-```typescript
+\`\`\`typescript
 const { t } = useLanguage()  // ✅ Correct
 // not: const t = useTranslation()  // ❌ This works too but less flexible
-```
+\`\`\`
 
 ### Issue: RTL not applying
 
 **Cause**: Language metadata incorrect
 
 **Fix**: Check `isRTL` flag in `/lib/i18n.ts`:
-```typescript
+\`\`\`typescript
 ar: {
   code: 'ar',
   name: 'Arabic',
@@ -274,7 +274,7 @@ ar: {
   flag: '🇸🇦',
   isRTL: true,  // ← Must be true for RTL
 },
-```
+\`\`\`
 
 ### Issue: Language not persisting
 
@@ -287,129 +287,129 @@ ar: {
 ### ✅ DO:
 
 1. **Use semantic key names**
-   ```typescript
+   \`\`\`typescript
    t("header.title")  // ✅ Clear and semantic
-   ```
+   \`\`\`
 
 2. **Keep keys organized by section**
-   ```json
+   \`\`\`json
    {
      "header": { ... },
      "revenueSetup": { ... },
      "costStructure": { ... }
    }
-   ```
+   \`\`\`
 
 3. **Provide fallback text for new keys**
-   ```typescript
+   \`\`\`typescript
    t("new.key", "Default text")  // ✅ Fallback provided
-   ```
+   \`\`\`
 
 4. **Use consistent naming**
-   ```typescript
+   \`\`\`typescript
    t("section.fieldName")        // Label
    t("section.fieldNameTooltip") // Tooltip
-   ```
+   \`\`\`
 
 ### ❌ DON'T:
 
 1. **Don't use arbitrary key names**
-   ```typescript
+   \`\`\`typescript
    t("x123")  // ❌ Not clear what this is
-   ```
+   \`\`\`
 
 2. **Don't hard-code values in translation calls**
-   ```typescript
+   \`\`\`typescript
    t(`header.${"title"}`)  // ❌ Use proper keys
-   ```
+   \`\`\`
 
 3. **Don't skip translations for some languages**
-   ```json
+   \`\`\`json
    // ❌ Missing in some language files
-   ```
+   \`\`\`
 
 4. **Don't translate technical IDs or class names**
-   ```typescript
+   \`\`\`typescript
    className={t("styles.className")}  // ❌ Keep CSS classes as-is
-   ```
+   \`\`\`
 
 ## Real-World Examples from the App
 
 ### Example 1: Header Translation
 
 **Original (Hardcoded):**
-```typescript
+\`\`\`typescript
 <h1 className="text-2xl font-semibold">ROI Calculator</h1>
 <p className="text-sm text-muted-foreground mt-1">
   Calculate your cold outreach campaign return on investment
 </p>
-```
+\`\`\`
 
 **Translated:**
-```typescript
+\`\`\`typescript
 <h1 className="text-2xl font-semibold">{t("header.title")}</h1>
 <p className="text-sm text-muted-foreground mt-1">
   {t("header.subtitle")}
 </p>
-```
+\`\`\`
 
 ### Example 2: Form Label with Tooltip
 
 **Original:**
-```typescript
+\`\`\`typescript
 <LabelWithTooltip
   htmlFor="domains"
   label="Domains"
   tooltip="Number of unique domains you'll use for sending emails..."
 />
-```
+\`\`\`
 
 **Translated:**
-```typescript
+\`\`\`typescript
 <LabelWithTooltip
   htmlFor="domains"
   label={t("revenueSetup.domains")}
   tooltip={t("revenueSetup.domainsTooltip")}
 />
-```
+\`\`\`
 
 ### Example 3: Button with Icon
 
 **Original:**
-```typescript
+\`\`\`typescript
 <Button onClick={handleReset}>
   <RotateCcw className="h-4 w-4" />
   Reset
 </Button>
-```
+\`\`\`
 
 **Translated:**
-```typescript
+\`\`\`typescript
 <Button onClick={handleReset}>
   <RotateCcw className="h-4 w-4" />
   {t("header.reset")}
 </Button>
-```
+\`\`\`
 
 ### Example 4: Validation Message
 
 **Original:**
-```typescript
+\`\`\`typescript
 <CardTitle className="text-base">Required Fields Missing</CardTitle>
 <CardDescription className="text-xs">
   Please fill in the following required fields to see calculations:
 </CardDescription>
-```
+\`\`\`
 
 **Translated:**
-```typescript
+\`\`\`typescript
 <CardTitle className="text-base">
   {t("validation.requiredFieldsMissing")}
 </CardTitle>
 <CardDescription className="text-xs">
   {t("validation.fillRequiredFields")}
 </CardDescription>
-```
+\`\`\`
 
 ## Testing Your Translations
 
@@ -431,9 +431,9 @@ ar: {
 
 Run the build to catch any errors:
 
-```bash
+\`\`\`bash
 npm run build
-```
+\`\`\`
 
 Look for:
 - ✅ Compiled successfully
