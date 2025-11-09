@@ -1,0 +1,234 @@
+================================================================================
+COMBINED METRICS MATHEMATICAL VALIDATION TEST
+================================================================================
+
+TEST 1: ALL CHANNELS DISABLED
+--------------------------------------------------------------------------------
+Cold Email Metrics:
+  Meetings: 12, Deals: 8, Revenue: $40,000, Cost: $5,800, ROI: 589.66%
+
+[32m✓ PASS[0m 1.1
+  Description: Total cost equals cold email cost only (no phantom costs)
+  Expected: 5,800.00
+  Actual:   5,800.00
+
+[32m✓ PASS[0m 1.2
+  Description: Total revenue equals cold email revenue
+  Expected: 40,000.00
+  Actual:   40,000.00
+
+[32m✓ PASS[0m 1.3
+  Description: Total deals equals cold email deals
+  Expected: 8.00
+  Actual:   8.00
+
+[32m✓ PASS[0m 1.4
+  Description: Total meetings equals cold email meetings
+  Expected: 12.00
+  Actual:   12.00
+
+[32m✓ PASS[0m 1.5
+  Description: Combined ROI equals cold email ROI
+  Expected: 589.66
+  Actual:   589.66
+
+[32m✓ PASS[0m 1.6
+  Description: Cold calling cost is zero when disabled
+  Expected: 0.00
+  Actual:   0.00
+
+[32m✓ PASS[0m 1.7
+  Description: LinkedIn cost is zero when disabled
+  Expected: 0.00
+  Actual:   0.00
+
+[32m✓ PASS[0m 1.8
+  Description: Referrals cost is zero when disabled
+  Expected: 0.00
+  Actual:   0.00
+
+TEST 2: SINGLE CHANNEL ADDITION (Cold Calling)
+--------------------------------------------------------------------------------
+Cold Email Metrics:
+  Cost: $5,800, Revenue: $40,000, ROI: 589.66%
+Cold Calling Metrics:
+  Cost: $4,200, Revenue: $165,000, ROI: 3828.57%
+
+[32m✓ PASS[0m 2.1
+  Description: Total cost = email + calling
+  Expected: 10,000.00
+  Actual:   10,000.00
+
+[32m✓ PASS[0m 2.2
+  Description: Calling cost increased by exactly $4,200
+  Expected: 4,200.00
+  Actual:   4,200.00
+
+[32m✓ PASS[0m 2.3
+  Description: Total revenue = email + calling
+  Expected: 205,000.00
+  Actual:   205,000.00
+
+[32m✓ PASS[0m 2.4
+  Description: Combined ROI calculated correctly
+  Expected: 1,950.00
+  Actual:   1,950.00
+
+[32m✓ PASS[0m 2.5
+  Description: LinkedIn cost is still zero
+  Expected: 0.00
+  Actual:   0.00
+
+[32m✓ PASS[0m 2.6
+  Description: Referrals cost is still zero
+  Expected: 0.00
+  Actual:   0.00
+
+TEST 3: ALL CHANNELS ENABLED
+--------------------------------------------------------------------------------
+Channel Breakdown:
+  Cold Email:   Cost: $5,800, Revenue: $40,000, Deals: 8
+  Cold Calling: Cost: $4,200, Revenue: $165,000, Deals: 33
+  LinkedIn:     Cost: $3,600, Revenue: $10,000, Deals: 2
+  Referrals:    Cost: $2,500, Revenue: $15,000, Deals: 3
+
+[32m✓ PASS[0m 3.1
+  Description: Total cost = sum of all enabled channels
+  Expected: 16,100.00
+  Actual:   16,100.00
+
+[32m✓ PASS[0m 3.2
+  Description: Total revenue = sum of all channels
+  Expected: 230,000.00
+  Actual:   230,000.00
+
+[32m✓ PASS[0m 3.3
+  Description: Total deals = sum of all channels
+  Expected: 46.00
+  Actual:   46.00
+
+[32m✓ PASS[0m 3.4
+  Description: Total meetings = sum of all channels
+  Expected: 66.00
+  Actual:   66.00
+
+[32m✓ PASS[0m 3.5
+  Description: Combined ROI calculated correctly
+  Expected: 1,328.57
+  Actual:   1,328.57
+
+[32m✓ PASS[0m 3.6
+  Description: Combined CAC calculated correctly
+  Expected: 350.00
+  Actual:   350.00
+
+TEST 4: CHANNEL TOGGLE TEST (LinkedIn)
+--------------------------------------------------------------------------------
+LinkedIn Disabled:
+  Total Cost: $5,800, LinkedIn Cost: $0
+LinkedIn Enabled:
+  Total Cost: $9,400, LinkedIn Cost: $3,600
+
+[32m✓ PASS[0m 4.1
+  Description: LinkedIn cost is $0 when disabled
+  Expected: 0.00
+  Actual:   0.00
+
+[32m✓ PASS[0m 4.2
+  Description: LinkedIn cost is $3,600 when enabled
+  Expected: 3,600.00
+  Actual:   3,600.00
+
+[32m✓ PASS[0m 4.3
+  Description: Cost increases by LinkedIn cost amount
+  Expected: 3,600.00
+  Actual:   3,600.00
+
+LinkedIn Disabled Again:
+  Total Cost: $5,800, LinkedIn Cost: $0
+
+[32m✓ PASS[0m 4.4
+  Description: Cost returns to original when disabled
+  Expected: 5,800.00
+  Actual:   5,800.00
+
+TEST 5: MATHEMATICAL CONSISTENCY
+--------------------------------------------------------------------------------
+Verifying summation consistency:
+  Individual deals: 8 + 33 + 2 + 3 = 46
+  Combined deals: 46
+
+[32m✓ PASS[0m 5.1
+  Description: Total deals = sum of channel deals
+  Expected: 46.00
+  Actual:   46.00
+
+[32m✓ PASS[0m 5.2
+  Description: Total meetings = sum of channel meetings
+  Expected: 66.00
+  Actual:   66.00
+
+[32m✓ PASS[0m 5.3
+  Description: Total revenue = sum of channel revenues
+  Expected: 230,000.00
+  Actual:   230,000.00
+
+[32m✓ PASS[0m 5.4
+  Description: Total cost = sum of enabled channel costs
+  Expected: 16,100.00
+  Actual:   16,100.00
+
+[32m✓ PASS[0m 5.5
+  Description: Combined CAC = totalCost / totalDeals
+  Expected: 350.00
+  Actual:   350.00
+
+[32m✓ PASS[0m 5.6
+  Description: Combined ROI = ((revenue - cost) / cost) × 100
+  Expected: 1,328.57
+  Actual:   1,328.57
+
+TEST 6: EDGE CASES
+--------------------------------------------------------------------------------
+Zero LTV Test:
+  Revenue: $0, ROI: -100.00%
+
+[32m✓ PASS[0m 6.1
+  Description: Zero LTV results in zero revenue
+  Expected: 0.00
+  Actual:   0.00
+
+[32m✓ PASS[0m 6.2
+  Description: Zero revenue with cost results in -100% ROI
+  Expected: -100.00
+  Actual:   -100.00
+
+Zero Close Rate Test:
+  Deals: 0, Revenue: $0
+
+[32m✓ PASS[0m 6.3
+  Description: Zero close rate results in zero deals
+  Expected: 0.00
+  Actual:   0.00
+
+[32m✓ PASS[0m 6.4
+  Description: Zero deals results in zero revenue
+  Expected: 0.00
+  Actual:   0.00
+
+================================================================================
+FINAL RESULTS
+================================================================================
+
+[32mTests Passed: 34/34 (100.00%)[0m
+
+[32m✓ ALL TESTS PASSED - Combined metrics are mathematically correct![0m
+
+Key Validations:
+  ✓ No phantom costs when channels disabled
+  ✓ Costs dynamically adjust when toggling channels
+  ✓ All summations mathematically consistent
+  ✓ ROI and CAC calculations correct
+  ✓ Edge cases handled properly
+
+================================================================================

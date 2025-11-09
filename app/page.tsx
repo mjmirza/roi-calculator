@@ -584,7 +584,8 @@ export default function ROICalculator() {
     const callDeals = Math.round(callMeetings * (closeRate / 100))
     // Updated call revenue to use LTV
     const callRevenue = callDeals * ltv
-    const callCost = callingSoftwareCost + callerSalaryCost
+    // FIXED: Only include cost when channel is enabled
+    const callCost = enableColdCalling ? callingSoftwareCost + callerSalaryCost : 0
     const callROI = callCost > 0 ? ((callRevenue - callCost) / callCost) * 100 : 0
     const callCAC = callDeals > 0 ? callCost / callDeals : 0
 
@@ -595,7 +596,8 @@ export default function ROICalculator() {
     const linkedInDeals = Math.round(linkedInMeetings * (closeRate / 100))
     // Updated LinkedIn revenue to use LTV
     const linkedInRevenue = linkedInDeals * ltv
-    const linkedInCost = linkedInToolCost + linkedInManagerCost
+    // FIXED: Only include cost when channel is enabled
+    const linkedInCost = enableLinkedIn ? linkedInToolCost + linkedInManagerCost : 0
     const linkedInROI = linkedInCost > 0 ? ((linkedInRevenue - linkedInCost) / linkedInCost) * 100 : 0
     const linkedInCAC = linkedInDeals > 0 ? linkedInCost / linkedInDeals : 0
 
@@ -603,7 +605,8 @@ export default function ROICalculator() {
     const referralDeals = Math.round(referralMeetings * (closeRate / 100))
     // Updated referral revenue to use LTV
     const referralRevenue = referralDeals * ltv
-    const referralCost = referralProgramCost + referralDeals * referralIncentiveCost
+    // FIXED: Only include cost when channel is enabled
+    const referralCost = enableReferrals ? referralProgramCost + referralDeals * referralIncentiveCost : 0
     const referralROI = referralCost > 0 ? ((referralRevenue - referralCost) / referralCost) * 100 : 0
     const referralCAC = referralDeals > 0 ? referralCost / referralDeals : 0
 
