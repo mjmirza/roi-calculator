@@ -510,15 +510,15 @@ export default function ROICalculator() {
     const revenue = deals * ltv
 
     // For compatibility with rest of code, calculate these metrics
-    const emailsPerMonth = totalEmailsAllMailboxes
-    const totalEmails = totalEmailsAllMailboxes
+    const emailsPerMonth = emailsPerDay * workingDays  // PER MAILBOX (not total!)
+    const totalEmails = totalEmailsAllMailboxes  // Total across all mailboxes
     const delivered = Math.round(totalEmails * (1 - bounceRate / 100))
     const opens = Math.round(delivered * (openRate / 100))
     const emailsReplied = Math.round(totalEmails * (replyRate / 100))
 
-    // Leads are defined as positive replies (opportunities in this context)
-    const positiveReplies = opportunities
-    const leads = positiveReplies
+    // Leads are defined as total prospects in reference (not opportunities!)
+    const positiveReplies = totalProspects  // This should be prospects contacted
+    const leads = totalProspects  // Leads Contacted = Prospects in reference
 
     // Prospects are unique contacts (same as totalProspects in reference)
     const prospects = totalProspects
@@ -2638,9 +2638,9 @@ export default function ROICalculator() {
                     <CardDescription className="text-xs uppercase tracking-wider font-medium">
                       Overall Revenue
                     </CardDescription>
-                    <TrendingUp className="h-5 w-5 text-green-600" />
+                    <TrendingUp className="h-5 w-5 text-green-600 flex-shrink-0" />
                   </div>
-                  <CardTitle className="text-4xl font-bold tabular-nums text-green-700 dark:text-green-400 transition-all">
+                  <CardTitle className="text-3xl sm:text-4xl font-bold tabular-nums text-green-700 dark:text-green-400 transition-all break-words leading-tight">
                     {displayValue(calculations.totalRevenueAllChannels, "currency")}
                   </CardTitle>
                   <p className="text-xs text-muted-foreground mt-1">Total revenue generated per month</p>
@@ -3196,27 +3196,27 @@ export default function ROICalculator() {
                 <CardDescription className="text-xs">Your sales funnel metrics</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                   <div className="p-4 rounded-lg bg-green-100 dark:bg-green-950/30 border border-green-200 dark:border-green-900">
-                    <p className="text-3xl font-bold tabular-nums text-green-700 dark:text-green-400 truncate break-words">
+                    <p className="text-3xl font-bold tabular-nums text-green-700 dark:text-green-400 break-words">
                       {displayValue(calculations.opportunities, "number")}
                     </p>
                     <p className="text-xs text-muted-foreground mt-1">Opportunities</p>
                   </div>
                   <div className="p-4 rounded-lg bg-green-100 dark:bg-green-950/30 border border-green-200 dark:border-green-900">
-                    <p className="text-3xl font-bold tabular-nums text-green-700 dark:text-green-400 truncate break-words">
+                    <p className="text-3xl font-bold tabular-nums text-green-700 dark:text-green-400 break-words">
                       {displayValue(calculations.meetings, "number")}
                     </p>
                     <p className="text-xs text-muted-foreground mt-1">Meetings</p>
                   </div>
                   <div className="p-4 rounded-lg bg-green-100 dark:bg-green-950/30 border border-green-200 dark:border-green-900">
-                    <p className="text-3xl font-bold tabular-nums text-green-700 dark:text-green-400 truncate break-words">
+                    <p className="text-3xl font-bold tabular-nums text-green-700 dark:text-green-400 break-words">
                       {displayValue(calculations.deals, "number")}
                     </p>
                     <p className="text-xs text-muted-foreground mt-1">Deals Closed</p>
                   </div>
-                  <div className="p-4 rounded-lg bg-green-100 dark:bg-green-950/30 border border-green-200 dark:border-green-900">
-                    <p className="text-3xl font-bold tabular-nums text-green-700 dark:text-green-400 truncate break-words">
+                  <div className="p-4 rounded-lg bg-green-100 dark:bg-green-950/30 border border-green-200 dark:border-green-900 sm:col-span-2 lg:col-span-1">
+                    <p className="text-2xl sm:text-3xl font-bold tabular-nums text-green-700 dark:text-green-400 break-words leading-tight">
                       {displayValue(calculations.totalRevenueAllChannels, "currency")}
                     </p>
                     <p className="text-xs text-muted-foreground mt-1">Revenue</p>
