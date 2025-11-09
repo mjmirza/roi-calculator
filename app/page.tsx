@@ -1247,12 +1247,25 @@ export default function ROICalculator() {
   // Cash flow projections
   const getCashFlowProjections = () => {
     const projections = []
-    for (let i = 1; i <= 5; i++) {
-      const cumulativeCash = calculations.totalRevenueAllChannels * i - calculations.totalCostAllChannels * i
+    for (let i = 1; i <= 6; i++) {
+      // Calculate cumulative values for this month
+      const cumulativeRevenue = calculations.totalRevenueAllChannels * i
+      const cumulativeBaseCost = calculations.totalCostAllChannels * i
+
+      // Add commission costs if enabled
+      const cumulativeCommissionCost = enableCommission ? calculations.commissionCost * i : 0
+
+      // Calculate net cash flow (revenue - base costs - commission)
+      const netCashFlow = cumulativeRevenue - cumulativeBaseCost - cumulativeCommissionCost
+
       projections.push({
         month: i,
-        cash: cumulativeCash,
-        profitable: cumulativeCash >= 0, // Corrected condition for profitability
+        revenue: cumulativeRevenue,
+        baseCost: cumulativeBaseCost,
+        commissionCost: cumulativeCommissionCost,
+        totalCost: cumulativeBaseCost + cumulativeCommissionCost,
+        netCashFlow: netCashFlow,
+        profitable: netCashFlow >= 0,
       })
     }
     return projections
@@ -3271,35 +3284,85 @@ export default function ROICalculator() {
 
             <Card className="transition-all hover:shadow-md">
               <CardHeader>
-                <CardTitle className="text-base">5-Month Cash Flow Projections</CardTitle>
-                <CardDescription className="text-xs">Cumulative cash flow over time</CardDescription>
+                <CardTitle className="text-base">6-Month Cash Flow Projections</CardTitle>
+                <CardDescription className="text-xs">
+                  Cumulative cash flow over time {enableCommission && "(including commission costs)"}
+                </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="space-y-2">
-                  <div className="grid grid-cols-3 gap-4 pb-2 border-b text-xs font-medium text-muted-foreground">
-                    <div>Month</div>
-                    <div className="text-right">Cumulative Cash Flow</div>
-                    <div className="text-right">Status</div>
-                  </div>
-                  {getCashFlowProjections().map((projection) => (
-                    <div key={projection.month} className="grid grid-cols-3 gap-4 py-2 items-center">
-                      <div className="text-sm">Month {projection.month}</div>
-                      <div className="text-sm font-mono font-semibold text-right tabular-nums">
-                        {formatCurrency(projection.cash)}
-                      </div>
-                      <div className="text-right">
-                        <span
-                          className={`px-2 py-1 rounded-full text-xs font-medium ${
-                            projection.profitable
-                              ? "bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-400"
-                              : "bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-400"
-                          }`}
-                        >
-                          {projection.profitable ? "Profitable" : "Loss"}
-                        </span>
-                      </div>
+                <div className="space-y-4">
+                  {/* Summary Table */}
+                  <div className="space-y-2">
+                    <div className="grid grid-cols-3 gap-4 pb-2 border-b text-xs font-medium text-muted-foreground">
+                      <div>Month</div>
+                      <div className="text-right">Net Cash Flow</div>
+                      <div className="text-right">Status</div>
                     </div>
-                  ))}
+                    {getCashFlowProjections().map((projection) => (
+                      <div key={projection.month} className="grid grid-cols-3 gap-4 py-2 items-center">
+                        <div className="text-sm font-medium">Month {projection.month}</div>
+                        <div className="text-sm font-mono font-semibold text-right tabular-nums">
+                          {formatCurrency(projection.netCashFlow)}
+                        </div>
+                        <div className="text-right">
+                          <span
+                            className={`px-2 py-1 rounded-full text-xs font-medium ${
+                              projection.profitable
+                                ? "bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-400"
+                                : "bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-400"
+                            }`}
+                          >
+                            {projection.profitable ? "Profitable" : "Loss"}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Detailed Breakdown */}
+                  <div className="mt-6 pt-4 border-t">
+                    <h4 className="text-sm font-semibold mb-3">Detailed Monthly Breakdown</h4>
+                    <div className="space-y-3">
+                      {getCashFlowProjections().map((projection) => (
+                        <div
+                          key={`detail-${projection.month}`}
+                          className="p-3 rounded-lg bg-muted/50 border border-border"
+                        >
+                          <div className="font-semibold text-sm mb-2">Month {projection.month}</div>
+                          <div className="space-y-1 text-xs">
+                            <div className="flex justify-between">
+                              <span className="text-muted-foreground">Cumulative Revenue:</span>
+                              <span className="font-mono font-semibold text-green-600 dark:text-green-400">
+                                +{formatCurrency(projection.revenue)}
+                              </span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-muted-foreground">Operating Costs:</span>
+                              <span className="font-mono font-semibold text-red-600 dark:text-red-400">
+                                -{formatCurrency(projection.baseCost)}
+                              </span>
+                            </div>
+                            {enableCommission && projection.commissionCost > 0 && (
+                              <div className="flex justify-between">
+                                <span className="text-muted-foreground">Commission Costs:</span>
+                                <span className="font-mono font-semibold text-red-600 dark:text-red-400">
+                                  -{formatCurrency(projection.commissionCost)}
+                                </span>
+                              </div>
+                            )}
+                            <div className="pt-1 mt-1 border-t border-border/50 flex justify-between font-semibold">
+                              <span>Net Cash Flow:</span>
+                              <span
+                                className={`font-mono ${projection.profitable ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}
+                              >
+                                {formatCurrency(projection.netCashFlow)}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </CardContent>
             </Card>
