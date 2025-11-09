@@ -1004,6 +1004,12 @@ export default function ROICalculator() {
     // Reset commission visibility state
     setShowCommission(false)
 
+    // Reset additional visibility states
+    setShowColdCalling(false)
+    setShowLinkedIn(false)
+    setShowReferrals(false)
+    setShowCalculationBreakdown(false)
+
     // Reset all toggle states to default
     setEnableEmailMetrics(true)
     setEnableAdvanced(false)
