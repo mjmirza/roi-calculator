@@ -27,13 +27,13 @@ The ROI Calculator's multi-language translation system is **functionally complet
 - **Russian (ru):** 349 keys ✅
 
 ### Verification Results
-```
+\`\`\`
 Total Languages: 10
 Files Verified: 10/10
 Key Consistency: 100% (all files have identical key structure)
 Critical Sections: All present in all languages
 Structure Validation: All correct with language code wrapper
-```
+\`\`\`
 
 ---
 
@@ -62,7 +62,7 @@ Structure Validation: All correct with language code wrapper
 The smart suggestions logic uses **hardcoded English strings** instead of calling the translation function, even though all these keys exist in the translation files.
 
 **Example of the problem:**
-```javascript
+\`\`\`javascript
 // Current (WRONG):
 suggestions.push({
   type: "critical",
@@ -76,7 +76,7 @@ suggestions.push({
   message: t("suggestions.campaignLoss"),
   action: t("suggestions.campaignLossAction"),
 })
-```
+\`\`\`
 
 **Impact:** When users select German, Spanish, or any other language, the suggestions panel will still show English text. This breaks the user experience for non-English speakers.
 
@@ -145,7 +145,7 @@ These appear in suggestions and need translation keys added:
 ### E. Dynamic Messages with Interpolation
 Some suggestion messages include dynamic values that need special handling:
 
-```javascript
+\`\`\`javascript
 // Line 1099 - needs interpolation
 message: `Cold Email Open rate (${openRate}%) is below industry average (40-60%)`
 // Should use: t("suggestions.openRateLow") + ` (${openRate}%)` + t("suggestions.belowIndustryAverage")
@@ -153,14 +153,14 @@ message: `Cold Email Open rate (${openRate}%) is below industry average (40-60%)
 // Line 1126 - needs interpolation
 message: `Sending ${emailsPerDay} emails/day per mailbox may trigger spam filters`
 // Should use: t("suggestions.emailsPerDayHigh") + ` ${emailsPerDay} ` + t("suggestions.emailsPerDayPerMailboxMayTrigger")
-```
+\`\`\`
 
 ---
 
 ## 4. System Architecture Verification ✅
 
 ### LanguageContext.tsx
-```typescript
+\`\`\`typescript
 Location: /Users/mirzaiqbal/roi-calculator/contexts/LanguageContext.tsx
 Status: ✅ Correctly Implemented
 
@@ -171,10 +171,10 @@ Features:
 - localStorage persistence ✅
 - Browser language detection ✅
 - Loading states ✅
-```
+\`\`\`
 
 ### lib/i18n.ts
-```typescript
+\`\`\`typescript
 Location: /Users/mirzaiqbal/roi-calculator/lib/i18n.ts
 Status: ✅ Correctly Implemented
 
@@ -184,10 +184,10 @@ Features:
 - Nested key path resolution (e.g., "header.title") ✅
 - RTL language detection ✅
 - Translation loading with error handling ✅
-```
+\`\`\`
 
 ### Translation File Structure
-```json
+\`\`\`json
 {
   "en": {
     "header": { "title": "ROI Calculator", ... },
@@ -197,7 +197,7 @@ Features:
     ...
   }
 }
-```
+\`\`\`
 Status: ✅ All 10 files follow this structure correctly
 
 ---
@@ -207,7 +207,7 @@ Status: ✅ All 10 files follow this structure correctly
 ### Automated Test Script
 Created: `/Users/mirzaiqbal/roi-calculator/test-translations.js`
 
-```bash
+\`\`\`bash
 $ node test-translations.js
 
 ✓ All 10 languages validated successfully
@@ -218,7 +218,7 @@ $ node test-translations.js
 ✓ ALL TESTS PASSED!
 
 Translation system is ready for production.
-```
+\`\`\`
 
 ---
 
@@ -403,7 +403,7 @@ After fixes are applied, test each language:
    - `/Users/mirzaiqbal/roi-calculator/public/translations/ru.json`
 
    Add section:
-   ```json
+   \`\`\`json
    "costBreakdown": {
      "gtmEngineer": "GTM Engineer",
      "software": "Software",
@@ -419,7 +419,7 @@ After fixes are applied, test each language:
      "referralProgram": "Referral Program",
      "referralIncentives": "Referral Incentives"
    }
-   ```
+   \`\`\`
 
 ---
 
@@ -456,15 +456,15 @@ The ROI Calculator's multi-language translation system is **well-architected and
 ### Translation Key Examples
 
 #### Well-Implemented Example ✅
-```typescript
+\`\`\`typescript
 // Currency selector - CORRECT
 <span className="text-xs text-muted-foreground">
   - {t(`currencies.${code}`)}
 </span>
-```
+\`\`\`
 
 #### Poorly-Implemented Example ❌
-```typescript
+\`\`\`typescript
 // Suggestion - INCORRECT (hardcoded)
 suggestions.push({
   type: "critical",
@@ -478,17 +478,17 @@ suggestions.push({
   message: t("suggestions.campaignLoss"),
   action: t("suggestions.campaignLossAction"),
 })
-```
+\`\`\`
 
 ### Test Script Usage
-```bash
+\`\`\`bash
 # Run translation validation
 cd /Users/mirzaiqbal/roi-calculator
 node test-translations.js
 
 # Expected output: All tests pass
 # Exit code: 0 (success)
-```
+\`\`\`
 
 ---
 

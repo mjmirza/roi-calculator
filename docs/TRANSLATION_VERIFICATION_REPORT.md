@@ -174,14 +174,14 @@ The translation keys exist in all language files, but the code is not calling th
 Created: `/Users/mirzaiqbal/roi-calculator/test-translations.js`
 
 **Results:**
-```
+\`\`\`
 ✓ All 10 languages validated successfully
 ✓ 349/349 translation keys present in each language
 ✓ All languages have consistent keys
 ✓ All critical sections present
 ✓ All expected sections present (28 sections)
 ✓ ALL TESTS PASSED!
-```
+\`\`\`
 
 ---
 
