@@ -1388,10 +1388,10 @@ export default function ROICalculator() {
                 className="cursor-pointer hover:bg-muted/50 transition-colors"
                 onClick={() => setShowCalculationBreakdown(!showCalculationBreakdown)}
               >
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
                     <Calculator className="h-5 w-5 text-blue-600" />
-                    <CardTitle className="text-lg">{t("calculationBreakdown.title")}</CardTitle>
+                    <CardTitle className="text-lg break-words">{t("calculationBreakdown.title")}</CardTitle>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="text-xs text-muted-foreground">{t("calculationBreakdown.subtitle")}</span>
