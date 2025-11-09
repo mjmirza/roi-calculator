@@ -472,37 +472,41 @@ export default function ROICalculator() {
     }))
     setIsValidated(validation.isValid) // Update validation state
 
-    // Cold Email Calculations - REFERENCE IMPLEMENTATION (tools.coldiq.com)
+    // Cold Email Calculations - Using Advanced Metrics
     // Step 1: Total emails sent across all mailboxes
     const totalEmailsAllMailboxes = mailboxes * emailsPerDay * workingDays
-
-    // Step 2: Unique prospects (divide by sequence steps, not multiply!)
-    const totalProspects = Math.floor(totalEmailsAllMailboxes / sequenceSteps)
-
-    // Step 3: Opportunities (divide by ratio, not multiply!)
-    const opportunities = Math.floor(totalProspects / ratioPerReply)
-
-    // Step 4: Meetings (76% conversion rate to match reference)
-    const meetings = Math.floor(opportunities * 0.76)
-
-    // Step 5: Deals
-    const deals = Math.floor(meetings * (closeRate / 100))
-
-    // Step 6: Revenue
-    const revenue = deals * ltv
-
-    // For compatibility with rest of code, calculate these metrics
     const emailsPerMonth = emailsPerDay * workingDays  // PER MAILBOX (not total!)
     const totalEmails = totalEmailsAllMailboxes  // Total across all mailboxes
+
+    // Step 2: Account for bounces - emails actually delivered
     const delivered = Math.round(totalEmails * (1 - bounceRate / 100))
+
+    // Step 3: Opens (using user's openRate)
     const opens = Math.round(delivered * (openRate / 100))
+
+    // Step 4: Replies (using user's replyRate on total emails)
     const emailsReplied = Math.round(totalEmails * (replyRate / 100))
 
-    // Leads are defined as total prospects in reference (not opportunities!)
-    const positiveReplies = totalProspects  // This should be prospects contacted
-    const leads = totalProspects  // Leads Contacted = Prospects in reference
+    // Step 5: Positive replies (using user's positiveReplyRate)
+    const positiveReplies = Math.round(emailsReplied * (positiveReplyRate / 100))
 
-    // Prospects are unique contacts (same as totalProspects in reference)
+    // Step 6: Meetings (using user's meetingBookRate, NOT hardcoded 76%!)
+    const meetings = Math.round(positiveReplies * (meetingBookRate / 100))
+
+    // Step 7: Deals closed (using user's closeRate)
+    const deals = Math.round(meetings * (closeRate / 100))
+
+    // Step 8: Revenue
+    const revenue = deals * ltv
+
+    // Legacy compatibility - calculate prospects and opportunities for backward compatibility
+    const totalProspects = Math.floor(totalEmailsAllMailboxes / sequenceSteps)
+    const opportunities = Math.floor(totalProspects / ratioPerReply)
+
+    // Leads are positive replies (actual interested prospects)
+    const leads = positiveReplies
+
+    // Prospects are unique contacts
     const prospects = totalProspects
 
     const emailsBounced = Math.round(totalEmails * (bounceRate / 100))
@@ -610,7 +614,7 @@ export default function ROICalculator() {
       roi,
       ltvCacRatio,
       emailsOpened: opens, // Assigning calculated opens
-      emailsReplied: Math.round(totalEmails * (replyRate / 100)), // Recalculating emailsReplied
+      emailsReplied, // Using calculated emailsReplied
       positiveReplies,
       meetingsBooked: meetings, // Assigning the calculated meetings to meetingsBooked
       emailsBounced,
