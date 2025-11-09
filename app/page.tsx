@@ -217,6 +217,8 @@ export default function ROICalculator() {
     taxAmount: 0,
     netIncomeAfterTax: 0,
     afterTaxROI: 0,
+    avgCustomerLifetimeMonths: 0,
+    timeToFirstRevenueDays: 0,
     isValid: false,
     missingFields: [] as string[],
   })
@@ -604,6 +606,10 @@ export default function ROICalculator() {
     const netIncomeAfterTax = netIncomeBeforeTax - taxAmount
     const afterTaxROI = totalCostAllChannels > 0 ? (netIncomeAfterTax / totalCostAllChannels) * 100 : 0
 
+    // Sales Cycle and Churn insights
+    const avgCustomerLifetimeMonths = churnRate > 0 ? Math.round(100 / churnRate) : 0
+    const timeToFirstRevenueDays = salesCycleLength
+
     setCalculations({
       emailsPerMonth,
       totalEmails,
@@ -674,6 +680,8 @@ export default function ROICalculator() {
       taxAmount,
       netIncomeAfterTax,
       afterTaxROI,
+      avgCustomerLifetimeMonths,
+      timeToFirstRevenueDays,
       isValid: validation.isValid,
       missingFields: validation.missingFields,
     })
@@ -1836,6 +1844,11 @@ export default function ROICalculator() {
                       onChange={(e) => handleNumberInput(e.target.value, setSalesCycleLength)}
                       className="font-mono transition-all focus:ring-2"
                     />
+                    {salesCycleLength > 0 && (
+                      <p className="text-xs text-muted-foreground mt-1">
+                        First deals close in {calculations.timeToFirstRevenueDays} days
+                      </p>
+                    )}
                   </div>
                   <div className="space-y-2">
                     <LabelWithTooltip
@@ -1850,6 +1863,11 @@ export default function ROICalculator() {
                       onChange={(e) => handleNumberInput(e.target.value, setChurnRate)}
                       className="font-mono transition-all focus:ring-2"
                     />
+                    {churnRate > 0 && (
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Average customer lifetime: {calculations.avgCustomerLifetimeMonths} months
+                      </p>
+                    )}
                   </div>
                 </CardContent>
               )}
@@ -2893,6 +2911,29 @@ export default function ROICalculator() {
                     {calculations.ltvCacRatio > 0 ? calculations.ltvCacRatio.toFixed(1) : "--"}
                   </span>
                 </div>
+                {enableAdvanced && (salesCycleLength > 0 || churnRate > 0) && (
+                  <>
+                    <Separator />
+                    <div className="grid grid-cols-2 gap-4">
+                      {salesCycleLength > 0 && (
+                        <div className="p-3 rounded-lg bg-muted/50">
+                          <p className="text-xs text-muted-foreground mb-1">Time to First Revenue</p>
+                          <p className="text-lg font-bold tabular-nums">
+                            {calculations.timeToFirstRevenueDays} days
+                          </p>
+                        </div>
+                      )}
+                      {churnRate > 0 && (
+                        <div className="p-3 rounded-lg bg-muted/50">
+                          <p className="text-xs text-muted-foreground mb-1">Customer Lifetime</p>
+                          <p className="text-lg font-bold tabular-nums">
+                            {calculations.avgCustomerLifetimeMonths} months
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </>
+                )}
               </CardContent>
             </Card>
 
