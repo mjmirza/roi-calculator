@@ -152,7 +152,7 @@
 ## Complete Calculation Flow Comparison
 
 ### Reference Calculator Flow:
-```
+\`\`\`
 Input: 3 mailboxes, 18 emails/day, 21 days, 3 steps, 300 ratio, 70% close
 
 Step 1: totalEmailsAllMailboxes
@@ -172,10 +172,10 @@ Step 5: deals
 
 Step 6: revenue
         0 × $5,000 = $0
-```
+\`\`\`
 
 ### Local Calculator Flow:
-```
+\`\`\`
 Input: 3 mailboxes, 18 emails/day, 21 days, 3 steps, 300 ratio, 70% close
 
 Step 1: emailsPerMonth
@@ -204,7 +204,7 @@ Step 8: deals
 
 Step 9: revenue
         3 × $5,000 = $15,000
-```
+\`\`\`
 
 ---
 
@@ -239,18 +239,18 @@ Step 9: revenue
 ## Compounding Impact Analysis
 
 ### Reference: Simple Multiplier Chain
-```
+\`\`\`
 1,134 × (1/3) × (1/300) × 0.76 × 0.70 = 0.66 → 0 deals
                 ↑         ↑      ↑      ↑
             prospects   opps   mtgs   deals
-```
+\`\`\`
 
 ### Local: Complex Multi-Stage Funnel
-```
+\`\`\`
 3,402 × 0.95 × 0.45 × 0.01 × 0.30 × 0.75 × 0.70 = 2.41 → 2-3 deals
          ↑      ↑      ↑      ↑      ↑      ↑
       deliv   open   click   opp   mtgs   deals
-```
+\`\`\`
 
 **Key differences in compounding:**
 1. Local starts with 3x more emails (3,402 vs 1,134)

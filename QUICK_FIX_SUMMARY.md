@@ -36,7 +36,7 @@ Local calculator multiplies by sequenceSteps and uses click-based funnel with 1%
 
 ## The Correct Formula (Reference)
 
-```javascript
+\`\`\`javascript
 // Step 1: Calculate total emails sent
 const totalEmailsAllMailboxes = emailsPerDay × workingDays × sendingMailboxes
 
@@ -54,7 +54,7 @@ const deals = Math.floor(meetings × (closeRate / 100))
 
 // Step 6: Calculate revenue
 const revenue = deals × ltv
-```
+\`\`\`
 
 ---
 
@@ -81,7 +81,7 @@ const revenue = deals × ltv
 - 70% close rate
 
 ### Current Local Output:
-```
+\`\`\`
 emailsPerMonth = 3 × 18 × 21 = 1,134
 totalEmails = 1,134 × 3 = 3,402 ✗ (wrong: multiplies by steps)
 delivered = 3,402 × 95% = 3,232 ✗ (shouldn't exist)
@@ -90,16 +90,16 @@ clicks = 1,454 × 1% = 15 ✗ (MAJOR ERROR: 99% reduction)
 opportunities = 15 × 30% = 5 ✗ (wrong conversion logic)
 meetings = 5 × 75% = 4 ✗ (wrong percentage)
 deals = 4 × 70% = 3
-```
+\`\`\`
 
 ### Correct Reference Output:
-```
+\`\`\`
 totalEmailsAllMailboxes = 18 × 21 × 3 = 1,134 ✓
 totalProspects = floor(1,134 ÷ 3) = 378 ✓ (divides by steps)
 opportunities = floor(378 ÷ 300) = 1 ✓ (divides by ratio)
 meetings = floor(1 × 0.76) = 0 ✓ (76% with floor)
 deals = floor(0 × 0.70) = 0 ✓
-```
+\`\`\`
 
 **Result:** Local shows 3 deals, Reference shows 0 deals (infinite % difference!)
 
@@ -108,7 +108,7 @@ deals = floor(0 × 0.70) = 0 ✓
 ## Code Changes Required
 
 ### Find (in app/page.tsx around line 499):
-```javascript
+\`\`\`javascript
 const emailsPerMonth = mailboxes * emailsPerDay * workingDays
 const totalEmails = emailsPerMonth * sequenceSteps
 const delivered = Math.round(totalEmails * (1 - bounceRate / 100))
@@ -119,10 +119,10 @@ const conversionRate = positiveReplyRate
 const opportunities = Math.round(clicks * (conversionRate / 100))
 const meetings = Math.round(opportunities * 0.75)
 const deals = Math.round(meetings * (closeRate / 100))
-```
+\`\`\`
 
 ### Replace with:
-```javascript
+\`\`\`javascript
 // Reference Calculator Implementation
 const totalEmailsAllMailboxes = mailboxes * emailsPerDay * workingDays
 const totalProspects = Math.floor(totalEmailsAllMailboxes / sequenceSteps)
@@ -135,7 +135,7 @@ const emailsPerMonth = totalEmailsAllMailboxes
 const totalEmails = totalEmailsAllMailboxes
 const delivered = Math.round(totalEmails * (1 - bounceRate / 100))
 const opens = Math.round(delivered * (openRate / 100))
-```
+\`\`\`
 
 ---
 

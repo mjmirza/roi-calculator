@@ -7,7 +7,7 @@
 ## Change #1: Main Calculation Block (Lines ~498-508)
 
 ### FIND THIS CODE:
-```typescript
+\`\`\`typescript
     // Cold Email Calculations
     const emailsPerMonth = mailboxes * emailsPerDay * workingDays
     const totalEmails = emailsPerMonth * sequenceSteps
@@ -19,10 +19,10 @@
     const opportunities = Math.round(clicks * (conversionRate / 100)) // Recalculating opportunities based on clicks
     const meetings = Math.round(opportunities * 0.75) // Keep existing meeting conversion logic
     const deals = Math.round(meetings * (closeRate / 100))
-```
+\`\`\`
 
 ### REPLACE WITH:
-```typescript
+\`\`\`typescript
     // Cold Email Calculations - Reference Calculator Implementation
     // Based on tools.coldiq.com methodology
 
@@ -49,14 +49,14 @@
     const totalEmails = totalEmailsAllMailboxes
     const delivered = Math.round(totalEmails * (1 - bounceRate / 100))
     const opens = Math.round(delivered * (openRate / 100))
-```
+\`\`\`
 
 ---
 
 ## Change #2: Console Logging (Lines ~512-526)
 
 ### FIND THIS CODE:
-```typescript
+\`\`\`typescript
     console.log("[v0] ===== CALCULATION BREAKDOWN =====")
     console.log("[v0] Revenue Setup:", { domains, mailboxes, emailsPerDay, workingDays, sequenceSteps })
     console.log("[v0] Performance Metrics:", { ratioPerReply, closeRate, ltv })
@@ -72,10 +72,10 @@
     console.log("[v0]   deals =", meetings, "× (", closeRate, "/ 100) =", deals)
     console.log("[v0]   revenue =", deals, "×", ltv, "=", revenue)
     console.log("[v0] ===== END BREAKDOWN =====")
-```
+\`\`\`
 
 ### REPLACE WITH:
-```typescript
+\`\`\`typescript
     console.log("[v0] ===== CALCULATION BREAKDOWN (Reference Method) =====")
     console.log("[v0] Revenue Setup:", { domains, mailboxes, emailsPerDay, workingDays, sequenceSteps })
     console.log("[v0] Performance Metrics:", { ratioPerReply, closeRate, ltv })
@@ -91,35 +91,35 @@
     console.log("[v0]   delivered = round(", totalEmails, "× (1 - ", bounceRate, "/ 100)) =", delivered)
     console.log("[v0]   opens = round(", delivered, "× (", openRate, "/ 100)) =", opens)
     console.log("[v0] ===== END BREAKDOWN =====")
-```
+\`\`\`
 
 ---
 
 ## Change #3: positiveReplies Calculation (Lines ~486-489)
 
 ### FIND THIS CODE:
-```typescript
+\`\`\`typescript
     // Declare positiveReplies and leads here
     const positiveReplies = Math.round(
       (mailboxes * emailsPerDay * workingDays * sequenceSteps * (openRate / 100) * (replyRate / 100)) / ratioPerReply,
     )
     const leads = positiveReplies // Leads are now positive replies
-```
+\`\`\`
 
 ### REPLACE WITH:
-```typescript
+\`\`\`typescript
     // Align leads with opportunities (using Reference calculator method)
     // This will be calculated below, so we'll set it after the main calculation
     // For now, declare as 0 - will be set to opportunities value below
-```
+\`\`\`
 
 Then AFTER the opportunities calculation (after line where `const opportunities = Math.floor(totalProspects / ratioPerReply)` is added), ADD:
 
-```typescript
+\`\`\`typescript
     // Set leads and positiveReplies to match opportunities (Reference method)
     const leads = opportunities
     const positiveReplies = opportunities
-```
+\`\`\`
 
 ---
 
@@ -128,7 +128,7 @@ Then AFTER the opportunities calculation (after line where `const opportunities 
 ### FIND THIS CODE (around line 600-650, in the setCalculations section):
 Look for where calculations are being set, likely something like:
 
-```typescript
+\`\`\`typescript
     setCalculations((prev) => ({
       ...prev,
       emailsPerMonth: emailsPerMonth,
@@ -137,10 +137,10 @@ Look for where calculations are being set, likely something like:
       opportunities: opportunities,
       // ... other fields
     }))
-```
+\`\`\`
 
 ### ENSURE these fields are set correctly:
-```typescript
+\`\`\`typescript
     setCalculations((prev) => ({
       ...prev,
       emailsPerMonth: emailsPerMonth,
@@ -153,7 +153,7 @@ Look for where calculations are being set, likely something like:
       revenue: revenue,
       // ... rest of fields
     }))
-```
+\`\`\`
 
 ---
 
@@ -174,7 +174,7 @@ Look for where calculations are being set, likely something like:
 If you want to replace the entire calculation section in one go, here's the complete block:
 
 ### FIND (starting around line 484):
-```typescript
+\`\`\`typescript
     const validation = validateRequiredFields()
     // Declare positiveReplies and leads here
     const positiveReplies = Math.round(
@@ -202,10 +202,10 @@ If you want to replace the entire calculation section in one go, here's the comp
     const deals = Math.round(meetings * (closeRate / 100))
 
     const revenue = deals * ltv
-```
+\`\`\`
 
 ### REPLACE WITH:
-```typescript
+\`\`\`typescript
     const validation = validateRequiredFields()
 
     setCalculations((prev) => ({
@@ -262,7 +262,7 @@ If you want to replace the entire calculation section in one go, here's the comp
     const totalEmails = totalEmailsAllMailboxes
     const delivered = Math.round(totalEmails * (1 - bounceRate / 100))
     const opens = Math.round(delivered * (openRate / 100))
-```
+\`\`\`
 
 ---
 
@@ -270,7 +270,7 @@ If you want to replace the entire calculation section in one go, here's the comp
 
 After making changes, add these console.log statements temporarily to verify:
 
-```typescript
+\`\`\`typescript
     // TEMPORARY: Verification tests
     console.log("[TEST] With inputs:", { mailboxes, emailsPerDay, workingDays, sequenceSteps, ratioPerReply, closeRate })
     console.log("[TEST] Expected totalEmailsAllMailboxes:", mailboxes * emailsPerDay * workingDays)
@@ -282,14 +282,14 @@ After making changes, add these console.log statements temporarily to verify:
 
     // Test with default values (3, 18, 21, 3, 300, 70)
     // Should produce: 1134 emails, 378 prospects, 1 opportunity, 0 meetings, 0 deals
-```
+\`\`\`
 
 ---
 
 ## Expected Results After Changes
 
 ### Test Case 1: Default Values
-```
+\`\`\`
 Input:
 - mailboxes: 3
 - emailsPerDay: 18
@@ -305,10 +305,10 @@ Expected Output:
 - meetings: 0
 - deals: 0
 - revenue: $0
-```
+\`\`\`
 
 ### Test Case 2: Higher Volume
-```
+\`\`\`
 Input:
 - mailboxes: 10
 - emailsPerDay: 25
@@ -324,10 +324,10 @@ Expected Output:
 - meetings: 3
 - deals: 2
 - revenue: $10,000 (assuming $5,000 LTV)
-```
+\`\`\`
 
 ### Test Case 3: Edge Case (Low Volume)
-```
+\`\`\`
 Input:
 - mailboxes: 1
 - emailsPerDay: 10
@@ -343,14 +343,14 @@ Expected Output:
 - meetings: 0
 - deals: 0
 - revenue: $0
-```
+\`\`\`
 
 ---
 
 ## Common Mistakes to Avoid
 
 ### ❌ DON'T DO THIS:
-```typescript
+\`\`\`typescript
 // Wrong: multiplying by sequenceSteps
 const totalEmails = emailsPerMonth * sequenceSteps
 
@@ -365,10 +365,10 @@ const meetings = Math.round(opportunities * 0.75)
 
 // Wrong: including click rate
 const clicks = Math.round(opens * 0.01)
-```
+\`\`\`
 
 ### ✅ DO THIS:
-```typescript
+\`\`\`typescript
 // Correct: dividing by sequenceSteps to get unique prospects
 const totalProspects = Math.floor(totalEmailsAllMailboxes / sequenceSteps)
 
@@ -383,7 +383,7 @@ const meetings = Math.floor(opportunities * 0.76)
 
 // Correct: NO click rate in calculation
 // (skip this step entirely)
-```
+\`\`\`
 
 ---
 
@@ -391,13 +391,13 @@ const meetings = Math.floor(opportunities * 0.76)
 
 If you need to rollback:
 
-```bash
+\`\`\`bash
 # Restore from backup
 cp app/page.tsx.backup app/page.tsx
 
 # Or use git
 git checkout app/page.tsx
-```
+\`\`\`
 
 ---
 

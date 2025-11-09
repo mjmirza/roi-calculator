@@ -13,23 +13,23 @@ This document provides a detailed comparison between the **Reference Calculator*
 ### Difference #1: Opportunities Calculation Method
 
 **Reference Calculator:**
-```javascript
+\`\`\`javascript
 // Step 1: Calculate total prospects
 totalProspects = Math.floor(totalEmailsAllMailboxes / sequenceSteps)
 
 // Step 2: Calculate opportunities
 opportunities = Math.floor(totalProspects / ratioPerReply)
-```
+\`\`\`
 
 **Local Calculator:**
-```javascript
+\`\`\`javascript
 // Multiple intermediate steps
 totalEmails = emailsPerMonth * sequenceSteps
 delivered = Math.round(totalEmails * (1 - bounceRate / 100))
 opens = Math.round(delivered * (openRate / 100))
 clicks = Math.round(opens * (clickRate / 100))  // clickRate hardcoded at 1.0%
 opportunities = Math.round(clicks * (conversionRate / 100))  // conversionRate = positiveReplyRate
-```
+\`\`\`
 
 **Impact**: Completely different calculation paths lead to vastly different opportunity counts.
 
@@ -38,14 +38,14 @@ opportunities = Math.round(clicks * (conversionRate / 100))  // conversionRate =
 ### Difference #2: Meeting Conversion Rate
 
 **Reference Calculator:**
-```javascript
+\`\`\`javascript
 meetings = Math.floor(opportunities × 0.76)  // 76% conversion
-```
+\`\`\`
 
 **Local Calculator:**
-```javascript
+\`\`\`javascript
 meetings = Math.round(opportunities * 0.75)  // 75% conversion
-```
+\`\`\`
 
 **Impact**: 1% difference in conversion rate (76% vs 75%)
 
@@ -54,14 +54,14 @@ meetings = Math.round(opportunities * 0.75)  // 75% conversion
 ### Difference #3: Rounding Method
 
 **Reference Calculator:**
-```javascript
+\`\`\`javascript
 Math.floor()  // Always rounds DOWN
-```
+\`\`\`
 
 **Local Calculator:**
-```javascript
+\`\`\`javascript
 Math.round()  // Rounds to nearest integer
-```
+\`\`\`
 
 **Impact**: Local calculator produces higher numbers due to rounding up when decimal >= 0.5
 
@@ -70,17 +70,17 @@ Math.round()  // Rounds to nearest integer
 ### Difference #4: Input Calculation Method
 
 **Reference Calculator:**
-```javascript
+\`\`\`javascript
 totalEmailsAllMailboxes = emailsPerDay × workingDays × sendingMailboxes
 totalProspects = Math.floor(totalEmailsAllMailboxes / sequenceSteps)
-```
+\`\`\`
 
 **Local Calculator:**
-```javascript
+\`\`\`javascript
 emailsPerMonth = mailboxes * emailsPerDay * workingDays
 totalEmails = emailsPerMonth * sequenceSteps
 // Then applies bounce rate, open rate, click rate, etc.
-```
+\`\`\`
 
 **Impact**: Reference divides by sequenceSteps to get prospects; Local multiplies by sequenceSteps to get total touchpoints
 
@@ -89,15 +89,15 @@ totalEmails = emailsPerMonth * sequenceSteps
 ### Difference #5: Bounce Rate Consideration
 
 **Reference Calculator:**
-```javascript
+\`\`\`javascript
 // Does NOT account for bounce rate in opportunities calculation
-```
+\`\`\`
 
 **Local Calculator:**
-```javascript
+\`\`\`javascript
 delivered = Math.round(totalEmails * (1 - bounceRate / 100))
 // Then uses delivered emails for subsequent calculations
-```
+\`\`\`
 
 **Impact**: Local calculator reduces the funnel by bounce rate (default 5%), Reference does not
 
@@ -106,15 +106,15 @@ delivered = Math.round(totalEmails * (1 - bounceRate / 100))
 ### Difference #6: Click Rate Layer
 
 **Reference Calculator:**
-```javascript
+\`\`\`javascript
 // No click rate in the calculation
-```
+\`\`\`
 
 **Local Calculator:**
-```javascript
+\`\`\`javascript
 const clickRate = 1.0  // Hardcoded 1% click rate
 const clicks = Math.round(opens * (clickRate / 100))
-```
+\`\`\`
 
 **Impact**: Local calculator introduces an additional 99% reduction in the funnel that doesn't exist in Reference
 
@@ -123,16 +123,16 @@ const clicks = Math.round(opens * (clickRate / 100))
 ### Difference #7: Conversion Rate Usage
 
 **Reference Calculator:**
-```javascript
+\`\`\`javascript
 // Uses ratioPerReply directly as divisor
 opportunities = Math.floor(totalProspects / ratioPerReply)
-```
+\`\`\`
 
 **Local Calculator:**
-```javascript
+\`\`\`javascript
 const conversionRate = positiveReplyRate  // 30% default
 opportunities = Math.round(clicks * (conversionRate / 100))
-```
+\`\`\`
 
 **Impact**: Fundamentally different approaches - Reference uses ratio as divisor, Local uses rate as multiplier
 
@@ -141,15 +141,15 @@ opportunities = Math.round(clicks * (conversionRate / 100))
 ### Difference #8: Open Rate Impact
 
 **Reference Calculator:**
-```javascript
+\`\`\`javascript
 // Open rate NOT used in opportunities calculation
-```
+\`\`\`
 
 **Local Calculator:**
-```javascript
+\`\`\`javascript
 opens = Math.round(delivered * (openRate / 100))  // 45% default
 // Opens then feed into clicks calculation
-```
+\`\`\`
 
 **Impact**: Local calculator reduces funnel by open rate (55% reduction by default), Reference does not
 
@@ -158,20 +158,20 @@ opens = Math.round(delivered * (openRate / 100))  // 45% default
 ### Difference #9: Reply Rate Usage
 
 **Reference Calculator:**
-```javascript
+\`\`\`javascript
 // Reply rate NOT explicitly used in formula
 // (implicitly captured in ratioPerReply)
-```
+\`\`\`
 
 **Local Calculator:**
-```javascript
+\`\`\`javascript
 // Reply rate used in separate positiveReplies calculation
 positiveReplies = Math.round(
   (mailboxes * emailsPerDay * workingDays * sequenceSteps *
    (openRate / 100) * (replyRate / 100)) / ratioPerReply
 )
 // But this is separate from the opportunities calculation
-```
+\`\`\`
 
 **Impact**: Local has duplicate/conflicting calculation paths
 
@@ -180,14 +180,14 @@ positiveReplies = Math.round(
 ### Difference #10: Deal Calculation (Same but different inputs)
 
 **Reference Calculator:**
-```javascript
+\`\`\`javascript
 deals = Math.floor(meetings × (closeRate / 100))
-```
+\`\`\`
 
 **Local Calculator:**
-```javascript
+\`\`\`javascript
 deals = Math.round(meetings * (closeRate / 100))
-```
+\`\`\`
 
 **Impact**: Same formula structure but different rounding and different meetings input
 
@@ -289,9 +289,9 @@ Local: Bounce adjustment at 5%
 **Why it causes different results:**
 
 This is a **CRITICAL** difference. The Local calculator includes:
-```javascript
+\`\`\`javascript
 clicks = Math.round(opens * (1.0 / 100))  // 1% click rate
-```
+\`\`\`
 
 This means:
 - Only 1% of opens become clicks
@@ -350,15 +350,15 @@ Example with 1077 delivered:
 The Local calculator has TWO separate calculations:
 
 Path 1 (positiveReplies - used for "leads"):
-```javascript
+\`\`\`javascript
 positiveReplies = (mailboxes × emailsPerDay × workingDays ×
                    sequenceSteps × openRate × replyRate) / ratioPerReply
-```
+\`\`\`
 
 Path 2 (opportunities - used for revenue):
-```javascript
+\`\`\`javascript
 opportunities = clicks × conversionRate
-```
+\`\`\`
 
 These paths produce DIFFERENT numbers for what should be the same thing.
 
@@ -373,16 +373,16 @@ These paths produce DIFFERENT numbers for what should be the same thing.
 All differences compound through the funnel:
 
 **Reference Path:**
-```
+\`\`\`
 1134 emails
 → 378 prospects (÷3 steps)
 → 1 opportunity (÷300 ratio, floored)
 → 0 meetings (×0.76, floored)
 → 0 deals (×70%, floored)
-```
+\`\`\`
 
 **Local Path:**
-```
+\`\`\`
 1134 emails
 → 1077 delivered (×95%)
 → 485 opens (×45%)
@@ -390,7 +390,7 @@ All differences compound through the funnel:
 → 2 opportunities (×30%, rounded)
 → 2 meetings (×75%, rounded)
 → 1 deal (×70%, rounded)
-```
+\`\`\`
 
 **Result**: Completely different final numbers despite same inputs
 
@@ -414,16 +414,16 @@ All differences compound through the funnel:
 - Click rate: 1% (hardcoded in Local)
 
 **Reference Calculator Results:**
-```
+\`\`\`
 totalEmailsAllMailboxes = 18 × 21 × 3 = 1,134 emails
 totalProspects = floor(1,134 / 3) = floor(378) = 378 prospects
 opportunities = floor(378 / 300) = floor(1.26) = 1 opportunity
 meetings = floor(1 × 0.76) = floor(0.76) = 0 meetings
 deals = floor(0 × 0.70) = 0 deals
-```
+\`\`\`
 
 **Local Calculator Results:**
-```
+\`\`\`
 emailsPerMonth = 3 × 18 × 21 = 1,134
 totalEmails = 1,134 × 3 = 3,402
 delivered = round(3,402 × 0.95) = round(3,232) = 3,232
@@ -432,20 +432,20 @@ clicks = round(1,454 × 0.01) = round(14.54) = 15
 opportunities = round(15 × 0.30) = round(4.5) = 5
 meetings = round(5 × 0.75) = round(3.75) = 4
 deals = round(4 × 0.70) = round(2.8) = 3
-```
+\`\`\`
 
 **WAIT - CORRECTION NEEDED**
 
 Looking at the local calculator code again:
-```javascript
+\`\`\`javascript
 const emailsPerMonth = mailboxes * emailsPerDay * workingDays  // Not multiplied by steps
 const totalEmails = emailsPerMonth * sequenceSteps  // Steps applied here
-```
+\`\`\`
 
 Let me recalculate:
 
 **Local Calculator Results (CORRECTED):**
-```
+\`\`\`
 emailsPerMonth = 3 × 18 × 21 = 1,134
 totalEmails = 1,134 × 3 = 3,402
 delivered = round(3,402 × 0.95) = 3,232
@@ -454,7 +454,7 @@ clicks = round(1,454 × 0.01) = 15
 opportunities = round(15 × 0.30) = 5
 meetings = round(5 × 0.75) = 4
 deals = round(4 × 0.70) = 3
-```
+\`\`\`
 
 **Comparison:**
 | Metric | Reference | Local | Difference |
@@ -488,16 +488,16 @@ deals = round(4 × 0.70) = 3
 - Other rates: same as Example 1
 
 **Reference Calculator Results:**
-```
+\`\`\`
 totalEmailsAllMailboxes = 25 × 21 × 10 = 5,250 emails
 totalProspects = floor(5,250 / 5) = 1,050 prospects
 opportunities = floor(1,050 / 200) = floor(5.25) = 5 opportunities
 meetings = floor(5 × 0.76) = floor(3.8) = 3 meetings
 deals = floor(3 × 0.75) = floor(2.25) = 2 deals
-```
+\`\`\`
 
 **Local Calculator Results:**
-```
+\`\`\`
 emailsPerMonth = 10 × 25 × 21 = 5,250
 totalEmails = 5,250 × 5 = 26,250
 delivered = round(26,250 × 0.95) = 24,938
@@ -506,7 +506,7 @@ clicks = round(11,222 × 0.01) = 112
 opportunities = round(112 × 0.30) = 34
 meetings = round(34 × 0.75) = 26
 deals = round(26 × 0.75) = 20
-```
+\`\`\`
 
 **Comparison:**
 | Metric | Reference | Local | Difference |
@@ -529,16 +529,16 @@ deals = round(26 × 0.75) = 20
 - Close rate: 50%
 
 **Reference Calculator Results:**
-```
+\`\`\`
 totalEmailsAllMailboxes = 10 × 20 × 1 = 200 emails
 totalProspects = floor(200 / 4) = 50 prospects
 opportunities = floor(50 / 500) = floor(0.1) = 0 opportunities
 meetings = floor(0 × 0.76) = 0 meetings
 deals = floor(0 × 0.50) = 0 deals
-```
+\`\`\`
 
 **Local Calculator Results:**
-```
+\`\`\`
 emailsPerMonth = 1 × 10 × 20 = 200
 totalEmails = 200 × 4 = 800
 delivered = round(800 × 0.95) = 760
@@ -547,7 +547,7 @@ clicks = round(342 × 0.01) = 3
 opportunities = round(3 × 0.30) = 1
 meetings = round(1 × 0.75) = 1
 deals = round(1 × 0.50) = 1
-```
+\`\`\`
 
 **Comparison:**
 | Metric | Reference | Local | Difference |
@@ -596,10 +596,10 @@ deals = round(1 × 0.50) = 1
 ### Root Cause #3: Incorrect Click Rate Implementation
 
 **The Problem:**
-```javascript
+\`\`\`javascript
 const clickRate = 1.0  // Hardcoded to 1%
 const clicks = Math.round(opens * (clickRate / 100))
-```
+\`\`\`
 
 **Why this is wrong:**
 1. Click rate is typically for web/email links, not relevant for cold email replies
@@ -623,11 +623,11 @@ The Local calculator seems to confuse:
 - Not click rate (unless tracking link clicks within emails)
 
 **Current implementation:**
-```javascript
+\`\`\`javascript
 opens = delivered × openRate
 clicks = opens × clickRate  // ← This step shouldn't exist
 opportunities = clicks × positiveReplyRate  // Should be opens × replyRate
-```
+\`\`\`
 
 ---
 
@@ -636,15 +636,15 @@ opportunities = clicks × positiveReplyRate  // Should be opens × replyRate
 **Two separate calculations exist in Local:**
 
 **Path A - positiveReplies (for "leads"):**
-```javascript
+\`\`\`javascript
 positiveReplies = (mailboxes × emailsPerDay × workingDays ×
                    sequenceSteps × openRate × replyRate) / ratioPerReply
-```
+\`\`\`
 
 **Path B - opportunities (for revenue):**
-```javascript
+\`\`\`javascript
 opportunities = clicks × positiveReplyRate
-```
+\`\`\`
 
 **The Problem:**
 - These should calculate the same thing
@@ -692,9 +692,9 @@ opportunities = clicks × positiveReplyRate
 
 **The Problem:**
 When Local multiplies by sequenceSteps:
-```javascript
+\`\`\`javascript
 totalEmails = emailsPerMonth × sequenceSteps
-```
+\`\`\`
 
 It should then normalize elsewhere to account for this multiplication.
 
@@ -719,7 +719,7 @@ Either:
 - Aligns with industry standard approach
 
 **Implementation:**
-```javascript
+\`\`\`javascript
 // RECOMMENDED: Match Reference Calculator exactly
 
 // Step 1: Calculate total emails sent
@@ -739,7 +739,7 @@ const deals = Math.floor(meetings × (closeRate / 100))
 
 // Step 6: Calculate revenue
 const revenue = deals × ltv
-```
+\`\`\`
 
 **Changes required:**
 1. Remove: delivered, opens, clicks calculations
@@ -761,24 +761,24 @@ const revenue = deals × ltv
 
 **Recommendation:** Change Local to 76% to match Reference
 
-```javascript
+\`\`\`javascript
 // Before
 const meetings = Math.round(opportunities * 0.75)
 
 // After
 const meetings = Math.floor(opportunities * 0.76)
-```
+\`\`\`
 
 ---
 
 ### Recommendation #3: Remove Click Rate Layer
 
 **Current Local Code:**
-```javascript
+\`\`\`javascript
 const clickRate = 1.0
 const clicks = Math.round(opens * (clickRate / 100))
 const opportunities = Math.round(clicks * (conversionRate / 100))
-```
+\`\`\`
 
 **Recommendation:** Remove entirely - not part of Reference methodology
 
@@ -798,7 +798,7 @@ const opportunities = Math.round(clicks * (conversionRate / 100))
 
 **Recommendation:** Use single calculation path from Reference methodology
 
-```javascript
+\`\`\`javascript
 // Remove this:
 const positiveReplies = Math.round(
   (mailboxes * emailsPerDay * workingDays * sequenceSteps *
@@ -809,31 +809,31 @@ const positiveReplies = Math.round(
 const totalProspects = Math.floor(totalEmailsAllMailboxes / sequenceSteps)
 const opportunities = Math.floor(totalProspects / ratioPerReply)
 const leads = opportunities  // Leads = Opportunities
-```
+\`\`\`
 
 ---
 
 ### Recommendation #5: Fix Sequence Steps Logic
 
 **Current Local:**
-```javascript
+\`\`\`javascript
 totalEmails = emailsPerMonth × sequenceSteps  // Multiplies
-```
+\`\`\`
 
 **Reference:**
-```javascript
+\`\`\`javascript
 totalProspects = totalEmailsAllMailboxes / sequenceSteps  // Divides
-```
+\`\`\`
 
 **Recommendation:** Follow Reference approach
 
-```javascript
+\`\`\`javascript
 // Calculate total emails sent (all touches)
 const totalEmailsAllMailboxes = mailboxes × emailsPerDay × workingDays
 
 // Calculate unique prospects contacted (divide by sequence)
 const totalProspects = Math.floor(totalEmailsAllMailboxes / sequenceSteps)
-```
+\`\`\`
 
 **Rationale:**
 - Sequence steps = emails per prospect
@@ -851,13 +851,13 @@ const totalProspects = Math.floor(totalEmailsAllMailboxes / sequenceSteps)
 
 **Recommendation:** Use ratioPerReply as divisor (Reference method)
 
-```javascript
+\`\`\`javascript
 // Instead of:
 opportunities = clicks × (positiveReplyRate / 100)
 
 // Use:
 opportunities = Math.floor(totalProspects / ratioPerReply)
-```
+\`\`\`
 
 **Rationale:**
 - ratioPerReply = 300 means "1 opportunity per 300 prospects"
@@ -873,7 +873,7 @@ opportunities = Math.floor(totalProspects / ratioPerReply)
 
 **Recommendation:** Keep these for informational/reporting purposes, but don't use in main ROI calculation
 
-```javascript
+\`\`\`javascript
 // Use these for display/analytics:
 const delivered = Math.round(totalEmails * (1 - bounceRate / 100))
 const opens = Math.round(delivered * (openRate / 100))
@@ -881,7 +881,7 @@ const emailsBounced = Math.round(totalEmails * (bounceRate / 100))
 
 // But use Reference method for ROI calculation:
 const opportunities = Math.floor(totalProspects / ratioPerReply)
-```
+\`\`\`
 
 **Rationale:**
 - Advanced metrics are valuable for user insights
@@ -894,18 +894,18 @@ const opportunities = Math.floor(totalProspects / ratioPerReply)
 ### Recommendation #8: Update Default Values
 
 **Meeting Conversion:**
-```javascript
+\`\`\`javascript
 // Change from 75% to 76%
 const meetingConversionRate = 0.76
-```
+\`\`\`
 
 **Rounding:**
-```javascript
+\`\`\`javascript
 // Change all Math.round() to Math.floor() in revenue funnel
 const opportunities = Math.floor(totalProspects / ratioPerReply)
 const meetings = Math.floor(opportunities * 0.76)
 const deals = Math.floor(meetings * (closeRate / 100))
-```
+\`\`\`
 
 ---
 
@@ -913,7 +913,7 @@ const deals = Math.floor(meetings * (closeRate / 100))
 
 **Add test cases to ensure alignment:**
 
-```javascript
+\`\`\`javascript
 // Test case 1: Default settings
 function testAgainstReference() {
   const inputs = {
@@ -940,7 +940,7 @@ function testAgainstReference() {
   // Assert equality
   assert.equal(localResult, expectedResults)
 }
-```
+\`\`\`
 
 ---
 
@@ -948,7 +948,7 @@ function testAgainstReference() {
 
 **Add clear documentation:**
 
-```javascript
+\`\`\`javascript
 /**
  * ROI Calculation - Reference Implementation
  * Based on tools.coldiq.com methodology
@@ -968,7 +968,7 @@ function testAgainstReference() {
  * - 1 opportunity × 76% = 0.76 → 0 meetings
  * - 0 meetings × 70% = 0 deals
  */
-```
+\`\`\`
 
 ---
 
@@ -998,14 +998,14 @@ function testAgainstReference() {
 ## 7. STEP-BY-STEP IMPLEMENTATION GUIDE
 
 ### Step 1: Backup Current Code
-```bash
+\`\`\`bash
 cp app/page.tsx app/page.tsx.backup
-```
+\`\`\`
 
 ### Step 2: Replace Calculation Section
 
 **Find this code (lines ~498-508):**
-```javascript
+\`\`\`javascript
 const emailsPerMonth = mailboxes * emailsPerDay * workingDays
 const totalEmails = emailsPerMonth * sequenceSteps
 const delivered = Math.round(totalEmails * (1 - bounceRate / 100))
@@ -1016,10 +1016,10 @@ const conversionRate = positiveReplyRate
 const opportunities = Math.round(clicks * (conversionRate / 100))
 const meetings = Math.round(opportunities * 0.75)
 const deals = Math.round(meetings * (closeRate / 100))
-```
+\`\`\`
 
 **Replace with:**
-```javascript
+\`\`\`javascript
 // Reference Calculator Implementation
 const totalEmailsAllMailboxes = mailboxes * emailsPerDay * workingDays
 const totalProspects = Math.floor(totalEmailsAllMailboxes / sequenceSteps)
@@ -1032,18 +1032,18 @@ const totalEmails = totalEmailsAllMailboxes
 const delivered = Math.round(totalEmails * (1 - bounceRate / 100))
 const opens = Math.round(delivered * (openRate / 100))
 const emailsPerMonth = totalEmailsAllMailboxes // For compatibility
-```
+\`\`\`
 
 ### Step 3: Update Console Logging
 
 **Find logging section (lines ~512-526):**
-```javascript
+\`\`\`javascript
 console.log("[v0] ===== CALCULATION BREAKDOWN =====")
 // ... existing logs
-```
+\`\`\`
 
 **Replace with:**
-```javascript
+\`\`\`javascript
 console.log("[v0] ===== CALCULATION BREAKDOWN (Reference Method) =====")
 console.log("[v0] Revenue Setup:", { domains, mailboxes, emailsPerDay, workingDays, sequenceSteps })
 console.log("[v0] Performance Metrics:", { ratioPerReply, closeRate, ltv })
@@ -1055,24 +1055,24 @@ console.log("[v0]   meetings = floor(", opportunities, "× 0.76 ) =", meetings)
 console.log("[v0]   deals = floor(", meetings, "× (", closeRate, "/ 100)) =", deals)
 console.log("[v0]   revenue =", deals, "×", ltv, "=", revenue)
 console.log("[v0] ===== END BREAKDOWN =====")
-```
+\`\`\`
 
 ### Step 4: Update positiveReplies Calculation
 
 **Find this code (lines ~486-489):**
-```javascript
+\`\`\`javascript
 const positiveReplies = Math.round(
   (mailboxes * emailsPerDay * workingDays * sequenceSteps * (openRate / 100) * (replyRate / 100)) / ratioPerReply,
 )
 const leads = positiveReplies
-```
+\`\`\`
 
 **Replace with:**
-```javascript
+\`\`\`javascript
 // Use opportunities as leads (aligned with Reference calculator)
 const leads = opportunities
 const positiveReplies = opportunities // For backward compatibility
-```
+\`\`\`
 
 ### Step 5: Test with Default Values
 
@@ -1150,26 +1150,26 @@ After implementing changes, verify:
 ## 10. EXPECTED IMPACT OF CHANGES
 
 ### Before Changes (Current Local):
-```
+\`\`\`
 Input: 3 mailboxes, 18 emails/day, 21 days, 3 steps, 300 ratio, 70% close
 Output: 5 opportunities → 4 meetings → 3 deals → $15,000 revenue
-```
+\`\`\`
 
 ### After Changes (Reference Method):
-```
+\`\`\`
 Input: 3 mailboxes, 18 emails/day, 21 days, 3 steps, 300 ratio, 70% close
 Output: 1 opportunity → 0 meetings → 0 deals → $0 revenue
-```
+\`\`\`
 
 **Impact:** Significantly more conservative estimates (realistic for small-scale campaigns)
 
 ### With Higher Volume:
-```
+\`\`\`
 Input: 10 mailboxes, 25 emails/day, 21 days, 5 steps, 200 ratio, 75% close
 
 Before: 34 opportunities → 26 meetings → 20 deals → $100,000 revenue
 After:  5 opportunities → 3 meetings → 2 deals → $10,000 revenue
-```
+\`\`\`
 
 **Impact:** ~90% reduction in estimates, but more accurate and aligned with Reference
 

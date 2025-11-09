@@ -4,7 +4,7 @@
 
 ### Reference Calculator (tools.coldiq.com) - SIMPLE & CORRECT
 
-```
+\`\`\`
 ┌─────────────────────────────────────────────────────────────┐
 │  INPUTS                                                     │
 │  • mailboxes = 3                                           │
@@ -61,7 +61,7 @@
 │  FINAL RESULT                                              │
 │  Revenue = 0 × $5,000 = $0                                │
 └─────────────────────────────────────────────────────────────┘
-```
+\`\`\`
 
 **Total Steps:** 5
 **Funnel Reductions:** 2 (prospects→opps, opps→meetings)
@@ -72,7 +72,7 @@
 
 ### Local Calculator (page.tsx) - COMPLEX & INCORRECT
 
-```
+\`\`\`
 ┌─────────────────────────────────────────────────────────────┐
 │  INPUTS                                                     │
 │  • mailboxes = 3                                           │
@@ -164,7 +164,7 @@
 │  FINAL RESULT                                              │
 │  Revenue = 3 × $5,000 = $15,000                           │
 └─────────────────────────────────────────────────────────────┘
-```
+\`\`\`
 
 **Total Steps:** 8
 **Funnel Reductions:** 6 (delivered, opens, clicks, opps, meetings, deals)
@@ -175,7 +175,7 @@
 
 ## Side-by-Side Comparison
 
-```
+\`\`\`
 REFERENCE                          LOCAL
 ─────────────────────────────────────────────────────────────
 
@@ -221,7 +221,7 @@ $0 revenue                         4 meetings
 
 RESULT: $0                         RESULT: $15,000
         (Accurate)                        (Inflated)
-```
+\`\`\`
 
 ---
 
@@ -229,7 +229,7 @@ RESULT: $0                         RESULT: $15,000
 
 ### Reference Funnel (Simple & Accurate)
 
-```
+\`\`\`
 1,134 emails
 │
 │ ÷ 3 sequence steps
@@ -249,11 +249,11 @@ RESULT: $0                         RESULT: $15,000
 0 deals ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 0%
 
 Overall: 1,134 → 0 (0% conversion)
-```
+\`\`\`
 
 ### Local Funnel (Complex & Inflated)
 
-```
+\`\`\`
 3,402 emails (already 3x inflated!)
 │
 │ × 95% delivery rate
@@ -281,7 +281,7 @@ Overall: 1,134 → 0 (0% conversion)
 3 deals ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 0.09%
 
 Overall: 3,402 → 3 (0.088% conversion)
-```
+\`\`\`
 
 ---
 
@@ -289,7 +289,7 @@ Overall: 3,402 → 3 (0.088% conversion)
 
 ### Local Calculator Errors Highlighted
 
-```
+\`\`\`
 ✅ CORRECT: emailsPerMonth = 3 × 18 × 21 = 1,134
 
 ❌ ERROR #1: totalEmails = 1,134 × 3 = 3,402
@@ -315,7 +315,7 @@ Overall: 3,402 → 3 (0.088% conversion)
    (Close rate is correct, but input is wrong)
 
 ✅ CORRECT: revenue = deals × ltv
-```
+\`\`\`
 
 ---
 
@@ -323,59 +323,59 @@ Overall: 3,402 → 3 (0.088% conversion)
 
 ### Error #1: Multiplying by sequence steps instead of dividing
 
-```
+\`\`\`
 Reference: 1,134 ÷ 3 = 378 prospects
 Local:     1,134 × 3 = 3,402 emails
 
 Impact: 900% inflation (9x higher)
-```
+\`\`\`
 
 ### Error #2: Applying bounce rate (5% reduction)
 
-```
+\`\`\`
 Reference: Uses full 378 prospects
 Local:     Reduces to 3,232 (95%)
 
 Impact: 5% reduction (small but unnecessary)
-```
+\`\`\`
 
 ### Error #3: Applying open rate (55% reduction)
 
-```
+\`\`\`
 Reference: Uses full prospects
 Local:     Reduces to 1,454 (45%)
 
 Impact: 55% reduction (unnecessary for ROI calc)
-```
+\`\`\`
 
 ### Error #4: Applying click rate (99% reduction) ⚠️ CRITICAL
 
-```
+\`\`\`
 Reference: No click rate
 Local:     Reduces to 15 (1%)
 
 Impact: 99% reduction (MASSIVE ERROR!)
 This single error causes most of the discrepancy
-```
+\`\`\`
 
 ### Error #5: Using 30% conversion vs 1/300
 
-```
+\`\`\`
 Reference: 378 ÷ 300 = 0.33% conversion → 1 opp
 Local:     15 × 30% = 30% conversion → 5 opps
 
 Impact: 90x higher conversion rate, but applied to
         much smaller base (15 vs 378)
-```
+\`\`\`
 
 ### Error #6: Using 75% vs 76% + Math.round vs Math.floor
 
-```
+\`\`\`
 Reference: floor(1 × 0.76) = 0
 Local:     round(5 × 0.75) = 4
 
 Impact: Different rate + different rounding + different input
-```
+\`\`\`
 
 ---
 
@@ -386,7 +386,7 @@ Both calculators should start with same base:
 - 3 mailboxes × 18 emails/day × 21 days = 1,134 emails
 
 ### Reference Path
-```
+\`\`\`
 1,134
   ÷ 3        = 378     (normalize for sequence)
   ÷ 300      = 1.26    (apply ratio)
@@ -396,10 +396,10 @@ Both calculators should start with same base:
   × 0.70     = 0       (close rate)
   floor      = 0       (round down)
   × $5,000   = $0
-```
+\`\`\`
 
 ### Local Path
-```
+\`\`\`
 1,134
   × 3        = 3,402   ❌ (inflate by sequence)
   × 0.95     = 3,232   ❌ (bounce reduction)
@@ -413,16 +413,16 @@ Both calculators should start with same base:
   × 0.70     = 2.8
   round      = 3
   × $5,000   = $15,000 ❌
-```
+\`\`\`
 
 ### Net Effect
-```
+\`\`\`
 Reference: 1,134 → 0 deals
 Local:     1,134 → 3 deals (via inflated intermediate steps)
 
 Difference: Infinite % (0 vs 3)
             or $0 vs $15,000
-```
+\`\`\`
 
 ---
 
@@ -430,7 +430,7 @@ Difference: Infinite % (0 vs 3)
 
 ### Before Fix (Current Local)
 
-```
+\`\`\`
                     ┌─────────────┐
                     │   INPUTS    │
                     └─────────────┘
@@ -480,11 +480,11 @@ Difference: Infinite % (0 vs 3)
         ┌──────────┐
         │ revenue  │
         └──────────┘
-```
+\`\`\`
 
 ### After Fix (Reference Method)
 
-```
+\`\`\`
               ┌─────────────┐
               │   INPUTS    │
               └─────────────┘
@@ -523,7 +523,7 @@ Difference: Infinite % (0 vs 3)
           ┌───────────────────┐
           │    revenue        │
           └───────────────────┘
-```
+\`\`\`
 
 ---
 

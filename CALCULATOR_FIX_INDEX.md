@@ -95,18 +95,18 @@ This directory contains comprehensive analysis and fix documentation for alignin
 ### The Core Problem
 
 **Local Calculator:**
-```javascript
+\`\`\`javascript
 totalEmails = emailsPerMonth × sequenceSteps  // Multiplies ❌
 clicks = opens × 1%                          // 99% reduction ❌
 opportunities = clicks × 30%                  // Wrong method ❌
-```
+\`\`\`
 
 **Reference Calculator:**
-```javascript
+\`\`\`javascript
 totalProspects = totalEmails ÷ sequenceSteps  // Divides ✅
 // No click rate step                         // Correct ✅
 opportunities = prospects ÷ 300               // Correct ✅
-```
+\`\`\`
 
 ---
 
@@ -114,7 +114,7 @@ opportunities = prospects ÷ 300               // Correct ✅
 
 Replace this calculation block in `/Users/mirzaiqbal/roi-calculator/app/page.tsx`:
 
-```javascript
+\`\`\`javascript
 // OLD (WRONG)
 const totalEmails = emailsPerMonth * sequenceSteps
 const delivered = Math.round(totalEmails * (1 - bounceRate / 100))
@@ -123,16 +123,16 @@ const clicks = Math.round(opens * 0.01)
 const opportunities = Math.round(clicks * (positiveReplyRate / 100))
 const meetings = Math.round(opportunities * 0.75)
 const deals = Math.round(meetings * (closeRate / 100))
-```
+\`\`\`
 
-```javascript
+\`\`\`javascript
 // NEW (CORRECT)
 const totalEmailsAllMailboxes = mailboxes * emailsPerDay * workingDays
 const totalProspects = Math.floor(totalEmailsAllMailboxes / sequenceSteps)
 const opportunities = Math.floor(totalProspects / ratioPerReply)
 const meetings = Math.floor(opportunities * 0.76)
 const deals = Math.floor(meetings * (closeRate / 100))
-```
+\`\`\`
 
 **Result:** Calculator will match Reference exactly.
 
@@ -219,22 +219,22 @@ const deals = Math.floor(meetings * (closeRate / 100))
 After implementing fixes, verify these results:
 
 ### Test 1: Default Settings
-```
+\`\`\`
 Input:  3 mailboxes, 18 emails/day, 21 days, 3 steps, 300 ratio, 70% close
 Output: 1,134 emails → 378 prospects → 1 opp → 0 meetings → 0 deals → $0
-```
+\`\`\`
 
 ### Test 2: Higher Volume
-```
+\`\`\`
 Input:  10 mailboxes, 25 emails/day, 21 days, 5 steps, 200 ratio, 75% close
 Output: 5,250 emails → 1,050 prospects → 5 opps → 3 meetings → 2 deals → $10,000
-```
+\`\`\`
 
 ### Test 3: Low Volume
-```
+\`\`\`
 Input:  1 mailbox, 10 emails/day, 20 days, 4 steps, 500 ratio, 50% close
 Output: 200 emails → 50 prospects → 0 opps → 0 meetings → 0 deals → $0
-```
+\`\`\`
 
 If your results match these exactly, the fix is complete!
 
