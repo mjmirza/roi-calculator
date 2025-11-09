@@ -258,6 +258,21 @@
       "isVeryLow": "منخفض جدًا",
       "isLow": "منخفض"
     },
+    "costItems": {
+      "gtmEngineer": "مهندس GTM",
+      "software": "البرمجيات",
+      "mailboxes": "صناديق البريد",
+      "deliverability": "قابلية التسليم",
+      "dataProvider": "مزود البيانات",
+      "copywriter": "كاتب المحتوى",
+      "commission": "عمولة",
+      "coldCallingSoftware": "برنامج المكالمات الباردة",
+      "callerSalary": "راتب المتصل",
+      "linkedInTool": "أداة LinkedIn",
+      "linkedInManager": "مدير LinkedIn",
+      "referralProgram": "برنامج الإحالة",
+      "referralIncentives": "حوافز الإحالة"
+    },
     "keyMetrics": {
       "overallROI": "عائد الاستثمار الإجمالي (جميع القنوات)",
       "coldEmailROI": "عائد استثمار البريد الإلكتروني البارد:",

@@ -258,6 +258,21 @@
       "isVeryLow": "非常低",
       "isLow": "偏低"
     },
+    "costItems": {
+      "gtmEngineer": "GTM工程师",
+      "software": "软件",
+      "mailboxes": "邮箱",
+      "deliverability": "送达率",
+      "dataProvider": "数据提供商",
+      "copywriter": "文案撰稿人",
+      "commission": "佣金",
+      "coldCallingSoftware": "冷电话软件",
+      "callerSalary": "电话员工资",
+      "linkedInTool": "LinkedIn工具",
+      "linkedInManager": "LinkedIn经理",
+      "referralProgram": "推荐计划",
+      "referralIncentives": "推荐奖励"
+    },
     "keyMetrics": {
       "overallROI": "总体ROI(所有渠道)",
       "coldEmailROI": "冷邮件ROI:",

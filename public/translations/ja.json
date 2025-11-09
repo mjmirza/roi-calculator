@@ -258,6 +258,21 @@
       "isVeryLow": "非常に低い",
       "isLow": "低い"
     },
+    "costItems": {
+      "gtmEngineer": "GTMエンジニア",
+      "software": "ソフトウェア",
+      "mailboxes": "メールボックス",
+      "deliverability": "配信性",
+      "dataProvider": "データプロバイダー",
+      "copywriter": "コピーライター",
+      "commission": "コミッション",
+      "coldCallingSoftware": "コールドコールソフトウェア",
+      "callerSalary": "コール担当者の給与",
+      "linkedInTool": "LinkedInツール",
+      "linkedInManager": "LinkedInマネージャー",
+      "referralProgram": "紹介プログラム",
+      "referralIncentives": "紹介インセンティブ"
+    },
     "keyMetrics": {
       "overallROI": "全体的なROI(すべてのチャネル)",
       "coldEmailROI": "コールドメールROI:",

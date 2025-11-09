@@ -258,6 +258,21 @@
       "isVeryLow": "очень низкий",
       "isLow": "низкий"
     },
+    "costItems": {
+      "gtmEngineer": "Инженер GTM",
+      "software": "Программное обеспечение",
+      "mailboxes": "Почтовые ящики",
+      "deliverability": "Доставляемость",
+      "dataProvider": "Поставщик данных",
+      "copywriter": "Копирайтер",
+      "commission": "Комиссия",
+      "coldCallingSoftware": "ПО для холодных звонков",
+      "callerSalary": "Зарплата звонящего",
+      "linkedInTool": "Инструмент LinkedIn",
+      "linkedInManager": "Менеджер LinkedIn",
+      "referralProgram": "Реферальная программа",
+      "referralIncentives": "Реферальные вознаграждения"
+    },
     "keyMetrics": {
       "overallROI": "Общий ROI (все каналы)",
       "coldEmailROI": "ROI холодных писем:",

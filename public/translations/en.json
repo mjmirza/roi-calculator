@@ -258,6 +258,21 @@
       "isVeryLow": "is very low",
       "isLow": "is low"
     },
+    "costItems": {
+      "gtmEngineer": "GTM Engineer",
+      "software": "Software",
+      "mailboxes": "Mailboxes",
+      "deliverability": "Deliverability",
+      "dataProvider": "Data Provider",
+      "copywriter": "Copywriter",
+      "commission": "Commission",
+      "coldCallingSoftware": "Cold Calling Software",
+      "callerSalary": "Caller Salary",
+      "linkedInTool": "LinkedIn Tool",
+      "linkedInManager": "LinkedIn Manager",
+      "referralProgram": "Referral Program",
+      "referralIncentives": "Referral Incentives"
+    },
     "keyMetrics": {
       "overallROI": "Overall ROI (All Channels)",
       "coldEmailROI": "Cold Email ROI:",

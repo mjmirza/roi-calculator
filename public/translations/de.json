@@ -258,6 +258,21 @@
       "isVeryLow": "ist sehr niedrig",
       "isLow": "ist niedrig"
     },
+    "costItems": {
+      "gtmEngineer": "GTM-Ingenieur",
+      "software": "Software",
+      "mailboxes": "Postfächer",
+      "deliverability": "Zustellbarkeit",
+      "dataProvider": "Datenanbieter",
+      "copywriter": "Texter",
+      "commission": "Provision",
+      "coldCallingSoftware": "Kaltakquise-Software",
+      "callerSalary": "Anrufer-Gehalt",
+      "linkedInTool": "LinkedIn-Tool",
+      "linkedInManager": "LinkedIn-Manager",
+      "referralProgram": "Empfehlungsprogramm",
+      "referralIncentives": "Empfehlungsanreize"
+    },
     "keyMetrics": {
       "overallROI": "Gesamt-ROI (Alle Kanäle)",
       "coldEmailROI": "Cold-E-Mail-ROI:",

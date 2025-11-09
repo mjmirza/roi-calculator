@@ -258,6 +258,21 @@
       "isVeryLow": "es muy bajo",
       "isLow": "es bajo"
     },
+    "costItems": {
+      "gtmEngineer": "Ingeniero GTM",
+      "software": "Software",
+      "mailboxes": "Buzones",
+      "deliverability": "Entregabilidad",
+      "dataProvider": "Proveedor de Datos",
+      "copywriter": "Redactor",
+      "commission": "Comisión",
+      "coldCallingSoftware": "Software de Llamadas en Frío",
+      "callerSalary": "Salario del Telefonista",
+      "linkedInTool": "Herramienta de LinkedIn",
+      "linkedInManager": "Gestor de LinkedIn",
+      "referralProgram": "Programa de Referencias",
+      "referralIncentives": "Incentivos de Referencias"
+    },
     "keyMetrics": {
       "overallROI": "ROI General (Todos los Canales)",
       "coldEmailROI": "ROI de Correo en Frío:",

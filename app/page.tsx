@@ -449,13 +449,13 @@ export default function ROICalculator() {
   useEffect(() => {
     const validateRequiredFields = () => {
       const missing: string[] = []
-      if (mailboxes < 1) missing.push("Sending mailboxes (min: 1)")
-      if (emailsPerDay < 1) missing.push("Emails per day per mailbox (min: 1)")
-      if (workingDays < 1) missing.push("Working days per month (min: 1)")
-      if (ratioPerReply < 1) missing.push("Ratio per positive reply (min: 1)")
-      if (closeRate < 1) missing.push("AEs close-rate (min: 1%)")
+      if (mailboxes < 1) missing.push(t("validation.sendingMailboxesMin"))
+      if (emailsPerDay < 1) missing.push(t("validation.emailsPerDayMin"))
+      if (workingDays < 1) missing.push(t("validation.workingDaysMin"))
+      if (ratioPerReply < 1) missing.push(t("validation.ratioPerReplyMin"))
+      if (closeRate < 1) missing.push(t("validation.closeRateMin"))
       // Updated validation to use LTV
-      if (ltv < 1) missing.push("Estimated LTV per deal (min: 1)")
+      if (ltv < 1) missing.push(t("validation.ltvMin"))
 
       return {
         isValid: missing.length === 0,
@@ -1072,8 +1072,8 @@ export default function ROICalculator() {
     if (calculations.combinedROI < 0) {
       suggestions.push({
         type: "critical",
-        message: "Your campaign is operating at a loss (including all channels)",
-        action: "Reduce costs or improve conversion rates across all channels to achieve profitability",
+        message: t("suggestions.campaignLoss"),
+        action: t("suggestions.campaignLossAction"),
       })
     }
 
@@ -1081,14 +1081,14 @@ export default function ROICalculator() {
     if (calculations.combinedCAC > 0 && calculations.ltvCacRatio < 1 && calculations.ltvCacRatio > 0) {
       suggestions.push({
         type: "critical",
-        message: "LTV/CAC ratio is below 1:1 - unsustainable",
-        action: "Increase deal size, reduce acquisition costs, or improve close rates",
+        message: t("suggestions.ltvCacBelow1"),
+        action: t("suggestions.ltvCacBelow1Action"),
       })
     } else if (calculations.combinedCAC > 0 && calculations.ltvCacRatio < 3 && calculations.ltvCacRatio >= 1) {
       suggestions.push({
         type: "warning",
-        message: "LTV/CAC ratio should be 3:1 or higher for healthy growth",
-        action: "Focus on increasing customer lifetime value or reducing CAC",
+        message: t("suggestions.ltvCacBelow3"),
+        action: t("suggestions.ltvCacBelow3Action"),
       })
     }
 
@@ -1096,8 +1096,8 @@ export default function ROICalculator() {
     if (enableEmailMetrics && openRate < 40) {
       suggestions.push({
         type: "warning",
-        message: `Cold Email Open rate (${openRate}%) is below industry average (40-60%)`,
-        action: "Improve subject lines, check deliverability, or warm up domains properly",
+        message: `${t("suggestions.openRateLow")} (${openRate}%) ${t("suggestions.belowIndustryAverage")} (40-60%)`,
+        action: t("suggestions.openRateLowAction"),
       })
     }
 
@@ -1105,8 +1105,8 @@ export default function ROICalculator() {
     if (enableEmailMetrics && replyRate < 1) {
       suggestions.push({
         type: "warning",
-        message: `Cold Email Reply rate (${replyRate}%) is very low`,
-        action: "Improve email copy, better targeting, or refine your ICP (Ideal Customer Profile)",
+        message: `${t("suggestions.replyRateLow")} (${replyRate}%) ${t("suggestions.isVeryLow")}`,
+        action: t("suggestions.replyRateLowAction"),
       })
     }
 
@@ -1114,8 +1114,8 @@ export default function ROICalculator() {
     if (enableEmailMetrics && bounceRate > 5) {
       suggestions.push({
         type: "critical",
-        message: `Cold Email Bounce rate (${bounceRate}%) is too high - damages sender reputation`,
-        action: "Use better data providers, verify emails before sending, or clean your lists",
+        message: `${t("suggestions.bounceRateHigh")} (${bounceRate}%) ${t("suggestions.isTooHigh")}`,
+        action: t("suggestions.bounceRateHighAction"),
       })
     }
 
@@ -1123,8 +1123,8 @@ export default function ROICalculator() {
     if (enableEmailMetrics && emailsPerDay > 50) {
       suggestions.push({
         type: "warning",
-        message: `Sending ${emailsPerDay} emails/day per mailbox may trigger spam filters`,
-        action: "Reduce to 30-50 emails per day per mailbox for better deliverability",
+        message: `${t("suggestions.emailsPerDayHigh")} ${emailsPerDay} ${t("suggestions.emailsPerDayPerMailboxMayTrigger")}`,
+        action: t("suggestions.emailsPerDayHighAction"),
       })
     }
 
@@ -1133,15 +1133,15 @@ export default function ROICalculator() {
       if (callConnectRate < 20) {
         suggestions.push({
           type: "warning",
-          message: `Cold Calling Connect rate (${callConnectRate}%) is low`,
-          action: "Improve your calling script, target better leads, or optimize calling times",
+          message: `${t("suggestions.callConnectRateLow")} (${callConnectRate}%) ${t("suggestions.isLow")}`,
+          action: t("suggestions.callConnectRateLowAction"),
         })
       }
       if (callToMeetingRate < 10) {
         suggestions.push({
           type: "warning",
-          message: `Cold Calling to Meeting rate (${callToMeetingRate}%) is low`,
-          action: "Enhance your post-connection pitch or offer more compelling meeting incentives",
+          message: `${t("suggestions.callToMeetingRateLow")} (${callToMeetingRate}%) ${t("suggestions.isLow")}`,
+          action: t("suggestions.callToMeetingRateLowAction"),
         })
       }
     }
@@ -1151,22 +1151,22 @@ export default function ROICalculator() {
       if (linkedInAcceptRate < 20) {
         suggestions.push({
           type: "warning",
-          message: `LinkedIn Accept rate (${linkedInAcceptRate}%) is low`,
-          action: "Personalize connection requests, ensure your profile is optimized, or target relevant connections",
+          message: `${t("suggestions.linkedInAcceptRateLow")} (${linkedInAcceptRate}%) ${t("suggestions.isLow")}`,
+          action: t("suggestions.linkedInAcceptRateLowAction"),
         })
       }
       if (linkedInReplyRate < 5) {
         suggestions.push({
           type: "warning",
-          message: `LinkedIn Reply rate (${linkedInReplyRate}%) is low`,
-          action: "Craft engaging initial messages after connection, and follow up strategically",
+          message: `${t("suggestions.linkedInReplyRateLow")} (${linkedInReplyRate}%) ${t("suggestions.isLow")}`,
+          action: t("suggestions.linkedInReplyRateLowAction"),
         })
       }
       if (linkedInMeetingRate < 15) {
         suggestions.push({
           type: "warning",
-          message: `LinkedIn Meeting rate (${linkedInMeetingRate}%) is low`,
-          action: "Improve your value proposition and call to action in messages",
+          message: `${t("suggestions.linkedInMeetingRateLow")} (${linkedInMeetingRate}%) ${t("suggestions.isLow")}`,
+          action: t("suggestions.linkedInMeetingRateLowAction"),
         })
       }
     }
@@ -1177,19 +1177,19 @@ export default function ROICalculator() {
       calculations.totalRevenueAllChannels > 0
     ) {
       const costBreakdown = [
-        { name: "GTM Engineer", value: engineerCost },
-        { name: "Software", value: softwareCost },
-        { name: "Mailboxes", value: mailboxCost },
-        { name: "Deliverability", value: deliveryCost },
-        { name: "Data Provider", value: dataProviderCost },
-        { name: "Copywriter", value: copywriterCost },
-        { name: "Commission", value: calculations.commissionCost },
-        { name: "Cold Calling Software", value: callingSoftwareCost },
-        { name: "Caller Salary", value: callerSalaryCost },
-        { name: "LinkedIn Tool", value: linkedInToolCost },
-        { name: "LinkedIn Manager", value: linkedInManagerCost },
-        { name: "Referral Program", value: referralProgramCost },
-        { name: "Referral Incentives", value: calculations.referralCost - referralProgramCost },
+        { name: t("costItems.gtmEngineer"), value: engineerCost },
+        { name: t("costItems.software"), value: softwareCost },
+        { name: t("costItems.mailboxes"), value: mailboxCost },
+        { name: t("costItems.deliverability"), value: deliveryCost },
+        { name: t("costItems.dataProvider"), value: dataProviderCost },
+        { name: t("costItems.copywriter"), value: copywriterCost },
+        { name: t("costItems.commission"), value: calculations.commissionCost },
+        { name: t("costItems.coldCallingSoftware"), value: callingSoftwareCost },
+        { name: t("costItems.callerSalary"), value: callerSalaryCost },
+        { name: t("costItems.linkedInTool"), value: linkedInToolCost },
+        { name: t("costItems.linkedInManager"), value: linkedInManagerCost },
+        { name: t("costItems.referralProgram"), value: referralProgramCost },
+        { name: t("costItems.referralIncentives"), value: calculations.referralCost - referralProgramCost },
       ]
         .filter((c) => c.value > 0)
         .sort((a, b) => b.value - a.value)
@@ -1197,8 +1197,8 @@ export default function ROICalculator() {
       if (costBreakdown.length > 0) {
         suggestions.push({
           type: "info",
-          message: `Highest cost: ${costBreakdown[0].name} (${formatCurrency(costBreakdown[0].value)})`,
-          action: "Consider optimizing this cost or improving output to justify the expense",
+          message: `${t("suggestions.highestCost")} ${costBreakdown[0].name} (${formatCurrency(costBreakdown[0].value)})`,
+          action: t("suggestions.highestCostAction"),
         })
       }
     }
@@ -1207,8 +1207,8 @@ export default function ROICalculator() {
     if (showAgencyComparison && enableAgency && calculations.costSavingsVsAgency < 0) {
       suggestions.push({
         type: "info",
-        message: `Agency would save you ${formatCurrency(Math.abs(calculations.costSavingsVsAgency))}/month`,
-        action: "Consider outsourcing to an agency instead of building in-house",
+        message: `${t("suggestions.agencySavings")} ${formatCurrency(Math.abs(calculations.costSavingsVsAgency))}/month`,
+        action: t("suggestions.agencySavingsAction"),
       })
     }
 
@@ -1216,8 +1216,8 @@ export default function ROICalculator() {
     if (closeRate < 20) {
       suggestions.push({
         type: "warning",
-        message: `Overall Close rate (${closeRate}%) is very low`,
-        action: "Improve sales process, qualify leads better, or provide sales training",
+        message: `${t("suggestions.closeRateLow")} (${closeRate}%) ${t("suggestions.isVeryLow")}`,
+        action: t("suggestions.closeRateLowAction"),
       })
     }
 
@@ -1275,7 +1275,7 @@ export default function ROICalculator() {
       <Label htmlFor={htmlFor} className="text-sm font-medium flex-1">
         {label}
         {required && <span className="text-red-600 ml-1">*</span>}
-        {minValue !== undefined && <span className="text-xs text-muted-foreground ml-1">(min: {minValue})</span>}
+        {minValue !== undefined && <span className="text-xs text-muted-foreground ml-1">({t("validation.minLabel")}: {minValue})</span>}
         {warning && (
           <span className="flex items-center gap-1 text-xs text-amber-600 dark:text-amber-500 mt-1">
             <AlertTriangle className="h-3 w-3" />
@@ -1391,10 +1391,10 @@ export default function ROICalculator() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <Calculator className="h-5 w-5 text-blue-600" />
-                    <CardTitle className="text-lg">Calculation Breakdown</CardTitle>
+                    <CardTitle className="text-lg">{t("calculationBreakdown.title")}</CardTitle>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs text-muted-foreground">See how your inputs flow through the system</span>
+                    <span className="text-xs text-muted-foreground">{t("calculationBreakdown.subtitle")}</span>
                     {showCalculationBreakdown ? (
                       <ChevronUp className="h-5 w-5 text-muted-foreground" />
                     ) : (
@@ -1411,13 +1411,12 @@ export default function ROICalculator() {
                         1
                       </div>
                       <div className="flex-1">
-                        <div className="font-semibold mb-1">Total Emails Sent</div>
+                        <div className="font-semibold mb-1">{t("calculationBreakdown.step1Title")}</div>
                         <div className="text-muted-foreground">
-                          {mailboxes} mailboxes × {emailsPerDay} emails/day × {workingDays} working days ×{" "}
-                          {sequenceSteps} sequence steps
+                          {t("calculationBreakdown.step1Description")}
                         </div>
                         <div className="font-mono text-lg mt-2 text-blue-600">
-                          = {displayValue(calculations.totalEmails, "number")} emails
+                          = {displayValue(calculations.totalEmails, "number")} {t("calculationBreakdown.step1Result")}
                         </div>
                       </div>
                     </div>
@@ -1427,12 +1426,12 @@ export default function ROICalculator() {
                         2
                       </div>
                       <div className="flex-1">
-                        <div className="font-semibold mb-1">Emails Opened</div>
+                        <div className="font-semibold mb-1">{t("calculationBreakdown.step2Title")}</div>
                         <div className="text-muted-foreground">
-                          {displayValue(calculations.totalEmails, "number")} emails × {openRate}% open rate
+                          {t("calculationBreakdown.step2Description")}
                         </div>
                         <div className="font-mono text-lg mt-2 text-blue-600">
-                          = {displayValue(calculations.emailsOpened, "number")} opens
+                          = {displayValue(calculations.emailsOpened, "number")} {t("calculationBreakdown.step2Result")}
                         </div>
                       </div>
                     </div>
@@ -1442,12 +1441,12 @@ export default function ROICalculator() {
                         3
                       </div>
                       <div className="flex-1">
-                        <div className="font-semibold mb-1">Emails Replied</div>
+                        <div className="font-semibold mb-1">{t("calculationBreakdown.step3Title")}</div>
                         <div className="text-muted-foreground">
-                          {displayValue(calculations.totalEmails, "number")} emails × {replyRate}% reply rate
+                          {t("calculationBreakdown.step3Description")}
                         </div>
                         <div className="font-mono text-lg mt-2 text-blue-600">
-                          = {displayValue(calculations.emailsReplied, "number")} replies
+                          = {displayValue(calculations.emailsReplied, "number")} {t("calculationBreakdown.step3Result")}
                         </div>
                       </div>
                     </div>
@@ -1457,13 +1456,12 @@ export default function ROICalculator() {
                         4
                       </div>
                       <div className="flex-1">
-                        <div className="font-semibold mb-1">Positive Replies</div>
+                        <div className="font-semibold mb-1">{t("calculationBreakdown.step4Title")}</div>
                         <div className="text-muted-foreground">
-                          {displayValue(calculations.emailsReplied, "number")} replies × {positiveReplyRate}% positive
-                          rate
+                          {t("calculationBreakdown.step4Description")}
                         </div>
                         <div className="font-mono text-lg mt-2 text-blue-600">
-                          = {displayValue(calculations.positiveReplies, "number")} positive replies
+                          = {displayValue(calculations.positiveReplies, "number")} {t("calculationBreakdown.step4Result")}
                         </div>
                       </div>
                     </div>
@@ -1473,13 +1471,12 @@ export default function ROICalculator() {
                         5
                       </div>
                       <div className="flex-1">
-                        <div className="font-semibold mb-1">Opportunities Created</div>
+                        <div className="font-semibold mb-1">{t("calculationBreakdown.step5Title")}</div>
                         <div className="text-muted-foreground">
-                          {displayValue(calculations.positiveReplies, "number")} positive replies ÷ {ratioPerReply}{" "}
-                          ratio (1 opportunity per {ratioPerReply} positive replies)
+                          {t("calculationBreakdown.step5Description")} {ratioPerReply} {t("calculationBreakdown.step5Description2")}
                         </div>
                         <div className="font-mono text-lg mt-2 text-blue-600">
-                          = {displayValue(calculations.opportunities, "number")} opportunities
+                          = {displayValue(calculations.opportunities, "number")} {t("calculationBreakdown.step5Result")}
                         </div>
                       </div>
                     </div>
@@ -1489,13 +1486,12 @@ export default function ROICalculator() {
                         6
                       </div>
                       <div className="flex-1">
-                        <div className="font-semibold mb-1">Meetings Booked</div>
+                        <div className="font-semibold mb-1">{t("calculationBreakdown.step6Title")}</div>
                         <div className="text-muted-foreground">
-                          {displayValue(calculations.opportunities, "number")} opportunities × {meetingBookRate}%
-                          meeting book rate
+                          {t("calculationBreakdown.step6Description")}
                         </div>
                         <div className="font-mono text-lg mt-2 text-blue-600">
-                          = {displayValue(calculations.meetings, "number")} meetings
+                          = {displayValue(calculations.meetings, "number")} {t("calculationBreakdown.step6Result")}
                         </div>
                       </div>
                     </div>
@@ -1505,10 +1501,10 @@ export default function ROICalculator() {
                         7
                       </div>
                       <div className="flex-1">
-                        <div className="font-semibold mb-1">Deals Closed</div>
-                        <div className="text-muted-foreground">Meetings convert to deals (1:1 ratio)</div>
+                        <div className="font-semibold mb-1">{t("calculationBreakdown.step7Title")}</div>
+                        <div className="text-muted-foreground">{t("calculationBreakdown.step7Description")}</div>
                         <div className="font-mono text-lg mt-2 text-blue-600">
-                          = {displayValue(calculations.deals, "number")} deals
+                          = {displayValue(calculations.deals, "number")} {t("calculationBreakdown.step7Result")}
                         </div>
                       </div>
                     </div>
@@ -1518,12 +1514,12 @@ export default function ROICalculator() {
                         8
                       </div>
                       <div className="flex-1">
-                        <div className="font-semibold mb-1 text-green-700">Total Revenue</div>
+                        <div className="font-semibold mb-1 text-green-700">{t("calculationBreakdown.step8Title")}</div>
                         <div className="text-muted-foreground">
-                          {displayValue(calculations.deals, "number")} deals × {formatCurrency(ltv)} LTV per deal
+                          {t("calculationBreakdown.step8Description")}
                         </div>
                         <div className="font-mono text-2xl mt-2 text-green-600 font-bold">
-                          = {displayValue(calculations.revenue, "currency")}
+                          {displayValue(calculations.revenue, "currency")}
                         </div>
                       </div>
                     </div>
@@ -1532,21 +1528,18 @@ export default function ROICalculator() {
                       <div className="flex items-start gap-2">
                         <Info className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
                         <div className="text-sm text-blue-900">
-                          <div className="font-semibold mb-1">Understanding Your Results</div>
+                          <div className="font-semibold mb-1">{t("calculationBreakdown.understandingTitle")}</div>
                           <div className="space-y-1 text-blue-800">
                             <div>
-                              • If changing mailboxes doesn't affect results, check your conversion rates (open rate,
-                              reply rate, etc.)
+                              • {t("calculationBreakdown.understandingPoint1")}
                             </div>
                             <div>
-                              • Low conversion rates create bottlenecks - even 10x more emails won't help if only 0.1%
-                              convert
+                              • {t("calculationBreakdown.understandingPoint2")}
                             </div>
                             <div>
-                              • The "Ratio per positive reply" is critical - it determines how many positive replies
-                              become opportunities
+                              • {t("calculationBreakdown.understandingPoint3")}
                             </div>
-                            <div>• Your close rate affects how many opportunities become actual deals</div>
+                            <div>• {t("calculationBreakdown.understandingPoint4")}</div>
                           </div>
                         </div>
                       </div>
@@ -1721,13 +1714,13 @@ export default function ROICalculator() {
                           }}
                           onClick={(e) => e.stopPropagation()}
                         />
-                        <span className="text-xs text-muted-foreground">{enableAdvanced ? "Enabled" : "Disabled"}</span>
+                        <span className="text-xs text-muted-foreground">{enableAdvanced ? t("advancedMetrics.enabled") : t("advancedMetrics.disabled")}</span>
                       </div>
                     </div>
                     <CardDescription className="mt-1 flex items-start gap-1">
                       <Info className="h-3 w-3 mt-0.5 flex-shrink-0 text-blue-500" />
                       <span className="text-xs">
-                        Enable to see detailed email performance metrics on the right panel
+                        {t("advancedMetrics.description")}
                       </span>
                     </CardDescription>
                   </div>
@@ -1740,8 +1733,8 @@ export default function ROICalculator() {
                   <div className="space-y-2">
                     <LabelWithTooltip
                       htmlFor="openRate"
-                      label="Open rate (%)"
-                      tooltip="Percentage of emails that get opened. Industry average: 40-60%. Lower rates indicate deliverability issues."
+                      label={t("advancedMetrics.openRate")}
+                      tooltip={t("advancedMetrics.openRateTooltip")}
                       warning={getBenchmarkWarning("openRate", openRate)}
                     />
                     <Input
@@ -1755,8 +1748,8 @@ export default function ROICalculator() {
                   <div className="space-y-2">
                     <LabelWithTooltip
                       htmlFor="replyRate"
-                      label="Reply rate (%)"
-                      tooltip="Percentage of emails that get any reply (positive or negative). Industry average: 1-5%."
+                      label={t("advancedMetrics.replyRate")}
+                      tooltip={t("advancedMetrics.replyRateTooltip")}
                       warning={getBenchmarkWarning("replyRate", replyRate)}
                     />
                     <Input
@@ -1770,8 +1763,8 @@ export default function ROICalculator() {
                   <div className="space-y-2">
                     <LabelWithTooltip
                       htmlFor="positiveReplyRate"
-                      label="Positive reply rate (%)"
-                      tooltip="Of all replies, what percentage are positive/interested? Typically 20-40% of total replies."
+                      label={t("advancedMetrics.positiveReplyRate")}
+                      tooltip={t("advancedMetrics.positiveReplyRateTooltip")}
                     />
                     <Input
                       id="positiveReplyRate"
@@ -1784,8 +1777,8 @@ export default function ROICalculator() {
                   <div className="space-y-2">
                     <LabelWithTooltip
                       htmlFor="meetingBookRate"
-                      label="Meeting book rate (%)"
-                      tooltip="Percentage of positive replies that convert to booked meetings. Industry average: 40-60%."
+                      label={t("advancedMetrics.meetingBookRate")}
+                      tooltip={t("advancedMetrics.meetingBookRateTooltip")}
                     />
                     <Input
                       id="meetingBookRate"
@@ -1798,8 +1791,8 @@ export default function ROICalculator() {
                   <div className="space-y-2">
                     <LabelWithTooltip
                       htmlFor="bounceRate"
-                      label="Bounce rate (%)"
-                      tooltip="Percentage of emails that bounce (invalid addresses). Keep under 5% to maintain sender reputation."
+                      label={t("advancedMetrics.bounceRate")}
+                      tooltip={t("advancedMetrics.bounceRateTooltip")}
                       warning={getBenchmarkWarning("bounceRate", bounceRate)}
                     />
                     <Input
@@ -1813,8 +1806,8 @@ export default function ROICalculator() {
                   <div className="space-y-2">
                     <LabelWithTooltip
                       htmlFor="unsubscribeRate"
-                      label="Unsubscribe rate (%)"
-                      tooltip="Percentage of recipients who unsubscribe. Keep under 1% for healthy campaigns."
+                      label={t("advancedMetrics.unsubscribeRate")}
+                      tooltip={t("advancedMetrics.unsubscribeRateTooltip")}
                     />
                     <Input
                       id="unsubscribeRate"
@@ -1828,8 +1821,8 @@ export default function ROICalculator() {
                   <div className="space-y-2">
                     <LabelWithTooltip
                       htmlFor="salesCycleLength"
-                      label="Sales cycle length (days)"
-                      tooltip="Average number of days from first contact to closed deal. Helps calculate time to revenue."
+                      label={t("advancedMetrics.salesCycleLength")}
+                      tooltip={t("advancedMetrics.salesCycleLengthTooltip")}
                     />
                     <Input
                       id="salesCycleLength"
@@ -1842,8 +1835,8 @@ export default function ROICalculator() {
                   <div className="space-y-2">
                     <LabelWithTooltip
                       htmlFor="churnRate"
-                      label="Monthly churn rate (%)"
-                      tooltip="Percentage of customers who cancel each month. Important for calculating true LTV."
+                      label={t("advancedMetrics.churnRate")}
+                      tooltip={t("advancedMetrics.churnRateTooltip")}
                     />
                     <Input
                       id="churnRate"
@@ -1859,7 +1852,7 @@ export default function ROICalculator() {
 
             <Card className="transition-all hover:shadow-md">
               <CardHeader>
-                <CardTitle className="text-base">Cost Structure</CardTitle>
+                <CardTitle className="text-base">{t("costStructure.title")}</CardTitle>
                 <CardDescription>{t("costStructure.description")}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -1989,7 +1982,7 @@ export default function ROICalculator() {
                 <div className="flex items-center justify-between">
                   <div className="flex-1">
                     <div className="flex items-center gap-3">
-                      <CardTitle className="text-base">Sales Commission</CardTitle>
+                      <CardTitle className="text-base">{t("salesCommission.title")}</CardTitle>
                       <div className="flex items-center gap-2">
                         <Switch
                           checked={enableCommission}
@@ -2004,13 +1997,13 @@ export default function ROICalculator() {
                           onClick={(e) => e.stopPropagation()}
                         />
                         <span className="text-xs text-muted-foreground">
-                          {enableCommission ? "Enabled" : "Disabled"}
+                          {enableCommission ? t("salesCommission.enabled") : t("salesCommission.disabled")}
                         </span>
                       </div>
                     </div>
                     <CardDescription className="mt-1 flex items-start gap-1">
                       <Info className="h-3 w-3 mt-0.5 flex-shrink-0 text-blue-500" />
-                      <span className="text-xs">Enable to see commission impact analysis on the right panel</span>
+                      <span className="text-xs">{t("salesCommission.description")}</span>
                     </CardDescription>
                   </div>
                   {showCommission ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
@@ -2021,7 +2014,7 @@ export default function ROICalculator() {
                   <Separator className="mb-4" />
                   <div className="space-y-2">
                     <Label htmlFor="commissionType" className="text-sm font-medium">
-                      Commission Type
+                      {t("salesCommission.commissionType")}
                     </Label>
                     <Select
                       value={commissionType}
@@ -2031,14 +2024,14 @@ export default function ROICalculator() {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="percentage">Percentage of Deal Value</SelectItem>
-                        <SelectItem value="flat">Flat Rate per Deal</SelectItem>
+                        <SelectItem value="percentage">{t("salesCommission.commissionTypePercentage")}</SelectItem>
+                        <SelectItem value="flat">{t("salesCommission.commissionTypeFlat")}</SelectItem>
                       </SelectContent>
                     </Select>
                     <p className="text-xs text-muted-foreground">
                       {commissionType === "percentage"
-                        ? "Sales reps earn a percentage of each closed deal"
-                        : "Sales reps earn a fixed amount per closed deal"}
+                        ? t("salesCommission.commissionTypePercentageDesc")
+                        : t("salesCommission.commissionTypeFlatDesc")}
                     </p>
                   </div>
 
@@ -2046,8 +2039,8 @@ export default function ROICalculator() {
                     <div className="space-y-2">
                       <LabelWithTooltip
                         htmlFor="commissionRate"
-                        label="Commission Rate (%)"
-                        tooltip="Percentage of deal value paid to sales reps. Industry standard: 10-20% for B2B sales, 5-10% for high-ticket items."
+                        label={t("salesCommission.commissionRate")}
+                        tooltip={t("salesCommission.commissionRateTooltip")}
                       />
                       <Input
                         id="commissionRate"
@@ -2057,16 +2050,15 @@ export default function ROICalculator() {
                         className="font-mono transition-all focus:ring-2"
                       />
                       <p className="text-xs text-muted-foreground">
-                        Sales rep earns {formatCurrency(ltv * (commissionRate / 100))} per deal{" "}
-                        {/* Updated to use LTV */}
+                        {t("salesCommission.salesRepEarnsPercentage")} {formatCurrency(ltv * (commissionRate / 100))} {t("salesCommission.perDeal")}
                       </p>
                     </div>
                   ) : (
                     <div className="space-y-2">
                       <LabelWithTooltip
                         htmlFor="commissionFlat"
-                        label="Commission per Deal"
-                        tooltip="Fixed amount paid to sales reps per closed deal. Common for standardized products or services."
+                        label={t("salesCommission.commissionPerDeal")}
+                        tooltip={t("salesCommission.commissionPerDealTooltip")}
                       />
                       <Input
                         id="commissionFlat"
@@ -2076,7 +2068,7 @@ export default function ROICalculator() {
                         className="font-mono transition-all focus:ring-2"
                       />
                       <p className="text-xs text-muted-foreground">
-                        Sales rep earns {formatCurrency(commissionFlat)} per deal
+                        {t("salesCommission.salesRepEarnsFlat")} {formatCurrency(commissionFlat)} {t("salesCommission.perDeal")}
                       </p>
                     </div>
                   )}
@@ -2085,13 +2077,13 @@ export default function ROICalculator() {
 
                   <div className="p-3 rounded-lg bg-purple-50/50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-900">
                     <div className="flex items-center justify-between mb-2">
-                      <p className="text-sm font-medium">Total Monthly Commission</p>
+                      <p className="text-sm font-medium">{t("salesCommission.totalMonthlyCommission")}</p>
                       <p className="text-lg font-bold tabular-nums text-purple-700 dark:text-purple-400">
                         {displayValue(calculations.commissionCost, "currency")}
                       </p>
                     </div>
                     <p className="text-xs text-muted-foreground">
-                      Based on {displayValue(calculations.deals, "number")} deals closed per month
+                      {t("salesCommission.basedOnDeals")} {displayValue(calculations.deals, "number")} {t("salesCommission.dealsClosedPerMonth")}
                     </p>
                   </div>
                 </CardContent>
@@ -2103,7 +2095,7 @@ export default function ROICalculator() {
                 <div className="flex items-center justify-between">
                   <div className="flex-1">
                     <div className="flex items-center gap-3">
-                      <CardTitle className="text-base">Agency Comparison</CardTitle>
+                      <CardTitle className="text-base">{t("agencyComparison.title")}</CardTitle>
                       <div className="flex items-center gap-2">
                         <Switch
                           checked={enableAgency}
@@ -2117,12 +2109,12 @@ export default function ROICalculator() {
                           }}
                           onClick={(e) => e.stopPropagation()}
                         />
-                        <span className="text-xs text-muted-foreground">{enableAgency ? "Enabled" : "Disabled"}</span>
+                        <span className="text-xs text-muted-foreground">{enableAgency ? t("agencyComparison.enabled") : t("agencyComparison.disabled")}</span>
                       </div>
                     </div>
                     <CardDescription className="mt-1 flex items-start gap-1">
                       <Info className="h-3 w-3 mt-0.5 flex-shrink-0 text-blue-500" />
-                      <span className="text-xs">Enable to compare in-house vs agency costs on the right panel</span>
+                      <span className="text-xs">{t("agencyComparison.description")}</span>
                     </CardDescription>
                   </div>
                   {showAgencyComparison ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
@@ -2134,8 +2126,8 @@ export default function ROICalculator() {
                   <div className="space-y-2">
                     <LabelWithTooltip
                       htmlFor="agencySetupFee"
-                      label="Agency setup fee (one-time)"
-                      tooltip="One-time setup fee charged by agencies to onboard and configure your cold email campaigns."
+                      label={t("agencyComparison.setupFee")}
+                      tooltip={t("agencyComparison.setupFeeTooltip")}
                     />
                     <Input
                       id="agencySetupFee"
@@ -2148,8 +2140,8 @@ export default function ROICalculator() {
                   <div className="space-y-2">
                     <LabelWithTooltip
                       htmlFor="agencyMonthlyFee"
-                      label="Agency monthly retainer"
-                      tooltip="Fixed monthly fee charged by agencies for managing your cold email campaigns. Typically $5,000-$15,000/month."
+                      label={t("agencyComparison.monthlyRetainer")}
+                      tooltip={t("agencyComparison.monthlyRetainerTooltip")}
                     />
                     <Input
                       id="agencyMonthlyFee"
@@ -2162,8 +2154,8 @@ export default function ROICalculator() {
                   <div className="space-y-2">
                     <LabelWithTooltip
                       htmlFor="agencyPerLeadFee"
-                      label="Agency per-lead fee"
-                      tooltip="Additional cost per qualified lead/opportunity generated. Typically $100-$300 per lead depending on industry."
+                      label={t("agencyComparison.perLeadFee")}
+                      tooltip={t("agencyComparison.perLeadFeeTooltip")}
                     />
                     <Input
                       id="agencyPerLeadFee"
@@ -2183,7 +2175,7 @@ export default function ROICalculator() {
                   <div className="flex-1">
                     <div className="flex items-center gap-3">
                       <Phone className="h-5 w-5 text-blue-600" />
-                      <CardTitle className="text-base">Cold Calling</CardTitle>
+                      <CardTitle className="text-base">{t("coldCalling.title")}</CardTitle>
                       <div className="flex items-center gap-2">
                         <Switch
                           checked={enableColdCalling}
@@ -2198,14 +2190,14 @@ export default function ROICalculator() {
                           onClick={(e) => e.stopPropagation()}
                         />
                         <span className="text-xs text-muted-foreground">
-                          {enableColdCalling ? "Enabled" : "Disabled"}
+                          {enableColdCalling ? t("coldCalling.enabled") : t("coldCalling.disabled")}
                         </span>
                       </div>
                     </div>
                     <CardDescription className="mt-1 flex items-start gap-1">
                       <Info className="h-3 w-3 mt-0.5 flex-shrink-0 text-blue-500" />
                       <span className="text-xs">
-                        Enable to add cold calling metrics and see combined channel performance
+                        {t("coldCalling.description")}
                       </span>
                     </CardDescription>
                   </div>
@@ -2218,8 +2210,8 @@ export default function ROICalculator() {
                   <div className="space-y-2">
                     <LabelWithTooltip
                       htmlFor="callsPerDay"
-                      label="Calls per day"
-                      tooltip="Number of outbound calls your team makes per day. Industry average: 40-80 calls/day."
+                      label={t("coldCalling.callsPerDay")}
+                      tooltip={t("coldCalling.callsPerDayTooltip")}
                       warning={getBenchmarkWarning("callsPerDay", callsPerDay)}
                     />
                     <Input
@@ -2233,8 +2225,8 @@ export default function ROICalculator() {
                   <div className="space-y-2">
                     <LabelWithTooltip
                       htmlFor="callConnectRate"
-                      label="Connect rate (%)"
-                      tooltip="Percentage of calls where you reach a decision maker. Industry average: 20-40%."
+                      label={t("coldCalling.connectRate")}
+                      tooltip={t("coldCalling.connectRateTooltip")}
                       warning={getBenchmarkWarning("callConnectRate", callConnectRate)}
                     />
                     <Input
@@ -2248,8 +2240,8 @@ export default function ROICalculator() {
                   <div className="space-y-2">
                     <LabelWithTooltip
                       htmlFor="callToMeetingRate"
-                      label="Call to meeting rate (%)"
-                      tooltip="Percentage of connected calls that result in a booked meeting. Industry average: 10-20%."
+                      label={t("coldCalling.callToMeetingRate")}
+                      tooltip={t("coldCalling.callToMeetingRateTooltip")}
                       warning={getBenchmarkWarning("callToMeetingRate", callToMeetingRate)}
                     />
                     <Input
@@ -2263,8 +2255,8 @@ export default function ROICalculator() {
                   <div className="space-y-2">
                     <LabelWithTooltip
                       htmlFor="callingDaysPerMonth"
-                      label="Calling days per month"
-                      tooltip="Number of days per month dedicated to cold calling."
+                      label={t("coldCalling.callingDaysPerMonth")}
+                      tooltip={t("coldCalling.callingDaysPerMonthTooltip")}
                     />
                     <Input
                       id="callingDaysPerMonth"
@@ -2278,8 +2270,8 @@ export default function ROICalculator() {
                   <div className="space-y-2">
                     <LabelWithTooltip
                       htmlFor="callingSoftwareCost"
-                      label="Calling software cost (monthly)"
-                      tooltip="Monthly cost for calling software (e.g., Aircall, RingCentral, Dialpad)."
+                      label={t("coldCalling.softwareCost")}
+                      tooltip={t("coldCalling.softwareCostTooltip")}
                     />
                     <Input
                       id="callingSoftwareCost"
@@ -2292,8 +2284,8 @@ export default function ROICalculator() {
                   <div className="space-y-2">
                     <LabelWithTooltip
                       htmlFor="callerSalaryCost"
-                      label="Caller salary/cost (monthly)"
-                      tooltip="Monthly salary or cost for the person making cold calls."
+                      label={t("coldCalling.salartCost")}
+                      tooltip={t("coldCalling.salaryCostTooltip")}
                     />
                     <Input
                       id="callerSalaryCost"
@@ -2313,7 +2305,7 @@ export default function ROICalculator() {
                   <div className="flex-1">
                     <div className="flex items-center gap-3">
                       <Linkedin className="h-5 w-5 text-blue-600" />
-                      <CardTitle className="text-base">LinkedIn Outreach</CardTitle>
+                      <CardTitle className="text-base">{t("linkedInOutreach.title")}</CardTitle>
                       <div className="flex items-center gap-2">
                         <Switch
                           checked={enableLinkedIn}
@@ -2327,13 +2319,13 @@ export default function ROICalculator() {
                           }}
                           onClick={(e) => e.stopPropagation()}
                         />
-                        <span className="text-xs text-muted-foreground">{enableLinkedIn ? "Enabled" : "Disabled"}</span>
+                        <span className="text-xs text-muted-foreground">{enableLinkedIn ? t("linkedInOutreach.enabled") : t("linkedInOutreach.disabled")}</span>
                       </div>
                     </div>
                     <CardDescription className="mt-1 flex items-start gap-1">
                       <Info className="h-3 w-3 mt-0.5 flex-shrink-0 text-blue-500" />
                       <span className="text-xs">
-                        Enable to add LinkedIn outreach metrics and see combined channel performance
+                        {t("linkedInOutreach.description")}
                       </span>
                     </CardDescription>
                   </div>
@@ -2346,8 +2338,8 @@ export default function ROICalculator() {
                   <div className="space-y-2">
                     <LabelWithTooltip
                       htmlFor="linkedInConnectionsPerDay"
-                      label="Connection requests per day"
-                      tooltip="Number of LinkedIn connection requests sent per day. LinkedIn limit: ~100/week."
+                      label={t("linkedInOutreach.connectionsPerDay")}
+                      tooltip={t("linkedInOutreach.connectionsPerDayTooltip")}
                       warning={getBenchmarkWarning("linkedInConnectionsPerDay", linkedInConnectionsPerDay)}
                     />
                     <Input
@@ -2361,8 +2353,8 @@ export default function ROICalculator() {
                   <div className="space-y-2">
                     <LabelWithTooltip
                       htmlFor="linkedInAcceptRate"
-                      label="Accept rate (%)"
-                      tooltip="Percentage of connection requests that get accepted. Industry average: 20-40%."
+                      label={t("linkedInOutreach.acceptRate")}
+                      tooltip={t("linkedInOutreach.acceptRateTooltip")}
                       warning={getBenchmarkWarning("linkedInAcceptRate", linkedInAcceptRate)}
                     />
                     <Input
@@ -2376,8 +2368,8 @@ export default function ROICalculator() {
                   <div className="space-y-2">
                     <LabelWithTooltip
                       htmlFor="linkedInReplyRate"
-                      label="Reply rate (%)"
-                      tooltip="Percentage of accepted connections that reply to your message. Industry average: 5-15%."
+                      label={t("linkedInOutreach.replyRate")}
+                      tooltip={t("linkedInOutreach.replyRateTooltip")}
                       warning={getBenchmarkWarning("linkedInReplyRate", linkedInReplyRate)}
                     />
                     <Input
@@ -2391,8 +2383,8 @@ export default function ROICalculator() {
                   <div className="space-y-2">
                     <LabelWithTooltip
                       htmlFor="linkedInMeetingRate"
-                      label="Meeting booking rate (%)"
-                      tooltip="Percentage of replies that convert to booked meetings. Industry average: 15-30%."
+                      label={t("linkedInOutreach.meetingBookingRate")}
+                      tooltip={t("linkedInOutreach.meetingBookingRateTooltip")}
                       warning={getBenchmarkWarning("linkedInMeetingRate", linkedInMeetingRate)}
                     />
                     <Input
@@ -2407,8 +2399,8 @@ export default function ROICalculator() {
                   <div className="space-y-2">
                     <LabelWithTooltip
                       htmlFor="linkedInToolCost"
-                      label="LinkedIn tool cost (monthly)"
-                      tooltip="Monthly cost for LinkedIn automation tools (e.g., Sales Navigator, Dux-Soup)."
+                      label={t("linkedInOutreach.toolCost")}
+                      tooltip={t("linkedInOutreach.toolCostTooltip")}
                     />
                     <Input
                       id="linkedInToolCost"
@@ -2421,8 +2413,8 @@ export default function ROICalculator() {
                   <div className="space-y-2">
                     <LabelWithTooltip
                       htmlFor="linkedInManagerCost"
-                      label="LinkedIn manager cost (monthly)"
-                      tooltip="Monthly salary or cost for the person managing LinkedIn outreach."
+                      label={t("linkedInOutreach.managerCost")}
+                      tooltip={t("linkedInOutreach.managerCostTooltip")}
                     />
                     <Input
                       id="linkedInManagerCost"
@@ -2442,7 +2434,7 @@ export default function ROICalculator() {
                   <div className="flex-1">
                     <div className="flex items-center gap-3">
                       <UserPlus className="h-5 w-5 text-green-600" />
-                      <CardTitle className="text-base">Referral Program</CardTitle>
+                      <CardTitle className="text-base">{t("referralProgram.title")}</CardTitle>
                       <div className="flex items-center gap-2">
                         <Switch
                           checked={enableReferrals}
@@ -2457,14 +2449,14 @@ export default function ROICalculator() {
                           onClick={(e) => e.stopPropagation()}
                         />
                         <span className="text-xs text-muted-foreground">
-                          {enableReferrals ? "Enabled" : "Disabled"}
+                          {enableReferrals ? t("referralProgram.enabled") : t("referralProgram.disabled")}
                         </span>
                       </div>
                     </div>
                     <CardDescription className="mt-1 flex items-start gap-1">
                       <Info className="h-3 w-3 mt-0.5 flex-shrink-0 text-blue-500" />
                       <span className="text-xs">
-                        Enable to add referral program metrics and see combined channel performance
+                        {t("referralProgram.description")}
                       </span>
                     </CardDescription>
                   </div>
@@ -2477,8 +2469,8 @@ export default function ROICalculator() {
                   <div className="space-y-2">
                     <LabelWithTooltip
                       htmlFor="referralsPerMonth"
-                      label="Referrals per month"
-                      tooltip="Number of qualified referrals you expect to receive per month."
+                      label={t("referralProgram.referralsPerMonth")}
+                      tooltip={t("referralProgram.referralsPerMonthTooltip")}
                     />
                     <Input
                       id="referralsPerMonth"
@@ -2491,8 +2483,8 @@ export default function ROICalculator() {
                   <div className="space-y-2">
                     <LabelWithTooltip
                       htmlFor="referralConversionRate"
-                      label="Referral to meeting rate (%)"
-                      tooltip="Percentage of referrals that convert to meetings. Referrals typically convert at 30-50%."
+                      label={t("referralProgram.conversionRate")}
+                      tooltip={t("referralProgram.conversionRateTooltip")}
                       warning={getBenchmarkWarning("referralConversionRate", referralConversionRate)}
                     />
                     <Input
@@ -2507,8 +2499,8 @@ export default function ROICalculator() {
                   <div className="space-y-2">
                     <LabelWithTooltip
                       htmlFor="referralIncentiveCost"
-                      label="Referral incentive per deal"
-                      tooltip="Amount paid to the referrer for each successful deal closed."
+                      label={t("referralProgram.incentiveCost")}
+                      tooltip={t("referralProgram.incentiveCostTooltip")}
                     />
                     <Input
                       id="referralIncentiveCost"
@@ -2521,8 +2513,8 @@ export default function ROICalculator() {
                   <div className="space-y-2">
                     <LabelWithTooltip
                       htmlFor="referralProgramCost"
-                      label="Program management cost (monthly)"
-                      tooltip="Monthly cost to manage and promote your referral program."
+                      label={t("referralProgram.programCost")}
+                      tooltip={t("referralProgram.programCostTooltip")}
                     />
                     <Input
                       id="referralProgramCost"
@@ -2554,13 +2546,13 @@ export default function ROICalculator() {
                       <Lightbulb className="h-5 w-5 text-amber-600" />
                     )}
                     <CardTitle className="text-base">
-                      {hasCriticalIssues ? "Critical Issues Detected" : "Optimization Suggestions"}
+                      {hasCriticalIssues ? t("suggestions.criticalIssues") : t("suggestions.optimizationSuggestions")}
                     </CardTitle>
                   </div>
                   <CardDescription className="text-xs">
                     {hasCriticalIssues
-                      ? "Address these issues to improve profitability"
-                      : "Tips to improve your campaign performance"}
+                      ? t("suggestions.criticalDescription")
+                      : t("suggestions.optimizationDescription")}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-3">
@@ -2594,7 +2586,7 @@ export default function ROICalculator() {
                   ))}
                   {suggestions.length > 4 && (
                     <p className="text-xs text-muted-foreground text-center pt-2">
-                      +{suggestions.length - 4} more suggestions
+                      +{suggestions.length - 4} {t("suggestions.moreSuggestions")}
                     </p>
                   )}
                 </CardContent>
@@ -2610,7 +2602,7 @@ export default function ROICalculator() {
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between">
                     <CardDescription className="text-xs uppercase tracking-wider font-medium">
-                      Overall ROI (All Channels)
+                      {t("keyMetrics.overallROI")}
                     </CardDescription>
                     {calculations.combinedROI > 0 ? (
                       <TrendingUp className="h-5 w-5 text-green-600" />
@@ -2629,7 +2621,7 @@ export default function ROICalculator() {
                     )}
                   </CardTitle>
                   <p className="text-xs text-muted-foreground mt-1">
-                    Cold Email ROI:{" "}
+                    {t("keyMetrics.coldEmailROI")}{" "}
                     {displayValue(
                       isClient ? `${calculations.roi >= 0 ? "+" : ""}${calculations.roi.toFixed(1)}%` : "--",
                       "percentage",
@@ -2641,14 +2633,14 @@ export default function ROICalculator() {
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between">
                     <CardDescription className="text-xs uppercase tracking-wider font-medium">
-                      Overall Revenue
+                      {t("keyMetrics.overallRevenue")}
                     </CardDescription>
                     <TrendingUp className="h-5 w-5 text-green-600 flex-shrink-0" />
                   </div>
                   <CardTitle className="text-3xl sm:text-4xl font-bold tabular-nums text-green-700 dark:text-green-400 transition-all break-words leading-tight">
                     {displayValue(calculations.totalRevenueAllChannels, "currency")}
                   </CardTitle>
-                  <p className="text-xs text-muted-foreground mt-1">Total revenue generated per month</p>
+                  <p className="text-xs text-muted-foreground mt-1">{t("keyMetrics.totalRevenueGenerated")}</p>
                 </CardHeader>
               </Card>
             </div>
@@ -2657,8 +2649,8 @@ export default function ROICalculator() {
             {enableEmailMetrics && enableAdvanced && (
               <Card className="transition-all hover:shadow-md">
                 <CardHeader>
-                  <CardTitle className="text-base">Email Performance Metrics</CardTitle>
-                  <CardDescription className="text-xs">Your email outreach volume and reach</CardDescription>
+                  <CardTitle className="text-base">{t("emailPerformanceMetrics.title")}</CardTitle>
+                  <CardDescription className="text-xs">{t("emailPerformanceMetrics.description")}</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -2666,23 +2658,23 @@ export default function ROICalculator() {
                       <p className="text-3xl font-bold tabular-nums">
                         {displayValue(calculations.emailsPerMonth, "number")}
                       </p>
-                      <p className="text-xs text-muted-foreground">Emails/Month per Mailbox</p>
+                      <p className="text-xs text-muted-foreground">{t("emailPerformanceMetrics.emailsPerMonthPerMailbox")}</p>
                     </div>
                     <div className="space-y-1">
                       <p className="text-3xl font-bold tabular-nums">
                         {displayValue(calculations.totalEmails, "number")}
                       </p>
-                      <p className="text-xs text-muted-foreground">Total Emails/Month</p>
+                      <p className="text-xs text-muted-foreground">{t("emailPerformanceMetrics.totalEmailsPerMonth")}</p>
                     </div>
                     <div className="space-y-1">
                       <p className="text-3xl font-bold tabular-nums">
                         {displayValue(calculations.prospects, "number")}
                       </p>
-                      <p className="text-xs text-muted-foreground">Prospects/Month</p>
+                      <p className="text-xs text-muted-foreground">{t("emailPerformanceMetrics.prospectsPerMonth")}</p>
                     </div>
                     <div className="space-y-1">
                       <p className="text-3xl font-bold tabular-nums">{displayValue(calculations.leads, "number")}</p>
-                      <p className="text-xs text-muted-foreground">Leads Contacted</p>
+                      <p className="text-xs text-muted-foreground">{t("emailPerformanceMetrics.leadsContacted")}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -2692,8 +2684,8 @@ export default function ROICalculator() {
             {/* Sales Performance */}
             <Card className="transition-all hover:shadow-md">
               <CardHeader>
-                <CardTitle className="text-base">Sales Performance</CardTitle>
-                <CardDescription className="text-xs">Your sales funnel metrics</CardDescription>
+                <CardTitle className="text-base">{t("salesPerformance.title")}</CardTitle>
+                <CardDescription className="text-xs">{t("salesPerformance.description")}</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -2701,25 +2693,25 @@ export default function ROICalculator() {
                     <p className="text-3xl font-bold tabular-nums text-green-700 dark:text-green-400 break-words">
                       {displayValue(calculations.opportunities, "number")}
                     </p>
-                    <p className="text-xs text-muted-foreground mt-1">Opportunities</p>
+                    <p className="text-xs text-muted-foreground mt-1">{t("salesPerformance.opportunities")}</p>
                   </div>
                   <div className="p-4 rounded-lg bg-green-100 dark:bg-green-950/30 border border-green-200 dark:border-green-900">
                     <p className="text-3xl font-bold tabular-nums text-green-700 dark:text-green-400 break-words">
                       {displayValue(calculations.meetings, "number")}
                     </p>
-                    <p className="text-xs text-muted-foreground mt-1">Meetings</p>
+                    <p className="text-xs text-muted-foreground mt-1">{t("salesPerformance.meetings")}</p>
                   </div>
                   <div className="p-4 rounded-lg bg-green-100 dark:bg-green-950/30 border border-green-200 dark:border-green-900">
                     <p className="text-3xl font-bold tabular-nums text-green-700 dark:text-green-400 break-words">
                       {displayValue(calculations.deals, "number")}
                     </p>
-                    <p className="text-xs text-muted-foreground mt-1">Deals Closed</p>
+                    <p className="text-xs text-muted-foreground mt-1">{t("salesPerformance.dealsClosed")}</p>
                   </div>
                   <div className="p-4 rounded-lg bg-green-100 dark:bg-green-950/30 border border-green-200 dark:border-green-900 sm:col-span-2 lg:col-span-1">
                     <p className="text-2xl sm:text-3xl font-bold tabular-nums text-green-700 dark:text-green-400 break-words leading-tight">
                       {displayValue(calculations.totalRevenueAllChannels, "currency")}
                     </p>
-                    <p className="text-xs text-muted-foreground mt-1">Revenue</p>
+                    <p className="text-xs text-muted-foreground mt-1">{t("salesPerformance.revenue")}</p>
                   </div>
                 </div>
               </CardContent>
@@ -2728,8 +2720,8 @@ export default function ROICalculator() {
             {/* Financial Summary - Always show */}
             <Card className="border-2 border-blue-200 dark:border-blue-900 bg-blue-50/50 dark:bg-blue-950/20">
               <CardHeader>
-                <CardTitle className="text-base">Financial Summary</CardTitle>
-                <CardDescription className="text-xs">Monthly income breakdown after all costs</CardDescription>
+                <CardTitle className="text-base">{t("financialSummary.title")}</CardTitle>
+                <CardDescription className="text-xs">{t("financialSummary.description")}</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="grid gap-4">
@@ -2737,7 +2729,7 @@ export default function ROICalculator() {
                   <div className="flex items-center justify-between p-3 rounded-lg bg-white dark:bg-gray-900 border border-border">
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                      <span className="text-sm font-medium">Total Monthly Revenue</span>
+                      <span className="text-sm font-medium">{t("financialSummary.totalMonthlyRevenue")}</span>
                     </div>
                     <span className="text-lg font-bold font-mono tabular-nums text-green-600 dark:text-green-400">
                       {displayValue(calculations.totalRevenueAllChannels, "currency")}
@@ -2748,7 +2740,7 @@ export default function ROICalculator() {
                   <div className="flex items-center justify-between p-3 rounded-lg bg-white dark:bg-gray-900 border border-border">
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 rounded-full bg-red-500"></div>
-                      <span className="text-sm font-medium">Total Operating Costs</span>
+                      <span className="text-sm font-medium">{t("financialSummary.totalOperatingCosts")}</span>
                     </div>
                     <span className="text-lg font-bold font-mono tabular-nums text-red-600 dark:text-red-400">
                       -{displayValue(calculations.totalCostAllChannels, "currency")}
@@ -2761,7 +2753,7 @@ export default function ROICalculator() {
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 rounded-full bg-purple-500"></div>
                         <span className="text-sm font-medium">
-                          Commission {commissionType === "percentage" ? `(${commissionRate}%)` : `($${commissionFlat}/deal)`}
+                          {t("financialSummary.commission")} {commissionType === "percentage" ? `(${commissionRate}%)` : `($${commissionFlat}/deal)`}
                         </span>
                       </div>
                       <span className="text-lg font-bold font-mono tabular-nums text-purple-600 dark:text-purple-400">
@@ -2777,10 +2769,10 @@ export default function ROICalculator() {
                   <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/30 border-2 border-green-300 dark:border-green-800">
                     <div>
                       <span className="text-sm font-semibold text-green-900 dark:text-green-100">
-                        Net Income {!enableCommission && "(Before Commission)"}
+                        {!enableCommission ? t("financialSummary.netIncomeBeforeCommission") : t("financialSummary.netIncome")}
                       </span>
                       <p className="text-xs text-green-700 dark:text-green-300 mt-0.5">
-                        Revenue - Operating Costs
+                        {t("financialSummary.revenueMinusOperatingCosts")}
                       </p>
                     </div>
                     <span className="text-2xl font-bold font-mono tabular-nums text-green-700 dark:text-green-300">
@@ -2796,10 +2788,10 @@ export default function ROICalculator() {
                     <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 border-2 border-blue-300 dark:border-blue-800">
                       <div>
                         <span className="text-sm font-semibold text-blue-900 dark:text-blue-100">
-                          Net Income (After Commission)
+                          {t("financialSummary.netIncomeAfterCommission")}
                         </span>
                         <p className="text-xs text-blue-700 dark:text-blue-300 mt-0.5">
-                          Revenue - All Costs - Commission
+                          {t("financialSummary.revenueMinusAllCosts")}
                         </p>
                       </div>
                       <span className="text-2xl font-bold font-mono tabular-nums text-blue-700 dark:text-blue-300">
@@ -2818,7 +2810,7 @@ export default function ROICalculator() {
                         <div className="flex items-center gap-2">
                           <div className="w-2 h-2 rounded-full bg-orange-500"></div>
                           <span className="text-sm font-medium">
-                            Corporate Tax ({(CORPORATE_TAX_RATES[currency] * 100).toFixed(1)}%)
+                            {t("financialSummary.corporateTax")} ({(CORPORATE_TAX_RATES[currency] * 100).toFixed(1)}%)
                           </span>
                         </div>
                         <span className="text-lg font-bold font-mono tabular-nums text-orange-600 dark:text-orange-400">
@@ -2830,10 +2822,10 @@ export default function ROICalculator() {
                       <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 border-2 border-emerald-300 dark:border-emerald-800">
                         <div>
                           <span className="text-sm font-semibold text-emerald-900 dark:text-emerald-100">
-                            Net Income (After Tax)
+                            {t("financialSummary.netIncomeAfterTax")}
                           </span>
                           <p className="text-xs text-emerald-700 dark:text-emerald-300 mt-0.5">
-                            Final profit after all deductions
+                            {t("financialSummary.finalProfitAfterDeductions")}
                           </p>
                         </div>
                         <span className="text-2xl font-bold font-mono tabular-nums text-emerald-700 dark:text-emerald-300">
@@ -2845,7 +2837,7 @@ export default function ROICalculator() {
                       <div className="flex items-center justify-between p-3 rounded-lg bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-teal-950/30 dark:to-cyan-950/30 border border-teal-300 dark:border-teal-800">
                         <div className="flex items-center gap-2">
                           <div className="w-2 h-2 rounded-full bg-teal-500"></div>
-                          <span className="text-sm font-medium">After-Tax ROI</span>
+                          <span className="text-sm font-medium">{t("financialSummary.afterTaxROI")}</span>
                         </div>
                         <span className="text-lg font-bold font-mono tabular-nums text-teal-700 dark:text-teal-300">
                           {displayValue(calculations.afterTaxROI, "percentage")}
@@ -2860,19 +2852,19 @@ export default function ROICalculator() {
             {/* Financial Analysis */}
             <Card className="transition-all hover:shadow-md">
               <CardHeader>
-                <CardTitle className="text-base">Financial Analysis</CardTitle>
-                <CardDescription className="text-xs">Cost breakdown and efficiency metrics</CardDescription>
+                <CardTitle className="text-base">{t("financialAnalysis.title")}</CardTitle>
+                <CardDescription className="text-xs">{t("financialAnalysis.description")}</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-3 gap-6">
                   <div className="space-y-1">
-                    <p className="text-xs text-muted-foreground">Total Monthly Cost</p>
+                    <p className="text-xs text-muted-foreground">{t("financialAnalysis.totalMonthlyCost")}</p>
                     <p className="text-2xl font-bold tabular-nums text-red-700 dark:text-red-400">
                       {displayValue(calculations.totalCostAllChannels, "currency")}
                     </p>
                   </div>
                   <div className="space-y-1">
-                    <p className="text-xs text-muted-foreground">Cost per Meeting</p>
+                    <p className="text-xs text-muted-foreground">{t("financialAnalysis.costPerMeeting")}</p>
                     <p className="text-2xl font-bold tabular-nums">
                       {displayValue(
                         calculations.totalMeetingsAllChannels > 0
@@ -2883,7 +2875,7 @@ export default function ROICalculator() {
                     </p>
                   </div>
                   <div className="space-y-1">
-                    <p className="text-xs text-muted-foreground">Customer Acquisition Cost</p>
+                    <p className="text-xs text-muted-foreground">{t("financialAnalysis.customerAcquisitionCost")}</p>
                     <p className="text-2xl font-bold tabular-nums">
                       {displayValue(calculations.combinedCAC, "currency")}
                     </p>
@@ -2891,7 +2883,7 @@ export default function ROICalculator() {
                 </div>
                 <Separator />
                 <div className="flex items-center justify-between p-4 rounded-lg bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900">
-                  <span className="text-sm font-medium">LTV/CAC Ratio</span>
+                  <span className="text-sm font-medium">{t("financialAnalysis.ltvCacRatio")}</span>
                   <span className="px-3 py-1 rounded-full bg-blue-600 text-white text-sm font-bold">
                     {calculations.ltvCacRatio > 0 ? calculations.ltvCacRatio.toFixed(1) : "--"}
                   </span>
@@ -2906,8 +2898,8 @@ export default function ROICalculator() {
                   <div className="flex items-center gap-2">
                     <Percent className="h-5 w-5" />
                     <div>
-                      <CardTitle className="text-base">Commission Impact Analysis</CardTitle>
-                      <CardDescription className="text-xs">How commission affects your bottom line</CardDescription>
+                      <CardTitle className="text-base">{t("commissionImpact.title")}</CardTitle>
+                      <CardDescription className="text-xs">{t("commissionImpact.description")}</CardDescription>
                     </div>
                   </div>
                 </CardHeader>
@@ -3021,8 +3013,8 @@ export default function ROICalculator() {
                   <div className="flex items-center gap-2">
                     <Building2 className="h-5 w-5" />
                     <div>
-                      <CardTitle className="text-base">In-House vs Agency Comparison</CardTitle>
-                      <CardDescription className="text-xs">Cost analysis and savings breakdown</CardDescription>
+                      <CardTitle className="text-base">{t("agencyComparisonPanel.title")}</CardTitle>
+                      <CardDescription className="text-xs">{t("agencyComparisonPanel.description")}</CardDescription>
                     </div>
                   </div>
                 </CardHeader>
@@ -3101,13 +3093,13 @@ export default function ROICalculator() {
                   <div className="p-4 rounded-lg bg-green-50/50 dark:bg-green-950/20 border border-green-200 dark:border-green-900">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-sm font-semibold mb-1">Monthly Savings with In-House</p>
+                        <p className="text-sm font-semibold mb-1">{t("agencyComparisonPanel.monthlySavings")}</p>
                         <p className="text-xs text-muted-foreground">
                           {isClient && calculations.opportunities > 0
                             ? calculations.costSavingsVsAgency >= 0
-                              ? "You save by building in-house"
-                              : "Agency would be cheaper"
-                            : "Fill required fields to compare"}
+                              ? t("agencyComparisonPanel.youSaveByBuilding")
+                              : t("agencyComparisonPanel.agencyWouldBeCheaper")
+                            : t("agencyComparisonPanel.fillRequiredFieldsToCompare")}
                         </p>
                       </div>
                       <p
@@ -3138,9 +3130,9 @@ export default function ROICalculator() {
                 <CardHeader>
                   <CardTitle className="text-base flex items-center gap-2">
                     <BarChart3 className="h-5 w-5 text-purple-600" />
-                    Multi-Channel Performance
+                    {t("multiChannelPerformance.title")}
                   </CardTitle>
-                  <CardDescription>Combined metrics across all enabled channels</CardDescription>
+                  <CardDescription>{t("multiChannelPerformance.description")}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
@@ -3407,9 +3399,9 @@ export default function ROICalculator() {
 
             <Card className="transition-all hover:shadow-md">
               <CardHeader>
-                <CardTitle className="text-base">6-Month Cash Flow Projections</CardTitle>
+                <CardTitle className="text-base">{t("cashFlowProjections.title")}</CardTitle>
                 <CardDescription className="text-xs">
-                  Cumulative cash flow over time {enableCommission && "(including commission costs)"}
+                  {t("cashFlowProjections.description")} {enableCommission && t("cashFlowProjections.includingCommission")}
                 </CardDescription>
               </CardHeader>
               <CardContent>

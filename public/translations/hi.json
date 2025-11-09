@@ -258,6 +258,21 @@
       "isVeryLow": "बहुत कम है",
       "isLow": "कम है"
     },
+    "costItems": {
+      "gtmEngineer": "GTM इंजीनियर",
+      "software": "सॉफ़्टवेयर",
+      "mailboxes": "मेलबॉक्स",
+      "deliverability": "डिलिवरेबिलिटी",
+      "dataProvider": "डेटा प्रदाता",
+      "copywriter": "कॉपीराइटर",
+      "commission": "कमीशन",
+      "coldCallingSoftware": "कोल्ड कॉलिंग सॉफ़्टवेयर",
+      "callerSalary": "कॉलर वेतन",
+      "linkedInTool": "LinkedIn टूल",
+      "linkedInManager": "LinkedIn प्रबंधक",
+      "referralProgram": "रेफरल प्रोग्राम",
+      "referralIncentives": "रेफरल प्रोत्साहन"
+    },
     "keyMetrics": {
       "overallROI": "समग्र ROI (सभी चैनल)",
       "coldEmailROI": "कोल्ड ईमेल ROI:",

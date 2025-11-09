@@ -258,6 +258,21 @@
       "isVeryLow": "está muito baixo",
       "isLow": "está baixo"
     },
+    "costItems": {
+      "gtmEngineer": "Engenheiro GTM",
+      "software": "Software",
+      "mailboxes": "Caixas de Correio",
+      "deliverability": "Entregabilidade",
+      "dataProvider": "Provedor de Dados",
+      "copywriter": "Redator",
+      "commission": "Comissão",
+      "coldCallingSoftware": "Software de Chamadas Frias",
+      "callerSalary": "Salário do Atendente",
+      "linkedInTool": "Ferramenta do LinkedIn",
+      "linkedInManager": "Gerente do LinkedIn",
+      "referralProgram": "Programa de Indicações",
+      "referralIncentives": "Incentivos de Indicações"
+    },
     "keyMetrics": {
       "overallROI": "ROI Geral (Todos os Canais)",
       "coldEmailROI": "ROI de E-mail Frio:",
