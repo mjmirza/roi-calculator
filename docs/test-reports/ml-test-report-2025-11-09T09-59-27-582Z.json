@@ -1,0 +1,1222 @@
+{
+  "timestamp": "2025-11-09T09:59:27.498Z",
+  "summary": {
+    "totalTests": 116,
+    "passed": 102,
+    "failed": 1,
+    "warnings": 13,
+    "passRate": "87.9%"
+  },
+  "categories": {
+    "languageSwitching": {
+      "tests": [
+        {
+          "name": "Switch to en",
+          "status": "passed",
+          "details": "Loaded 349 translation keys",
+          "metrics": {
+            "loadTime": 0,
+            "keyCount": 349
+          },
+          "timestamp": "2025-11-09T09:59:27.510Z"
+        },
+        {
+          "name": "en: UI completeness",
+          "status": "passed",
+          "details": "All major sections present",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.510Z"
+        },
+        {
+          "name": "Switch to es",
+          "status": "passed",
+          "details": "Loaded 349 translation keys",
+          "metrics": {
+            "loadTime": 0,
+            "keyCount": 349
+          },
+          "timestamp": "2025-11-09T09:59:27.510Z"
+        },
+        {
+          "name": "es: UI completeness",
+          "status": "passed",
+          "details": "All major sections present",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.510Z"
+        },
+        {
+          "name": "Switch to fr",
+          "status": "passed",
+          "details": "Loaded 349 translation keys",
+          "metrics": {
+            "loadTime": 0,
+            "keyCount": 349
+          },
+          "timestamp": "2025-11-09T09:59:27.510Z"
+        },
+        {
+          "name": "fr: UI completeness",
+          "status": "passed",
+          "details": "All major sections present",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.510Z"
+        },
+        {
+          "name": "Switch to de",
+          "status": "passed",
+          "details": "Loaded 349 translation keys",
+          "metrics": {
+            "loadTime": 0,
+            "keyCount": 349
+          },
+          "timestamp": "2025-11-09T09:59:27.511Z"
+        },
+        {
+          "name": "de: UI completeness",
+          "status": "passed",
+          "details": "All major sections present",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.511Z"
+        },
+        {
+          "name": "Switch to pt",
+          "status": "passed",
+          "details": "Loaded 349 translation keys",
+          "metrics": {
+            "loadTime": 0,
+            "keyCount": 349
+          },
+          "timestamp": "2025-11-09T09:59:27.511Z"
+        },
+        {
+          "name": "pt: UI completeness",
+          "status": "passed",
+          "details": "All major sections present",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.511Z"
+        },
+        {
+          "name": "Switch to ru",
+          "status": "passed",
+          "details": "Loaded 349 translation keys",
+          "metrics": {
+            "loadTime": 0,
+            "keyCount": 349
+          },
+          "timestamp": "2025-11-09T09:59:27.511Z"
+        },
+        {
+          "name": "ru: UI completeness",
+          "status": "passed",
+          "details": "All major sections present",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.511Z"
+        },
+        {
+          "name": "Switch to ar",
+          "status": "passed",
+          "details": "Loaded 349 translation keys",
+          "metrics": {
+            "loadTime": 0,
+            "keyCount": 349
+          },
+          "timestamp": "2025-11-09T09:59:27.512Z"
+        },
+        {
+          "name": "ar: UI completeness",
+          "status": "passed",
+          "details": "All major sections present",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.512Z"
+        },
+        {
+          "name": "Switch to zh",
+          "status": "passed",
+          "details": "Loaded 349 translation keys",
+          "metrics": {
+            "loadTime": 0,
+            "keyCount": 349
+          },
+          "timestamp": "2025-11-09T09:59:27.512Z"
+        },
+        {
+          "name": "zh: UI completeness",
+          "status": "passed",
+          "details": "All major sections present",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.512Z"
+        },
+        {
+          "name": "Switch to ja",
+          "status": "passed",
+          "details": "Loaded 349 translation keys",
+          "metrics": {
+            "loadTime": 0,
+            "keyCount": 349
+          },
+          "timestamp": "2025-11-09T09:59:27.512Z"
+        },
+        {
+          "name": "ja: UI completeness",
+          "status": "passed",
+          "details": "All major sections present",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.512Z"
+        },
+        {
+          "name": "Switch to hi",
+          "status": "passed",
+          "details": "Loaded 349 translation keys",
+          "metrics": {
+            "loadTime": 0,
+            "keyCount": 349
+          },
+          "timestamp": "2025-11-09T09:59:27.512Z"
+        },
+        {
+          "name": "hi: UI completeness",
+          "status": "passed",
+          "details": "All major sections present",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.512Z"
+        },
+        {
+          "name": "es: Translation completeness",
+          "status": "passed",
+          "details": "100% complete (349 keys)",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.512Z"
+        },
+        {
+          "name": "fr: Translation completeness",
+          "status": "passed",
+          "details": "100% complete (349 keys)",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.513Z"
+        },
+        {
+          "name": "de: Translation completeness",
+          "status": "passed",
+          "details": "100% complete (349 keys)",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.513Z"
+        },
+        {
+          "name": "pt: Translation completeness",
+          "status": "passed",
+          "details": "100% complete (349 keys)",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.513Z"
+        },
+        {
+          "name": "ru: Translation completeness",
+          "status": "passed",
+          "details": "100% complete (349 keys)",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.514Z"
+        },
+        {
+          "name": "ar: Translation completeness",
+          "status": "passed",
+          "details": "100% complete (349 keys)",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.514Z"
+        },
+        {
+          "name": "zh: Translation completeness",
+          "status": "passed",
+          "details": "100% complete (349 keys)",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.514Z"
+        },
+        {
+          "name": "ja: Translation completeness",
+          "status": "passed",
+          "details": "100% complete (349 keys)",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.515Z"
+        },
+        {
+          "name": "hi: Translation completeness",
+          "status": "passed",
+          "details": "100% complete (349 keys)",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.515Z"
+        }
+      ],
+      "passed": 29,
+      "failed": 0,
+      "warnings": 0
+    },
+    "rtl": {
+      "tests": [
+        {
+          "name": "Arabic characters",
+          "status": "passed",
+          "details": "Verified: حاسبة عائد الاستثمار",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.515Z"
+        },
+        {
+          "name": "Arabic currency symbols",
+          "status": "passed",
+          "details": "Found: درهم إماراتي",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.515Z"
+        },
+        {
+          "name": "RTL character count",
+          "status": "passed",
+          "details": "9291 Arabic characters found",
+          "metrics": {
+            "characterCount": 9291
+          },
+          "timestamp": "2025-11-09T09:59:27.515Z"
+        },
+        {
+          "name": "RTL layout compatibility",
+          "status": "passed",
+          "details": "Manual verification required - check component mirroring",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.515Z"
+        },
+        {
+          "name": "Number formatting in RTL",
+          "status": "passed",
+          "details": "Currency and numbers should align properly in RTL context",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.515Z"
+        }
+      ],
+      "passed": 5,
+      "failed": 0,
+      "warnings": 0
+    },
+    "characterSets": {
+      "tests": [
+        {
+          "name": "Chinese (Simplified) rendering",
+          "status": "passed",
+          "details": "Sample: ROI计算器...",
+          "metrics": {
+            "characterCount": 1,
+            "range": "U+4E00-U+9FA5"
+          },
+          "timestamp": "2025-11-09T09:59:27.515Z"
+        },
+        {
+          "name": "zh: Encoding integrity",
+          "status": "passed",
+          "details": "No encoding issues detected",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.515Z"
+        },
+        {
+          "name": "Japanese (Hiragana/Katakana) rendering",
+          "status": "failed",
+          "details": "Expected characters (U+3040-U+30FF) not found in: ROI計算機",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.515Z"
+        },
+        {
+          "name": "ja: Encoding integrity",
+          "status": "passed",
+          "details": "No encoding issues detected",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.515Z"
+        },
+        {
+          "name": "Arabic rendering",
+          "status": "passed",
+          "details": "Sample: حاسبة عائد الاستثمار...",
+          "metrics": {
+            "characterCount": 1,
+            "range": "U+0600-U+06FF"
+          },
+          "timestamp": "2025-11-09T09:59:27.515Z"
+        },
+        {
+          "name": "ar: Encoding integrity",
+          "status": "passed",
+          "details": "No encoding issues detected",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.515Z"
+        },
+        {
+          "name": "Hindi (Devanagari) rendering",
+          "status": "passed",
+          "details": "Sample: ROI कैलकुलेटर...",
+          "metrics": {
+            "characterCount": 1,
+            "range": "U+0900-U+097F"
+          },
+          "timestamp": "2025-11-09T09:59:27.515Z"
+        },
+        {
+          "name": "hi: Encoding integrity",
+          "status": "passed",
+          "details": "No encoding issues detected",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.515Z"
+        },
+        {
+          "name": "Russian (Cyrillic) rendering",
+          "status": "passed",
+          "details": "Sample: Калькулятор ROI...",
+          "metrics": {
+            "characterCount": 1,
+            "range": "U+0400-U+04FF"
+          },
+          "timestamp": "2025-11-09T09:59:27.515Z"
+        },
+        {
+          "name": "ru: Encoding integrity",
+          "status": "passed",
+          "details": "No encoding issues detected",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.515Z"
+        },
+        {
+          "name": "en: Special characters",
+          "status": "passed",
+          "details": "Quotes: 1454, Currency: 7",
+          "metrics": {
+            "quotes": 1454,
+            "apostrophes": 5,
+            "percent": 32,
+            "currency": 7
+          },
+          "timestamp": "2025-11-09T09:59:27.516Z"
+        },
+        {
+          "name": "es: Special characters",
+          "status": "passed",
+          "details": "Quotes: 1454, Currency: 7",
+          "metrics": {
+            "quotes": 1454,
+            "apostrophes": 0,
+            "percent": 32,
+            "currency": 7
+          },
+          "timestamp": "2025-11-09T09:59:27.516Z"
+        },
+        {
+          "name": "fr: Special characters",
+          "status": "passed",
+          "details": "Quotes: 1454, Currency: 5",
+          "metrics": {
+            "quotes": 1454,
+            "apostrophes": 76,
+            "percent": 32,
+            "currency": 5
+          },
+          "timestamp": "2025-11-09T09:59:27.516Z"
+        },
+        {
+          "name": "de: Special characters",
+          "status": "passed",
+          "details": "Quotes: 1454, Currency: 5",
+          "metrics": {
+            "quotes": 1454,
+            "apostrophes": 0,
+            "percent": 32,
+            "currency": 5
+          },
+          "timestamp": "2025-11-09T09:59:27.516Z"
+        },
+        {
+          "name": "pt: Special characters",
+          "status": "passed",
+          "details": "Quotes: 1454, Currency: 7",
+          "metrics": {
+            "quotes": 1454,
+            "apostrophes": 0,
+            "percent": 32,
+            "currency": 7
+          },
+          "timestamp": "2025-11-09T09:59:27.516Z"
+        },
+        {
+          "name": "ru: Special characters",
+          "status": "passed",
+          "details": "Quotes: 1454, Currency: 7",
+          "metrics": {
+            "quotes": 1454,
+            "apostrophes": 0,
+            "percent": 32,
+            "currency": 7
+          },
+          "timestamp": "2025-11-09T09:59:27.517Z"
+        },
+        {
+          "name": "ar: Special characters",
+          "status": "passed",
+          "details": "Quotes: 1452, Currency: 0",
+          "metrics": {
+            "quotes": 1452,
+            "apostrophes": 0,
+            "percent": 15,
+            "currency": 0
+          },
+          "timestamp": "2025-11-09T09:59:27.517Z"
+        },
+        {
+          "name": "zh: Special characters",
+          "status": "passed",
+          "details": "Quotes: 1454, Currency: 0",
+          "metrics": {
+            "quotes": 1454,
+            "apostrophes": 0,
+            "percent": 32,
+            "currency": 0
+          },
+          "timestamp": "2025-11-09T09:59:27.517Z"
+        },
+        {
+          "name": "ja: Special characters",
+          "status": "passed",
+          "details": "Quotes: 1452, Currency: 0",
+          "metrics": {
+            "quotes": 1452,
+            "apostrophes": 0,
+            "percent": 32,
+            "currency": 0
+          },
+          "timestamp": "2025-11-09T09:59:27.517Z"
+        },
+        {
+          "name": "hi: Special characters",
+          "status": "passed",
+          "details": "Quotes: 1452, Currency: 7",
+          "metrics": {
+            "quotes": 1452,
+            "apostrophes": 0,
+            "percent": 32,
+            "currency": 7
+          },
+          "timestamp": "2025-11-09T09:59:27.517Z"
+        }
+      ],
+      "passed": 19,
+      "failed": 1,
+      "warnings": 0
+    },
+    "combinedFeatures": {
+      "tests": [
+        {
+          "name": "Language + Currency combinations",
+          "status": "passed",
+          "details": "110/110 combinations valid (100.0%)",
+          "metrics": {
+            "passed": 110,
+            "failed": 0,
+            "total": 110
+          },
+          "timestamp": "2025-11-09T09:59:27.517Z"
+        },
+        {
+          "name": "en: Multi-channel translations",
+          "status": "passed",
+          "details": "All channel features translated",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.517Z"
+        },
+        {
+          "name": "es: Multi-channel translations",
+          "status": "passed",
+          "details": "All channel features translated",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.517Z"
+        },
+        {
+          "name": "fr: Multi-channel translations",
+          "status": "passed",
+          "details": "All channel features translated",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.517Z"
+        },
+        {
+          "name": "de: Multi-channel translations",
+          "status": "passed",
+          "details": "All channel features translated",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.517Z"
+        },
+        {
+          "name": "pt: Multi-channel translations",
+          "status": "passed",
+          "details": "All channel features translated",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.517Z"
+        },
+        {
+          "name": "ru: Multi-channel translations",
+          "status": "passed",
+          "details": "All channel features translated",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.517Z"
+        },
+        {
+          "name": "ar: Multi-channel translations",
+          "status": "passed",
+          "details": "All channel features translated",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.517Z"
+        },
+        {
+          "name": "zh: Multi-channel translations",
+          "status": "passed",
+          "details": "All channel features translated",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.517Z"
+        },
+        {
+          "name": "ja: Multi-channel translations",
+          "status": "passed",
+          "details": "All channel features translated",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.517Z"
+        },
+        {
+          "name": "hi: Multi-channel translations",
+          "status": "passed",
+          "details": "All channel features translated",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.517Z"
+        },
+        {
+          "name": "en: Advanced features",
+          "status": "passed",
+          "details": "Commission and Agency sections translated",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.517Z"
+        },
+        {
+          "name": "es: Advanced features",
+          "status": "passed",
+          "details": "Commission and Agency sections translated",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.517Z"
+        },
+        {
+          "name": "de: Advanced features",
+          "status": "passed",
+          "details": "Commission and Agency sections translated",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.517Z"
+        },
+        {
+          "name": "zh: Advanced features",
+          "status": "passed",
+          "details": "Commission and Agency sections translated",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.517Z"
+        },
+        {
+          "name": "ar: Advanced features",
+          "status": "passed",
+          "details": "Commission and Agency sections translated",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.517Z"
+        }
+      ],
+      "passed": 16,
+      "failed": 0,
+      "warnings": 0
+    },
+    "performance": {
+      "tests": [
+        {
+          "name": "en: File size",
+          "status": "passed",
+          "details": "21.10 KB (349 keys, 61.91 bytes/key)",
+          "metrics": {
+            "sizeKB": "21.10",
+            "keyCount": 349,
+            "avgBytesPerKey": "61.91"
+          },
+          "timestamp": "2025-11-09T09:59:27.517Z"
+        },
+        {
+          "name": "es: File size",
+          "status": "passed",
+          "details": "23.66 KB (349 keys, 69.41 bytes/key)",
+          "metrics": {
+            "sizeKB": "23.66",
+            "keyCount": 349,
+            "avgBytesPerKey": "69.41"
+          },
+          "timestamp": "2025-11-09T09:59:27.518Z"
+        },
+        {
+          "name": "fr: File size",
+          "status": "passed",
+          "details": "24.09 KB (349 keys, 70.68 bytes/key)",
+          "metrics": {
+            "sizeKB": "24.09",
+            "keyCount": 349,
+            "avgBytesPerKey": "70.68"
+          },
+          "timestamp": "2025-11-09T09:59:27.518Z"
+        },
+        {
+          "name": "de: File size",
+          "status": "passed",
+          "details": "23.53 KB (349 keys, 69.04 bytes/key)",
+          "metrics": {
+            "sizeKB": "23.53",
+            "keyCount": 349,
+            "avgBytesPerKey": "69.04"
+          },
+          "timestamp": "2025-11-09T09:59:27.518Z"
+        },
+        {
+          "name": "pt: File size",
+          "status": "passed",
+          "details": "23.38 KB (349 keys, 68.61 bytes/key)",
+          "metrics": {
+            "sizeKB": "23.38",
+            "keyCount": 349,
+            "avgBytesPerKey": "68.61"
+          },
+          "timestamp": "2025-11-09T09:59:27.518Z"
+        },
+        {
+          "name": "ru: File size",
+          "status": "passed",
+          "details": "33.67 KB (349 keys, 98.81 bytes/key)",
+          "metrics": {
+            "sizeKB": "33.67",
+            "keyCount": 349,
+            "avgBytesPerKey": "98.81"
+          },
+          "timestamp": "2025-11-09T09:59:27.518Z"
+        },
+        {
+          "name": "ar: File size",
+          "status": "passed",
+          "details": "30.31 KB (349 keys, 88.94 bytes/key)",
+          "metrics": {
+            "sizeKB": "30.31",
+            "keyCount": 349,
+            "avgBytesPerKey": "88.94"
+          },
+          "timestamp": "2025-11-09T09:59:27.518Z"
+        },
+        {
+          "name": "zh: File size",
+          "status": "passed",
+          "details": "20.26 KB (349 keys, 59.46 bytes/key)",
+          "metrics": {
+            "sizeKB": "20.26",
+            "keyCount": 349,
+            "avgBytesPerKey": "59.46"
+          },
+          "timestamp": "2025-11-09T09:59:27.518Z"
+        },
+        {
+          "name": "ja: File size",
+          "status": "passed",
+          "details": "25.26 KB (349 keys, 74.11 bytes/key)",
+          "metrics": {
+            "sizeKB": "25.26",
+            "keyCount": 349,
+            "avgBytesPerKey": "74.11"
+          },
+          "timestamp": "2025-11-09T09:59:27.518Z"
+        },
+        {
+          "name": "hi: File size",
+          "status": "passed",
+          "details": "37.92 KB (349 keys, 111.26 bytes/key)",
+          "metrics": {
+            "sizeKB": "37.92",
+            "keyCount": 349,
+            "avgBytesPerKey": "111.26"
+          },
+          "timestamp": "2025-11-09T09:59:27.518Z"
+        },
+        {
+          "name": "Average parse time",
+          "status": "passed",
+          "details": "0.84ms (10 iterations)",
+          "metrics": {
+            "avgMs": 0.8391585000000001,
+            "iterations": 10
+          },
+          "timestamp": "2025-11-09T09:59:27.526Z"
+        },
+        {
+          "name": "Total bundle size",
+          "status": "passed",
+          "details": "263.18 KB for 10 languages",
+          "metrics": {
+            "totalKB": 263.18,
+            "languageCount": 10
+          },
+          "timestamp": "2025-11-09T09:59:27.526Z"
+        }
+      ],
+      "passed": 12,
+      "failed": 0,
+      "warnings": 0
+    },
+    "edgeCases": {
+      "tests": [
+        {
+          "name": "en: Empty strings",
+          "status": "warnings",
+          "details": "Found 1 empty string(s)",
+          "metrics": {
+            "count": 1
+          },
+          "timestamp": "2025-11-09T09:59:27.527Z"
+        },
+        {
+          "name": "es: Empty strings",
+          "status": "warnings",
+          "details": "Found 1 empty string(s)",
+          "metrics": {
+            "count": 1
+          },
+          "timestamp": "2025-11-09T09:59:27.527Z"
+        },
+        {
+          "name": "fr: Empty strings",
+          "status": "warnings",
+          "details": "Found 1 empty string(s)",
+          "metrics": {
+            "count": 1
+          },
+          "timestamp": "2025-11-09T09:59:27.527Z"
+        },
+        {
+          "name": "de: Empty strings",
+          "status": "warnings",
+          "details": "Found 1 empty string(s)",
+          "metrics": {
+            "count": 1
+          },
+          "timestamp": "2025-11-09T09:59:27.527Z"
+        },
+        {
+          "name": "pt: Empty strings",
+          "status": "warnings",
+          "details": "Found 1 empty string(s)",
+          "metrics": {
+            "count": 1
+          },
+          "timestamp": "2025-11-09T09:59:27.527Z"
+        },
+        {
+          "name": "ru: Empty strings",
+          "status": "warnings",
+          "details": "Found 1 empty string(s)",
+          "metrics": {
+            "count": 1
+          },
+          "timestamp": "2025-11-09T09:59:27.527Z"
+        },
+        {
+          "name": "ar: Empty strings",
+          "status": "warnings",
+          "details": "Found 1 empty string(s)",
+          "metrics": {
+            "count": 1
+          },
+          "timestamp": "2025-11-09T09:59:27.527Z"
+        },
+        {
+          "name": "zh: Empty strings",
+          "status": "warnings",
+          "details": "Found 1 empty string(s)",
+          "metrics": {
+            "count": 1
+          },
+          "timestamp": "2025-11-09T09:59:27.527Z"
+        },
+        {
+          "name": "ja: Empty strings",
+          "status": "warnings",
+          "details": "Found 1 empty string(s)",
+          "metrics": {
+            "count": 1
+          },
+          "timestamp": "2025-11-09T09:59:27.527Z"
+        },
+        {
+          "name": "hi: Empty strings",
+          "status": "warnings",
+          "details": "Found 1 empty string(s)",
+          "metrics": {
+            "count": 1
+          },
+          "timestamp": "2025-11-09T09:59:27.527Z"
+        },
+        {
+          "name": "de: Long words",
+          "status": "warnings",
+          "details": "14 words > 25 chars - check for overflow",
+          "metrics": {
+            "count": 14,
+            "samples": [
+              "Provisionsauswirkungsanalyse",
+              "commissionTypePercentageDesc",
+              "callingDaysPerMonthTooltip"
+            ]
+          },
+          "timestamp": "2025-11-09T09:59:27.528Z"
+        },
+        {
+          "name": "ru: Long words",
+          "status": "warnings",
+          "details": "12 words > 25 chars - check for overflow",
+          "metrics": {
+            "count": 12,
+            "samples": [
+              "commissionTypePercentageDesc",
+              "callingDaysPerMonthTooltip",
+              "meetingBookingRateTooltip"
+            ]
+          },
+          "timestamp": "2025-11-09T09:59:27.528Z"
+        },
+        {
+          "name": "pt: Long words",
+          "status": "warnings",
+          "details": "12 words > 25 chars - check for overflow",
+          "metrics": {
+            "count": 12,
+            "samples": [
+              "commissionTypePercentageDesc",
+              "callingDaysPerMonthTooltip",
+              "meetingBookingRateTooltip"
+            ]
+          },
+          "timestamp": "2025-11-09T09:59:27.528Z"
+        },
+        {
+          "name": "en: Escaped characters",
+          "status": "passed",
+          "details": "Quotes: true, Newlines: false, Backslashes: false",
+          "metrics": {
+            "hasDoubleQuotes": true,
+            "hasNewlines": false,
+            "hasEscaped": false
+          },
+          "timestamp": "2025-11-09T09:59:27.528Z"
+        },
+        {
+          "name": "es: Escaped characters",
+          "status": "passed",
+          "details": "Quotes: true, Newlines: false, Backslashes: false",
+          "metrics": {
+            "hasDoubleQuotes": true,
+            "hasNewlines": false,
+            "hasEscaped": false
+          },
+          "timestamp": "2025-11-09T09:59:27.528Z"
+        },
+        {
+          "name": "fr: Escaped characters",
+          "status": "passed",
+          "details": "Quotes: true, Newlines: false, Backslashes: false",
+          "metrics": {
+            "hasDoubleQuotes": true,
+            "hasNewlines": false,
+            "hasEscaped": false
+          },
+          "timestamp": "2025-11-09T09:59:27.529Z"
+        },
+        {
+          "name": "de: Escaped characters",
+          "status": "passed",
+          "details": "Quotes: true, Newlines: false, Backslashes: false",
+          "metrics": {
+            "hasDoubleQuotes": true,
+            "hasNewlines": false,
+            "hasEscaped": false
+          },
+          "timestamp": "2025-11-09T09:59:27.529Z"
+        },
+        {
+          "name": "pt: Escaped characters",
+          "status": "passed",
+          "details": "Quotes: true, Newlines: false, Backslashes: false",
+          "metrics": {
+            "hasDoubleQuotes": true,
+            "hasNewlines": false,
+            "hasEscaped": false
+          },
+          "timestamp": "2025-11-09T09:59:27.529Z"
+        },
+        {
+          "name": "ru: Escaped characters",
+          "status": "passed",
+          "details": "Quotes: true, Newlines: false, Backslashes: false",
+          "metrics": {
+            "hasDoubleQuotes": true,
+            "hasNewlines": false,
+            "hasEscaped": false
+          },
+          "timestamp": "2025-11-09T09:59:27.529Z"
+        },
+        {
+          "name": "ar: Escaped characters",
+          "status": "passed",
+          "details": "Quotes: false, Newlines: false, Backslashes: false",
+          "metrics": {
+            "hasDoubleQuotes": false,
+            "hasNewlines": false,
+            "hasEscaped": false
+          },
+          "timestamp": "2025-11-09T09:59:27.529Z"
+        },
+        {
+          "name": "zh: Escaped characters",
+          "status": "passed",
+          "details": "Quotes: true, Newlines: false, Backslashes: false",
+          "metrics": {
+            "hasDoubleQuotes": true,
+            "hasNewlines": false,
+            "hasEscaped": false
+          },
+          "timestamp": "2025-11-09T09:59:27.529Z"
+        },
+        {
+          "name": "ja: Escaped characters",
+          "status": "passed",
+          "details": "Quotes: false, Newlines: false, Backslashes: false",
+          "metrics": {
+            "hasDoubleQuotes": false,
+            "hasNewlines": false,
+            "hasEscaped": false
+          },
+          "timestamp": "2025-11-09T09:59:27.529Z"
+        },
+        {
+          "name": "hi: Escaped characters",
+          "status": "passed",
+          "details": "Quotes: false, Newlines: false, Backslashes: false",
+          "metrics": {
+            "hasDoubleQuotes": false,
+            "hasNewlines": false,
+            "hasEscaped": false
+          },
+          "timestamp": "2025-11-09T09:59:27.529Z"
+        },
+        {
+          "name": "en: JSON validity",
+          "status": "passed",
+          "details": "Valid JSON structure",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.529Z"
+        },
+        {
+          "name": "es: JSON validity",
+          "status": "passed",
+          "details": "Valid JSON structure",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.529Z"
+        },
+        {
+          "name": "fr: JSON validity",
+          "status": "passed",
+          "details": "Valid JSON structure",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.529Z"
+        },
+        {
+          "name": "de: JSON validity",
+          "status": "passed",
+          "details": "Valid JSON structure",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.529Z"
+        },
+        {
+          "name": "pt: JSON validity",
+          "status": "passed",
+          "details": "Valid JSON structure",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.529Z"
+        },
+        {
+          "name": "ru: JSON validity",
+          "status": "passed",
+          "details": "Valid JSON structure",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.530Z"
+        },
+        {
+          "name": "ar: JSON validity",
+          "status": "passed",
+          "details": "Valid JSON structure",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.530Z"
+        },
+        {
+          "name": "zh: JSON validity",
+          "status": "passed",
+          "details": "Valid JSON structure",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.530Z"
+        },
+        {
+          "name": "ja: JSON validity",
+          "status": "passed",
+          "details": "Valid JSON structure",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.530Z"
+        },
+        {
+          "name": "hi: JSON validity",
+          "status": "passed",
+          "details": "Valid JSON structure",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.530Z"
+        },
+        {
+          "name": "Translation consistency",
+          "status": "passed",
+          "details": "All keys consistently present or absent",
+          "metrics": {},
+          "timestamp": "2025-11-09T09:59:27.581Z"
+        }
+      ],
+      "passed": 21,
+      "failed": 0,
+      "warnings": 13
+    }
+  },
+  "languages": {
+    "es": {
+      "totalKeys": 349,
+      "missingKeys": 0,
+      "extraKeys": 0,
+      "completeness": "100.00%"
+    },
+    "fr": {
+      "totalKeys": 349,
+      "missingKeys": 0,
+      "extraKeys": 0,
+      "completeness": "100.00%"
+    },
+    "de": {
+      "totalKeys": 349,
+      "missingKeys": 0,
+      "extraKeys": 0,
+      "completeness": "100.00%"
+    },
+    "pt": {
+      "totalKeys": 349,
+      "missingKeys": 0,
+      "extraKeys": 0,
+      "completeness": "100.00%"
+    },
+    "ru": {
+      "totalKeys": 349,
+      "missingKeys": 0,
+      "extraKeys": 0,
+      "completeness": "100.00%"
+    },
+    "ar": {
+      "totalKeys": 349,
+      "missingKeys": 0,
+      "extraKeys": 0,
+      "completeness": "100.00%"
+    },
+    "zh": {
+      "totalKeys": 349,
+      "missingKeys": 0,
+      "extraKeys": 0,
+      "completeness": "100.00%"
+    },
+    "ja": {
+      "totalKeys": 349,
+      "missingKeys": 0,
+      "extraKeys": 0,
+      "completeness": "100.00%"
+    },
+    "hi": {
+      "totalKeys": 349,
+      "missingKeys": 0,
+      "extraKeys": 0,
+      "completeness": "100.00%"
+    }
+  },
+  "recommendations": [
+    {
+      "priority": "high",
+      "category": "Quality",
+      "message": "Pass rate is 87.9% - aim for >90% to ensure production readiness"
+    },
+    {
+      "priority": "high",
+      "category": "Critical",
+      "message": "1 tests failed - address these issues before deployment"
+    },
+    {
+      "priority": "medium",
+      "category": "Quality",
+      "message": "13 warnings detected - review for potential improvements"
+    }
+  ],
+  "browserCompatibility": {
+    "modern": "Full support expected in Chrome 90+, Firefox 88+, Safari 14+, Edge 90+",
+    "rtl": "RTL support requires CSS direction property and browser support for Arabic/Hebrew rendering",
+    "fonts": "Ensure web fonts include glyphs for Chinese, Japanese, Arabic, Hindi, and Cyrillic characters",
+    "testing": "Manual testing recommended on actual devices for mobile RTL experience"
+  },
+  "performanceMetrics": {
+    "en": {
+      "fileSizeKB": 21.1,
+      "keyCount": 349,
+      "avgBytesPerKey": 61.91
+    },
+    "es": {
+      "fileSizeKB": 23.66,
+      "keyCount": 349,
+      "avgBytesPerKey": 69.41
+    },
+    "fr": {
+      "fileSizeKB": 24.09,
+      "keyCount": 349,
+      "avgBytesPerKey": 70.68
+    },
+    "de": {
+      "fileSizeKB": 23.53,
+      "keyCount": 349,
+      "avgBytesPerKey": 69.04
+    },
+    "pt": {
+      "fileSizeKB": 23.38,
+      "keyCount": 349,
+      "avgBytesPerKey": 68.61
+    },
+    "ru": {
+      "fileSizeKB": 33.67,
+      "keyCount": 349,
+      "avgBytesPerKey": 98.81
+    },
+    "ar": {
+      "fileSizeKB": 30.31,
+      "keyCount": 349,
+      "avgBytesPerKey": 88.94
+    },
+    "zh": {
+      "fileSizeKB": 20.26,
+      "keyCount": 349,
+      "avgBytesPerKey": 59.46
+    },
+    "ja": {
+      "fileSizeKB": 25.26,
+      "keyCount": 349,
+      "avgBytesPerKey": 74.11
+    },
+    "hi": {
+      "fileSizeKB": 37.92,
+      "keyCount": 349,
+      "avgBytesPerKey": 111.26
+    }
+  }
+}

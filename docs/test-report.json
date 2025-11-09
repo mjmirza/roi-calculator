@@ -1,0 +1,1165 @@
+{
+  "total": 193,
+  "passed": 182,
+  "failed": 11,
+  "tests": [
+    {
+      "category": "Setup",
+      "name": "Read page.tsx file",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Variable \"emailsPerMonth\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Variable \"totalEmails\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Variable \"prospects\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Variable \"leads\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Variable \"opportunities\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Variable \"meetings\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Variable \"deals\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Variable \"revenue\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Variable \"totalCost\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Variable \"costPerMeeting\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Variable \"cac\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Variable \"roi\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Cold Calling \"callsPerMonth\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Cold Calling \"callConnections\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Cold Calling \"callMeetings\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Cold Calling \"callDeals\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Cold Calling \"callRevenue\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Cold Calling \"callCost\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Cold Calling \"callROI\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Cold Calling \"callCAC\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "LinkedIn \"linkedInConnectionsPerMonth\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "LinkedIn \"linkedInAccepted\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "LinkedIn \"linkedInReplies\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "LinkedIn \"linkedInMeetings\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "LinkedIn \"linkedInDeals\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "LinkedIn \"linkedInRevenue\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "LinkedIn \"linkedInCost\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "LinkedIn \"linkedInROI\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "LinkedIn \"linkedInCAC\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Referral \"referralMeetings\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Referral \"referralDeals\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Referral \"referralRevenue\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Referral \"referralCost\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Referral \"referralROI\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Referral \"referralCAC\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Combined metric \"totalMeetingsAllChannels\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Combined metric \"totalDealsAllChannels\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Combined metric \"totalRevenueAllChannels\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Combined metric \"totalCostAllChannels\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Combined metric \"combinedROI\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Combined metric \"combinedCAC\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Commission \"commissionCost\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Commission \"totalCostWithCommission\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Commission \"roiWithCommission\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Commission \"cacWithCommission\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Commission \"profitWithoutCommission\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Commission \"profitWithCommission\" exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "CORPORATE_TAX_RATES constant exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Tax rate for USD defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Tax rate for EUR defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Tax rate for GBP defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Tax rate for JPY defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Tax rate for CNY defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Tax rate for AUD defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Tax rate for CAD defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Tax rate for CHF defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Tax rate for INR defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Tax rate for SGD defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Core Calculations",
+      "name": "Tax rate for AED defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Input state \"domains\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Input state \"mailboxes\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Input state \"emailsPerDay\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Input state \"workingDays\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Input state \"sequenceSteps\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Input state \"ratioPerReply\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Input state \"closeRate\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Input state \"ltv\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Input state \"openRate\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Input state \"replyRate\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Input state \"positiveReplyRate\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Input state \"meetingBookRate\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Input state \"bounceRate\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Input state \"unsubscribeRate\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Input state \"salesCycleLength\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Input state \"churnRate\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Cost state \"domainCost\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Cost state \"mailboxCost\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Cost state \"deliveryCost\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Cost state \"softwareCost\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Cost state \"engineerCost\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Cost state \"warmupCost\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Cost state \"dataProviderCost\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Cost state \"copywriterCost\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Toggle state \"enableEmailMetrics\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Toggle state \"enableAdvanced\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Toggle state \"enableAgency\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Toggle state \"enableCommission\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Toggle state \"enableColdCalling\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Toggle state \"enableLinkedIn\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Toggle state \"enableReferrals\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Toggle state \"enableTax\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Visibility state \"showAdvanced\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Visibility state \"showAgencyComparison\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Visibility state \"showCommission\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Visibility state \"showColdCalling\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Visibility state \"showLinkedIn\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Visibility state \"showReferrals\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Visibility state \"showCalculationBreakdown\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Currency state exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Commission type state exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Multi-channel state \"callsPerDay\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Multi-channel state \"callConnectRate\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Multi-channel state \"callToMeetingRate\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Multi-channel state \"linkedInConnectionsPerDay\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Multi-channel state \"linkedInAcceptRate\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Multi-channel state \"linkedInReplyRate\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Multi-channel state \"referralsPerMonth\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "State Management",
+      "name": "Multi-channel state \"referralConversionRate\" with setter",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "UI Components",
+      "name": "Card imported",
+      "status": "FAIL",
+      "details": ""
+    },
+    {
+      "category": "UI Components",
+      "name": "CardContent imported",
+      "status": "FAIL",
+      "details": ""
+    },
+    {
+      "category": "UI Components",
+      "name": "CardDescription imported",
+      "status": "FAIL",
+      "details": ""
+    },
+    {
+      "category": "UI Components",
+      "name": "CardHeader imported",
+      "status": "FAIL",
+      "details": ""
+    },
+    {
+      "category": "UI Components",
+      "name": "CardTitle imported",
+      "status": "FAIL",
+      "details": ""
+    },
+    {
+      "category": "UI Components",
+      "name": "Input imported",
+      "status": "FAIL",
+      "details": ""
+    },
+    {
+      "category": "UI Components",
+      "name": "Label imported",
+      "status": "FAIL",
+      "details": ""
+    },
+    {
+      "category": "UI Components",
+      "name": "Separator imported",
+      "status": "FAIL",
+      "details": ""
+    },
+    {
+      "category": "UI Components",
+      "name": "Button imported",
+      "status": "FAIL",
+      "details": ""
+    },
+    {
+      "category": "UI Components",
+      "name": "Select imported",
+      "status": "FAIL",
+      "details": ""
+    },
+    {
+      "category": "UI Components",
+      "name": "Switch imported",
+      "status": "FAIL",
+      "details": ""
+    },
+    {
+      "category": "UI Components",
+      "name": "Icon \"InfoIcon\" imported",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "UI Components",
+      "name": "Icon \"RotateCcw\" imported",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "UI Components",
+      "name": "Icon \"TrendingUp\" imported",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "UI Components",
+      "name": "Icon \"TrendingDown\" imported",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "UI Components",
+      "name": "Icon \"AlertTriangle\" imported",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "UI Components",
+      "name": "Icon \"DollarSign\" imported",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "UI Components",
+      "name": "Icon \"Calculator\" imported",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "UI Components",
+      "name": "Icon \"Phone\" imported",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "UI Components",
+      "name": "Icon \"Linkedin\" imported",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "UI Components",
+      "name": "Icon \"UserPlus\" imported",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "UI Components",
+      "name": "Icon \"Mail\" imported",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "UI Components",
+      "name": "Tooltip icons present (2 found)",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "UI Components",
+      "name": "\"Revenue Setup\" section exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "UI Components",
+      "name": "\"Performance Metrics\" section exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "UI Components",
+      "name": "\"Cost Structure\" section exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "UI Components",
+      "name": "\"ROI\" section exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "UI Components",
+      "name": "\"Financial Summary\" section exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Data Persistence",
+      "name": "localStorage save implemented",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Data Persistence",
+      "name": "localStorage load implemented",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Data Persistence",
+      "name": "useEffect for loading data on mount",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Data Persistence",
+      "name": "useEffect for auto-saving data",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Data Persistence",
+      "name": "State \"domains\" persisted and loaded",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Data Persistence",
+      "name": "State \"mailboxes\" persisted and loaded",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Data Persistence",
+      "name": "State \"emailsPerDay\" persisted and loaded",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Data Persistence",
+      "name": "State \"currency\" persisted and loaded",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Data Persistence",
+      "name": "State \"enableTax\" persisted and loaded",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Data Persistence",
+      "name": "State \"commissionType\" persisted and loaded",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Data Persistence",
+      "name": "State \"commissionRate\" persisted and loaded",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Data Persistence",
+      "name": "State \"enableColdCalling\" persisted and loaded",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Data Persistence",
+      "name": "State \"enableLinkedIn\" persisted and loaded",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Validation",
+      "name": "Validation function exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Validation",
+      "name": "Missing fields tracking",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Validation",
+      "name": "isValid flag in calculations",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Validation",
+      "name": "\"mailboxes\" has validation",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Validation",
+      "name": "\"emailsPerDay\" has validation",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Validation",
+      "name": "\"workingDays\" has validation",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Validation",
+      "name": "\"ratioPerReply\" has validation",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Validation",
+      "name": "\"closeRate\" has validation",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Validation",
+      "name": "\"ltv\" has validation",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Validation",
+      "name": "Error/warning indicators present",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Reset Functionality",
+      "name": "Reset button/icon present",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Currency",
+      "name": "All 11 currencies defined in CURRENCIES object",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Currency",
+      "name": "USD has symbol defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Currency",
+      "name": "EUR has symbol defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Currency",
+      "name": "GBP has symbol defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Currency",
+      "name": "JPY has symbol defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Currency",
+      "name": "CNY has symbol defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Currency",
+      "name": "AUD has symbol defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Currency",
+      "name": "CAD has symbol defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Currency",
+      "name": "CHF has symbol defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Currency",
+      "name": "INR has symbol defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Currency",
+      "name": "SGD has symbol defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Currency",
+      "name": "AED has symbol defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Currency",
+      "name": "USD has name defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Currency",
+      "name": "EUR has name defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Currency",
+      "name": "GBP has name defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Currency",
+      "name": "JPY has name defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Currency",
+      "name": "CNY has name defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Currency",
+      "name": "AUD has name defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Currency",
+      "name": "CAD has name defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Currency",
+      "name": "CHF has name defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Currency",
+      "name": "INR has name defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Currency",
+      "name": "SGD has name defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Currency",
+      "name": "AED has name defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Advanced Features",
+      "name": "Agency comparison fields present",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Advanced Features",
+      "name": "Commission tracking implemented",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Advanced Features",
+      "name": "Cold Calling channel implemented",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Advanced Features",
+      "name": "LinkedIn channel implemented",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Advanced Features",
+      "name": "Referrals channel implemented",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Code Quality",
+      "name": "\"use client\" directive present",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Code Quality",
+      "name": "TypeScript types defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Code Quality",
+      "name": "Constants properly defined",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Code Quality",
+      "name": "No improper console.error usage",
+      "status": "PASS",
+      "details": ""
+    }
+  ]
+}

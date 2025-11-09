@@ -1,6 +1,8 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useLanguage } from "@/contexts/LanguageContext"
+import { LanguageSelector } from "@/components/language/LanguageSelector"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -64,6 +66,7 @@ const CORPORATE_TAX_RATES = {
 type CurrencyCode = keyof typeof CURRENCIES
 
 export default function ROICalculator() {
+  const { t } = useLanguage()
   const [isClient, setIsClient] = useState(false)
 
   const [enableEmailMetrics, setEnableEmailMetrics] = useState(true)
@@ -502,18 +505,6 @@ export default function ROICalculator() {
     // Prospects are unique contacts (same as totalProspects in reference)
     const prospects = totalProspects
 
-    console.log("[v0] ===== CALCULATION BREAKDOWN (REFERENCE METHOD) =====")
-    console.log("[v0] Revenue Setup:", { domains, mailboxes, emailsPerDay, workingDays, sequenceSteps })
-    console.log("[v0] Performance Metrics:", { ratioPerReply, closeRate, ltv })
-    console.log("[v0] Email Funnel:")
-    console.log("[v0]   totalEmailsAllMailboxes =", mailboxes, "×", emailsPerDay, "×", workingDays, "=", totalEmailsAllMailboxes)
-    console.log("[v0]   totalProspects = Math.floor(", totalEmailsAllMailboxes, "÷", sequenceSteps, ") =", totalProspects)
-    console.log("[v0]   opportunities = Math.floor(", totalProspects, "÷", ratioPerReply, ") =", opportunities)
-    console.log("[v0]   meetings = Math.floor(", opportunities, "× 0.76) =", meetings)
-    console.log("[v0]   deals = Math.floor(", meetings, "× (", closeRate, "/ 100)) =", deals)
-    console.log("[v0]   revenue =", deals, "×", ltv, "=", revenue)
-    console.log("[v0] ===== END BREAKDOWN =====")
-
     const emailsBounced = Math.round(totalEmails * (bounceRate / 100))
     const unsubscribes = Math.round(totalEmails * (unsubscribeRate / 100))
     const effectiveReach = totalEmails - emailsBounced - unsubscribes
@@ -913,9 +904,6 @@ export default function ROICalculator() {
     setShowReferrals(true)
 
     setShowCalculationBreakdown(true)
-
-    // Show a toast or notification about which scenario was loaded
-    console.log(`[v0] Loaded scenario: ${scenario.name}`)
   }
 
   // Rename reset to resetToDefaults for clarity
@@ -1310,17 +1298,18 @@ export default function ROICalculator() {
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between gap-4 flex-wrap">
             <div className="flex-1 min-w-[200px]">
-              <h1 className="text-2xl font-semibold tracking-tight text-foreground">ROI Calculator</h1>
+              <h1 className="text-2xl font-semibold tracking-tight text-foreground">{t("header.title")}</h1>
               <p className="text-sm text-muted-foreground mt-1">
-                Calculate your cold outreach campaign return on investment across multiple channels
+                {t("header.subtitle")}
               </p>
             </div>
             <div className="flex items-center gap-3">
+              <LanguageSelector />
               <div className="flex items-center gap-2">
                 <DollarSign className="h-4 w-4 text-muted-foreground" />
                 <Select value={currency} onValueChange={(value) => setCurrency(value as CurrencyCode)}>
                   <SelectTrigger className="w-[180px] bg-background">
-                    <SelectValue placeholder="Select currency" />
+                    <SelectValue placeholder={t("header.selectCurrency")} />
                   </SelectTrigger>
                   <SelectContent>
                     {Object.entries(CURRENCIES).map(([code, info]) => (
@@ -1328,7 +1317,7 @@ export default function ROICalculator() {
                         <div className="flex items-center gap-2">
                           <span className="font-mono font-semibold">{info.symbol}</span>
                           <span>{code}</span>
-                          <span className="text-xs text-muted-foreground">- {info.name}</span>
+                          <span className="text-xs text-muted-foreground">- {t(`currencies.${code}`)}</span>
                         </div>
                       </SelectItem>
                     ))}
@@ -1337,7 +1326,7 @@ export default function ROICalculator() {
               </div>
               <div className="flex items-center gap-2 border rounded-md px-3 py-1.5 bg-background">
                 <label htmlFor="tax-toggle" className="text-sm font-medium cursor-pointer">
-                  Include Tax ({(CORPORATE_TAX_RATES[currency] * 100).toFixed(1)}%)
+                  {t("header.includeTax")} ({(CORPORATE_TAX_RATES[currency] * 100).toFixed(1)}%)
                 </label>
                 <Switch id="tax-toggle" checked={enableTax} onCheckedChange={setEnableTax} />
               </div>
@@ -1346,10 +1335,10 @@ export default function ROICalculator() {
                 size="sm"
                 onClick={shuffleScenario}
                 className="gap-2 transition-all hover:scale-105 bg-transparent"
-                title="Load a random realistic scenario to test the calculator"
+                title={t("header.shuffleScenarioTooltip")}
               >
                 <Shuffle className="h-4 w-4" />
-                Shuffle Scenario
+                {t("header.shuffleScenario")}
               </Button>
               {/* Removed duplicate handleReset function - calling resetToDefaults directly from button */}
               <Button
@@ -1359,7 +1348,7 @@ export default function ROICalculator() {
                 className="gap-2 transition-all hover:scale-105 bg-transparent"
               >
                 <RotateCcw className="h-4 w-4" />
-                Reset
+                {t("header.reset")}
               </Button>
             </div>
           </div>
@@ -1374,10 +1363,10 @@ export default function ROICalculator() {
                 <CardHeader className="pb-3">
                   <div className="flex items-center gap-2">
                     <AlertTriangle className="h-5 w-5 text-red-600" />
-                    <CardTitle className="text-base">Required Fields Missing</CardTitle>
+                    <CardTitle className="text-base">{t("validation.requiredFieldsMissing")}</CardTitle>
                   </div>
                   <CardDescription className="text-xs">
-                    Please fill in the following required fields to see calculations:
+                    {t("validation.fillRequiredFields")}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -1570,15 +1559,15 @@ export default function ROICalculator() {
             {/* Revenue Setup */}
             <Card className="transition-all hover:shadow-md">
               <CardHeader>
-                <CardTitle className="text-base">Revenue Setup</CardTitle>
-                <CardDescription>Configure your core outreach parameters</CardDescription>
+                <CardTitle className="text-base">{t("revenueSetup.title")}</CardTitle>
+                <CardDescription>{t("revenueSetup.description")}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
                   <LabelWithTooltip
                     htmlFor="domains"
-                    label="Domains"
-                    tooltip="Number of unique domains you'll use for sending emails. Using multiple domains helps protect your sender reputation."
+                    label={t("revenueSetup.domains")}
+                    tooltip={t("revenueSetup.domainsTooltip")}
                   />
                   <Input
                     id="domains"
@@ -1591,8 +1580,8 @@ export default function ROICalculator() {
                 <div className="space-y-2">
                   <LabelWithTooltip
                     htmlFor="mailboxes"
-                    label="Sending mailboxes"
-                    tooltip="Total number of email accounts you'll use to send campaigns. More mailboxes = higher volume capacity."
+                    label={t("revenueSetup.sendingMailboxes")}
+                    tooltip={t("revenueSetup.sendingMailboxesTooltip")}
                     required
                     minValue={1}
                   />
@@ -1607,8 +1596,8 @@ export default function ROICalculator() {
                 <div className="space-y-2">
                   <LabelWithTooltip
                     htmlFor="emailsPerDay"
-                    label="Emails per day per mailbox"
-                    tooltip="How many emails each mailbox sends daily. Keep this under 50 to maintain good deliverability and avoid spam filters."
+                    label={t("revenueSetup.emailsPerDay")}
+                    tooltip={t("revenueSetup.emailsPerDayTooltip")}
                     warning={getBenchmarkWarning("emailsPerDay", emailsPerDay)}
                     required
                     minValue={1}
@@ -1624,8 +1613,8 @@ export default function ROICalculator() {
                 <div className="space-y-2">
                   <LabelWithTooltip
                     htmlFor="workingDays"
-                    label="Working days per month"
-                    tooltip="Number of business days per month you'll be sending emails. Typically 20-22 days (excluding weekends)."
+                    label={t("revenueSetup.workingDays")}
+                    tooltip={t("revenueSetup.workingDaysTooltip")}
                     required
                     minValue={1}
                   />
@@ -1640,8 +1629,8 @@ export default function ROICalculator() {
                 <div className="space-y-2">
                   <LabelWithTooltip
                     htmlFor="sequenceSteps"
-                    label="Sequence steps"
-                    tooltip="Number of follow-up emails in your sequence. Example: 1 initial email + 2 follow-ups = 3 steps total."
+                    label={t("revenueSetup.sequenceSteps")}
+                    tooltip={t("revenueSetup.sequenceStepsTooltip")}
                   />
                   <Input
                     id="sequenceSteps"
@@ -1657,15 +1646,15 @@ export default function ROICalculator() {
             {/* Performance Metrics */}
             <Card className="transition-all hover:shadow-md">
               <CardHeader>
-                <CardTitle className="text-base">Performance Metrics</CardTitle>
-                <CardDescription>Define your conversion rates</CardDescription>
+                <CardTitle className="text-base">{t("performanceMetrics.title")}</CardTitle>
+                <CardDescription>{t("performanceMetrics.description")}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
                   <LabelWithTooltip
                     htmlFor="ratioPerReply"
-                    label="Ratio per positive reply"
-                    tooltip="How many emails you need to send to get 1 positive reply. Example: 300 means 1 interested reply per 300 emails sent."
+                    label={t("performanceMetrics.ratioPerReply")}
+                    tooltip={t("performanceMetrics.ratioPerReplyTooltip")}
                     required
                     minValue={1}
                   />
@@ -1680,8 +1669,8 @@ export default function ROICalculator() {
                 <div className="space-y-2">
                   <LabelWithTooltip
                     htmlFor="closeRate"
-                    label="AEs close-rate (%)"
-                    tooltip="Percentage of opportunities that your sales team converts into paying customers. Example: 70% means 7 out of 10 opportunities close."
+                    label={t("performanceMetrics.closeRate")}
+                    tooltip={t("performanceMetrics.closeRateTooltip")}
                     warning={getBenchmarkWarning("closeRate", closeRate)}
                     required
                     minValue={1}
@@ -1697,8 +1686,8 @@ export default function ROICalculator() {
                 <div className="space-y-2">
                   <LabelWithTooltip
                     htmlFor="ltv"
-                    label="Deal Value / LTV" // Updated label
-                    tooltip="Lifetime Value - the total revenue you expect from one customer over their entire relationship with your business."
+                    label={t("performanceMetrics.dealValueLTV")} // Updated label
+                    tooltip={t("performanceMetrics.dealValueLTVTooltip")}
                     required
                     minValue={1}
                   />
@@ -1718,7 +1707,7 @@ export default function ROICalculator() {
                 <div className="flex items-center justify-between">
                   <div className="flex-1">
                     <div className="flex items-center gap-3">
-                      <CardTitle className="text-base">Advanced Metrics</CardTitle>
+                      <CardTitle className="text-base">{t("advancedMetrics.title")}</CardTitle>
                       <div className="flex items-center gap-2">
                         <Switch
                           checked={enableAdvanced}
@@ -1871,14 +1860,14 @@ export default function ROICalculator() {
             <Card className="transition-all hover:shadow-md">
               <CardHeader>
                 <CardTitle className="text-base">Cost Structure</CardTitle>
-                <CardDescription>Enter your monthly costs</CardDescription>
+                <CardDescription>{t("costStructure.description")}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
                   <LabelWithTooltip
                     htmlFor="domainCost"
-                    label="Domains monthly cost"
-                    tooltip="Monthly cost for all your domains. Typically $10-15 per domain per year, so divide annual cost by 12."
+                    label={t("costStructure.domainCost")}
+                    tooltip={t("costStructure.domainCostTooltip")}
                   />
                   <Input
                     id="domainCost"
@@ -1891,8 +1880,8 @@ export default function ROICalculator() {
                 <div className="space-y-2">
                   <LabelWithTooltip
                     htmlFor="mailboxCost"
-                    label="Mailboxes monthly cost"
-                    tooltip="Monthly cost for all email accounts. Google Workspace or similar services typically cost $6-12 per mailbox per month."
+                    label={t("costStructure.mailboxCost")}
+                    tooltip={t("costStructure.mailboxCostTooltip")}
                   />
                   <Input
                     id="mailboxCost"
@@ -1905,8 +1894,8 @@ export default function ROICalculator() {
                 <div className="space-y-2">
                   <LabelWithTooltip
                     htmlFor="deliveryCost"
-                    label="Deliverability setup cost/month"
-                    tooltip="Monthly cost for email warmup services and deliverability tools to ensure your emails reach the inbox, not spam."
+                    label={t("costStructure.deliveryCost")}
+                    tooltip={t("costStructure.deliveryCostTooltip")}
                   />
                   <Input
                     id="deliveryCost"
@@ -1919,8 +1908,8 @@ export default function ROICalculator() {
                 <div className="space-y-2">
                   <LabelWithTooltip
                     htmlFor="softwareCost"
-                    label="Software cost"
-                    tooltip="Monthly cost for cold email software platforms (like Instantly, Smartlead, etc.) used to manage and automate campaigns."
+                    label={t("costStructure.softwareCost")}
+                    tooltip={t("costStructure.softwareCostTooltip")}
                   />
                   <Input
                     id="softwareCost"
@@ -1933,8 +1922,8 @@ export default function ROICalculator() {
                 <div className="space-y-2">
                   <LabelWithTooltip
                     htmlFor="engineerCost"
-                    label="GTM Engineer cost"
-                    tooltip="Monthly salary/cost for your Go-To-Market engineer or specialist who manages the cold email infrastructure and campaigns."
+                    label={t("costStructure.engineerCost")}
+                    tooltip={t("costStructure.engineerCostTooltip")}
                   />
                   <Input
                     id="engineerCost"
@@ -1951,8 +1940,8 @@ export default function ROICalculator() {
                     <div className="space-y-2">
                       <LabelWithTooltip
                         htmlFor="warmupCost"
-                        label="Email warmup cost"
-                        tooltip="Monthly cost for warming up new email accounts to build sender reputation. Typically $20-50 per mailbox."
+                        label={t("costStructure.warmupCost")}
+                        tooltip={t("costStructure.warmupCostTooltip")}
                       />
                       <Input
                         id="warmupCost"
@@ -1965,8 +1954,8 @@ export default function ROICalculator() {
                     <div className="space-y-2">
                       <LabelWithTooltip
                         htmlFor="dataProviderCost"
-                        label="Data provider cost"
-                        tooltip="Monthly cost for lead data providers (Apollo, ZoomInfo, etc.) to source quality contact lists."
+                        label={t("costStructure.dataProviderCost")}
+                        tooltip={t("costStructure.dataProviderCostTooltip")}
                       />
                       <Input
                         id="dataProviderCost"
@@ -1979,8 +1968,8 @@ export default function ROICalculator() {
                     <div className="space-y-2">
                       <LabelWithTooltip
                         htmlFor="copywriterCost"
-                        label="Copywriter cost"
-                        tooltip="Monthly cost for professional copywriting services to create high-converting email sequences."
+                        label={t("costStructure.copywriterCost")}
+                        tooltip={t("costStructure.copywriterCostTooltip")}
                       />
                       <Input
                         id="copywriterCost"
@@ -2663,6 +2652,42 @@ export default function ROICalculator() {
                 </CardHeader>
               </Card>
             </div>
+
+            {/* Email Performance Metrics - only show if enabled */}
+            {enableEmailMetrics && enableAdvanced && (
+              <Card className="transition-all hover:shadow-md">
+                <CardHeader>
+                  <CardTitle className="text-base">Email Performance Metrics</CardTitle>
+                  <CardDescription className="text-xs">Your email outreach volume and reach</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div className="space-y-1">
+                      <p className="text-3xl font-bold tabular-nums">
+                        {displayValue(calculations.emailsPerMonth, "number")}
+                      </p>
+                      <p className="text-xs text-muted-foreground">Emails/Month per Mailbox</p>
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-3xl font-bold tabular-nums">
+                        {displayValue(calculations.totalEmails, "number")}
+                      </p>
+                      <p className="text-xs text-muted-foreground">Total Emails/Month</p>
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-3xl font-bold tabular-nums">
+                        {displayValue(calculations.prospects, "number")}
+                      </p>
+                      <p className="text-xs text-muted-foreground">Prospects/Month</p>
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-3xl font-bold tabular-nums">{displayValue(calculations.leads, "number")}</p>
+                      <p className="text-xs text-muted-foreground">Leads Contacted</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
 
             {/* Sales Performance */}
             <Card className="transition-all hover:shadow-md">
@@ -3374,42 +3399,6 @@ export default function ROICalculator() {
                     <div className="space-y-1">
                       <p className="text-lg font-bold">{displayValue(calculations.referralCAC, "currency")}</p>
                       <p className="text-xs text-muted-foreground">CAC</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            )}
-
-            {/* Email Performance Metrics - only show if enabled */}
-            {enableEmailMetrics && enableAdvanced && (
-              <Card className="transition-all hover:shadow-md">
-                <CardHeader>
-                  <CardTitle className="text-base">Email Performance Metrics</CardTitle>
-                  <CardDescription className="text-xs">Your email outreach volume and reach</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div className="space-y-1">
-                      <p className="text-3xl font-bold tabular-nums">
-                        {displayValue(calculations.emailsPerMonth, "number")}
-                      </p>
-                      <p className="text-xs text-muted-foreground">Emails/Month per Mailbox</p>
-                    </div>
-                    <div className="space-y-1">
-                      <p className="text-3xl font-bold tabular-nums">
-                        {displayValue(calculations.totalEmails, "number")}
-                      </p>
-                      <p className="text-xs text-muted-foreground">Total Emails/Month</p>
-                    </div>
-                    <div className="space-y-1">
-                      <p className="text-3xl font-bold tabular-nums">
-                        {displayValue(calculations.prospects, "number")}
-                      </p>
-                      <p className="text-xs text-muted-foreground">Prospects/Month</p>
-                    </div>
-                    <div className="space-y-1">
-                      <p className="text-3xl font-bold tabular-nums">{displayValue(calculations.leads, "number")}</p>
-                      <p className="text-xs text-muted-foreground">Leads Contacted</p>
                     </div>
                   </div>
                 </CardContent>
