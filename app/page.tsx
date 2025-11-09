@@ -1012,14 +1012,13 @@ export default function ROICalculator() {
 
   const formatCurrency = (value: number) => {
     const currencyInfo = CURRENCIES[currency]
-    const convertedValue = value * currencyInfo.rate
-
+    // Only change the symbol, do NOT convert the value
     return new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: currency,
       minimumFractionDigits: currency === "JPY" ? 0 : 2,
       maximumFractionDigits: currency === "JPY" ? 0 : 2,
-    }).format(convertedValue)
+    }).format(value)
   }
 
   const formatNumber = (value: number) => {
