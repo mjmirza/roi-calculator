@@ -542,16 +542,25 @@ export default function ROICalculator() {
     const agencyROI = agencyTotalCost > 0 ? ((revenue - agencyTotalCost) / agencyTotalCost) * 100 : 0
     const costSavingsVsAgency = agencyTotalCost - totalCost
 
-    // Commission Calculations
-    // Updated commission calculation to use LTV
+    // Multi-Channel Totals (calculated BEFORE commission)
+    const totalMeetingsAllChannels = meetings + callMeetings + linkedInMeetings + referralMeetings
+    const totalDealsAllChannels = deals + callDeals + linkedInDeals + referralDeals
+    const totalRevenueAllChannels = revenue + callRevenue + linkedInRevenue + referralRevenue
+    const totalCostAllChannels = totalCost + callCost + linkedInCost + referralCost
+
+    // Commission Calculations - FIXED: Use ALL channels, not just email
     const commissionCost =
-      commissionType === "percentage" ? deals * ltv * (commissionRate / 100) : deals * commissionFlat
-    const totalCostWithCommission = totalCost + commissionCost
+      commissionType === "percentage"
+        ? totalDealsAllChannels * ltv * (commissionRate / 100)
+        : totalDealsAllChannels * commissionFlat
+    const totalCostWithCommission = totalCostAllChannels + commissionCost
     const roiWithCommission =
-      totalCostWithCommission > 0 ? ((revenue - totalCostWithCommission) / totalCostWithCommission) * 100 : 0
-    const cacWithCommission = deals > 0 ? totalCostWithCommission / deals : 0
-    const profitWithoutCommission = revenue - totalCost
-    const profitWithCommission = revenue - totalCostWithCommission
+      totalCostWithCommission > 0
+        ? ((totalRevenueAllChannels - totalCostWithCommission) / totalCostWithCommission) * 100
+        : 0
+    const cacWithCommission = totalDealsAllChannels > 0 ? totalCostWithCommission / totalDealsAllChannels : 0
+    const profitWithoutCommission = totalRevenueAllChannels - totalCostAllChannels
+    const profitWithCommission = totalRevenueAllChannels - totalCostWithCommission
 
     const callsPerMonth = enableColdCalling ? callsPerDay * callingDaysPerMonth : 0
     const callConnections = Math.round(callsPerMonth * (callConnectRate / 100))
@@ -585,10 +594,7 @@ export default function ROICalculator() {
     const referralROI = referralCost > 0 ? ((referralRevenue - referralCost) / referralCost) * 100 : 0
     const referralCAC = referralDeals > 0 ? referralCost / referralDeals : 0
 
-    const totalMeetingsAllChannels = meetings + callMeetings + linkedInMeetings + referralMeetings
-    const totalDealsAllChannels = deals + callDeals + linkedInDeals + referralDeals
-    const totalRevenueAllChannels = revenue + callRevenue + linkedInRevenue + referralRevenue
-    const totalCostAllChannels = totalCost + callCost + linkedInCost + referralCost
+    // Combined metrics (using variables already calculated above)
     const combinedROI =
       totalCostAllChannels > 0 ? ((totalRevenueAllChannels - totalCostAllChannels) / totalCostAllChannels) * 100 : 0
     const combinedCAC = totalDealsAllChannels > 0 ? totalCostAllChannels / totalDealsAllChannels : 0
