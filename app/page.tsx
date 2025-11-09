@@ -2712,6 +2712,42 @@ export default function ROICalculator() {
               </Card>
             </div>
 
+            {/* Sales Performance */}
+            <Card className="transition-all hover:shadow-md">
+              <CardHeader>
+                <CardTitle className="text-base">Sales Performance</CardTitle>
+                <CardDescription className="text-xs">Your sales funnel metrics</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  <div className="p-4 rounded-lg bg-green-100 dark:bg-green-950/30 border border-green-200 dark:border-green-900">
+                    <p className="text-3xl font-bold tabular-nums text-green-700 dark:text-green-400 break-words">
+                      {displayValue(calculations.opportunities, "number")}
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">Opportunities</p>
+                  </div>
+                  <div className="p-4 rounded-lg bg-green-100 dark:bg-green-950/30 border border-green-200 dark:border-green-900">
+                    <p className="text-3xl font-bold tabular-nums text-green-700 dark:text-green-400 break-words">
+                      {displayValue(calculations.meetings, "number")}
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">Meetings</p>
+                  </div>
+                  <div className="p-4 rounded-lg bg-green-100 dark:bg-green-950/30 border border-green-200 dark:border-green-900">
+                    <p className="text-3xl font-bold tabular-nums text-green-700 dark:text-green-400 break-words">
+                      {displayValue(calculations.deals, "number")}
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">Deals Closed</p>
+                  </div>
+                  <div className="p-4 rounded-lg bg-green-100 dark:bg-green-950/30 border border-green-200 dark:border-green-900 sm:col-span-2 lg:col-span-1">
+                    <p className="text-2xl sm:text-3xl font-bold tabular-nums text-green-700 dark:text-green-400 break-words leading-tight">
+                      {displayValue(calculations.totalRevenueAllChannels, "currency")}
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">Revenue</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
             {/* Financial Summary - Always show */}
             <Card className="border-2 border-blue-200 dark:border-blue-900 bg-blue-50/50 dark:bg-blue-950/20">
               <CardHeader>
@@ -2840,6 +2876,48 @@ export default function ROICalculator() {
                       </div>
                     </>
                   )}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Financial Analysis */}
+            <Card className="transition-all hover:shadow-md">
+              <CardHeader>
+                <CardTitle className="text-base">Financial Analysis</CardTitle>
+                <CardDescription className="text-xs">Cost breakdown and efficiency metrics</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-3 gap-6">
+                  <div className="space-y-1">
+                    <p className="text-xs text-muted-foreground">Total Monthly Cost</p>
+                    <p className="text-2xl font-bold tabular-nums text-red-700 dark:text-red-400">
+                      {displayValue(calculations.totalCostAllChannels, "currency")}
+                    </p>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-xs text-muted-foreground">Cost per Meeting</p>
+                    <p className="text-2xl font-bold tabular-nums">
+                      {displayValue(
+                        calculations.totalMeetingsAllChannels > 0
+                          ? calculations.totalCostAllChannels / calculations.totalMeetingsAllChannels
+                          : 0,
+                        "currency",
+                      )}
+                    </p>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-xs text-muted-foreground">Customer Acquisition Cost</p>
+                    <p className="text-2xl font-bold tabular-nums">
+                      {displayValue(calculations.combinedCAC, "currency")}
+                    </p>
+                  </div>
+                </div>
+                <Separator />
+                <div className="flex items-center justify-between p-4 rounded-lg bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900">
+                  <span className="text-sm font-medium">LTV/CAC Ratio</span>
+                  <span className="px-3 py-1 rounded-full bg-blue-600 text-white text-sm font-bold">
+                    {calculations.ltvCacRatio > 0 ? calculations.ltvCacRatio.toFixed(1) : "--"}
+                  </span>
                 </div>
               </CardContent>
             </Card>
@@ -3385,82 +3463,6 @@ export default function ROICalculator() {
                 </CardContent>
               </Card>
             )}
-
-            <Card className="transition-all hover:shadow-md">
-              <CardHeader>
-                <CardTitle className="text-base">Sales Performance</CardTitle>
-                <CardDescription className="text-xs">Your sales funnel metrics</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                  <div className="p-4 rounded-lg bg-green-100 dark:bg-green-950/30 border border-green-200 dark:border-green-900">
-                    <p className="text-3xl font-bold tabular-nums text-green-700 dark:text-green-400 break-words">
-                      {displayValue(calculations.opportunities, "number")}
-                    </p>
-                    <p className="text-xs text-muted-foreground mt-1">Opportunities</p>
-                  </div>
-                  <div className="p-4 rounded-lg bg-green-100 dark:bg-green-950/30 border border-green-200 dark:border-green-900">
-                    <p className="text-3xl font-bold tabular-nums text-green-700 dark:text-green-400 break-words">
-                      {displayValue(calculations.meetings, "number")}
-                    </p>
-                    <p className="text-xs text-muted-foreground mt-1">Meetings</p>
-                  </div>
-                  <div className="p-4 rounded-lg bg-green-100 dark:bg-green-950/30 border border-green-200 dark:border-green-900">
-                    <p className="text-3xl font-bold tabular-nums text-green-700 dark:text-green-400 break-words">
-                      {displayValue(calculations.deals, "number")}
-                    </p>
-                    <p className="text-xs text-muted-foreground mt-1">Deals Closed</p>
-                  </div>
-                  <div className="p-4 rounded-lg bg-green-100 dark:bg-green-950/30 border border-green-200 dark:border-green-900 sm:col-span-2 lg:col-span-1">
-                    <p className="text-2xl sm:text-3xl font-bold tabular-nums text-green-700 dark:text-green-400 break-words leading-tight">
-                      {displayValue(calculations.totalRevenueAllChannels, "currency")}
-                    </p>
-                    <p className="text-xs text-muted-foreground mt-1">Revenue</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="transition-all hover:shadow-md">
-              <CardHeader>
-                <CardTitle className="text-base">Financial Analysis</CardTitle>
-                <CardDescription className="text-xs">Cost breakdown and efficiency metrics</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-3 gap-6">
-                  <div className="space-y-1">
-                    <p className="text-xs text-muted-foreground">Total Monthly Cost</p>
-                    <p className="text-2xl font-bold tabular-nums text-red-700 dark:text-red-400">
-                      {displayValue(calculations.totalCostAllChannels, "currency")}
-                    </p>
-                  </div>
-                  <div className="space-y-1">
-                    <p className="text-xs text-muted-foreground">Cost per Meeting</p>
-                    <p className="text-2xl font-bold tabular-nums">
-                      {displayValue(
-                        calculations.totalMeetingsAllChannels > 0
-                          ? calculations.totalCostAllChannels / calculations.totalMeetingsAllChannels
-                          : 0,
-                        "currency",
-                      )}
-                    </p>
-                  </div>
-                  <div className="space-y-1">
-                    <p className="text-xs text-muted-foreground">Customer Acquisition Cost</p>
-                    <p className="text-2xl font-bold tabular-nums">
-                      {displayValue(calculations.combinedCAC, "currency")}
-                    </p>
-                  </div>
-                </div>
-                <Separator />
-                <div className="flex items-center justify-between p-4 rounded-lg bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900">
-                  <span className="text-sm font-medium">LTV/CAC Ratio</span>
-                  <span className="px-3 py-1 rounded-full bg-blue-600 text-white text-sm font-bold">
-                    {calculations.ltvCacRatio > 0 ? calculations.ltvCacRatio.toFixed(1) : "--"}
-                  </span>
-                </div>
-              </CardContent>
-            </Card>
 
             <Card className="transition-all hover:shadow-md">
               <CardHeader>
