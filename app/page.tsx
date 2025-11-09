@@ -1303,20 +1303,29 @@ export default function ROICalculator() {
   return (
     <div className="min-h-screen bg-background">
       <div className="border-b bg-card">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center justify-between gap-4 flex-wrap">
-            <div className="flex-1 min-w-[200px]">
-              <h1 className="text-2xl font-semibold tracking-tight text-foreground">{t("header.title")}</h1>
-              <p className="text-sm text-muted-foreground mt-1">
+        <div className="container mx-auto px-4 py-4 md:py-6">
+          <div className="flex flex-col gap-4">
+            {/* Title Section */}
+            <div>
+              <h1 className="text-xl md:text-2xl font-semibold tracking-tight text-foreground">{t("header.title")}</h1>
+              <p className="text-xs md:text-sm text-muted-foreground mt-1">
                 {t("header.subtitle")}
               </p>
             </div>
-            <div className="flex items-center gap-3">
-              <LanguageSelector />
-              <Select value={currency} onValueChange={(value) => setCurrency(value as CurrencyCode)}>
-                <SelectTrigger className="w-[180px] bg-background">
-                  <SelectValue placeholder={t("header.selectCurrency")} />
-                </SelectTrigger>
+
+            {/* Controls Section - Responsive Grid */}
+            <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:items-center">
+              {/* Language Selector */}
+              <div className="w-full sm:w-auto">
+                <LanguageSelector />
+              </div>
+
+              {/* Currency Selector */}
+              <div className="w-full sm:w-auto">
+                <Select value={currency} onValueChange={(value) => setCurrency(value as CurrencyCode)}>
+                  <SelectTrigger className="w-full sm:w-[180px] bg-background">
+                    <SelectValue placeholder={t("header.selectCurrency")} />
+                  </SelectTrigger>
                   <SelectContent>
                     {Object.entries(CURRENCIES).map(([code, info]) => (
                       <SelectItem key={code} value={code}>
@@ -1329,32 +1338,40 @@ export default function ROICalculator() {
                     ))}
                   </SelectContent>
                 </Select>
-              <div className="flex items-center gap-2 border rounded-md px-3 py-1.5 bg-background">
-                <label htmlFor="tax-toggle" className="text-sm font-medium cursor-pointer">
+              </div>
+
+              {/* Tax Toggle */}
+              <div className="flex items-center gap-2 border rounded-md px-3 py-2 bg-background w-full sm:w-auto">
+                <label htmlFor="tax-toggle" className="text-xs md:text-sm font-medium cursor-pointer whitespace-nowrap">
                   {t("header.includeTax")} ({(CORPORATE_TAX_RATES[currency] * 100).toFixed(1)}%)
                 </label>
                 <Switch id="tax-toggle" checked={enableTax} onCheckedChange={setEnableTax} />
               </div>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={shuffleScenario}
-                className="gap-2 transition-all hover:scale-105 bg-transparent"
-                title={t("header.shuffleScenarioTooltip")}
-              >
-                <Shuffle className="h-4 w-4" />
-                {t("header.shuffleScenario")}
-              </Button>
-              {/* Removed duplicate handleReset function - calling resetToDefaults directly from button */}
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={resetToDefaults}
-                className="gap-2 transition-all hover:scale-105 bg-transparent"
-              >
-                <RotateCcw className="h-4 w-4" />
-                {t("header.reset")}
-              </Button>
+
+              {/* Action Buttons - Full width on mobile, auto on larger screens */}
+              <div className="flex gap-2 w-full sm:w-auto sm:ml-auto">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={shuffleScenario}
+                  className="flex-1 sm:flex-initial gap-2 transition-all hover:scale-105 bg-transparent"
+                  title={t("header.shuffleScenarioTooltip")}
+                >
+                  <Shuffle className="h-4 w-4" />
+                  <span className="hidden sm:inline">{t("header.shuffleScenario")}</span>
+                  <span className="sm:hidden">Shuffle</span>
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={resetToDefaults}
+                  className="flex-1 sm:flex-initial gap-2 transition-all hover:scale-105 bg-transparent"
+                >
+                  <RotateCcw className="h-4 w-4" />
+                  <span className="hidden sm:inline">{t("header.reset")}</span>
+                  <span className="sm:hidden">Reset</span>
+                </Button>
+              </div>
             </div>
           </div>
         </div>
