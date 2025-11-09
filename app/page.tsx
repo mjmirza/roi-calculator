@@ -216,48 +216,6 @@ export default function ROICalculator() {
   const [prevROI, setPrevROI] = useState(0)
   const [isValidated, setIsValidated] = useState(false) // New state to track validation
 
-  const triggerConfetti = () => {
-    if (typeof window !== "undefined") {
-      const duration = 3 * 1000
-      const animationEnd = Date.now() + duration
-      const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 }
-
-      function randomInRange(min: number, max: number) {
-        return Math.random() * (max - min) + min
-      }
-
-      const interval: NodeJS.Timeout = setInterval(() => {
-        const timeLeft = animationEnd - Date.now()
-
-        if (timeLeft <= 0) {
-          return clearInterval(interval)
-        }
-
-        const particleCount = 50 * (timeLeft / duration)
-
-        // @ts-ignore
-        if (window.confetti) {
-          // @ts-ignore
-          window.confetti(
-            Object.assign({}, defaults, {
-              particleCount,
-              origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
-              colors: ["#10b981", "#059669", "#047857"],
-            }),
-          )
-          // @ts-ignore
-          window.confetti(
-            Object.assign({}, defaults, {
-              particleCount,
-              origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
-              colors: ["#10b981", "#059669", "#047857"],
-            }),
-          )
-        }
-      }, 250)
-    }
-  }
-
   const triggerWarning = () => {
     const element = document.getElementById("roi-card")
     if (element) {
@@ -721,9 +679,6 @@ export default function ROICalculator() {
     })
 
     // Trigger animations
-    if (isClient && prevROI <= 100 && roiWithCommission > 100) {
-      triggerConfetti()
-    }
     if (isClient && prevROI >= 0 && roiWithCommission < 0) {
       triggerWarning()
     }
@@ -1352,8 +1307,6 @@ export default function ROICalculator() {
 
   return (
     <div className="min-h-screen bg-background">
-      <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
-
       <div className="border-b bg-card">
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between gap-4 flex-wrap">
