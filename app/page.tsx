@@ -1308,7 +1308,7 @@ export default function ROICalculator() {
   )
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background overflow-x-hidden">
       <div className="sticky top-0 z-50 border-b bg-card shadow-sm">
         <div className="container mx-auto px-4 py-4 md:py-6">
           <div className="flex flex-col gap-4">
