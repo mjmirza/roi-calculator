@@ -212,6 +212,11 @@ export default function ROICalculator() {
     totalCostAllChannels: 0,
     combinedROI: 0,
     combinedCAC: 0,
+    taxRate: 0,
+    netIncomeBeforeTax: 0,
+    taxAmount: 0,
+    netIncomeAfterTax: 0,
+    afterTaxROI: 0,
     isValid: false,
     missingFields: [] as string[],
   })
@@ -514,7 +519,7 @@ export default function ROICalculator() {
     const effectiveReach = totalEmails - emailsBounced - unsubscribes
 
     const totalCost =
-      domainCost +
+      (domains * domainCost) +
       mailboxCost +
       deliveryCost +
       softwareCost +
@@ -701,8 +706,6 @@ export default function ROICalculator() {
     bounceRate,
     unsubscribeRate,
     // avgDealSize removed
-    salesCycleLength,
-    churnRate,
     warmupCost,
     dataProviderCost,
     copywriterCost,
@@ -713,7 +716,6 @@ export default function ROICalculator() {
     commissionType,
     commissionRate,
     commissionFlat,
-    showCommission,
     // Include all toggle and new channel dependencies
     enableEmailMetrics,
     enableAdvanced,
