@@ -1305,12 +1305,10 @@ export default function ROICalculator() {
             </div>
             <div className="flex items-center gap-3">
               <LanguageSelector />
-              <div className="flex items-center gap-2">
-                <DollarSign className="h-4 w-4 text-muted-foreground" />
-                <Select value={currency} onValueChange={(value) => setCurrency(value as CurrencyCode)}>
-                  <SelectTrigger className="w-[180px] bg-background">
-                    <SelectValue placeholder={t("header.selectCurrency")} />
-                  </SelectTrigger>
+              <Select value={currency} onValueChange={(value) => setCurrency(value as CurrencyCode)}>
+                <SelectTrigger className="w-[180px] bg-background">
+                  <SelectValue placeholder={t("header.selectCurrency")} />
+                </SelectTrigger>
                   <SelectContent>
                     {Object.entries(CURRENCIES).map(([code, info]) => (
                       <SelectItem key={code} value={code}>
@@ -1323,7 +1321,6 @@ export default function ROICalculator() {
                     ))}
                   </SelectContent>
                 </Select>
-              </div>
               <div className="flex items-center gap-2 border rounded-md px-3 py-1.5 bg-background">
                 <label htmlFor="tax-toggle" className="text-sm font-medium cursor-pointer">
                   {t("header.includeTax")} ({(CORPORATE_TAX_RATES[currency] * 100).toFixed(1)}%)
