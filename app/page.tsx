@@ -2664,6 +2664,92 @@ export default function ROICalculator() {
               </Card>
             </div>
 
+            {/* Financial Summary - Always show */}
+            <Card className="border-2 border-blue-200 dark:border-blue-900 bg-blue-50/50 dark:bg-blue-950/20">
+              <CardHeader>
+                <CardTitle className="text-base">Financial Summary</CardTitle>
+                <CardDescription className="text-xs">Monthly income breakdown after all costs</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid gap-4">
+                  {/* Total Revenue */}
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-white dark:bg-gray-900 border border-border">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                      <span className="text-sm font-medium">Total Monthly Revenue</span>
+                    </div>
+                    <span className="text-lg font-bold font-mono tabular-nums text-green-600 dark:text-green-400">
+                      {displayValue(calculations.totalRevenueAllChannels, "currency")}
+                    </span>
+                  </div>
+
+                  {/* Operating Costs */}
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-white dark:bg-gray-900 border border-border">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 rounded-full bg-red-500"></div>
+                      <span className="text-sm font-medium">Total Operating Costs</span>
+                    </div>
+                    <span className="text-lg font-bold font-mono tabular-nums text-red-600 dark:text-red-400">
+                      -{displayValue(calculations.totalCostAllChannels, "currency")}
+                    </span>
+                  </div>
+
+                  {/* Commission Paid (if enabled) */}
+                  {enableCommission && calculations.commissionCost > 0 && (
+                    <div className="flex items-center justify-between p-3 rounded-lg bg-white dark:bg-gray-900 border border-border">
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 rounded-full bg-purple-500"></div>
+                        <span className="text-sm font-medium">
+                          Commission {commissionType === "percentage" ? `(${commissionRate}%)` : `($${commissionFlat}/deal)`}
+                        </span>
+                      </div>
+                      <span className="text-lg font-bold font-mono tabular-nums text-purple-600 dark:text-purple-400">
+                        -{displayValue(calculations.commissionCost, "currency")}
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Separator */}
+                  <div className="border-t-2 border-dashed border-border"></div>
+
+                  {/* Net Income (without commission) */}
+                  <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/30 border-2 border-green-300 dark:border-green-800">
+                    <div>
+                      <span className="text-sm font-semibold text-green-900 dark:text-green-100">
+                        Net Income {!enableCommission && "(Before Commission)"}
+                      </span>
+                      <p className="text-xs text-green-700 dark:text-green-300 mt-0.5">
+                        Revenue - Operating Costs
+                      </p>
+                    </div>
+                    <span className="text-2xl font-bold font-mono tabular-nums text-green-700 dark:text-green-300">
+                      {displayValue(
+                        calculations.totalRevenueAllChannels - calculations.totalCostAllChannels,
+                        "currency",
+                      )}
+                    </span>
+                  </div>
+
+                  {/* Net Income After Commission (if enabled) */}
+                  {enableCommission && (
+                    <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 border-2 border-blue-300 dark:border-blue-800">
+                      <div>
+                        <span className="text-sm font-semibold text-blue-900 dark:text-blue-100">
+                          Net Income (After Commission)
+                        </span>
+                        <p className="text-xs text-blue-700 dark:text-blue-300 mt-0.5">
+                          Revenue - All Costs - Commission
+                        </p>
+                      </div>
+                      <span className="text-2xl font-bold font-mono tabular-nums text-blue-700 dark:text-blue-300">
+                        {displayValue(calculations.profitWithCommission, "currency")}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+
             {/* Commission Impact - only show if enabled */}
             {enableCommission && (
               <Card className="transition-all hover:shadow-md border-2 border-purple-200 dark:border-purple-900">
