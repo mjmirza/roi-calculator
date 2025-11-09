@@ -43,6 +43,22 @@ const CURRENCIES = {
   CHF: { symbol: "CHF", name: "Swiss Franc", rate: 0.88 },
   INR: { symbol: "₹", name: "Indian Rupee", rate: 83.12 },
   SGD: { symbol: "S$", name: "Singapore Dollar", rate: 1.34 },
+  AED: { symbol: "د.إ", name: "UAE Dirham", rate: 3.67 },
+} as const
+
+// Corporate tax rates by country (2024-2025 data)
+const CORPORATE_TAX_RATES = {
+  USD: 0.21,    // USA: 21%
+  EUR: 0.299,   // Germany: 29.9%
+  GBP: 0.25,    // UK: 25%
+  JPY: 0.3062,  // Japan: 30.62%
+  CNY: 0.25,    // China: 25%
+  AUD: 0.30,    // Australia: 30%
+  CAD: 0.265,   // Canada: 26.5% (average)
+  CHF: 0.144,   // Switzerland: 14.4%
+  INR: 0.25,    // India: 25% (standard rate)
+  SGD: 0.17,    // Singapore: 17%
+  AED: 0.09,    // UAE: 9% (above AED 375k threshold)
 } as const
 
 type CurrencyCode = keyof typeof CURRENCIES
@@ -68,6 +84,7 @@ export default function ROICalculator() {
   const [showCalculationBreakdown, setShowCalculationBreakdown] = useState(false)
 
   const [currency, setCurrency] = useState<CurrencyCode>("USD")
+  const [enableTax, setEnableTax] = useState(false)
 
   // Commission tracking state
   const [commissionType, setCommissionType] = useState<"percentage" | "flat">("percentage")
@@ -289,6 +306,7 @@ export default function ROICalculator() {
         setAgencyMonthlyFee(data.agencyMonthlyFee ?? 8000)
         setAgencyPerLeadFee(data.agencyPerLeadFee ?? 150)
         setCurrency(data.currency ?? "USD")
+        setEnableTax(data.enableTax ?? false)
         // Load commission state
         setCommissionType(data.commissionType ?? "percentage")
         setCommissionRate(data.commissionRate ?? 10)
@@ -367,6 +385,7 @@ export default function ROICalculator() {
       agencyMonthlyFee,
       agencyPerLeadFee,
       currency,
+      enableTax,
       // Save commission state
       commissionType,
       commissionRate,
@@ -462,6 +481,8 @@ export default function ROICalculator() {
     referralConversionRate,
     referralIncentiveCost,
     referralProgramCost,
+    currency,
+    enableTax,
   ])
 
   useEffect(() => {
@@ -618,6 +639,13 @@ export default function ROICalculator() {
       totalCostAllChannels > 0 ? ((totalRevenueAllChannels - totalCostAllChannels) / totalCostAllChannels) * 100 : 0
     const combinedCAC = totalDealsAllChannels > 0 ? totalCostAllChannels / totalDealsAllChannels : 0
 
+    // Tax calculations
+    const taxRate = CORPORATE_TAX_RATES[currency]
+    const netIncomeBeforeTax = totalRevenueAllChannels - totalCostAllChannels - (enableCommission ? commissionCost : 0)
+    const taxAmount = enableTax && netIncomeBeforeTax > 0 ? netIncomeBeforeTax * taxRate : 0
+    const netIncomeAfterTax = netIncomeBeforeTax - taxAmount
+    const afterTaxROI = totalCostAllChannels > 0 ? (netIncomeAfterTax / totalCostAllChannels) * 100 : 0
+
     setCalculations({
       emailsPerMonth,
       totalEmails,
@@ -683,6 +711,11 @@ export default function ROICalculator() {
       totalCostAllChannels,
       combinedROI,
       combinedCAC,
+      taxRate,
+      netIncomeBeforeTax,
+      taxAmount,
+      netIncomeAfterTax,
+      afterTaxROI,
       isValid: validation.isValid,
       missingFields: validation.missingFields,
     })
@@ -755,6 +788,8 @@ export default function ROICalculator() {
     referralConversionRate,
     referralIncentiveCost,
     referralProgramCost,
+    currency,
+    enableTax,
   ])
 
   const shuffleScenario = () => {
@@ -961,6 +996,7 @@ export default function ROICalculator() {
     setAgencyMonthlyFee(8000)
     setAgencyPerLeadFee(150)
     setCurrency("USD")
+    setEnableTax(false)
     // Reset commission state
     setCommissionType("percentage")
     setCommissionRate(10)
@@ -1340,6 +1376,12 @@ export default function ROICalculator() {
                     ))}
                   </SelectContent>
                 </Select>
+              </div>
+              <div className="flex items-center gap-2 border rounded-md px-3 py-1.5 bg-background">
+                <label htmlFor="tax-toggle" className="text-sm font-medium cursor-pointer">
+                  Include Tax ({(CORPORATE_TAX_RATES[currency] * 100).toFixed(1)}%)
+                </label>
+                <Switch id="tax-toggle" checked={enableTax} onCheckedChange={setEnableTax} />
               </div>
               <Button
                 variant="outline"
@@ -2745,6 +2787,52 @@ export default function ROICalculator() {
                         {displayValue(calculations.profitWithCommission, "currency")}
                       </span>
                     </div>
+                  )}
+
+                  {/* Tax Section (if enabled) */}
+                  {enableTax && (
+                    <>
+                      <div className="border-t-2 border-dashed border-border"></div>
+
+                      {/* Tax Amount */}
+                      <div className="flex items-center justify-between p-3 rounded-lg bg-white dark:bg-gray-900 border border-border">
+                        <div className="flex items-center gap-2">
+                          <div className="w-2 h-2 rounded-full bg-orange-500"></div>
+                          <span className="text-sm font-medium">
+                            Corporate Tax ({(CORPORATE_TAX_RATES[currency] * 100).toFixed(1)}%)
+                          </span>
+                        </div>
+                        <span className="text-lg font-bold font-mono tabular-nums text-orange-600 dark:text-orange-400">
+                          -{displayValue(calculations.taxAmount, "currency")}
+                        </span>
+                      </div>
+
+                      {/* Net Income After Tax */}
+                      <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 border-2 border-emerald-300 dark:border-emerald-800">
+                        <div>
+                          <span className="text-sm font-semibold text-emerald-900 dark:text-emerald-100">
+                            Net Income (After Tax)
+                          </span>
+                          <p className="text-xs text-emerald-700 dark:text-emerald-300 mt-0.5">
+                            Final profit after all deductions
+                          </p>
+                        </div>
+                        <span className="text-2xl font-bold font-mono tabular-nums text-emerald-700 dark:text-emerald-300">
+                          {displayValue(calculations.netIncomeAfterTax, "currency")}
+                        </span>
+                      </div>
+
+                      {/* After-Tax ROI */}
+                      <div className="flex items-center justify-between p-3 rounded-lg bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-teal-950/30 dark:to-cyan-950/30 border border-teal-300 dark:border-teal-800">
+                        <div className="flex items-center gap-2">
+                          <div className="w-2 h-2 rounded-full bg-teal-500"></div>
+                          <span className="text-sm font-medium">After-Tax ROI</span>
+                        </div>
+                        <span className="text-lg font-bold font-mono tabular-nums text-teal-700 dark:text-teal-300">
+                          {displayValue(calculations.afterTaxROI, "percentage")}
+                        </span>
+                      </div>
+                    </>
                   )}
                 </div>
               </CardContent>
