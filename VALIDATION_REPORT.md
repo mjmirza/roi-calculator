@@ -12,7 +12,7 @@ Comprehensive mathematical validation confirms that the combined/multi-channel m
 
 ### Key Fix Validated
 
-```typescript
+\`\`\`typescript
 // Lines 588, 600, 609 - CRITICAL FIX
 const callCost = enableColdCalling ? callingSoftwareCost + callerSalaryCost : 0
 const linkedInCost = enableLinkedIn ? linkedInToolCost + linkedInManagerCost : 0
@@ -25,7 +25,7 @@ const totalRevenueAllChannels = revenue + callRevenue + linkedInRevenue + referr
 const totalCostAllChannels = totalCost + callCost + linkedInCost + referralCost
 const combinedROI = totalCostAllChannels > 0 ? ((totalRevenueAllChannels - totalCostAllChannels) / totalCostAllChannels) * 100 : 0
 const combinedCAC = totalDealsAllChannels > 0 ? totalCostAllChannels / totalDealsAllChannels : 0
-```
+\`\`\`
 
 ---
 
@@ -67,7 +67,7 @@ const combinedCAC = totalDealsAllChannels > 0 ? totalCostAllChannels / totalDeal
 **Key Validation:** ✓ No phantom costs when channels are disabled
 
 **Calculation Verification:**
-```
+\`\`\`
 Cold Email Only:
 - Cost: $5,800 (engineer cost)
 - Revenue: $40,000 (8 deals × $5,000 LTV)
@@ -77,7 +77,7 @@ Combined Metrics:
 - totalCostAllChannels = $5,800 + $0 + $0 + $0 = $5,800 ✓
 - totalRevenueAllChannels = $40,000 + $0 + $0 + $0 = $40,000 ✓
 - combinedROI = ($40,000 - $5,800) / $5,800 × 100 = 589.66% ✓
-```
+\`\`\`
 
 ---
 
@@ -101,7 +101,7 @@ Combined Metrics:
 **Key Validation:** ✓ Cost increases by exactly the enabled channel's cost (not $0!)
 
 **Calculation Verification:**
-```
+\`\`\`
 Cold Email:
 - Cost: $5,800, Revenue: $40,000, Deals: 8
 
@@ -117,7 +117,7 @@ Combined:
 - totalCostAllChannels = $5,800 + $4,200 + $0 + $0 = $10,000 ✓
 - totalRevenueAllChannels = $40,000 + $165,000 = $205,000 ✓
 - combinedROI = ($205,000 - $10,000) / $10,000 × 100 = 1,950.00% ✓
-```
+\`\`\`
 
 ---
 
@@ -151,7 +151,7 @@ Combined:
 **Key Validation:** ✓ All channels properly summed when enabled
 
 **Calculation Verification:**
-```
+\`\`\`
 Total Cost Breakdown:
 - Cold Email: $5,800
 - Cold Calling: $4,200 (enabled ✓)
@@ -165,7 +165,7 @@ Combined ROI:
 
 Combined CAC:
 - CAC: $16,100 / 46 deals = $350.00 ✓
-```
+\`\`\`
 
 ---
 
@@ -185,7 +185,7 @@ Combined CAC:
 **Key Validation:** ✓ Costs dynamically adjust when toggling channels
 
 **Calculation Verification:**
-```
+\`\`\`
 State 1 - LinkedIn Disabled:
 - totalCostAllChannels = $5,800 + $0 + $0 + $0 = $5,800 ✓
 
@@ -198,7 +198,7 @@ State 3 - LinkedIn Disabled Again:
 - linkedInCost = $0 ✓
 - totalCostAllChannels = $5,800 + $0 + $0 + $0 = $5,800 ✓
 - Returns to original cost ✓
-```
+\`\`\`
 
 ---
 
@@ -220,7 +220,7 @@ State 3 - LinkedIn Disabled Again:
 **Key Validation:** ✓ All summations and derived calculations are mathematically consistent
 
 **Detailed Verification:**
-```
+\`\`\`
 Individual Channel Deals:
 - Cold Email: 8
 - Cold Calling: 33
@@ -236,7 +236,7 @@ CAC Calculation:
 ROI Calculation:
 - Manual: ($230,000 - $16,100) / $16,100 × 100 = 1,328.57% ✓
 - Combined: 1,328.57% ✓
-```
+\`\`\`
 
 ---
 
@@ -252,12 +252,12 @@ ROI Calculation:
 | Combined ROI | -100.00% | -100.00% | ✓ PASS |
 
 **Verification:**
-```
+\`\`\`
 With LTV = $0:
 - All channels generate $0 revenue
 - Cost = $10,000 (email + calling)
 - ROI = ($0 - $10,000) / $10,000 × 100 = -100% ✓
-```
+\`\`\`
 
 #### Edge Case 6.2: Zero Close Rate
 
@@ -267,11 +267,11 @@ With LTV = $0:
 | Total Revenue | $0 | $0 | ✓ PASS |
 
 **Verification:**
-```
+\`\`\`
 With closeRate = 0%:
 - All channels generate 0 deals
 - Revenue = 0 deals × $5,000 = $0 ✓
-```
+\`\`\`
 
 ---
 
@@ -280,14 +280,14 @@ With closeRate = 0%:
 ### Bug 1: Phantom Costs (FIXED ✓)
 
 **Before Fix:**
-```typescript
+\`\`\`typescript
 const callCost = callingSoftwareCost + callerSalaryCost  // Always $4,200!
-```
+\`\`\`
 
 **After Fix:**
-```typescript
+\`\`\`typescript
 const callCost = enableColdCalling ? callingSoftwareCost + callerSalaryCost : 0  // $0 when disabled ✓
-```
+\`\`\`
 
 **Validation Result:** ✓ PASS
 - Test 1.6: Cold calling cost is $0 when disabled
@@ -299,7 +299,7 @@ const callCost = enableColdCalling ? callingSoftwareCost + callerSalaryCost : 0 
 **Issue:** Previously, disabled channels could contribute non-zero costs to `totalCostAllChannels`
 
 **Fix Validated:**
-```
+\`\`\`
 Disabled Channel Costs:
 - enableColdCalling = false → callCost = $0 ✓
 - enableLinkedIn = false → linkedInCost = $0 ✓
@@ -308,7 +308,7 @@ Disabled Channel Costs:
 Combined Cost Calculation:
 - totalCostAllChannels = totalCost + callCost + linkedInCost + referralCost
 - Only includes costs when channels are enabled ✓
-```
+\`\`\`
 
 **Validation Result:** ✓ PASS
 - Test 1.1: Total cost = $5,800 (no phantom costs)
@@ -322,12 +322,12 @@ Combined Cost Calculation:
 ### Proof 1: ROI Formula Correctness
 
 **Formula:**
-```
+\`\`\`
 combinedROI = ((totalRevenueAllChannels - totalCostAllChannels) / totalCostAllChannels) × 100
-```
+\`\`\`
 
 **Example (All Channels Enabled):**
-```
+\`\`\`
 Given:
 - totalRevenueAllChannels = $230,000
 - totalCostAllChannels = $16,100
@@ -341,17 +341,17 @@ Verification:
 - Expected: 1,328.57%
 - Actual: 1,328.57%
 - Match: ✓ EXACT
-```
+\`\`\`
 
 ### Proof 2: CAC Formula Correctness
 
 **Formula:**
-```
+\`\`\`
 combinedCAC = totalCostAllChannels / totalDealsAllChannels
-```
+\`\`\`
 
 **Example (All Channels Enabled):**
-```
+\`\`\`
 Given:
 - totalCostAllChannels = $16,100
 - totalDealsAllChannels = 46
@@ -363,17 +363,17 @@ Verification:
 - Expected: $350.00
 - Actual: $350.00
 - Match: ✓ EXACT
-```
+\`\`\`
 
 ### Proof 3: Summation Correctness
 
 **Formula:**
-```
+\`\`\`
 totalCostAllChannels = totalCost + callCost + linkedInCost + referralCost
-```
+\`\`\`
 
 **Example (Mixed Enable States):**
-```
+\`\`\`
 State: Email + Calling enabled, LinkedIn + Referrals disabled
 
 Given:
@@ -389,7 +389,7 @@ Verification:
 - Expected: $10,000
 - Actual: $10,000
 - Match: ✓ EXACT
-```
+\`\`\`
 
 ---
 
@@ -422,15 +422,15 @@ Verification:
 Location: `/Users/mirzaiqbal/roi-calculator/test-combined-metrics.js`
 
 Run with:
-```bash
+\`\`\`bash
 node test-combined-metrics.js
-```
+\`\`\`
 
 Expected output:
-```
+\`\`\`
 Tests Passed: 34/34 (100.00%)
 ✓ ALL TESTS PASSED - Combined metrics are mathematically correct!
-```
+\`\`\`
 
 ---
 
@@ -466,7 +466,7 @@ The combined/multi-channel metrics calculations in lines 613-618 of `/Users/mirz
 
 ## Appendix: Test Execution Log
 
-```
+\`\`\`
 ================================================================================
 COMBINED METRICS MATHEMATICAL VALIDATION TEST
 ================================================================================
@@ -488,6 +488,6 @@ Key Validations:
   ✓ All summations mathematically consistent
   ✓ ROI and CAC calculations correct
   ✓ Edge cases handled properly
-```
+\`\`\`
 
 **End of Report**

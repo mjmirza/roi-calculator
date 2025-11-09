@@ -17,15 +17,15 @@
 5. **test-results.txt** - Test execution output
 
 ### Run Tests
-```bash
+\`\`\`bash
 node test-combined-metrics.js
-```
+\`\`\`
 
 ---
 
 ## Critical Code Validated (Lines 613-618)
 
-```typescript
+\`\`\`typescript
 const totalMeetingsAllChannels = meetings + callMeetings + linkedInMeetings + referralMeetings
 const totalDealsAllChannels = deals + callDeals + linkedInDeals + referralDeals
 const totalRevenueAllChannels = revenue + callRevenue + linkedInRevenue + referralRevenue
@@ -36,7 +36,7 @@ const combinedROI = totalCostAllChannels > 0
 const combinedCAC = totalDealsAllChannels > 0
   ? totalCostAllChannels / totalDealsAllChannels
   : 0
-```
+\`\`\`
 
 ---
 
@@ -61,14 +61,14 @@ const combinedCAC = totalDealsAllChannels > 0
 **Problem:** Disabled channels were contributing costs to combined totals
 
 **Before Fix:**
-```typescript
+\`\`\`typescript
 const callCost = callingSoftwareCost + callerSalaryCost  // Always $4,200!
-```
+\`\`\`
 
 **After Fix:**
-```typescript
+\`\`\`typescript
 const callCost = enableColdCalling ? callingSoftwareCost + callerSalaryCost : 0  // $0 when disabled ✓
-```
+\`\`\`
 
 **Validation:**
 - Test 1.6: callCost = $0 when disabled ✓
@@ -80,13 +80,13 @@ const callCost = enableColdCalling ? callingSoftwareCost + callerSalaryCost : 0 
 **Problem:** totalCostAllChannels included costs from disabled channels
 
 **Fix Validated:**
-```
+\`\`\`
 All Channels Disabled:
 - totalCostAllChannels = $5,800 (cold email only) ✓
 - No phantom $4,200 from cold calling ✓
 - No phantom $3,600 from LinkedIn ✓
 - No phantom $1,000+ from referrals ✓
-```
+\`\`\`
 
 **Validation:**
 - Test 1.1: Total cost = $5,800 (no phantom costs) ✓
@@ -98,7 +98,7 @@ All Channels Disabled:
 ## Real-World Calculation Examples
 
 ### Example 1: All Channels Disabled
-```
+\`\`\`
 Cold Email Only:
 - Cost: $5,800
 - Revenue: $40,000
@@ -108,10 +108,10 @@ Cold Email Only:
 Combined Metrics:
 - totalCostAllChannels = $5,800 ✓ (no phantom costs)
 - combinedROI = 589.66% ✓ (equals cold email ROI)
-```
+\`\`\`
 
 ### Example 2: Cold Email + Cold Calling
-```
+\`\`\`
 Cold Email:    Cost: $5,800,  Revenue: $40,000,  Deals: 8
 Cold Calling:  Cost: $4,200,  Revenue: $165,000, Deals: 33
 
@@ -119,10 +119,10 @@ Combined:
 - totalCostAllChannels = $10,000 ✓
 - totalRevenueAllChannels = $205,000 ✓
 - combinedROI = 1,950.00% ✓
-```
+\`\`\`
 
 ### Example 3: All Channels Enabled
-```
+\`\`\`
 Cold Email:    Cost: $5,800,  Revenue: $40,000,  Deals: 8
 Cold Calling:  Cost: $4,200,  Revenue: $165,000, Deals: 33
 LinkedIn:      Cost: $3,600,  Revenue: $10,000,  Deals: 2
@@ -134,10 +134,10 @@ Combined:
 - totalDealsAllChannels = 46 ✓
 - combinedROI = 1,328.57% ✓
 - combinedCAC = $350.00 ✓
-```
+\`\`\`
 
 ### Example 4: Channel Toggle (LinkedIn)
-```
+\`\`\`
 State 1 - LinkedIn Disabled:
 - totalCostAllChannels = $5,800 ✓
 
@@ -146,14 +146,14 @@ State 2 - LinkedIn Enabled:
 
 State 3 - LinkedIn Disabled Again:
 - totalCostAllChannels = $5,800 ✓ (returns to original)
-```
+\`\`\`
 
 ---
 
 ## Mathematical Proofs
 
 ### ROI Formula
-```
+\`\`\`
 combinedROI = ((totalRevenueAllChannels - totalCostAllChannels) / totalCostAllChannels) × 100
 
 Example (All Channels):
@@ -161,20 +161,20 @@ Example (All Channels):
   / ($5,800 + $4,200 + $3,600 + $2,500) × 100
 = ($230,000 - $16,100) / $16,100 × 100
 = 1,328.57% ✓ EXACT MATCH
-```
+\`\`\`
 
 ### CAC Formula
-```
+\`\`\`
 combinedCAC = totalCostAllChannels / totalDealsAllChannels
 
 Example (All Channels):
 = ($5,800 + $4,200 + $3,600 + $2,500) / (8 + 33 + 2 + 3)
 = $16,100 / 46
 = $350.00 ✓ EXACT MATCH
-```
+\`\`\`
 
 ### Summation Formula
-```
+\`\`\`
 totalCostAllChannels = totalCost + callCost + linkedInCost + referralCost
 
 where:
@@ -185,32 +185,32 @@ where:
 Example (Email + Calling only):
 = $5,800 + $4,200 + $0 + $0
 = $10,000 ✓ EXACT MATCH
-```
+\`\`\`
 
 ---
 
 ## Key Validations Confirmed
 
 ### 1. No Phantom Costs ✓
-```
+\`\`\`
 When channels are disabled:
 - Cold Calling: $0 (not $4,200) ✓
 - LinkedIn: $0 (not $3,600) ✓
 - Referrals: $0 (not $1,000+) ✓
 
 Test 1 validates this across 8 test cases
-```
+\`\`\`
 
 ### 2. Dynamic Cost Adjustment ✓
-```
+\`\`\`
 Enable LinkedIn:  $5,800 → $9,400 (+$3,600) ✓
 Disable LinkedIn: $9,400 → $5,800 (-$3,600) ✓
 
 Test 4 validates this across 4 test cases
-```
+\`\`\`
 
 ### 3. Mathematical Consistency ✓
-```
+\`\`\`
 All summations verified:
 - totalDeals = sum of channel deals ✓
 - totalMeetings = sum of channel meetings ✓
@@ -218,26 +218,26 @@ All summations verified:
 - totalCost = sum of enabled channel costs ✓
 
 Test 5 validates this across 6 test cases
-```
+\`\`\`
 
 ### 4. Correct Formula Application ✓
-```
+\`\`\`
 ROI Formula: ((revenue - cost) / cost) × 100 ✓
 CAC Formula: cost / deals ✓
 Division by zero protection: checked ✓
 
 Test 5 validates formulas
 Test 6 validates edge cases
-```
+\`\`\`
 
 ### 5. Edge Case Handling ✓
-```
+\`\`\`
 Zero LTV: ROI = -100% ✓
 Zero Close Rate: Deals = 0, no division by zero ✓
 All Disabled: Falls back to cold email only ✓
 
 Test 6 validates this across 4 test cases
-```
+\`\`\`
 
 ---
 
@@ -261,7 +261,7 @@ Test 6 validates this across 4 test cases
 
 ## Test Execution Output
 
-```
+\`\`\`
 ================================================================================
 COMBINED METRICS MATHEMATICAL VALIDATION TEST
 ================================================================================
@@ -283,7 +283,7 @@ Key Validations:
   ✓ All summations mathematically consistent
   ✓ ROI and CAC calculations correct
   ✓ Edge cases handled properly
-```
+\`\`\`
 
 ---
 
@@ -313,7 +313,7 @@ The combined/multi-channel metrics calculations in lines 613-618 are **mathemati
 4. ✓ **Add UI Validation** - Display breakdown to users for transparency
 
 ### Test Coverage
-```
+\`\`\`
 Total Tests: 34
 Passed: 34
 Failed: 0
@@ -321,7 +321,7 @@ Pass Rate: 100%
 
 Lines Covered: 613-618 (combined metrics)
 Dependencies Validated: Lines 588, 600, 609 (channel costs)
-```
+\`\`\`
 
 ---
 

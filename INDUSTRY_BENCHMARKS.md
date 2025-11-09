@@ -414,7 +414,7 @@ Referral programs demonstrate the highest conversion rates across all outreach c
 ### Recommended Validation Thresholds for ROI Calculator
 
 #### Cold Email Channel
-```javascript
+\`\`\`javascript
 const coldEmailValidation = {
   openRate: {
     min: 5,          // Absolute minimum for any campaign
@@ -449,10 +449,10 @@ const coldEmailValidation = {
     optimal: 5
   }
 }
-```
+\`\`\`
 
 #### Cold Calling Channel
-```javascript
+\`\`\`javascript
 const coldCallingValidation = {
   connectRate: {
     min: 5,
@@ -479,10 +479,10 @@ const coldCallingValidation = {
     optimal: 5
   }
 }
-```
+\`\`\`
 
 #### LinkedIn Outreach Channel
-```javascript
+\`\`\`javascript
 const linkedinValidation = {
   acceptanceRate: {
     min: 10,
@@ -517,10 +517,10 @@ const linkedinValidation = {
     optimal: 25
   }
 }
-```
+\`\`\`
 
 #### Referral Program Channel
-```javascript
+\`\`\`javascript
 const referralValidation = {
   conversionRate: {
     min: 3,
@@ -535,7 +535,7 @@ const referralValidation = {
     max: 90
   }
 }
-```
+\`\`\`
 
 ### Implementation Recommendations
 
@@ -567,12 +567,12 @@ For each field, provide:
 - Link to this benchmark document
 
 Example:
-```
+\`\`\`
 Reply Rate: [____] %
 Industry Average: 4-5.1% | Good: 10% | Top Performers: 15-25%
 ⚠️ Values above 30% are extremely rare
 ℹ️ View benchmarks
-```
+\`\`\`
 
 #### 3. Funnel Logic Validation
 

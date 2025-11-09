@@ -43,19 +43,19 @@ Each agent performed:
 **Impact:** HIGH - Inflated costs by up to $14,100
 
 **Problem:**
-```typescript
+\`\`\`typescript
 // BEFORE (BROKEN)
 const callCost = callingSoftwareCost + callerSalaryCost
 // Always $4,200 even when enableColdCalling = false!
-```
+\`\`\`
 
 **Fix Applied:**
-```typescript
+\`\`\`typescript
 // AFTER (FIXED) - Lines 588, 600, 609
 const callCost = enableColdCalling ? callingSoftwareCost + callerSalaryCost : 0
 const linkedInCost = enableLinkedIn ? linkedInToolCost + linkedInManagerCost : 0
 const referralCost = enableReferrals ? referralProgramCost + referralDeals * referralIncentiveCost : 0
-```
+\`\`\`
 
 **Verification:**
 - ✅ Test confirmed: Disabled channels now cost $0 (not $4,200, $3,600, $2,000)
@@ -72,13 +72,13 @@ const referralCost = enableReferrals ? referralProgramCost + referralDeals * ref
 - `leads` showed opportunities instead of prospects contacted
 
 **Fix Applied:**
-```typescript
+\`\`\`typescript
 // Line 513 - Show per-mailbox value
 const emailsPerMonth = emailsPerDay * workingDays  // 378, not 15,120
 
 // Line 521 - Show prospects contacted
 const leads = totalProspects  // 5,040, not 16
-```
+\`\`\`
 
 **Verification:**
 - ✅ Emails/Month per Mailbox: 378 (18 × 21)
@@ -115,13 +115,13 @@ const leads = totalProspects  // 5,040, not 16
 - ✅ All formulas mathematically correct
 
 **Example Validation (300% commission):**
-```
+\`\`\`
 Revenue: $50,000
 Commission: $150,000 (300% of $50,000)
 Total Cost: $155,800
 Profit: -$105,800 (NEGATIVE ✓)
 ROI: -67.91% (NEGATIVE ✓)
-```
+\`\`\`
 
 **Verdict:** Working as intended. No fixes needed.
 
@@ -181,11 +181,11 @@ ROI: -67.91% (NEGATIVE ✓)
 | Volume | 10/month | 10-30/month | N/A | ✅ Realistic |
 
 **Cost Calculation Verification:**
-```
+\`\`\`
 Fixed Cost: $1,000 (program management)
 Variable Cost: $500 per deal
 Example (3 deals): $1,000 + (3 × $500) = $2,500 ✓
-```
+\`\`\`
 
 **Critical Fix:**
 - ✅ Cost now $0 when disabled (was $2,000)
@@ -208,7 +208,7 @@ Example (3 deals): $1,000 + (3 × $500) = $2,500 ✓
 - ✅ CAC formula = mathematically correct
 
 **Example Validation (All Channels):**
-```
+\`\`\`
 Cold Email: $5,800 cost | $40,000 revenue
 Cold Calling: $4,200 cost | $165,000 revenue
 LinkedIn: $3,600 cost | $10,000 revenue
@@ -217,7 +217,7 @@ Referrals: $2,500 cost | $15,000 revenue
 Combined Cost: $16,100 ✓
 Combined Revenue: $230,000 ✓
 Combined ROI: 1,328.57% ✓
-```
+\`\`\`
 
 **Verdict:** All fixes working correctly.
 
@@ -250,11 +250,11 @@ All critical bugs fixed. Calculator is accurate and non-inflated.
 ### 🎯 Recommended Enhancements (Optional)
 
 1. **Add Input Validation Warnings**
-   ```typescript
+   \`\`\`typescript
    if (callConnectRate > 40) {
      showWarning("Connect rate exceeds industry benchmarks")
    }
-   ```
+   \`\`\`
 
 2. **Add Benchmark Tooltips**
    - Show industry ranges on input fields

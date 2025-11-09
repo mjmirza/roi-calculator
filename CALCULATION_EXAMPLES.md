@@ -7,7 +7,7 @@ This document provides real-world calculation examples to demonstrate the mathem
 ## Example 1: All Channels Disabled (Cold Email Only)
 
 ### Configuration
-```javascript
+\`\`\`javascript
 enableColdCalling = false
 enableLinkedIn = false
 enableReferrals = false
@@ -21,12 +21,12 @@ ratioPerReply = 300
 closeRate = 70%
 ltv = $5,000
 engineerCost = $5,800
-```
+\`\`\`
 
 ### Step-by-Step Calculation
 
 #### Cold Email Channel
-```
+\`\`\`
 1. Total emails = 40 mailboxes × 18 emails/day × 21 days = 15,120 emails
 2. Prospects = 15,120 ÷ 3 sequence steps = 5,040 prospects
 3. Opportunities = 5,040 ÷ 300 ratio = 16.8 → 16 opportunities
@@ -35,10 +35,10 @@ engineerCost = $5,800
 6. Revenue = 8 deals × $5,000 LTV = $40,000
 7. Cost = $5,800 (engineer cost only)
 8. ROI = ($40,000 - $5,800) / $5,800 × 100 = 589.66%
-```
+\`\`\`
 
 #### Disabled Channels
-```
+\`\`\`
 Cold Calling:
 - enableColdCalling = false
 - callCost = 0 (NOT $4,200) ✓
@@ -59,31 +59,31 @@ Referrals:
 - referralRevenue = 0
 - referralDeals = 0
 - referralMeetings = 0
-```
+\`\`\`
 
 #### Combined Metrics (Lines 613-618)
-```javascript
+\`\`\`javascript
 totalMeetingsAllChannels = 12 + 0 + 0 + 0 = 12 ✓
 totalDealsAllChannels = 8 + 0 + 0 + 0 = 8 ✓
 totalRevenueAllChannels = $40,000 + $0 + $0 + $0 = $40,000 ✓
 totalCostAllChannels = $5,800 + $0 + $0 + $0 = $5,800 ✓
 combinedROI = ($40,000 - $5,800) / $5,800 × 100 = 589.66% ✓
 combinedCAC = $5,800 / 8 = $725.00 ✓
-```
+\`\`\`
 
 ### Result
-```
+\`\`\`
 ✓ PASS: Combined metrics = Cold Email metrics exactly
 ✓ PASS: No phantom costs from disabled channels
 ✓ PASS: Total cost = $5,800 (only enabled channel)
-```
+\`\`\`
 
 ---
 
 ## Example 2: Cold Email + Cold Calling
 
 ### Configuration
-```javascript
+\`\`\`javascript
 enableColdCalling = true  // ← ENABLED
 enableLinkedIn = false
 enableReferrals = false
@@ -95,21 +95,21 @@ callToMeetingRate = 15%
 callingDaysPerMonth = 21
 callingSoftwareCost = $200
 callerSalaryCost = $4,000
-```
+\`\`\`
 
 ### Step-by-Step Calculation
 
 #### Cold Email Channel (Same as Example 1)
-```
+\`\`\`
 Meetings: 12
 Deals: 8
 Revenue: $40,000
 Cost: $5,800
 ROI: 589.66%
-```
+\`\`\`
 
 #### Cold Calling Channel
-```
+\`\`\`
 1. Calls per month = 50 calls/day × 21 days = 1,050 calls
 2. Connections = 1,050 × 30% = 315 connections
 3. Meetings = 315 × 15% = 47.25 → 47 meetings
@@ -117,10 +117,10 @@ ROI: 589.66%
 5. Revenue = 33 deals × $5,000 LTV = $165,000
 6. Cost = enableColdCalling ? ($200 + $4,000) : $0 = $4,200 ✓
 7. ROI = ($165,000 - $4,200) / $4,200 × 100 = 3,828.57%
-```
+\`\`\`
 
 #### Disabled Channels
-```
+\`\`\`
 LinkedIn:
 - enableLinkedIn = false
 - linkedInCost = 0 ✓
@@ -130,42 +130,42 @@ Referrals:
 - enableReferrals = false
 - referralCost = 0 ✓
 - referralRevenue = 0
-```
+\`\`\`
 
 #### Combined Metrics (Lines 613-618)
-```javascript
+\`\`\`javascript
 totalMeetingsAllChannels = 12 + 47 + 0 + 0 = 59 ✓
 totalDealsAllChannels = 8 + 33 + 0 + 0 = 41 ✓
 totalRevenueAllChannels = $40,000 + $165,000 + $0 + $0 = $205,000 ✓
 totalCostAllChannels = $5,800 + $4,200 + $0 + $0 = $10,000 ✓
 combinedROI = ($205,000 - $10,000) / $10,000 × 100 = 1,950.00% ✓
 combinedCAC = $10,000 / 41 = $243.90 ✓
-```
+\`\`\`
 
 ### Result
-```
+\`\`\`
 ✓ PASS: Cost increased by exactly $4,200 (cold calling cost)
 ✓ PASS: Revenue increased by $165,000
 ✓ PASS: Combined ROI = 1,950% (correct weighted average)
 ✓ PASS: No costs from disabled LinkedIn/Referrals
-```
+\`\`\`
 
 ### Key Insight
-```
+\`\`\`
 When enabling Cold Calling:
 - Total cost increases: $5,800 → $10,000 (+$4,200) ✓
 - Total revenue increases: $40,000 → $205,000 (+$165,000) ✓
 - Combined ROI changes: 589.66% → 1,950.00% ✓
 
 This proves the conditional cost logic is working correctly!
-```
+\`\`\`
 
 ---
 
 ## Example 3: All Channels Enabled
 
 ### Configuration
-```javascript
+\`\`\`javascript
 enableColdCalling = true
 enableLinkedIn = true
 enableReferrals = true
@@ -183,28 +183,28 @@ referralsPerMonth = 10
 referralConversionRate = 40%
 referralIncentiveCost = $500 per deal
 referralProgramCost = $1,000
-```
+\`\`\`
 
 ### Step-by-Step Calculation
 
 #### Cold Email Channel
-```
+\`\`\`
 Meetings: 12
 Deals: 8
 Revenue: $40,000
 Cost: $5,800
-```
+\`\`\`
 
 #### Cold Calling Channel
-```
+\`\`\`
 Meetings: 47
 Deals: 33
 Revenue: $165,000
 Cost: $4,200
-```
+\`\`\`
 
 #### LinkedIn Channel
-```
+\`\`\`
 1. Connections per month = 30 connections/day × 21 days = 630 connections
 2. Accepted = 630 × 25% = 157.5 → 158 accepted
 3. Replies = 158 × 10% = 15.8 → 16 replies
@@ -213,39 +213,39 @@ Cost: $4,200
 6. Revenue = 2 deals × $5,000 LTV = $10,000
 7. Cost = enableLinkedIn ? ($100 + $3,500) : $0 = $3,600 ✓
 8. ROI = ($10,000 - $3,600) / $3,600 × 100 = 177.78%
-```
+\`\`\`
 
 #### Referrals Channel
-```
+\`\`\`
 1. Referrals per month = 10 referrals
 2. Meetings = 10 × 40% = 4 meetings
 3. Deals = 4 × 70% = 2.8 → 3 deals
 4. Revenue = 3 deals × $5,000 LTV = $15,000
 5. Cost = enableReferrals ? ($1,000 + 3 × $500) : $0 = $2,500 ✓
 6. ROI = ($15,000 - $2,500) / $2,500 × 100 = 500.00%
-```
+\`\`\`
 
 #### Combined Metrics (Lines 613-618)
-```javascript
+\`\`\`javascript
 totalMeetingsAllChannels = 12 + 47 + 3 + 4 = 66 ✓
 totalDealsAllChannels = 8 + 33 + 2 + 3 = 46 ✓
 totalRevenueAllChannels = $40,000 + $165,000 + $10,000 + $15,000 = $230,000 ✓
 totalCostAllChannels = $5,800 + $4,200 + $3,600 + $2,500 = $16,100 ✓
 combinedROI = ($230,000 - $16,100) / $16,100 × 100 = 1,328.57% ✓
 combinedCAC = $16,100 / 46 = $350.00 ✓
-```
+\`\`\`
 
 ### Result
-```
+\`\`\`
 ✓ PASS: All four channels properly summed
 ✓ PASS: Total cost = $16,100 (sum of all enabled channels)
 ✓ PASS: Total revenue = $230,000
 ✓ PASS: Combined ROI = 1,328.57%
 ✓ PASS: Combined CAC = $350.00
-```
+\`\`\`
 
 ### Channel Contribution Analysis
-```
+\`\`\`
 Channel          | Cost    | Revenue  | Deals | ROI       | % of Total Cost | % of Total Revenue
 -----------------|---------|----------|-------|-----------|-----------------|-------------------
 Cold Email       | $5,800  | $40,000  | 8     | 589.66%   | 36.0%          | 17.4%
@@ -254,7 +254,7 @@ LinkedIn         | $3,600  | $10,000  | 2     | 177.78%   | 22.4%          | 4.3
 Referrals        | $2,500  | $15,000  | 3     | 500.00%   | 15.5%          | 6.5%
 -----------------|---------|----------|-------|-----------|-----------------|-------------------
 COMBINED         | $16,100 | $230,000 | 46    | 1,328.57% | 100.0%         | 100.0%
-```
+\`\`\`
 
 ---
 
@@ -263,7 +263,7 @@ COMBINED         | $16,100 | $230,000 | 46    | 1,328.57% | 100.0%         | 100
 ### Scenario: Toggling LinkedIn On and Off
 
 #### State 1: LinkedIn Disabled
-```javascript
+\`\`\`javascript
 enableLinkedIn = false
 
 Cold Email:    Cost = $5,800, Revenue = $40,000
@@ -275,10 +275,10 @@ Combined:
 - totalCostAllChannels = $5,800 + $0 + $0 + $0 = $5,800 ✓
 - totalRevenueAllChannels = $40,000
 - combinedROI = 589.66%
-```
+\`\`\`
 
 #### State 2: LinkedIn Enabled
-```javascript
+\`\`\`javascript
 enableLinkedIn = true  // ← TOGGLE ON
 
 Cold Email:    Cost = $5,800, Revenue = $40,000
@@ -290,27 +290,27 @@ Combined:
 - totalCostAllChannels = $5,800 + $0 + $3,600 + $0 = $9,400 ✓
 - totalRevenueAllChannels = $40,000 + $10,000 = $50,000
 - combinedROI = ($50,000 - $9,400) / $9,400 × 100 = 431.91%
-```
+\`\`\`
 
 #### State 3: LinkedIn Disabled Again
-```javascript
+\`\`\`javascript
 enableLinkedIn = false  // ← TOGGLE OFF
 
 Combined:
 - totalCostAllChannels = $5,800 + $0 + $0 + $0 = $5,800 ✓
 - (Returns to State 1) ✓
-```
+\`\`\`
 
 ### Result
-```
+\`\`\`
 ✓ PASS: Cost = $5,800 when LinkedIn disabled
 ✓ PASS: Cost = $9,400 when LinkedIn enabled (+$3,600)
 ✓ PASS: Cost = $5,800 when LinkedIn disabled again
 ✓ PASS: Costs dynamically adjust with toggle
-```
+\`\`\`
 
 ### Toggle Impact Analysis
-```
+\`\`\`
 Action                  | Total Cost | Cost Change | Revenue  | ROI
 ------------------------|------------|-------------|----------|----------
 LinkedIn Disabled       | $5,800     | —           | $40,000  | 589.66%
@@ -322,14 +322,14 @@ Observations:
 2. Cost decreases by exactly $3,600 when disabled ✓
 3. Revenue adjusts accordingly ✓
 4. ROI recalculates correctly ✓
-```
+\`\`\`
 
 ---
 
 ## Mathematical Verification Formulas
 
 ### Formula 1: Combined ROI
-```
+\`\`\`
 combinedROI = ((totalRevenueAllChannels - totalCostAllChannels) / totalCostAllChannels) × 100
 
 Example (All Channels):
@@ -338,20 +338,20 @@ Example (All Channels):
 = $213,900 / $16,100 × 100
 = 13.2857 × 100
 = 1,328.57% ✓
-```
+\`\`\`
 
 ### Formula 2: Combined CAC
-```
+\`\`\`
 combinedCAC = totalCostAllChannels / totalDealsAllChannels
 
 Example (All Channels):
 = ($5,800 + $4,200 + $3,600 + $2,500) / (8 + 33 + 2 + 3)
 = $16,100 / 46
 = $350.00 ✓
-```
+\`\`\`
 
 ### Formula 3: Total Cost (Conditional)
-```
+\`\`\`
 totalCostAllChannels = totalCost + callCost + linkedInCost + referralCost
 
 where:
@@ -364,14 +364,14 @@ Example (Cold Calling only):
 - linkedInCost = false ? ($100 + $3,500) : 0 = $0 ✓
 - referralCost = false ? ($1,000 + ...) : 0 = $0 ✓
 - totalCostAllChannels = $5,800 + $4,200 + $0 + $0 = $10,000 ✓
-```
+\`\`\`
 
 ---
 
 ## Edge Case Examples
 
 ### Edge Case 1: Zero LTV
-```javascript
+\`\`\`javascript
 ltv = $0
 
 All Channels:
@@ -381,10 +381,10 @@ All Channels:
 - ROI = ($0 - $16,100) / $16,100 × 100 = -100.00% ✓
 
 Result: Correctly shows negative ROI when no revenue
-```
+\`\`\`
 
 ### Edge Case 2: Zero Close Rate
-```javascript
+\`\`\`javascript
 closeRate = 0%
 
 All Channels:
@@ -396,10 +396,10 @@ All Channels:
 - CAC = division by zero check: totalDealsAllChannels > 0 ? ... : 0 = 0 ✓
 
 Result: Correctly handles zero deals without division by zero error
-```
+\`\`\`
 
 ### Edge Case 3: All Channels Disabled
-```javascript
+\`\`\`javascript
 enableColdCalling = false
 enableLinkedIn = false
 enableReferrals = false
@@ -410,7 +410,7 @@ Combined:
 - No phantom costs ✓
 
 Result: Correctly falls back to cold email only
-```
+\`\`\`
 
 ---
 
