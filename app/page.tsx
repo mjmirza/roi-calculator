@@ -3530,6 +3530,56 @@ export default function ROICalculator() {
           </div>
         </div>
       </div>
+
+      {/* Credits Footer */}
+      <footer className="border-t bg-muted/30 mt-8">
+        <div className="container mx-auto px-4 py-6">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <span>Built by</span>
+              <a
+                href="https://services.next8n.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-foreground hover:text-primary transition-colors"
+              >
+                Mirza Iqbal
+              </a>
+              <span>•</span>
+              <a
+                href="https://services.next8n.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline"
+              >
+                Next8n
+              </a>
+            </div>
+            <a
+              href="https://services.next8n.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-sm font-medium"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+              </svg>
+              Need Assistance? Book a Meeting
+            </a>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
