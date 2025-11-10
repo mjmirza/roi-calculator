@@ -1249,20 +1249,33 @@ export default function ROICalculator() {
     for (let i = 1; i <= 6; i++) {
       // Calculate cumulative values for this month
       const cumulativeRevenue = calculations.totalRevenueAllChannels * i
+
+      // Break down operating costs by channel
+      const cumulativeEmailCost = calculations.totalCost * i
+      const cumulativeColdCallingCost = enableColdCalling ? calculations.coldCallingTotalCost * i : 0
+      const cumulativeLinkedInCost = enableLinkedIn ? calculations.linkedInTotalCost * i : 0
+      const cumulativeReferralCost = enableReferrals ? calculations.referralProgramCost * i : 0
       const cumulativeBaseCost = calculations.totalCostAllChannels * i
 
-      // Add commission costs if enabled
+      // Add commission and agency costs if enabled
       const cumulativeCommissionCost = enableCommission ? calculations.commissionCost * i : 0
+      const cumulativeAgencyCost = enableAgency ? calculations.agencyTotalCost * i : 0
 
-      // Calculate net cash flow (revenue - base costs - commission)
-      const netCashFlow = cumulativeRevenue - cumulativeBaseCost - cumulativeCommissionCost
+      // Calculate net cash flow (revenue - all costs)
+      const netCashFlow = cumulativeRevenue - cumulativeBaseCost - cumulativeCommissionCost - cumulativeAgencyCost
 
       projections.push({
         month: i,
         revenue: cumulativeRevenue,
+        // Detailed cost breakdown
+        emailCost: cumulativeEmailCost,
+        coldCallingCost: cumulativeColdCallingCost,
+        linkedInCost: cumulativeLinkedInCost,
+        referralCost: cumulativeReferralCost,
         baseCost: cumulativeBaseCost,
         commissionCost: cumulativeCommissionCost,
-        totalCost: cumulativeBaseCost + cumulativeCommissionCost,
+        agencyCost: cumulativeAgencyCost,
+        totalCost: cumulativeBaseCost + cumulativeCommissionCost + cumulativeAgencyCost,
         netCashFlow: netCashFlow,
         profitable: netCashFlow >= 0,
       })
@@ -2788,7 +2801,7 @@ export default function ROICalculator() {
                     </span>
                   </div>
 
-                  {/* Commission Paid (if enabled) */}
+                  {/* Sales Commission (if enabled) */}
                   {enableCommission && calculations.commissionCost > 0 && (
                     <div className="flex items-center justify-between p-3 rounded-lg bg-white dark:bg-gray-900 border border-border">
                       <div className="flex items-center gap-2">
@@ -2799,6 +2812,21 @@ export default function ROICalculator() {
                       </div>
                       <span className="text-lg font-bold font-mono tabular-nums text-purple-600 dark:text-purple-400">
                         -{displayValue(calculations.commissionCost, "currency")}
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Agency Cost (if enabled) */}
+                  {enableAgency && calculations.agencyTotalCost > 0 && (
+                    <div className="flex items-center justify-between p-3 rounded-lg bg-white dark:bg-gray-900 border border-border">
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 rounded-full bg-orange-500"></div>
+                        <span className="text-sm font-medium">
+                          Agency Cost (Setup + Monthly + Per Lead)
+                        </span>
+                      </div>
+                      <span className="text-lg font-bold font-mono tabular-nums text-orange-600 dark:text-orange-400">
+                        -{displayValue(calculations.agencyTotalCost, "currency")}
                       </span>
                     </div>
                   )}
@@ -3509,27 +3537,78 @@ export default function ROICalculator() {
                         >
                           <div className="font-semibold text-sm mb-2">Month {projection.month}</div>
                           <div className="space-y-1 text-xs">
+                            {/* Revenue */}
                             <div className="flex justify-between">
                               <span className="text-muted-foreground">Cumulative Revenue:</span>
                               <span className="font-mono font-semibold text-green-600 dark:text-green-400">
                                 +{formatCurrency(projection.revenue)}
                               </span>
                             </div>
-                            <div className="flex justify-between">
+
+                            {/* Operating Costs Header */}
+                            <div className="flex justify-between pt-2 font-medium">
                               <span className="text-muted-foreground">Operating Costs:</span>
                               <span className="font-mono font-semibold text-red-600 dark:text-red-400">
                                 -{formatCurrency(projection.baseCost)}
                               </span>
                             </div>
-                            {enableCommission && projection.commissionCost > 0 && (
+
+                            {/* Cost Breakdown - Indented */}
+                            <div className="pl-4 space-y-1 border-l-2 border-muted-foreground/20">
                               <div className="flex justify-between">
-                                <span className="text-muted-foreground">Commission Costs:</span>
-                                <span className="font-mono font-semibold text-red-600 dark:text-red-400">
+                                <span className="text-muted-foreground text-[11px]">• Email Outreach:</span>
+                                <span className="font-mono text-red-600 dark:text-red-400">
+                                  -{formatCurrency(projection.emailCost)}
+                                </span>
+                              </div>
+                              {enableColdCalling && projection.coldCallingCost > 0 && (
+                                <div className="flex justify-between">
+                                  <span className="text-muted-foreground text-[11px]">• Cold Calling:</span>
+                                  <span className="font-mono text-red-600 dark:text-red-400">
+                                    -{formatCurrency(projection.coldCallingCost)}
+                                  </span>
+                                </div>
+                              )}
+                              {enableLinkedIn && projection.linkedInCost > 0 && (
+                                <div className="flex justify-between">
+                                  <span className="text-muted-foreground text-[11px]">• LinkedIn Outreach:</span>
+                                  <span className="font-mono text-red-600 dark:text-red-400">
+                                    -{formatCurrency(projection.linkedInCost)}
+                                  </span>
+                                </div>
+                              )}
+                              {enableReferrals && projection.referralCost > 0 && (
+                                <div className="flex justify-between">
+                                  <span className="text-muted-foreground text-[11px]">• Referral Program:</span>
+                                  <span className="font-mono text-red-600 dark:text-red-400">
+                                    -{formatCurrency(projection.referralCost)}
+                                  </span>
+                                </div>
+                              )}
+                            </div>
+
+                            {/* Commission Costs */}
+                            {enableCommission && projection.commissionCost > 0 && (
+                              <div className="flex justify-between pt-1">
+                                <span className="text-muted-foreground">Sales Commission:</span>
+                                <span className="font-mono font-semibold text-purple-600 dark:text-purple-400">
                                   -{formatCurrency(projection.commissionCost)}
                                 </span>
                               </div>
                             )}
-                            <div className="pt-1 mt-1 border-t border-border/50 flex justify-between font-semibold">
+
+                            {/* Agency Costs */}
+                            {enableAgency && projection.agencyCost > 0 && (
+                              <div className="flex justify-between pt-1">
+                                <span className="text-muted-foreground">Agency Cost:</span>
+                                <span className="font-mono font-semibold text-orange-600 dark:text-orange-400">
+                                  -{formatCurrency(projection.agencyCost)}
+                                </span>
+                              </div>
+                            )}
+
+                            {/* Net Cash Flow */}
+                            <div className="pt-2 mt-2 border-t border-border/50 flex justify-between font-semibold">
                               <span>Net Cash Flow:</span>
                               <span
                                 className={`font-mono ${projection.profitable ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}
