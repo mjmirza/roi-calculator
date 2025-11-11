@@ -142,13 +142,13 @@ Hire 3-6 months BEFORE you need capacity, accounting for ramp time. If you need 
 ### 2.1 Sales Rep ROI Formula
 
 #### Basic ROI
-```
+\`\`\`
 ROI = (Revenue Generated - Total Investment Cost) / Total Investment Cost × 100%
 
 Where:
 - Revenue Generated = Total bookings closed by rep
 - Total Investment Cost = Fully loaded cost + onboarding + tools
-```
+\`\`\`
 
 #### Expected ROI Benchmark
 **Target:** 3:1 to 5:1 ratio
@@ -160,42 +160,42 @@ Where:
 ### 2.2 Break-Even Timeline Calculation
 
 #### Basic Break-Even Formula
-```
+\`\`\`
 Break-Even Time = Total Investment Cost / Monthly Net Revenue Generated
 
 Where:
 - Total Investment Cost = (Fully Loaded Annual Cost × Ramp Time in Months / 12) + Onboarding Cost
 - Monthly Net Revenue = (Monthly Bookings × Gross Margin%) - Monthly Fully Loaded Cost
-```
+\`\`\`
 
 #### Month-by-Month Break-Even Tracking
-```
+\`\`\`
 Month X Break-Even Status = Cumulative Revenue Generated - Cumulative Costs
 
 Cumulative Costs = Σ(Monthly Salary + Benefits + Tools + Overhead + One-time Onboarding)
 Cumulative Revenue = Σ(Monthly Quota Achieved × Quota Percentage × Gross Margin%)
-```
+\`\`\`
 
 **Typical Break-Even:** 6-12 months for most B2B SaaS roles, depending on ramp time and quota.
 
 ### 2.3 Capacity Utilization Formula
 
 #### Sales Capacity
-```
+\`\`\`
 Sales Capacity = Number of Reps × Quota per Rep × Average Quota Attainment
 
 More Advanced:
 Effective Capacity = Total Reps × % Ramped × Avg Quota Attainment × (1 - Turnover Rate)
-```
+\`\`\`
 
 #### Accounts Per Rep Capacity
-```
+\`\`\`
 Max Accounts per Rep = Available Working Hours / Hours per Account
 
 Where:
 - Available Working Hours ≈ 1,800 hours/year (after meetings, admin, training)
 - Hours per Account = (Avg Sales Cycle Length × Touchpoints × Time per Touch)
-```
+\`\`\`
 
 **Benchmarks:**
 - **SDR/BDR:** 88-150 accounts at a time (TOPO research)
@@ -207,42 +207,42 @@ Where:
 ### 2.4 Revenue Per Rep Calculations
 
 #### Average Revenue Per Sales Employee
-```
+\`\`\`
 Revenue per Rep = Total Revenue / Number of Sales Reps
 
 Benchmarks:
 - Private B2B SaaS: $130,000 median ARR per employee (all employees)
 - Public SaaS: $190,000-$210,000 per employee
 - Growth Rate: +26% YoY or +$21k/year (median)
-```
+\`\`\`
 
 #### Sales Quota Per Rep
-```
+\`\`\`
 Individual Quota = Revenue Target / (Number of Ramped Reps × Expected Quota Attainment %)
 
 Example:
 $2M revenue target / (3 reps × 65% attainment) = $1,026,000 per rep quota
-```
+\`\`\`
 
 **Source:** SaaS Capital 2025, Blossom Street Ventures
 
 ### 2.5 Cost Per Deal with New Hire
 
 #### Cost Per Deal Formula
-```
+\`\`\`
 Cost per Deal = Total Sales Costs / Number of Deals Closed
 
 Total Sales Costs = Σ(All Sales Rep Costs + Sales Tools + Overhead + Management)
-```
+\`\`\`
 
 #### Marginal Cost Per Deal (New Hire)
-```
+\`\`\`
 Marginal Cost per Deal = Incremental Cost of New Hire / Incremental Deals Closed
 
 Where:
 - Incremental Cost = Fully loaded annual cost of new hire
 - Incremental Deals = Expected deals closed by new hire in Year 1
-```
+\`\`\`
 
 #### Example Calculation
 - **New AE Cost:** $156,000 fully loaded
@@ -257,39 +257,39 @@ Where:
 ### 2.6 Productivity Ramp Curve Formulas
 
 #### Quarterly Ramp Model (Common Assumption)
-```
+\`\`\`
 Q1: 0% of quota
 Q2: 25% of quota
 Q3: 50% of quota
 Q4: 100% of quota
-```
+\`\`\`
 
 #### Empirical Quarterly Model (More Realistic)
-```
+\`\`\`
 Q1: 10% of quota
 Q2: 38% of quota
 Q3: 76% of quota
 Q4: 85% of quota
 Q5: 98% of quota
-```
+\`\`\`
 
 #### Monthly Ramp Model (SDR - 3 months)
-```
+\`\`\`
 Month 1: 25% productivity
 Month 2: 50% productivity
 Month 3: 75% productivity
 Month 4+: 100% productivity
-```
+\`\`\`
 
 #### Monthly Ramp Model (AE - 6 months)
-```
+\`\`\`
 Month 1-2: 15% productivity
 Month 3: 35% productivity
 Month 4: 55% productivity
 Month 5: 75% productivity
 Month 6: 90% productivity
 Month 7+: 100% productivity
-```
+\`\`\`
 
 **Source:** Kellblog, Mosaic.tech, Remuner
 
@@ -374,13 +374,13 @@ Month 7+: 100% productivity
 - Higher stakes per deal
 
 **Ramp Time Formula:**
-```
+\`\`\`
 Average Ramp Time = Sales Cycle Length + 90 days
 
 Examples:
 - SMB (90-day cycle): 90 + 90 = 180 days (6 months)
 - Enterprise (180-day cycle): 180 + 90 = 270 days (9 months)
-```
+\`\`\`
 
 **Source:** Unbound B2B, Concentrix, Close.com
 
@@ -442,17 +442,17 @@ Examples:
 ### 3.5 Ramp Curves (Month-by-Month %)
 
 #### SDR Ramp Curve (3-4 Month Ramp)
-```javascript
+\`\`\`javascript
 const sdrRampCurve = {
   month1: { productivity: 0.20, activities: 0.25, quota: 0.25 },
   month2: { productivity: 0.45, activities: 0.50, quota: 0.50 },
   month3: { productivity: 0.75, activities: 0.75, quota: 0.75 },
   month4: { productivity: 1.00, activities: 1.00, quota: 1.00 }
 };
-```
+\`\`\`
 
 #### AE (SMB/Mid-Market) Ramp Curve (4-6 Month Ramp)
-```javascript
+\`\`\`javascript
 const aeRampCurve = {
   month1: { productivity: 0.10, quota: 0.10, deals: 0.0 },
   month2: { productivity: 0.15, quota: 0.15, deals: 0.1 },
@@ -462,10 +462,10 @@ const aeRampCurve = {
   month6: { productivity: 0.90, quota: 0.90, deals: 0.9 },
   month7: { productivity: 1.00, quota: 1.00, deals: 1.0 }
 };
-```
+\`\`\`
 
 #### AE (Enterprise) Ramp Curve (6-9 Month Ramp)
-```javascript
+\`\`\`javascript
 const enterpriseAERamp = {
   month1: { productivity: 0.05, quota: 0.05 },
   month2: { productivity: 0.10, quota: 0.10 },
@@ -478,10 +478,10 @@ const enterpriseAERamp = {
   month9: { productivity: 0.95, quota: 0.95 },
   month10: { productivity: 1.00, quota: 1.00 }
 };
-```
+\`\`\`
 
 #### Account Manager Ramp Curve (3-5 Month Ramp)
-```javascript
+\`\`\`javascript
 const accountManagerRamp = {
   month1: { productivity: 0.30, relationships: 0.25 },
   month2: { productivity: 0.50, relationships: 0.50 },
@@ -489,7 +489,7 @@ const accountManagerRamp = {
   month4: { productivity: 0.85, relationships: 0.85 },
   month5: { productivity: 1.00, relationships: 1.00 }
 };
-```
+\`\`\`
 
 ---
 
@@ -500,12 +500,12 @@ const accountManagerRamp = {
 #### Standard Benchmark
 **Optimal Range:** 3x to 4x target
 
-```
+\`\`\`
 Pipeline Coverage Ratio = Total Pipeline Value / Revenue Target
 
 Example:
 $3M pipeline / $1M target = 3x coverage
-```
+\`\`\`
 
 **Interpretation:**
 - **< 3x:** Undersized pipeline, at risk of missing goals
@@ -555,14 +555,14 @@ $3M pipeline / $1M target = 3x coverage
 - Proposals/quotes delayed > 48 hours
 
 **Capacity Formula:**
-```
+\`\`\`
 Max Active Opportunities = Available Selling Hours / Hours per Opportunity
 
 Where:
 - Available Selling Hours ≈ 100-120 hours/month (after internal meetings)
 - Hours per Opportunity = 3-5 hours/month (for active deals)
 Result: 25-35 active opportunities max
-```
+\`\`\`
 
 **Hire Trigger:** When AE sustains 100+ active opps for 2+ months OR pipeline coverage < 3x for 2 quarters
 
@@ -592,12 +592,12 @@ Result: 25-35 active opportunities max
 
 #### Capacity Planning Use
 
-```
+\`\`\`
 Leads Needed = Revenue Target / (Avg Deal Size × Lead-to-Customer %)
 
 Example:
 $1M target / ($50K deal × 2% lead-to-customer) = 1,000 leads needed
-```
+\`\`\`
 
 **Source:** First Page Sage, Callin.io, Powered by Search
 
@@ -606,29 +606,29 @@ $1M target / ($50K deal × 2% lead-to-customer) = 1,000 leads needed
 #### Revenue-Based Method
 
 **Basic Formula:**
-```
+\`\`\`
 Number of Reps = Revenue Target / (Avg Quota per Rep × Expected Attainment %)
 
 Example:
 $5M target / ($800K quota × 65% attainment) = 9.6 ≈ 10 AEs
-```
+\`\`\`
 
 **Advanced Formula (Accounts for Ramp & Turnover):**
-```
+\`\`\`
 Required Reps = Revenue Target / (Avg Quota × Attainment % × (1 - Turnover %) × % Ramped)
 
 Example with ramp/turnover:
 $5M / ($800K × 0.65 × 0.85 × 0.80) = 14 AEs needed
-```
+\`\`\`
 
 #### Workload-Based Method
 
-```
+\`\`\`
 Number of Reps = Total Addressable Accounts / Max Accounts per Rep
 
 Example:
 2,000 target accounts / 125 accounts per rep = 16 reps needed
-```
+\`\`\`
 
 #### Rule of Thumb
 **B2B SaaS:** 1 sales rep per $1M-$2M in revenue (varies by segment)
@@ -1024,14 +1024,14 @@ Reps with 2+ hours coaching/week have 56% win rate vs. 43% with minimal coaching
 #### Deals Per Rep Per Year
 
 **Formula:**
-```
+\`\`\`
 Deals per Year = Annual Quota / Average Deal Size
 
 Examples:
 - SMB AE: $500K quota / $10K deal = 50 deals/year (4.2/month)
 - Mid-Market AE: $800K quota / $60K deal = 13.3 deals/year (1.1/month)
 - Enterprise AE: $1.5M quota / $200K deal = 7.5 deals/year (0.6/month)
-```
+\`\`\`
 
 #### By Role Annual Deal Volume
 
@@ -1076,7 +1076,7 @@ Examples:
 
 #### Impact on Capacity Planning
 
-```
+\`\`\`
 Max Active Opportunities per AE = (Sales Cycle in Months) × (Deals Needed per Month) × 3
 
 Example (Mid-Market AE):
@@ -1085,7 +1085,7 @@ Example (Mid-Market AE):
 - 3x pipeline coverage
 = 3 × 1 × 3 = 9 minimum active opps
 - With management buffer: 15-25 active opps
-```
+\`\`\`
 
 **Source:** Close.com, Walnut, Salesforce B2B Benchmark, First Page Sage
 
@@ -1128,14 +1128,14 @@ Example (Mid-Market AE):
 
 #### Calculation of Opportunities Needed
 
-```
+\`\`\`
 Opportunities Needed = Deals Required / Win Rate
 
 Examples:
 - Need 12 deals/year at 20% win rate = 60 opportunities
 - Need 12 deals/year at 30% win rate = 40 opportunities
 - 10 opportunity reduction = ~$50K in sales capacity saved
-```
+\`\`\`
 
 **Source:** Pavilion/Ebsta 2024 B2B Sales Benchmarks, Everstage, MeetRecord
 
@@ -1175,7 +1175,7 @@ Examples:
 #### Calculation Examples
 
 **Mid-Market AE Math:**
-```
+\`\`\`
 Annual Quota: $800,000
 Average Deal Size: $60,000
 Deals Needed: $800K / $60K = 13.3 deals/year
@@ -1183,7 +1183,7 @@ Win Rate: 20%
 Opportunities Needed: 13.3 / 0.20 = 67 opportunities/year (5.6/month)
 Sales Cycle: 90 days (3 months)
 Active Pipeline: 67 × (3/12) × 3 = 50 opportunities needed in pipeline
-```
+\`\`\`
 
 **Capacity Check:**
 - 50 active opportunities × 4 hours/opp/month = 200 hours/month
@@ -1236,13 +1236,13 @@ Active Pipeline: 67 × (3/12) × 3 = 50 opportunities needed in pipeline
 
 #### Expansion Revenue Calculation
 
-```
+\`\`\`
 Expansion ARR = (Upgrades + Add-ons + Additional Users + Cross-sells) - Contraction
 
 Net Revenue Retention (NRR) = (Starting ARR + Expansion - Churn) / Starting ARR × 100%
 
 Target NRR: 110-130% (best-in-class SaaS)
-```
+\`\`\`
 
 **Example:**
 - Starting ARR: $1,000,000
@@ -1424,7 +1424,7 @@ See Section 7.1 above - consolidated for clarity.
 
 #### Capacity Score Algorithm
 
-```javascript
+\`\`\`javascript
 function calculateCapacityScore(inputs) {
   let score = 0;
   const weights = {
@@ -1470,7 +1470,7 @@ function calculateCapacityScore(inputs) {
 // 31-60: Consider hiring in 3-6 months
 // 61-80: Hire within 1-3 months
 // 81-100: Hire immediately, capacity crisis
-```
+\`\`\`
 
 #### Output Recommendations
 
@@ -1502,7 +1502,7 @@ function calculateCapacityScore(inputs) {
 
 #### Month-by-Month Projection Template
 
-```javascript
+\`\`\`javascript
 function calculateMonthlyROI(inputs) {
   const {
     role,              // 'SDR', 'AE', 'AM'
@@ -1573,7 +1573,7 @@ function calculateMonthlyROI(inputs) {
 
   return monthlyResults;
 }
-```
+\`\`\`
 
 #### Example Output Table
 
@@ -1606,7 +1606,7 @@ function calculateMonthlyROI(inputs) {
 
 #### Break-Even Calculation
 
-```javascript
+\`\`\`javascript
 function calculateBreakEven(inputs) {
   const monthlyData = calculateMonthlyROI(inputs);
 
@@ -1638,7 +1638,7 @@ function calculateBreakEven(inputs) {
     year1ROI: monthlyData[11].roi
   };
 }
-```
+\`\`\`
 
 #### Break-Even Benchmarks
 
@@ -1660,7 +1660,7 @@ function calculateBreakEven(inputs) {
 
 #### Projection Formula
 
-```javascript
+\`\`\`javascript
 function calculate12MonthProjection(inputs) {
   const monthlyData = calculateMonthlyROI(inputs);
   const first12Months = monthlyData.slice(0, 12);
@@ -1705,13 +1705,13 @@ function calculate12MonthProjection(inputs) {
     }
   };
 }
-```
+\`\`\`
 
 #### Example Output
 
 **Mid-Market AE - 12 Month Projection:**
 
-```
+\`\`\`
 Total Revenue Generated: $480,000
 Total Gross Profit: $384,000
 Total Cost (fully loaded): $233,000
@@ -1725,7 +1725,7 @@ Q1: $40,000 revenue (17% avg productivity) - Heavy ramp period
 Q2: $110,000 revenue (52% avg productivity) - Accelerating
 Q3: $170,000 revenue (85% avg productivity) - Near full productivity
 Q4: $160,000 revenue (95% avg productivity) - Full productivity
-```
+\`\`\`
 
 **Interpretation:**
 - First year is profitable despite 6-month ramp
@@ -1737,7 +1737,7 @@ Q4: $160,000 revenue (95% avg productivity) - Full productivity
 
 #### Scenario Comparison Framework
 
-```javascript
+\`\`\`javascript
 function compareHireVsNoHire(inputs) {
   const {
     currentTeamSize,
@@ -1816,7 +1816,7 @@ function compareHireVsNoHire(inputs) {
 
   return comparison;
 }
-```
+\`\`\`
 
 #### Example Comparison Output
 
@@ -2020,7 +2020,7 @@ function compareHireVsNoHire(inputs) {
 6. Break-even month identification
 
 **Ramp Curves (Store as Constants):**
-```javascript
+\`\`\`javascript
 const RAMP_CURVES = {
   SDR_3MONTH: [0, 0.25, 0.50, 0.75, 1.0],
   SDR_4MONTH: [0, 0.20, 0.45, 0.75, 1.0],
@@ -2029,10 +2029,10 @@ const RAMP_CURVES = {
   AE_ENTERPRISE_9MONTH: [0, 0.05, 0.10, 0.20, 0.30, 0.45, 0.60, 0.75, 0.85, 0.95, 1.0],
   AM_4MONTH: [0, 0.30, 0.50, 0.70, 0.85, 1.0]
 };
-```
+\`\`\`
 
 **Default Benchmarks (Store as Constants):**
-```javascript
+\`\`\`javascript
 const BENCHMARKS = {
   SDR: {
     baseSalary: { min: 50000, median: 55000, max: 75000 },
@@ -2054,7 +2054,7 @@ const BENCHMARKS = {
   },
   // ... etc for other roles
 };
-```
+\`\`\`
 
 ### Visualization Requirements
 
