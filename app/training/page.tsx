@@ -25,10 +25,16 @@ import {
   Briefcase,
   Mail,
   Cog,
+  Save,
+  CheckCircle,
 } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { saveScenario, generateScenarioId, getDefaultScenarioName } from "@/lib/scenario-utils"
 
 export default function TrainingROICalculator() {
   const { t } = useLanguage()
+  const router = useRouter()
+  const [scenarioSaved, setScenarioSaved] = useState(false)
 
   // Input States
   const [numEmployees, setNumEmployees] = useState(50)
@@ -106,6 +112,38 @@ export default function TrainingROICalculator() {
     timeToCompetencyWeeks,
     newHiresPerYear,
   ])
+
+  const handleSaveScenario = () => {
+    const scenario = {
+      id: generateScenarioId(),
+      name: getDefaultScenarioName('training'),
+      calculatorType: 'training' as const,
+      inputs: {
+        numEmployees,
+        avgAnnualSalary,
+        currentTurnoverRate,
+        trainingCostPerEmployee,
+        expectedProductivityIncrease,
+        expectedTurnoverReduction
+      },
+      results: {
+        roi: results.threeYearROI,
+        totalCost: results.totalTrainingInvestment,
+        paybackMonths: Math.ceil(results.paybackMonths),
+        totalReturn: results.threeYearNetValue,
+        risk: results.threeYearROI > 150 ? 'low' as const : results.threeYearROI > 80 ? 'medium' as const : 'high' as const
+      },
+      createdAt: new Date().toISOString()
+    }
+
+    const success = saveScenario(scenario)
+    if (success) {
+      setScenarioSaved(true)
+      setTimeout(() => {
+        router.push('/planner')
+      }, 1500)
+    }
+  }
 
   const calculateROI = () => {
     // 1. Current Costs (Cost of NOT Training)
@@ -206,6 +244,24 @@ export default function TrainingROICalculator() {
             </div>
           </div>
           <div className="flex items-center gap-2">
+            <Button
+              variant={scenarioSaved ? "default" : "outline"}
+              size="sm"
+              onClick={handleSaveScenario}
+              disabled={scenarioSaved}
+            >
+              {scenarioSaved ? (
+                <>
+                  <CheckCircle className="h-4 w-4 mr-2" />
+                  Saved!
+                </>
+              ) : (
+                <>
+                  <Save className="h-4 w-4 mr-2" />
+                  Save Scenario
+                </>
+              )}
+            </Button>
             <LanguageSelector />
             <Select value={currency} onValueChange={setCurrency}>
               <SelectTrigger className="w-32">
