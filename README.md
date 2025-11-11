@@ -99,7 +99,7 @@ This project provides three specialized ROI calculators, each backed by extensiv
 
 ## 📁 Project Structure
 
-```
+\`\`\`
 app/
 ├── page.tsx              # Main landing page
 ├── roi/
@@ -117,35 +117,35 @@ docs/                    # Comprehensive documentation
 ├── INDUSTRY_BENCHMARKS.md
 ├── TEST_SUMMARY.md
 └── ...
-```
+\`\`\`
 
 ## 🚦 Getting Started
 
 ### Installation
 
-```bash
+\`\`\`bash
 npm install
-```
+\`\`\`
 
 ### Development
 
-```bash
+\`\`\`bash
 npm run dev
-```
+\`\`\`
 
 Open [http://localhost:3000](http://localhost:3000) to view the calculator suite.
 
 ### Build
 
-```bash
+\`\`\`bash
 npm run build
-```
+\`\`\`
 
 ### Production
 
-```bash
+\`\`\`bash
 npm start
-```
+\`\`\`
 
 ## 📊 URL Structure
 
@@ -163,9 +163,9 @@ npm start
 
 ### Run Tests
 
-```bash
+\`\`\`bash
 node test-combined-metrics.js
-```
+\`\`\`
 
 ### Test Reports
 All test reports are available in the `/docs` folder:
