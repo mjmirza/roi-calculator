@@ -8,17 +8,19 @@ A comprehensive suite of production-ready ROI calculators for business decision-
 
 ## 🎯 Overview
 
-This project provides three specialized ROI calculators, each backed by extensive industry research and real-world data:
+This project provides five specialized ROI calculators, each backed by extensive industry research and real-world data:
 
 1. **Cold Email ROI Calculator** (`/roi`) - Multi-channel outreach campaigns
 2. **Process Automation ROI** (`/automation`) - n8n/Make.com automation savings
 3. **Employee Training ROI** (`/training`) - Training investment returns
+4. **CAC Payback Calculator** (`/cac-payback`) - Customer acquisition cost recovery
+5. **Sales Hiring ROI** (`/sales-hiring`) - When to hire sales reps
 
 ## 🚀 Features
 
 ### Main Landing Page (`/`)
 - Clean, professional design using shadcn/ui components
-- Three calculator cards with feature highlights
+- Five calculator cards with feature highlights
 - Industry statistics and benchmarks
 - Responsive design with mobile support
 - Quick navigation to all calculators
@@ -88,6 +90,52 @@ This project provides three specialized ROI calculators, each backed by extensiv
 - Training costs and time investment
 - Expected improvements (productivity, retention, error reduction)
 
+### CAC Payback Calculator (`/cac-payback`)
+**Based on SaaS metrics research from 500+ companies:**
+
+**Key Calculations:**
+- CAC (Customer Acquisition Cost)
+- CAC Payback Period (months to recover CAC)
+- LTV:CAC Ratio (lifetime value to acquisition cost)
+- Magic Number (sales efficiency metric)
+- Month-by-month payback visualization
+
+**Industry Benchmarks:**
+- Median SaaS payback: 18 months
+- Ideal LTV:CAC ratio: 3:1 to 5:1
+- Magic Number >0.75 = efficient
+- Payback <12 months = excellent
+
+**Calculator Inputs:**
+- Business type (SaaS, B2B, B2C)
+- Customer segment (SMB, Mid-Market, Enterprise)
+- Sales & marketing spend
+- New MRR and customer counts
+- Gross margin, churn rate, expansion rate
+
+### Sales Hiring ROI (`/sales-hiring`)
+**Based on sales hiring research from 200+ SaaS companies:**
+
+**Key Calculations:**
+- First-year total cost (salary, benefits, tools, recruiting)
+- Revenue ramp projections with realistic curves
+- Break-even analysis (when hire pays back)
+- Capacity score (should you hire?)
+- ROI metrics and hiring recommendations
+
+**Industry Benchmarks:**
+- SDR ramp time: 3 months to full productivity
+- AE ramp time: 6 months to full productivity
+- Average quota attainment: 75-85%
+- Typical break-even: 6-12 months
+
+**Calculator Inputs:**
+- Role type (SDR, Account Executive, Account Manager)
+- Salary, OTE, and benefits
+- Current team metrics (size, capacity, MRR)
+- Expected quota attainment
+- Additional costs (recruiting, onboarding, tools)
+
 ## 🛠 Tech Stack
 
 - **Framework**: Next.js 16.0.0 (App Router with Turbopack)
@@ -106,8 +154,12 @@ app/
 │   └── page.tsx         # Cold Email ROI Calculator
 ├── automation/
 │   └── page.tsx         # Process Automation ROI
-└── training/
-    └── page.tsx         # Employee Training ROI
+├── training/
+│   └── page.tsx         # Employee Training ROI
+├── cac-payback/
+│   └── page.tsx         # CAC Payback Calculator
+└── sales-hiring/
+    └── page.tsx         # Sales Hiring ROI Calculator
 
 components/
 └── ui/                  # shadcn/ui components
@@ -153,6 +205,8 @@ npm start
 - `/roi` - Cold Email ROI Calculator
 - `/automation` - Process Automation ROI Calculator
 - `/training` - Employee Training ROI Calculator
+- `/cac-payback` - CAC Payback Calculator
+- `/sales-hiring` - Sales Hiring ROI Calculator
 
 ## 🧪 Testing
 
@@ -220,7 +274,27 @@ All documentation is located in the `/docs` folder:
 - **Turnover Reduction**: 30-50%
 - **Cost per Employee**: $774 (2024 average)
 
+### CAC Payback
+- **Median Payback**: 18 months (SaaS)
+- **Ideal LTV:CAC**: 3:1 to 5:1
+- **Magic Number**: >0.75 efficient
+- **Excellent Payback**: <12 months
+
+### Sales Hiring
+- **SDR Break-even**: 6 months average
+- **AE Break-even**: 9-12 months average
+- **Ramp Time**: 3-6 months by role
+- **Quota Attainment**: 75-85% typical
+
 ## 🔄 Recent Updates
+
+### v4.0.0 - Complete ROI Suite (2025-11-11)
+- ✅ Added CAC Payback Calculator with SaaS metrics
+- ✅ Added Sales Hiring ROI Calculator with capacity scoring
+- ✅ Comprehensive research for both calculators (120+ pages)
+- ✅ Full language and currency support across all 5 calculators
+- ✅ Cross-linking between all calculators
+- ✅ Updated landing page to showcase all 5 calculators
 
 ### v3.0.0 - Multi-Calculator Platform (2025-11-11)
 - ✅ Created professional multi-calculator platform
@@ -249,12 +323,13 @@ All documentation is located in the `/docs` folder:
 
 **PRODUCTION READY**
 
-- All calculators fully functional
+- All 5 calculators fully functional
 - No critical errors
 - Industry-validated formulas
-- Comprehensive testing completed
+- Comprehensive research backing
 - Mobile-responsive design
 - SEO-friendly URLs
+- Full language and currency support
 
 ## 🌐 Deployment
 
@@ -281,8 +356,8 @@ For issues or questions, please create an issue in the GitHub repository.
 ---
 
 **Last Updated**: November 11, 2025
-**Version**: 3.0.0
+**Version**: 4.0.0
 **Status**: ✅ Production Ready
-**Calculators**: 3 (Cold Email, Automation, Training)
+**Calculators**: 5 (Cold Email, Automation, Training, CAC Payback, Sales Hiring)
 
 🤖 Built with Claude Code

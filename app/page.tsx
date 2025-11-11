@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Mail, Cog, GraduationCap, Calculator } from "lucide-react"
+import { ArrowRight, Mail, Cog, GraduationCap, Calculator, Target, UserPlus } from "lucide-react"
 
 export default function LandingPage() {
   const calculators = [
@@ -45,6 +45,32 @@ export default function LandingPage() {
         "Skill obsolescence impact"
       ],
       stats: "Untrained employees operate at 60% capacity"
+    },
+    {
+      title: "CAC Payback Calculator",
+      description: "Measure how quickly you recover customer acquisition costs. Calculate CAC payback period, LTV:CAC ratio, and sales efficiency metrics.",
+      icon: Target,
+      href: "/cac-payback",
+      features: [
+        "CAC Payback Period calculation",
+        "LTV:CAC ratio analysis",
+        "Magic Number sales efficiency",
+        "Industry benchmark comparisons"
+      ],
+      stats: "Median SaaS payback: 18 months"
+    },
+    {
+      title: "Sales Hiring ROI Calculator",
+      description: "Determine when to hire sales reps and calculate the financial impact. Analyze break-even timelines, ramp periods, and hiring capacity.",
+      icon: UserPlus,
+      href: "/sales-hiring",
+      features: [
+        "Break-even analysis for new hires",
+        "Ramp time revenue projections",
+        "Hiring capacity score",
+        "Role-specific benchmarks (SDR/AE/AM)"
+      ],
+      stats: "Average SDR break-even: 6 months"
     }
   ]
 
@@ -67,6 +93,12 @@ export default function LandingPage() {
             <Link href="/training" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
               Training ROI
             </Link>
+            <Link href="/cac-payback" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+              CAC Payback
+            </Link>
+            <Link href="/sales-hiring" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+              Sales Hiring
+            </Link>
           </nav>
         </div>
       </header>
@@ -79,7 +111,7 @@ export default function LandingPage() {
           </h1>
           <p className="text-xl text-muted-foreground leading-relaxed">
             Make data-driven decisions with our suite of professional ROI calculators.
-            Calculate the financial impact of your investments in cold outreach, automation, and employee training.
+            Calculate the financial impact of your investments in cold outreach, automation, employee training, customer acquisition, and sales hiring.
           </p>
         </div>
 
