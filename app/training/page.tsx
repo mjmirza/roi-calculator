@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import { useLanguage } from "@/contexts/LanguageContext"
+import { LanguageSelector } from "@/components/language/LanguageSelector"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -26,6 +28,8 @@ import {
 } from "lucide-react"
 
 export default function TrainingROICalculator() {
+  const { t } = useLanguage()
+
   // Input States
   const [numEmployees, setNumEmployees] = useState(50)
   const [avgAnnualSalary, setAvgAnnualSalary] = useState(62400)
@@ -201,18 +205,21 @@ export default function TrainingROICalculator() {
               <span className="text-xl font-bold">Employee Training ROI</span>
             </div>
           </div>
-          <Select value={currency} onValueChange={setCurrency}>
-            <SelectTrigger className="w-32">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {Object.entries(CURRENCIES).map(([code, curr]) => (
-                <SelectItem key={code} value={code}>
-                  {curr.symbol} {code}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <div className="flex items-center gap-2">
+            <LanguageSelector />
+            <Select value={currency} onValueChange={setCurrency}>
+              <SelectTrigger className="w-32">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {Object.entries(CURRENCIES).map(([code, curr]) => (
+                  <SelectItem key={code} value={code}>
+                    {curr.symbol} {code}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
         </div>
       </header>
 
