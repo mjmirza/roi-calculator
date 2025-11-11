@@ -126,10 +126,10 @@ export default function ScenarioPlanner() {
 
   // Calculate comparison stats
   const comparisonStats = selectedScenarioData.length > 0 ? {
-    totalInvestment: selectedScenarioData.reduce((sum, s) => sum + s.results.totalCost, 0),
-    totalReturn: selectedScenarioData.reduce((sum, s) => sum + s.results.totalReturn, 0),
-    avgPayback: selectedScenarioData.reduce((sum, s) => sum + s.results.paybackMonths, 0) / selectedScenarioData.length,
-    avgROI: selectedScenarioData.reduce((sum, s) => sum + s.results.roi, 0) / selectedScenarioData.length
+    totalInvestment: selectedScenarioData.reduce((sum, s) => sum + (s.results?.totalCost || 0), 0),
+    totalReturn: selectedScenarioData.reduce((sum, s) => sum + (s.results?.totalReturn || 0), 0),
+    avgPayback: selectedScenarioData.reduce((sum, s) => sum + (s.results?.paybackMonths || 0), 0) / selectedScenarioData.length,
+    avgROI: selectedScenarioData.reduce((sum, s) => sum + (s.results?.roi || 0), 0) / selectedScenarioData.length
   } : null
 
   const formatCurrency = (amount: number) => {
@@ -148,6 +148,14 @@ export default function ScenarioPlanner() {
       case 'high': return 'text-red-600 bg-red-50 border-red-200'
       default: return 'text-gray-600 bg-gray-50 border-gray-200'
     }
+  }
+
+  // Safe number formatting with null checks
+  const safeToFixed = (value: any, decimals: number = 0): string => {
+    if (value === null || value === undefined || isNaN(Number(value))) {
+      return '0'
+    }
+    return Number(value).toFixed(decimals)
   }
 
   return (
@@ -207,7 +215,7 @@ export default function ScenarioPlanner() {
                   </CardHeader>
                   <CardContent>
                     <div className="text-3xl font-bold text-green-600">
-                      {(scenarios.reduce((sum, s) => sum + s.results.roi, 0) / scenarios.length).toFixed(0)}%
+                      {safeToFixed(scenarios.reduce((sum, s) => sum + (s.results?.roi || 0), 0) / scenarios.length)}%
                     </div>
                   </CardContent>
                 </Card>
@@ -331,7 +339,7 @@ export default function ScenarioPlanner() {
                           <div>
                             <p className="text-sm text-muted-foreground">ROI</p>
                             <p className="text-2xl font-bold text-green-600">
-                              {scenario.results.roi.toFixed(0)}%
+                              {safeToFixed(scenario.results?.roi)}%
                             </p>
                           </div>
                           <div>
@@ -409,7 +417,7 @@ export default function ScenarioPlanner() {
                   </CardHeader>
                   <CardContent>
                     <div className="text-3xl font-bold">
-                      {comparisonStats.avgPayback.toFixed(1)} mo
+                      {safeToFixed(comparisonStats?.avgPayback, 1)} mo
                     </div>
                   </CardContent>
                 </Card>
@@ -422,7 +430,7 @@ export default function ScenarioPlanner() {
                   </CardHeader>
                   <CardContent>
                     <div className="text-3xl font-bold text-green-600">
-                      {comparisonStats.avgROI.toFixed(0)}%
+                      {safeToFixed(comparisonStats?.avgROI)}%
                     </div>
                   </CardContent>
                 </Card>
@@ -446,7 +454,7 @@ export default function ScenarioPlanner() {
                     <div className="p-4 rounded-lg bg-green-50 border border-green-200">
                       <p className="text-sm font-semibold text-green-900 mb-2">🏆 Highest ROI</p>
                       <p className="font-bold text-green-700">{recommendation.highestROI.name}</p>
-                      <p className="text-sm text-green-600">{recommendation.highestROI.results.roi.toFixed(0)}% ROI</p>
+                      <p className="text-sm text-green-600">{safeToFixed(recommendation.highestROI.results?.roi)}% ROI</p>
                     </div>
                     <div className="p-4 rounded-lg bg-blue-50 border border-blue-200">
                       <p className="text-sm font-semibold text-blue-900 mb-2">⚡ Fastest Payback</p>
@@ -507,10 +515,10 @@ export default function ScenarioPlanner() {
                       <tr className="border-b bg-muted/30">
                         <td className="py-3 px-4 font-semibold">ROI %</td>
                         {selectedScenarioData.map((scenario) => {
-                          const isMax = scenario.results.roi === Math.max(...selectedScenarioData.map(s => s.results.roi))
+                          const isMax = scenario.results.roi === Math.max(...selectedScenarioData.map(s => s.results?.roi || 0))
                           return (
                             <td key={scenario.id} className={`py-3 px-4 font-bold ${isMax ? 'text-green-600' : ''}`}>
-                              {scenario.results.roi.toFixed(0)}%
+                              {safeToFixed(scenario.results?.roi)}%
                               {isMax && ' 🏆'}
                             </td>
                           )
@@ -557,11 +565,11 @@ export default function ScenarioPlanner() {
                       <tr className="border-b">
                         <td className="py-3 px-4 font-semibold">ROI per $1 Invested</td>
                         {selectedScenarioData.map((scenario) => {
-                          const efficiency = scenario.results.roi / scenario.results.totalCost
-                          const isMax = efficiency === Math.max(...selectedScenarioData.map(s => s.results.roi / s.results.totalCost))
+                          const efficiency = (scenario.results?.roi || 0) / (scenario.results?.totalCost || 1)
+                          const isMax = efficiency === Math.max(...selectedScenarioData.map(s => (s.results?.roi || 0) / (s.results?.totalCost || 1)))
                           return (
                             <td key={scenario.id} className={`py-3 px-4 font-bold ${isMax ? 'text-purple-600' : ''}`}>
-                              ${(efficiency * 1000).toFixed(2)}
+                              ${safeToFixed(efficiency * 1000, 2)}
                               {isMax && ' 🎯'}
                             </td>
                           )
@@ -582,15 +590,15 @@ export default function ScenarioPlanner() {
               <CardContent>
                 <div className="space-y-4">
                   {selectedScenarioData.map((scenario) => {
-                    const maxROI = Math.max(...selectedScenarioData.map(s => s.results.roi))
-                    const percentage = (scenario.results.roi / maxROI) * 100
+                    const maxROI = Math.max(...selectedScenarioData.map(s => s.results?.roi || 0))
+                    const percentage = ((scenario.results?.roi || 0) / maxROI) * 100
                     const info = calculatorInfo[scenario.calculatorType]
 
                     return (
                       <div key={scenario.id} className="space-y-2">
                         <div className="flex items-center justify-between">
                           <span className="font-medium">{scenario.name}</span>
-                          <span className="font-bold text-green-600">{scenario.results.roi.toFixed(0)}%</span>
+                          <span className="font-bold text-green-600">{safeToFixed(scenario.results?.roi)}%</span>
                         </div>
                         <div className="w-full bg-muted rounded-full h-8">
                           <div
@@ -599,7 +607,7 @@ export default function ScenarioPlanner() {
                           >
                             {percentage > 20 && (
                               <span className={`text-sm font-semibold ${info.color}`}>
-                                {scenario.results.roi.toFixed(0)}%
+                                {safeToFixed(scenario.results?.roi)}%
                               </span>
                             )}
                           </div>
