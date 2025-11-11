@@ -8,61 +8,22 @@ A comprehensive suite of production-ready ROI calculators for business decision-
 
 ## 🎯 Overview
 
-This project provides five specialized ROI calculators PLUS a powerful scenario comparison tool, each backed by extensive industry research and real-world data:
+This project provides five specialized ROI calculators, each backed by extensive industry research and real-world data:
 
-### ROI Calculators:
 1. **Cold Email ROI Calculator** (`/roi`) - Multi-channel outreach campaigns
 2. **Process Automation ROI** (`/automation`) - n8n/Make.com automation savings
 3. **Employee Training ROI** (`/training`) - Training investment returns
 4. **CAC Payback Calculator** (`/cac-payback`) - Customer acquisition cost recovery
 5. **Sales Hiring ROI** (`/sales-hiring`) - When to hire sales reps
 
-### Decision Tool:
-6. **Scenario Planner** (`/planner`) - Compare multiple investment scenarios side-by-side
-
 ## 🚀 Features
 
 ### Main Landing Page (`/`)
 - Clean, professional design using shadcn/ui components
 - Five calculator cards with feature highlights
-- Prominent Scenario Planner CTA
 - Industry statistics and benchmarks
 - Responsive design with mobile support
 - Quick navigation to all calculators
-
-### Scenario Planner (`/planner`)
-**The missing piece for investment decisions**
-
-**Core Features:**
-- Save scenarios from any ROI calculator
-- Compare up to 3 scenarios side-by-side
-- Visual comparison with bar charts
-- Intelligent recommendation engine
-- LocalStorage persistence (no account needed)
-
-**Comparison Metrics:**
-- ROI percentage
-- Total cost and return
-- Payback period
-- Risk level assessment
-- ROI per dollar invested
-
-**Smart Recommendations:**
-- Highest ROI scenario
-- Fastest payback option
-- Best efficiency (ROI per $)
-- Lowest risk choice
-
-**Use Cases:**
-- "Should I hire an SDR or invest in automation?"
-- "Which training program gives best ROI?"
-- "Cold email vs LinkedIn outreach comparison"
-- "CAC optimization vs sales team expansion"
-
-**Based on Research:**
-- 73% of CFOs struggle to compare heterogeneous investments (Gartner 2024)
-- No existing tool combines domain-specific calculators with comparison
-- Addresses #1 pain point: comparing apples to oranges
 
 ### Cold Email ROI Calculator (`/roi`)
 **Multi-Channel Support:**
@@ -189,8 +150,6 @@ This project provides five specialized ROI calculators PLUS a powerful scenario 
 \`\`\`
 app/
 ├── page.tsx              # Main landing page
-├── planner/
-│   └── page.tsx         # Scenario Planner (NEW!)
 ├── roi/
 │   └── page.tsx         # Cold Email ROI Calculator
 ├── automation/
@@ -243,7 +202,6 @@ npm start
 ## 📊 URL Structure
 
 - `/` - Main landing page with all calculators
-- `/planner` - **Scenario Planner** (compare multiple scenarios)
 - `/roi` - Cold Email ROI Calculator
 - `/automation` - Process Automation ROI Calculator
 - `/training` - Employee Training ROI Calculator
@@ -330,17 +288,6 @@ All documentation is located in the `/docs` folder:
 
 ## 🔄 Recent Updates
 
-### v5.0.0 - Scenario Planner Launch (2025-11-11)
-- ✅ **NEW: Scenario Planner** - Compare multiple investment scenarios
-- ✅ Save scenarios from any calculator with LocalStorage persistence
-- ✅ Side-by-side comparison of up to 3 scenarios
-- ✅ Intelligent recommendation engine (highest ROI, fastest payback, best efficiency, lowest risk)
-- ✅ Visual comparisons with bar charts for ROI and payback
-- ✅ Comprehensive comparison table with all metrics
-- ✅ 85-page research document backing the feature
-- ✅ Prominent CTA on landing page
-- ✅ Mobile-responsive design
-
 ### v4.0.0 - Complete ROI Suite (2025-11-11)
 - ✅ Added CAC Payback Calculator with SaaS metrics
 - ✅ Added Sales Hiring ROI Calculator with capacity scoring
@@ -377,14 +324,12 @@ All documentation is located in the `/docs` folder:
 **PRODUCTION READY**
 
 - All 5 calculators fully functional
-- Scenario Planner for investment comparison
 - No critical errors
 - Industry-validated formulas
-- Comprehensive research backing (170+ pages total)
+- Comprehensive research backing
 - Mobile-responsive design
 - SEO-friendly URLs
 - Full language and currency support
-- LocalStorage persistence
 
 ## 🌐 Deployment
 
@@ -411,9 +356,8 @@ For issues or questions, please create an issue in the GitHub repository.
 ---
 
 **Last Updated**: November 11, 2025
-**Version**: 5.0.0
+**Version**: 4.0.0
 **Status**: ✅ Production Ready
-**Features**: 5 Calculators + Scenario Planner
-**Tools**: Cold Email, Automation, Training, CAC Payback, Sales Hiring, Multi-Scenario Comparison
+**Calculators**: 5 (Cold Email, Automation, Training, CAC Payback, Sales Hiring)
 
 🤖 Built with Claude Code

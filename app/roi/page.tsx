@@ -32,11 +32,7 @@ import {
   Users,
   BarChart3,
   Mail,
-  Save,
-  CheckCircle,
 } from "lucide-react"
-import { useRouter } from "next/navigation"
-import { saveScenario, generateScenarioId, getDefaultScenarioName } from "@/lib/scenario-utils"
 
 const CURRENCIES = {
   USD: { symbol: "$", name: "US Dollar", rate: 1.0 },
@@ -71,9 +67,7 @@ type CurrencyCode = keyof typeof CURRENCIES
 
 export default function ROICalculator() {
   const { t } = useLanguage()
-  const router = useRouter()
   const [isClient, setIsClient] = useState(false)
-  const [scenarioSaved, setScenarioSaved] = useState(false)
 
   const [enableEmailMetrics, setEnableEmailMetrics] = useState(true)
   const [enableAdvanced, setEnableAdvanced] = useState(false)
@@ -759,47 +753,6 @@ export default function ROICalculator() {
     enableTax,
   ])
 
-  const handleSaveScenario = () => {
-    const scenario = {
-      id: generateScenarioId(),
-      name: getDefaultScenarioName('roi'),
-      calculatorType: 'roi' as const,
-      inputs: {
-        currency,
-        enableEmailMetrics,
-        mailboxes,
-        emailsPerDay,
-        openRate,
-        replyRate,
-        meetingBookRate,
-        closeRate,
-        averageDealValue,
-        salesCycle,
-        enableColdCalling,
-        enableLinkedIn,
-        enableReferrals,
-        enableCommission,
-        enableAgency
-      },
-      results: {
-        roi: calculations.combinedROI,
-        totalCost: calculations.totalCost,
-        paybackMonths: calculations.paybackMonths || 12,
-        totalReturn: calculations.totalRevenue,
-        risk: calculations.combinedROI > 150 ? 'low' as const : calculations.combinedROI > 80 ? 'medium' as const : 'high' as const
-      },
-      createdAt: new Date().toISOString()
-    }
-
-    const success = saveScenario(scenario)
-    if (success) {
-      setScenarioSaved(true)
-      setTimeout(() => {
-        router.push('/planner')
-      }, 1500)
-    }
-  }
-
   const shuffleScenario = () => {
     const scenarios = [
       {
@@ -1417,27 +1370,6 @@ export default function ROICalculator() {
 
               {/* Action Buttons - Full width on mobile, auto on larger screens */}
               <div className="flex gap-2 w-full sm:w-auto sm:ml-auto">
-                <Button
-                  variant={scenarioSaved ? "default" : "outline"}
-                  size="sm"
-                  onClick={handleSaveScenario}
-                  disabled={scenarioSaved}
-                  className="flex-1 sm:flex-initial gap-2 transition-all hover:scale-105"
-                >
-                  {scenarioSaved ? (
-                    <>
-                      <CheckCircle className="h-4 w-4" />
-                      <span className="hidden sm:inline">Saved!</span>
-                      <span className="sm:hidden">Saved</span>
-                    </>
-                  ) : (
-                    <>
-                      <Save className="h-4 w-4" />
-                      <span className="hidden sm:inline">Save Scenario</span>
-                      <span className="sm:hidden">Save</span>
-                    </>
-                  )}
-                </Button>
                 <Button
                   variant="outline"
                   size="sm"

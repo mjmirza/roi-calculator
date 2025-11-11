@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Mail, Cog, GraduationCap, Calculator, Target, UserPlus, BarChart3 } from "lucide-react"
+import { ArrowRight, Mail, Cog, GraduationCap, Calculator, Target, UserPlus } from "lucide-react"
 
 export default function LandingPage() {
   const calculators = [
@@ -99,12 +99,6 @@ export default function LandingPage() {
             <Link href="/sales-hiring" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
               Sales Hiring
             </Link>
-            <Link href="/planner">
-              <Button size="sm" className="ml-2">
-                <BarChart3 className="h-4 w-4 mr-2" />
-                Scenario Planner
-              </Button>
-            </Link>
           </nav>
         </div>
       </header>
@@ -120,31 +114,6 @@ export default function LandingPage() {
             Calculate the financial impact of your investments in cold outreach, automation, employee training, customer acquisition, and sales hiring.
           </p>
         </div>
-
-        {/* Scenario Planner CTA */}
-        <Card className="max-w-4xl mx-auto mb-12 border-2 border-primary bg-gradient-to-br from-primary/5 to-primary/10">
-          <CardHeader className="text-center">
-            <div className="mx-auto w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-              <BarChart3 className="h-8 w-8 text-primary" />
-            </div>
-            <CardTitle className="text-2xl md:text-3xl">Compare Multiple Scenarios</CardTitle>
-            <CardDescription className="text-base">
-              Can't decide between hiring, automation, or training? Use our Scenario Planner to compare multiple options side-by-side and get clear recommendations.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="text-center">
-            <Link href="/planner">
-              <Button size="lg" className="text-base px-8">
-                <BarChart3 className="h-5 w-5 mr-2" />
-                Open Scenario Planner
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
-            <p className="text-xs text-muted-foreground mt-4">
-              Save scenarios from any calculator, compare up to 3 at once, and get data-driven recommendations
-            </p>
-          </CardContent>
-        </Card>
 
         {/* Calculator Cards */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto mb-16">

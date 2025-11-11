@@ -24,16 +24,10 @@ import {
   Cog,
   GraduationCap,
   Users,
-  Save,
-  CheckCircle,
 } from "lucide-react"
-import { useRouter } from "next/navigation"
-import { saveScenario, generateScenarioId, getDefaultScenarioName } from "@/lib/scenario-utils"
 
 export default function CACPaybackCalculator() {
   const { t } = useLanguage()
-  const router = useRouter()
-  const [scenarioSaved, setScenarioSaved] = useState(false)
 
   // Input States
   const [businessType, setBusinessType] = useState("saas")
@@ -111,40 +105,6 @@ export default function CACPaybackCalculator() {
     businessType,
     customerSegment,
   ])
-
-  const handleSaveScenario = () => {
-    const scenario = {
-      id: generateScenarioId(),
-      name: getDefaultScenarioName('cac-payback'),
-      calculatorType: 'cac-payback' as const,
-      inputs: {
-        businessType,
-        customerSegment,
-        salesMarketingSpend,
-        newMRR,
-        newCustomers,
-        grossMargin,
-        churnRate,
-        expansionRate
-      },
-      results: {
-        roi: metrics.ltvCacRatio * 100, // Convert ratio to percentage
-        totalCost: metrics.cac,
-        paybackMonths: Math.ceil(metrics.cacPaybackMonths),
-        totalReturn: metrics.ltv,
-        risk: metrics.cacPaybackMonths < 12 ? 'low' as const : metrics.cacPaybackMonths < 18 ? 'medium' as const : 'high' as const
-      },
-      createdAt: new Date().toISOString()
-    }
-
-    const success = saveScenario(scenario)
-    if (success) {
-      setScenarioSaved(true)
-      setTimeout(() => {
-        router.push('/planner')
-      }, 1500)
-    }
-  }
 
   const calculateMetrics = () => {
     // 1. CAC (Customer Acquisition Cost)
@@ -261,24 +221,6 @@ export default function CACPaybackCalculator() {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <Button
-              variant={scenarioSaved ? "default" : "outline"}
-              size="sm"
-              onClick={handleSaveScenario}
-              disabled={scenarioSaved}
-            >
-              {scenarioSaved ? (
-                <>
-                  <CheckCircle className="h-4 w-4 mr-2" />
-                  Saved!
-                </>
-              ) : (
-                <>
-                  <Save className="h-4 w-4 mr-2" />
-                  Save Scenario
-                </>
-              )}
-            </Button>
             <LanguageSelector />
             <Select value={currency} onValueChange={setCurrency}>
               <SelectTrigger className="w-32">

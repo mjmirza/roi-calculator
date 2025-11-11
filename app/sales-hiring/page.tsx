@@ -5,13 +5,10 @@ import Link from "next/link"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
 import { useLanguage } from "@/contexts/LanguageContext"
 import { LanguageSelector } from "@/components/language/LanguageSelector"
-import { useRouter } from "next/navigation"
-import { saveScenario, generateScenarioId, getDefaultScenarioName } from "@/lib/scenario-utils"
 import {
   TrendingUp,
   DollarSign,
@@ -26,8 +23,7 @@ import {
   TrendingDown,
   AlertCircle,
   CheckCircle,
-  Clock,
-  Save
+  Clock
 } from "lucide-react"
 
 // Currency data with symbols and conversion rates
@@ -77,8 +73,6 @@ type RoleType = keyof typeof roleConfigs
 
 export default function SalesHiringROICalculator() {
   const { t } = useLanguage()
-  const router = useRouter()
-  const [scenarioSaved, setScenarioSaved] = useState(false)
 
   // Configuration State
   const [currency, setCurrency] = useState<CurrencyCode>("USD")
@@ -293,49 +287,6 @@ export default function SalesHiringROICalculator() {
 
   const hiringRecommendation = getHiringRecommendation()
 
-  // Save Scenario Function
-  const handleSaveScenario = () => {
-    const scenario = {
-      id: generateScenarioId(),
-      name: getDefaultScenarioName('sales-hiring'),
-      calculatorType: 'sales-hiring' as const,
-      inputs: {
-        currency,
-        roleType,
-        currentTeamSize,
-        currentMRR,
-        avgDealSize,
-        salesCycleLength,
-        currentCapacity,
-        baseSalary,
-        ote,
-        rampTime,
-        expectedQuotaAttainment,
-        monthlyQuota,
-        recruitingCost,
-        onboardingCost,
-        toolsCostPerMonth,
-        benefitsPercentage
-      },
-      results: {
-        roi: firstYearROI,
-        totalCost: totalFirstYearCost,
-        paybackMonths: Math.ceil(breakEvenMonth),
-        totalReturn: totalRevenue,
-        risk: firstYearROI > 150 ? 'low' as const : firstYearROI > 80 ? 'medium' as const : 'high' as const
-      },
-      createdAt: new Date().toISOString()
-    }
-
-    const success = saveScenario(scenario)
-    if (success) {
-      setScenarioSaved(true)
-      setTimeout(() => {
-        router.push('/planner')
-      }, 1500)
-    }
-  }
-
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -346,27 +297,6 @@ export default function SalesHiringROICalculator() {
             <span className="text-xl font-bold">Sales Hiring ROI</span>
           </Link>
           <div className="flex items-center gap-4">
-            <Button
-              variant={scenarioSaved ? "default" : "outline"}
-              size="sm"
-              onClick={handleSaveScenario}
-              disabled={scenarioSaved}
-              className="flex-1 sm:flex-initial gap-2 transition-all hover:scale-105"
-            >
-              {scenarioSaved ? (
-                <>
-                  <CheckCircle className="h-4 w-4" />
-                  <span className="hidden sm:inline">Saved!</span>
-                  <span className="sm:hidden">Saved</span>
-                </>
-              ) : (
-                <>
-                  <Save className="h-4 w-4" />
-                  <span className="hidden sm:inline">Save Scenario</span>
-                  <span className="sm:hidden">Save</span>
-                </>
-              )}
-            </Button>
             <LanguageSelector />
             <Select value={currency} onValueChange={(value) => setCurrency(value as CurrencyCode)}>
               <SelectTrigger className="w-32">
