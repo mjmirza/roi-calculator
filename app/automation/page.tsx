@@ -20,6 +20,8 @@ import {
   Users,
   Zap,
   BarChart3,
+  Mail,
+  GraduationCap,
 } from "lucide-react"
 
 export default function AutomationROICalculator() {

@@ -21,6 +21,8 @@ import {
   Target,
   Award,
   Briefcase,
+  Mail,
+  Cog,
 } from "lucide-react"
 
 export default function TrainingROICalculator() {
