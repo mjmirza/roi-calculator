@@ -118,6 +118,8 @@ export default function AutomationROICalculator() {
   ])
 
   const handleSaveScenario = () => {
+    const totalAnnualBenefits = results.annualLaborSavings + results.errorSavings + results.productivityValue
+
     const scenario = {
       id: generateScenarioId(),
       name: getDefaultScenarioName('automation'),
@@ -133,11 +135,11 @@ export default function AutomationROICalculator() {
         implementationApproach
       },
       results: {
-        roi: results.year1ROI,
-        totalCost: results.year1TotalCost,
+        roi: results.firstYearROI,
+        totalCost: results.totalFirstYearCost,
         paybackMonths: Math.ceil(results.paybackMonths),
-        totalReturn: results.totalAnnualBenefits,
-        risk: results.year1ROI > 200 ? 'low' as const : results.year1ROI > 100 ? 'medium' as const : 'high' as const
+        totalReturn: totalAnnualBenefits,
+        risk: results.firstYearROI > 200 ? 'low' as const : results.firstYearROI > 100 ? 'medium' as const : 'high' as const
       },
       createdAt: new Date().toISOString()
     }

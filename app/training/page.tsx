@@ -130,7 +130,7 @@ export default function TrainingROICalculator() {
         roi: results.threeYearROI,
         totalCost: results.totalTrainingInvestment,
         paybackMonths: Math.ceil(results.paybackMonths),
-        totalReturn: results.threeYearNetValue,
+        totalReturn: results.threeYearValue,
         risk: results.threeYearROI > 150 ? 'low' as const : results.threeYearROI > 80 ? 'medium' as const : 'high' as const
       },
       createdAt: new Date().toISOString()

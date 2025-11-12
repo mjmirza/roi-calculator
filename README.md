@@ -330,6 +330,19 @@ All documentation is located in the `/docs` folder:
 
 ## 🔄 Recent Updates
 
+### v5.1.0 - Critical Bug Fixes & UX Enhancements (2025-11-12)
+- ✅ **Fixed**: ROI Calculator - Undefined variable error (averageDealValue → ltv)
+- ✅ **Fixed**: CAC Calculator - Save functionality (metrics → results)
+- ✅ **Fixed**: Automation Calculator - NaN total cost issue (field name corrections)
+- ✅ **Fixed**: Training Calculator - Undefined totalReturn (threeYearNetValue → threeYearValue)
+- ✅ **Fixed**: Scenario Planner - toFixed errors on undefined values
+- ✅ **Enhanced**: Added safe number formatting with null checks throughout planner
+- ✅ **Enhanced**: 3-scenario selection limit now has clear UX hints
+- ✅ **Enhanced**: Info banner explains why limit exists (optimal comparison readability)
+- ✅ **Enhanced**: Visual feedback when selection limit reached (dimmed, cursor change)
+- ✅ All 5 calculators now save scenarios correctly without errors
+- ✅ Build: ✓ Successful across all calculators
+
 ### v5.0.0 - Scenario Planner Launch (2025-11-11)
 - ✅ **NEW: Scenario Planner** - Compare multiple investment scenarios
 - ✅ Save scenarios from any calculator with LocalStorage persistence
@@ -410,9 +423,9 @@ For issues or questions, please create an issue in the GitHub repository.
 
 ---
 
-**Last Updated**: November 11, 2025
-**Version**: 5.0.0
-**Status**: ✅ Production Ready
+**Last Updated**: November 12, 2025
+**Version**: 5.1.0
+**Status**: ✅ Production Ready - All Bugs Fixed
 **Features**: 5 Calculators + Scenario Planner
 **Tools**: Cold Email, Automation, Training, CAC Payback, Sales Hiring, Multi-Scenario Comparison
 
