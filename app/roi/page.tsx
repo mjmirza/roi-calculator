@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Link from "next/link"
 import { useLanguage } from "@/contexts/LanguageContext"
 import { LanguageSelector } from "@/components/language/LanguageSelector"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -34,6 +35,7 @@ import {
   Mail,
   Save,
   CheckCircle,
+  ArrowLeft,
 } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { saveScenario, generateScenarioId, getDefaultScenarioName } from "@/lib/scenario-utils"
@@ -1372,6 +1374,16 @@ export default function ROICalculator() {
       <div className="sticky top-0 z-50 border-b bg-card shadow-sm">
         <div className="container mx-auto px-4 py-4 md:py-6">
           <div className="flex flex-col gap-4">
+            {/* Back to Hub Button */}
+            <div>
+              <Link href="/">
+                <Button variant="ghost" size="sm">
+                  <ArrowLeft className="h-4 w-4 mr-2" />
+                  Back to Hub
+                </Button>
+              </Link>
+            </div>
+
             {/* Title Section */}
             <div>
               <h1 className="text-xl md:text-2xl font-semibold tracking-tight text-foreground">{t("header.title")}</h1>
