@@ -255,6 +255,18 @@ export default function AutomationROICalculator() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
+      {/* Mobile CTA Banner */}
+      <div className="lg:hidden bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-3 text-center">
+        <a
+          href="https://services.next8n.com/book-consultation"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-semibold text-sm hover:underline"
+        >
+          🚀 Get Expert Help - Book Free Consultation →
+        </a>
+      </div>
+
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b bg-white/80 dark:bg-gray-950/80 backdrop-blur-sm">
         <div className="container mx-auto flex h-16 items-center justify-between px-4">

@@ -1371,6 +1371,18 @@ export default function ROICalculator() {
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
+      {/* Mobile CTA Banner */}
+      <div className="lg:hidden bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-3 text-center">
+        <a
+          href="https://services.next8n.com/book-consultation"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-semibold text-sm hover:underline"
+        >
+          🚀 Get Expert Help - Book Free Consultation →
+        </a>
+      </div>
+
       <div className="sticky top-0 z-50 border-b bg-card shadow-sm">
         <div className="container mx-auto px-4 py-4 md:py-6">
           <div className="flex flex-col gap-4">

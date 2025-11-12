@@ -340,55 +340,120 @@ export default function SalesHiringROICalculator() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
+      {/* Mobile CTA Banner */}
+      <div className="lg:hidden bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-3 text-center">
+        <a
+          href="https://services.next8n.com/book-consultation"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-semibold text-sm hover:underline"
+        >
+          🚀 Get Expert Help - Book Free Consultation →
+        </a>
+      </div>
+
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container mx-auto flex h-16 items-center justify-between px-4">
-          <div className="flex items-center gap-4">
-            <Link href="/">
-              <Button variant="ghost" size="sm">
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                Back to Hub
-              </Button>
-            </Link>
-            <div className="flex items-center gap-2">
-              <Calculator className="h-6 w-6" />
-              <span className="text-xl font-bold">Sales Hiring ROI</span>
+        <div className="container mx-auto px-4 py-3">
+          {/* Mobile Layout */}
+          <div className="lg:hidden flex flex-col gap-3">
+            <div className="flex items-center justify-between">
+              <Link href="/">
+                <Button variant="ghost" size="sm" className="gap-2">
+                  <ArrowLeft className="h-4 w-4" />
+                  <span className="text-xs">Back</span>
+                </Button>
+              </Link>
+              <div className="flex items-center gap-2">
+                <Calculator className="h-5 w-5" />
+                <span className="text-base font-bold">Sales Hiring ROI</span>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 justify-between">
+              <div className="flex items-center gap-2 flex-1">
+                <Button
+                  variant={scenarioSaved ? "default" : "outline"}
+                  size="sm"
+                  onClick={handleSaveScenario}
+                  disabled={scenarioSaved}
+                  className="gap-1 text-xs flex-1"
+                >
+                  {scenarioSaved ? (
+                    <>
+                      <CheckCircle className="h-3 w-3" />
+                      Saved
+                    </>
+                  ) : (
+                    <>
+                      <Save className="h-3 w-3" />
+                      Save
+                    </>
+                  )}
+                </Button>
+                <LanguageSelector />
+              </div>
+              <Select value={currency} onValueChange={(value) => setCurrency(value as CurrencyCode)}>
+                <SelectTrigger className="w-24 h-9">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {Object.entries(currencies).map(([code, curr]) => (
+                    <SelectItem key={code} value={code}>
+                      {curr.symbol} {code}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
           </div>
-          <div className="flex items-center gap-4">
-            <Button
-              variant={scenarioSaved ? "default" : "outline"}
-              size="sm"
-              onClick={handleSaveScenario}
-              disabled={scenarioSaved}
-              className="flex-1 sm:flex-initial gap-2 transition-all hover:scale-105"
-            >
-              {scenarioSaved ? (
-                <>
-                  <CheckCircle className="h-4 w-4" />
-                  <span className="hidden sm:inline">Saved!</span>
-                  <span className="sm:hidden">Saved</span>
-                </>
-              ) : (
-                <>
-                  <Save className="h-4 w-4" />
-                  <span className="hidden sm:inline">Save Scenario</span>
-                  <span className="sm:hidden">Save</span>
-                </>
-              )}
-            </Button>
-            <LanguageSelector />
-            <Select value={currency} onValueChange={(value) => setCurrency(value as CurrencyCode)}>
-              <SelectTrigger className="w-32">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {Object.entries(currencies).map(([code, curr]) => (
-                  <SelectItem key={code} value={code}>
-                    {curr.symbol} {code}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+
+          {/* Desktop Layout */}
+          <div className="hidden lg:flex items-center justify-between h-16">
+            <div className="flex items-center gap-4">
+              <Link href="/">
+                <Button variant="ghost" size="sm">
+                  <ArrowLeft className="h-4 w-4 mr-2" />
+                  Back to Hub
+                </Button>
+              </Link>
+              <div className="flex items-center gap-2">
+                <Calculator className="h-6 w-6" />
+                <span className="text-xl font-bold">Sales Hiring ROI</span>
+              </div>
+            </div>
+            <div className="flex items-center gap-4">
+              <Button
+                variant={scenarioSaved ? "default" : "outline"}
+                size="sm"
+                onClick={handleSaveScenario}
+                disabled={scenarioSaved}
+                className="gap-2 transition-all hover:scale-105"
+              >
+                {scenarioSaved ? (
+                  <>
+                    <CheckCircle className="h-4 w-4" />
+                    Saved!
+                  </>
+                ) : (
+                  <>
+                    <Save className="h-4 w-4" />
+                    Save Scenario
+                  </>
+                )}
+              </Button>
+              <LanguageSelector />
+              <Select value={currency} onValueChange={(value) => setCurrency(value as CurrencyCode)}>
+                <SelectTrigger className="w-32">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {Object.entries(currencies).map(([code, curr]) => (
+                    <SelectItem key={code} value={code}>
+                      {curr.symbol} {code}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
           </div>
         </div>
       </header>
