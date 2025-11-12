@@ -231,12 +231,15 @@ export default function ScenarioPlanner() {
                 </Card>
                 <Card>
                   <CardHeader className="pb-3">
-                    <CardDescription>Selected</CardDescription>
+                    <CardDescription>Selected for Comparison</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <div className="text-3xl font-bold text-primary">
                       {selectedScenarios.length}/3
                     </div>
+                    <p className="text-xs text-muted-foreground mt-2">
+                      Select up to 3 scenarios for optimal side-by-side comparison
+                    </p>
                   </CardContent>
                 </Card>
               </div>
@@ -270,6 +273,24 @@ export default function ScenarioPlanner() {
               </CardContent>
             </Card>
 
+            {/* Selection Limit Info Banner */}
+            {selectedScenarios.length === 3 && (
+              <Card className="mb-6 border-blue-200 bg-blue-50/50 dark:bg-blue-950/20">
+                <CardContent className="pt-6">
+                  <div className="flex items-start gap-3">
+                    <AlertCircle className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-0.5" />
+                    <div>
+                      <p className="font-semibold text-blue-900 dark:text-blue-100">Maximum Selections Reached</p>
+                      <p className="text-sm text-blue-700 dark:text-blue-300 mt-1">
+                        You've selected the maximum of 3 scenarios for comparison. This limit ensures clear, focused analysis.
+                        To select a different scenario, deselect one of your current selections first.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
             {/* Scenarios List */}
             {scenarios.length === 0 ? (
               <Card className="text-center py-16">
@@ -298,13 +319,17 @@ export default function ScenarioPlanner() {
                   const Icon = info.icon
                   const isSelected = selectedScenarios.includes(scenario.id)
 
+                  const canSelect = isSelected || selectedScenarios.length < 3
+
                   return (
                     <Card
                       key={scenario.id}
-                      className={`transition-all cursor-pointer ${
-                        isSelected ? 'border-primary border-2 shadow-md' : 'hover:shadow-sm'
+                      className={`transition-all ${
+                        canSelect ? 'cursor-pointer' : 'cursor-not-allowed opacity-60'
+                      } ${
+                        isSelected ? 'border-primary border-2 shadow-md' : canSelect ? 'hover:shadow-sm' : ''
                       }`}
-                      onClick={() => toggleSelection(scenario.id)}
+                      onClick={() => canSelect && toggleSelection(scenario.id)}
                     >
                       <CardHeader>
                         <div className="flex items-start justify-between">

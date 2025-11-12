@@ -128,11 +128,11 @@ export default function CACPaybackCalculator() {
         expansionRate
       },
       results: {
-        roi: metrics.ltvCacRatio * 100, // Convert ratio to percentage
-        totalCost: metrics.cac,
-        paybackMonths: Math.ceil(metrics.cacPaybackMonths),
-        totalReturn: metrics.ltv,
-        risk: metrics.cacPaybackMonths < 12 ? 'low' as const : metrics.cacPaybackMonths < 18 ? 'medium' as const : 'high' as const
+        roi: results.ltvCacRatio * 100, // Convert ratio to percentage
+        totalCost: results.cac,
+        paybackMonths: Math.ceil(results.cacPaybackMonths),
+        totalReturn: results.ltv,
+        risk: results.cacPaybackMonths < 12 ? 'low' as const : results.cacPaybackMonths < 18 ? 'medium' as const : 'high' as const
       },
       createdAt: new Date().toISOString()
     }
