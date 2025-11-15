@@ -71,17 +71,26 @@ This project provides five specialized ROI calculators PLUS a powerful scenario 
 - LinkedIn Outreach
 - Referral Programs
 
+**Operating Costs (NEW v5.2.0):**
+- Enable/Disable toggle for full cost control
+- Team costs (SDRs, AEs, Sales Manager, Virtual Assistant)
+- Essential tools (CRM, Email Verification, Sales Analytics)
+- Training & Development per employee
+- Overhead bundle (office, utilities, insurance, etc.)
+- All fields stack vertically for easy input
+- Real-time cost breakdown display
+
 **Financial Features:**
 - Real-time ROI, CAC, LTV calculations
 - 11 currency support (USD, EUR, GBP, JPY, CNY, AUD, CAD, CHF, INR, SGD, AED)
 - Corporate tax calculations
 - Sales commission tracking (percentage or flat-rate)
 - Agency cost comparison
-- 6-month cash flow projections
+- 6-month cash flow projections with operating costs breakdown
 
 **Advanced Capabilities:**
 - Dark mode support
-- LocalStorage persistence
+- LocalStorage persistence (includes operating costs)
 - Export/Import configurations
 - Scenario shuffling for testing
 
@@ -253,14 +262,18 @@ npm start
 ## 🧪 Testing
 
 ### Test Coverage
-- **108 Total Tests** executed across all calculators
-- **96.3% Pass Rate** (104 passed, 4 fixed)
+- **158 Total Tests** executed across all calculators and features
+- **100% Pass Rate** (158 passed, 0 failed)
 - **100% Critical Functionality** verified
 
 ### Run Tests
 
 \`\`\`bash
+# Combined metrics tests (108 tests)
 node test-combined-metrics.js
+
+# Operating costs tests (50 tests)
+node test-operating-costs-toggle.js
 \`\`\`
 
 ### Test Reports
@@ -329,6 +342,20 @@ All documentation is located in the `/docs` folder:
 - **Quota Attainment**: 75-85% typical
 
 ## 🔄 Recent Updates
+
+### v5.2.0 - Operating Costs Toggle & Layout Fixes (2025-11-15)
+- ✅ **NEW**: Operating Costs Enable/Disable toggle for complete control
+- ✅ **NEW**: All operating costs fields now stack vertically (improved UX)
+- ✅ **NEW**: Operating costs appear in Monthly Breakdown when enabled
+- ✅ **NEW**: Clear role explanations (SDR, AE, VA, CRM) with info box
+- ✅ **NEW**: Industry-standard cost ranges in tooltips
+- ✅ **Enhanced**: Operating costs now saved/loaded from localStorage
+- ✅ **Enhanced**: Cash flow projections include operating costs breakdown
+- ✅ **Enhanced**: Financial Summary reflects toggle state
+- ✅ **Enhanced**: 100% test coverage (50 new tests, all passed)
+- ✅ When toggle OFF: All operating costs = $0 in calculations
+- ✅ When toggle ON: Full operating costs included in ROI/CAC/profit
+- ✅ Build: ✓ Successful with zero warnings
 
 ### v5.1.0 - Critical Bug Fixes & UX Enhancements (2025-11-12)
 - ✅ **Fixed**: ROI Calculator - Undefined variable error (averageDealValue → ltv)
@@ -423,10 +450,11 @@ For issues or questions, please create an issue in the GitHub repository.
 
 ---
 
-**Last Updated**: November 12, 2025
-**Version**: 5.1.0
-**Status**: ✅ Production Ready - All Bugs Fixed
+**Last Updated**: November 15, 2025
+**Version**: 5.2.0
+**Status**: ✅ Production Ready - All Features Complete
 **Features**: 5 Calculators + Scenario Planner
-**Tools**: Cold Email, Automation, Training, CAC Payback, Sales Hiring, Multi-Scenario Comparison
+**Tools**: Cold Email (with Operating Costs), Automation, Training, CAC Payback, Sales Hiring, Multi-Scenario Comparison
+**Test Coverage**: 158 tests, 100% pass rate
 
 🤖 Built with Claude Code

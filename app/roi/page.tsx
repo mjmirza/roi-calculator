@@ -84,6 +84,7 @@ export default function ROICalculator() {
   const [enableColdCalling, setEnableColdCalling] = useState(false)
   const [enableLinkedIn, setEnableLinkedIn] = useState(false)
   const [enableReferrals, setEnableReferrals] = useState(false)
+  const [enableOperatingCosts, setEnableOperatingCosts] = useState(false)
 
   const [showAdvanced, setShowAdvanced] = useState(false)
   const [showAgencyComparison, setShowAgencyComparison] = useState(false)
@@ -347,6 +348,22 @@ export default function ROICalculator() {
         setReferralConversionRate(data.referralConversionRate ?? 40)
         setReferralIncentiveCost(data.referralIncentiveCost ?? 500)
         setReferralProgramCost(data.referralProgramCost ?? 1000)
+
+        // Load Operating Costs state variables
+        setEnableOperatingCosts(data.enableOperatingCosts ?? false)
+        setSdrCount(data.sdrCount ?? 2)
+        setSdrCostPerPerson(data.sdrCostPerPerson ?? 8500)
+        setAeCount(data.aeCount ?? 1)
+        setAeCostPerPerson(data.aeCostPerPerson ?? 12000)
+        setEnableSalesManager(data.enableSalesManager ?? false)
+        setSalesManagerCost(data.salesManagerCost ?? 12500)
+        setCrmPlatformCost(data.crmPlatformCost ?? 300)
+        setEmailVerificationCost(data.emailVerificationCost ?? 100)
+        setSalesAnalyticsCost(data.salesAnalyticsCost ?? 200)
+        setEnableVirtualAssistant(data.enableVirtualAssistant ?? false)
+        setVirtualAssistantCost(data.virtualAssistantCost ?? 2500)
+        setTrainingCostPerEmployee(data.trainingCostPerEmployee ?? 300)
+        setOverheadBundleCost(data.overheadBundleCost ?? 1000)
       } catch (e) {
         console.error("Failed to load saved data", e)
       }
@@ -421,6 +438,21 @@ export default function ROICalculator() {
       referralConversionRate,
       referralIncentiveCost,
       referralProgramCost,
+      // Save Operating Costs state variables
+      enableOperatingCosts,
+      sdrCount,
+      sdrCostPerPerson,
+      aeCount,
+      aeCostPerPerson,
+      enableSalesManager,
+      salesManagerCost,
+      crmPlatformCost,
+      emailVerificationCost,
+      salesAnalyticsCost,
+      enableVirtualAssistant,
+      virtualAssistantCost,
+      trainingCostPerEmployee,
+      overheadBundleCost,
     }
     localStorage.setItem("roiCalculatorData", JSON.stringify(data))
   }, [
@@ -549,20 +581,29 @@ export default function ROICalculator() {
     const unsubscribes = Math.round(totalEmails * (unsubscribeRate / 100))
     const effectiveReach = totalEmails - emailsBounced - unsubscribes
 
-    // Operating Costs - Team
-    const totalEmployees = sdrCount + aeCount + (enableSalesManager ? 1 : 0) + (enableVirtualAssistant ? 1 : 0)
-    const teamCost =
-      (sdrCount * sdrCostPerPerson) +
-      (aeCount * aeCostPerPerson) +
-      (enableSalesManager ? salesManagerCost : 0) +
-      (enableVirtualAssistant ? virtualAssistantCost : 0)
+    // Operating Costs - Team (conditional based on enableOperatingCosts)
+    const totalEmployees = enableOperatingCosts
+      ? sdrCount + aeCount + (enableSalesManager ? 1 : 0) + (enableVirtualAssistant ? 1 : 0)
+      : 0
+    const teamCost = enableOperatingCosts
+      ? (sdrCount * sdrCostPerPerson) +
+        (aeCount * aeCostPerPerson) +
+        (enableSalesManager ? salesManagerCost : 0) +
+        (enableVirtualAssistant ? virtualAssistantCost : 0)
+      : 0
 
     // Operating Costs - Tools
-    const toolsCost = crmPlatformCost + emailVerificationCost + salesAnalyticsCost
+    const toolsCost = enableOperatingCosts
+      ? crmPlatformCost + emailVerificationCost + salesAnalyticsCost
+      : 0
 
     // Operating Costs - Training & Overhead
-    const trainingCost = totalEmployees * trainingCostPerEmployee
-    const operatingCostTotal = teamCost + toolsCost + trainingCost + overheadBundleCost
+    const trainingCost = enableOperatingCosts
+      ? totalEmployees * trainingCostPerEmployee
+      : 0
+    const operatingCostTotal = enableOperatingCosts
+      ? teamCost + toolsCost + trainingCost + overheadBundleCost
+      : 0
 
     const totalCost =
       (domains * domainCost) +
@@ -1366,6 +1407,7 @@ export default function ROICalculator() {
       const cumulativeColdCallingCost = enableColdCalling ? calculations.coldCallingTotalCost * i : 0
       const cumulativeLinkedInCost = enableLinkedIn ? calculations.linkedInTotalCost * i : 0
       const cumulativeReferralCost = enableReferrals ? calculations.referralProgramCost * i : 0
+      const cumulativeOperatingCost = enableOperatingCosts ? calculations.operatingCostTotal * i : 0
       const cumulativeBaseCost = calculations.totalCostAllChannels * i
 
       // Add commission and agency costs if enabled
@@ -1383,6 +1425,7 @@ export default function ROICalculator() {
         coldCallingCost: cumulativeColdCallingCost,
         linkedInCost: cumulativeLinkedInCost,
         referralCost: cumulativeReferralCost,
+        operatingCost: cumulativeOperatingCost,
         baseCost: cumulativeBaseCost,
         commissionCost: cumulativeCommissionCost,
         agencyCost: cumulativeAgencyCost,
@@ -2193,6 +2236,23 @@ export default function ROICalculator() {
                     <div className="flex items-center gap-3">
                       <Building2 className="h-5 w-5 text-blue-600" />
                       <CardTitle className="text-base">Operating Costs</CardTitle>
+                      <div className="flex items-center gap-2">
+                        <Switch
+                          checked={enableOperatingCosts}
+                          onCheckedChange={(checked) => {
+                            setEnableOperatingCosts(checked)
+                            if (checked) {
+                              setShowOperatingCosts(true)
+                            } else {
+                              setShowOperatingCosts(false)
+                            }
+                          }}
+                          onClick={(e) => e.stopPropagation()}
+                        />
+                        <span className="text-xs text-muted-foreground">
+                          {enableOperatingCosts ? "Enabled" : "Disabled"}
+                        </span>
+                      </div>
                     </div>
                     <CardDescription className="mt-1 flex items-start gap-1">
                       <Info className="h-3 w-3 mt-0.5 flex-shrink-0 text-blue-500" />
@@ -2202,7 +2262,7 @@ export default function ROICalculator() {
                   {showOperatingCosts ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
                 </div>
               </CardHeader>
-              {showOperatingCosts && (
+              {showOperatingCosts && enableOperatingCosts && (
                 <CardContent className="space-y-6 pt-0">
                   <Separator className="mb-4" />
 
@@ -2226,66 +2286,64 @@ export default function ROICalculator() {
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <LabelWithTooltip
-                          htmlFor="sdrCount"
-                          label="SDRs (Sales Dev Reps)"
-                          tooltip="Sales Development Representatives - responsible for prospecting, lead qualification, and booking meetings with qualified prospects"
-                        />
-                        <Input
-                          id="sdrCount"
-                          type="number"
-                          value={sdrCount || ""}
-                          onChange={(e) => handleNumberInput(e.target.value, setSdrCount)}
-                          className="font-mono transition-all focus:ring-2"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <LabelWithTooltip
-                          htmlFor="sdrCostPerPerson"
-                          label="Cost per SDR (Monthly)"
-                          tooltip="Total monthly cost per SDR including salary, benefits, commissions, and bonuses. Typical range: $6,000-$12,000/month"
-                        />
-                        <Input
-                          id="sdrCostPerPerson"
-                          type="number"
-                          value={sdrCostPerPerson || ""}
-                          onChange={(e) => handleNumberInput(e.target.value, setSdrCostPerPerson)}
-                          className="font-mono transition-all focus:ring-2"
-                        />
-                      </div>
+                    <div className="space-y-2">
+                      <LabelWithTooltip
+                        htmlFor="sdrCount"
+                        label="SDRs (Sales Dev Reps)"
+                        tooltip="Sales Development Representatives - responsible for prospecting, lead qualification, and booking meetings with qualified prospects"
+                      />
+                      <Input
+                        id="sdrCount"
+                        type="number"
+                        value={sdrCount || ""}
+                        onChange={(e) => handleNumberInput(e.target.value, setSdrCount)}
+                        className="font-mono transition-all focus:ring-2"
+                      />
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <LabelWithTooltip
-                          htmlFor="aeCount"
-                          label="AEs (Account Executives)"
-                          tooltip="Account Executives - responsible for closing deals, conducting product demos, and managing the full sales cycle from qualified meeting to signed contract"
-                        />
-                        <Input
-                          id="aeCount"
-                          type="number"
-                          value={aeCount || ""}
-                          onChange={(e) => handleNumberInput(e.target.value, setAeCount)}
-                          className="font-mono transition-all focus:ring-2"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <LabelWithTooltip
-                          htmlFor="aeCostPerPerson"
-                          label="Cost per AE (Monthly)"
-                          tooltip="Total monthly cost per Account Executive including base salary, benefits, commissions, and bonuses. Typical range: $10,000-$20,000/month"
-                        />
-                        <Input
-                          id="aeCostPerPerson"
-                          type="number"
-                          value={aeCostPerPerson || ""}
-                          onChange={(e) => handleNumberInput(e.target.value, setAeCostPerPerson)}
-                          className="font-mono transition-all focus:ring-2"
-                        />
-                      </div>
+                    <div className="space-y-2">
+                      <LabelWithTooltip
+                        htmlFor="sdrCostPerPerson"
+                        label="Cost per SDR (Monthly)"
+                        tooltip="Total monthly cost per SDR including salary, benefits, commissions, and bonuses. Typical range: $6,000-$12,000/month"
+                      />
+                      <Input
+                        id="sdrCostPerPerson"
+                        type="number"
+                        value={sdrCostPerPerson || ""}
+                        onChange={(e) => handleNumberInput(e.target.value, setSdrCostPerPerson)}
+                        className="font-mono transition-all focus:ring-2"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <LabelWithTooltip
+                        htmlFor="aeCount"
+                        label="AEs (Account Executives)"
+                        tooltip="Account Executives - responsible for closing deals, conducting product demos, and managing the full sales cycle from qualified meeting to signed contract"
+                      />
+                      <Input
+                        id="aeCount"
+                        type="number"
+                        value={aeCount || ""}
+                        onChange={(e) => handleNumberInput(e.target.value, setAeCount)}
+                        className="font-mono transition-all focus:ring-2"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <LabelWithTooltip
+                        htmlFor="aeCostPerPerson"
+                        label="Cost per AE (Monthly)"
+                        tooltip="Total monthly cost per Account Executive including base salary, benefits, commissions, and bonuses. Typical range: $10,000-$20,000/month"
+                      />
+                      <Input
+                        id="aeCostPerPerson"
+                        type="number"
+                        value={aeCostPerPerson || ""}
+                        onChange={(e) => handleNumberInput(e.target.value, setAeCostPerPerson)}
+                        className="font-mono transition-all focus:ring-2"
+                      />
                     </div>
 
                     <div className="flex items-center gap-2 p-3 bg-muted/50 rounded-lg">
@@ -4039,6 +4097,14 @@ export default function ROICalculator() {
                                   <span className="text-muted-foreground text-[11px]">• Referral Program:</span>
                                   <span className="font-mono text-red-600 dark:text-red-400">
                                     -{formatCurrency(projection.referralCost)}
+                                  </span>
+                                </div>
+                              )}
+                              {enableOperatingCosts && projection.operatingCost > 0 && (
+                                <div className="flex justify-between">
+                                  <span className="text-muted-foreground text-[11px]">• Operating Costs:</span>
+                                  <span className="font-mono text-red-600 dark:text-red-400">
+                                    -{formatCurrency(projection.operatingCost)}
                                   </span>
                                 </div>
                               )}
