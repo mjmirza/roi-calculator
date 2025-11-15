@@ -2213,12 +2213,25 @@ export default function ROICalculator() {
                       <h4 className="font-semibold text-sm">Team Costs</h4>
                     </div>
 
+                    {/* Info Box explaining roles */}
+                    <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3 space-y-2">
+                      <div className="flex items-start gap-2">
+                        <Info className="h-4 w-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                        <div className="text-xs space-y-1.5">
+                          <p className="font-semibold text-blue-900 dark:text-blue-100">Sales Team Roles:</p>
+                          <p><span className="font-semibold">SDR (Sales Development Rep):</span> Focuses on prospecting, qualifying leads, and booking meetings. First point of contact.</p>
+                          <p><span className="font-semibold">AE (Account Executive):</span> Closes deals, conducts demos, and manages the sales process from meeting to signed contract.</p>
+                          <p><span className="font-semibold">Sales Manager:</span> Oversees the sales team, provides coaching, and manages strategy and performance.</p>
+                        </div>
+                      </div>
+                    </div>
+
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <LabelWithTooltip
                           htmlFor="sdrCount"
-                          label="SDR Count"
-                          tooltip="Number of Sales Development Representatives on your team"
+                          label="SDRs (Sales Dev Reps)"
+                          tooltip="Sales Development Representatives - responsible for prospecting, lead qualification, and booking meetings with qualified prospects"
                         />
                         <Input
                           id="sdrCount"
@@ -2231,8 +2244,8 @@ export default function ROICalculator() {
                       <div className="space-y-2">
                         <LabelWithTooltip
                           htmlFor="sdrCostPerPerson"
-                          label="SDR Cost/Person"
-                          tooltip="Monthly cost per SDR (salary + benefits)"
+                          label="Cost per SDR (Monthly)"
+                          tooltip="Total monthly cost per SDR including salary, benefits, commissions, and bonuses. Typical range: $6,000-$12,000/month"
                         />
                         <Input
                           id="sdrCostPerPerson"
@@ -2248,8 +2261,8 @@ export default function ROICalculator() {
                       <div className="space-y-2">
                         <LabelWithTooltip
                           htmlFor="aeCount"
-                          label="AE Count"
-                          tooltip="Number of Account Executives on your team"
+                          label="AEs (Account Executives)"
+                          tooltip="Account Executives - responsible for closing deals, conducting product demos, and managing the full sales cycle from qualified meeting to signed contract"
                         />
                         <Input
                           id="aeCount"
@@ -2262,8 +2275,8 @@ export default function ROICalculator() {
                       <div className="space-y-2">
                         <LabelWithTooltip
                           htmlFor="aeCostPerPerson"
-                          label="AE Cost/Person"
-                          tooltip="Monthly cost per AE (salary + benefits)"
+                          label="Cost per AE (Monthly)"
+                          tooltip="Total monthly cost per Account Executive including base salary, benefits, commissions, and bonuses. Typical range: $10,000-$20,000/month"
                         />
                         <Input
                           id="aeCostPerPerson"
@@ -2282,7 +2295,7 @@ export default function ROICalculator() {
                       />
                       <div className="flex-1">
                         <Label className="text-sm font-medium cursor-pointer">Sales Manager</Label>
-                        <p className="text-xs text-muted-foreground">Add sales manager to your team</p>
+                        <p className="text-xs text-muted-foreground">Team leader who coaches SDRs/AEs and drives sales strategy</p>
                       </div>
                     </div>
 
@@ -2290,8 +2303,8 @@ export default function ROICalculator() {
                       <div className="space-y-2">
                         <LabelWithTooltip
                           htmlFor="salesManagerCost"
-                          label="Sales Manager Cost"
-                          tooltip="Monthly cost for sales manager (salary + benefits)"
+                          label="Sales Manager Cost (Monthly)"
+                          tooltip="Total monthly cost for sales manager including salary, benefits, and bonuses. Typical range: $10,000-$18,000/month"
                         />
                         <Input
                           id="salesManagerCost"
@@ -2309,8 +2322,8 @@ export default function ROICalculator() {
                         onCheckedChange={setEnableVirtualAssistant}
                       />
                       <div className="flex-1">
-                        <Label className="text-sm font-medium cursor-pointer">Virtual Assistant</Label>
-                        <p className="text-xs text-muted-foreground">Add VA for administrative support</p>
+                        <Label className="text-sm font-medium cursor-pointer">Virtual Assistant (VA)</Label>
+                        <p className="text-xs text-muted-foreground">Remote admin support for scheduling, data entry, and research</p>
                       </div>
                     </div>
 
@@ -2318,8 +2331,8 @@ export default function ROICalculator() {
                       <div className="space-y-2">
                         <LabelWithTooltip
                           htmlFor="virtualAssistantCost"
-                          label="VA Monthly Cost"
-                          tooltip="Monthly cost for virtual assistant"
+                          label="VA Cost (Monthly)"
+                          tooltip="Monthly cost for virtual assistant services. Typical range: $1,500-$4,000/month depending on hours and location"
                         />
                         <Input
                           id="virtualAssistantCost"
@@ -2344,8 +2357,8 @@ export default function ROICalculator() {
                     <div className="space-y-2">
                       <LabelWithTooltip
                         htmlFor="crmPlatformCost"
-                        label="CRM Platform Cost"
-                        tooltip="Monthly cost for CRM (HubSpot, Salesforce, Pipedrive, etc.)"
+                        label="CRM Platform"
+                        tooltip="Customer Relationship Management software (HubSpot, Salesforce, Pipedrive, etc.) for tracking leads, deals, and customer interactions. Typical: $200-$800/month"
                       />
                       <Input
                         id="crmPlatformCost"
@@ -2359,8 +2372,8 @@ export default function ROICalculator() {
                     <div className="space-y-2">
                       <LabelWithTooltip
                         htmlFor="emailVerificationCost"
-                        label="Email Verification Cost"
-                        tooltip="Monthly cost for email verification tools (ZeroBounce, NeverBounce, etc.)"
+                        label="Email Verification"
+                        tooltip="Email validation services (ZeroBounce, NeverBounce, Clearout, etc.) to verify email addresses and reduce bounce rates. Typical: $50-$300/month"
                       />
                       <Input
                         id="emailVerificationCost"
@@ -2374,8 +2387,8 @@ export default function ROICalculator() {
                     <div className="space-y-2">
                       <LabelWithTooltip
                         htmlFor="salesAnalyticsCost"
-                        label="Sales Analytics Tools"
-                        tooltip="Monthly cost for analytics tools (Gong, Chorus, etc.)"
+                        label="Sales Analytics"
+                        tooltip="Conversation intelligence and analytics platforms (Gong, Chorus, Outreach, etc.) for call recording, performance tracking, and insights. Typical: $100-$500/month"
                       />
                       <Input
                         id="salesAnalyticsCost"
@@ -2399,8 +2412,8 @@ export default function ROICalculator() {
                     <div className="space-y-2">
                       <LabelWithTooltip
                         htmlFor="trainingCostPerEmployee"
-                        label="Training Cost/Employee"
-                        tooltip="Monthly training and development cost per employee"
+                        label="Training per Employee"
+                        tooltip="Monthly training and development investment per team member (courses, coaching, certifications, workshops, etc.). Typical: $200-$500/employee/month"
                       />
                       <Input
                         id="trainingCostPerEmployee"
@@ -2415,7 +2428,7 @@ export default function ROICalculator() {
                       <LabelWithTooltip
                         htmlFor="overheadBundleCost"
                         label="Overhead Bundle"
-                        tooltip="Monthly overhead costs (office, utilities, internet, insurance, etc.)"
+                        tooltip="Monthly overhead and operational costs including office space, utilities, internet, insurance, software licenses, and miscellaneous expenses. Typical: $500-$3,000/month"
                       />
                       <Input
                         id="overheadBundleCost"
