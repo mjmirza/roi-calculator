@@ -156,6 +156,28 @@ export default function ROICalculator() {
   const [agencyMonthlyFee, setAgencyMonthlyFee] = useState(8000)
   const [agencyPerLeadFee, setAgencyPerLeadFee] = useState(150)
 
+  // Operating Costs - Team
+  const [sdrCount, setSdrCount] = useState(2)
+  const [sdrCostPerPerson, setSdrCostPerPerson] = useState(8500)
+  const [aeCount, setAeCount] = useState(1)
+  const [aeCostPerPerson, setAeCostPerPerson] = useState(12000)
+  const [enableSalesManager, setEnableSalesManager] = useState(false)
+  const [salesManagerCost, setSalesManagerCost] = useState(12500)
+
+  // Operating Costs - Tools
+  const [crmPlatformCost, setCrmPlatformCost] = useState(300)
+  const [emailVerificationCost, setEmailVerificationCost] = useState(100)
+  const [salesAnalyticsCost, setSalesAnalyticsCost] = useState(200)
+
+  // Operating Costs - Additional
+  const [enableVirtualAssistant, setEnableVirtualAssistant] = useState(false)
+  const [virtualAssistantCost, setVirtualAssistantCost] = useState(2500)
+  const [trainingCostPerEmployee, setTrainingCostPerEmployee] = useState(300)
+  const [overheadBundleCost, setOverheadBundleCost] = useState(1000)
+
+  // Show/hide Operating Costs section
+  const [showOperatingCosts, setShowOperatingCosts] = useState(false)
+
   const [calculations, setCalculations] = useState({
     emailsPerMonth: 0,
     totalEmails: 0,
@@ -227,6 +249,11 @@ export default function ROICalculator() {
     afterTaxROI: 0,
     avgCustomerLifetimeMonths: 0,
     timeToFirstRevenueDays: 0,
+    // Operating Costs breakdown
+    teamCost: 0,
+    toolsCost: 0,
+    trainingCost: 0,
+    operatingCostTotal: 0,
     isValid: false,
     missingFields: [] as string[],
   })
@@ -522,6 +549,21 @@ export default function ROICalculator() {
     const unsubscribes = Math.round(totalEmails * (unsubscribeRate / 100))
     const effectiveReach = totalEmails - emailsBounced - unsubscribes
 
+    // Operating Costs - Team
+    const totalEmployees = sdrCount + aeCount + (enableSalesManager ? 1 : 0) + (enableVirtualAssistant ? 1 : 0)
+    const teamCost =
+      (sdrCount * sdrCostPerPerson) +
+      (aeCount * aeCostPerPerson) +
+      (enableSalesManager ? salesManagerCost : 0) +
+      (enableVirtualAssistant ? virtualAssistantCost : 0)
+
+    // Operating Costs - Tools
+    const toolsCost = crmPlatformCost + emailVerificationCost + salesAnalyticsCost
+
+    // Operating Costs - Training & Overhead
+    const trainingCost = totalEmployees * trainingCostPerEmployee
+    const operatingCostTotal = teamCost + toolsCost + trainingCost + overheadBundleCost
+
     const totalCost =
       (domains * domainCost) +
       mailboxCost +
@@ -530,7 +572,8 @@ export default function ROICalculator() {
       engineerCost +
       warmupCost +
       dataProviderCost +
-      copywriterCost
+      copywriterCost +
+      operatingCostTotal
 
     const costPerMeeting = meetings > 0 ? totalCost / meetings : 0
     const cac = deals > 0 ? totalCost / deals : 0
@@ -691,6 +734,11 @@ export default function ROICalculator() {
       afterTaxROI,
       avgCustomerLifetimeMonths,
       timeToFirstRevenueDays,
+      // Operating Costs breakdown
+      teamCost,
+      toolsCost,
+      trainingCost,
+      operatingCostTotal,
       isValid: validation.isValid,
       missingFields: validation.missingFields,
     })
@@ -759,6 +807,20 @@ export default function ROICalculator() {
     referralProgramCost,
     currency,
     enableTax,
+    // Operating costs dependencies
+    sdrCount,
+    sdrCostPerPerson,
+    aeCount,
+    aeCostPerPerson,
+    enableSalesManager,
+    salesManagerCost,
+    crmPlatformCost,
+    emailVerificationCost,
+    salesAnalyticsCost,
+    enableVirtualAssistant,
+    virtualAssistantCost,
+    trainingCostPerEmployee,
+    overheadBundleCost,
   ])
 
   const handleSaveScenario = () => {
@@ -2121,6 +2183,296 @@ export default function ROICalculator() {
                   </>
                 )}
               </CardContent>
+            </Card>
+
+            {/* Operating Costs Section */}
+            <Card className="transition-all hover:shadow-md border-2 border-blue-200 dark:border-blue-900">
+              <CardHeader className="cursor-pointer" onClick={() => setShowOperatingCosts(!showOperatingCosts)}>
+                <div className="flex items-center justify-between">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3">
+                      <Building2 className="h-5 w-5 text-blue-600" />
+                      <CardTitle className="text-base">Operating Costs</CardTitle>
+                    </div>
+                    <CardDescription className="mt-1 flex items-start gap-1">
+                      <Info className="h-3 w-3 mt-0.5 flex-shrink-0 text-blue-500" />
+                      <span className="text-xs">Team salaries, essential tools, training, and overhead costs</span>
+                    </CardDescription>
+                  </div>
+                  {showOperatingCosts ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
+                </div>
+              </CardHeader>
+              {showOperatingCosts && (
+                <CardContent className="space-y-6 pt-0">
+                  <Separator className="mb-4" />
+
+                  {/* Team Costs Section */}
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-2">
+                      <Users className="h-4 w-4 text-blue-600" />
+                      <h4 className="font-semibold text-sm">Team Costs</h4>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <LabelWithTooltip
+                          htmlFor="sdrCount"
+                          label="SDR Count"
+                          tooltip="Number of Sales Development Representatives on your team"
+                        />
+                        <Input
+                          id="sdrCount"
+                          type="number"
+                          value={sdrCount || ""}
+                          onChange={(e) => handleNumberInput(e.target.value, setSdrCount)}
+                          className="font-mono transition-all focus:ring-2"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <LabelWithTooltip
+                          htmlFor="sdrCostPerPerson"
+                          label="SDR Cost/Person"
+                          tooltip="Monthly cost per SDR (salary + benefits)"
+                        />
+                        <Input
+                          id="sdrCostPerPerson"
+                          type="number"
+                          value={sdrCostPerPerson || ""}
+                          onChange={(e) => handleNumberInput(e.target.value, setSdrCostPerPerson)}
+                          className="font-mono transition-all focus:ring-2"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <LabelWithTooltip
+                          htmlFor="aeCount"
+                          label="AE Count"
+                          tooltip="Number of Account Executives on your team"
+                        />
+                        <Input
+                          id="aeCount"
+                          type="number"
+                          value={aeCount || ""}
+                          onChange={(e) => handleNumberInput(e.target.value, setAeCount)}
+                          className="font-mono transition-all focus:ring-2"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <LabelWithTooltip
+                          htmlFor="aeCostPerPerson"
+                          label="AE Cost/Person"
+                          tooltip="Monthly cost per AE (salary + benefits)"
+                        />
+                        <Input
+                          id="aeCostPerPerson"
+                          type="number"
+                          value={aeCostPerPerson || ""}
+                          onChange={(e) => handleNumberInput(e.target.value, setAeCostPerPerson)}
+                          className="font-mono transition-all focus:ring-2"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2 p-3 bg-muted/50 rounded-lg">
+                      <Switch
+                        checked={enableSalesManager}
+                        onCheckedChange={setEnableSalesManager}
+                      />
+                      <div className="flex-1">
+                        <Label className="text-sm font-medium cursor-pointer">Sales Manager</Label>
+                        <p className="text-xs text-muted-foreground">Add sales manager to your team</p>
+                      </div>
+                    </div>
+
+                    {enableSalesManager && (
+                      <div className="space-y-2">
+                        <LabelWithTooltip
+                          htmlFor="salesManagerCost"
+                          label="Sales Manager Cost"
+                          tooltip="Monthly cost for sales manager (salary + benefits)"
+                        />
+                        <Input
+                          id="salesManagerCost"
+                          type="number"
+                          value={salesManagerCost || ""}
+                          onChange={(e) => handleNumberInput(e.target.value, setSalesManagerCost)}
+                          className="font-mono transition-all focus:ring-2"
+                        />
+                      </div>
+                    )}
+
+                    <div className="flex items-center gap-2 p-3 bg-muted/50 rounded-lg">
+                      <Switch
+                        checked={enableVirtualAssistant}
+                        onCheckedChange={setEnableVirtualAssistant}
+                      />
+                      <div className="flex-1">
+                        <Label className="text-sm font-medium cursor-pointer">Virtual Assistant</Label>
+                        <p className="text-xs text-muted-foreground">Add VA for administrative support</p>
+                      </div>
+                    </div>
+
+                    {enableVirtualAssistant && (
+                      <div className="space-y-2">
+                        <LabelWithTooltip
+                          htmlFor="virtualAssistantCost"
+                          label="VA Monthly Cost"
+                          tooltip="Monthly cost for virtual assistant"
+                        />
+                        <Input
+                          id="virtualAssistantCost"
+                          type="number"
+                          value={virtualAssistantCost || ""}
+                          onChange={(e) => handleNumberInput(e.target.value, setVirtualAssistantCost)}
+                          className="font-mono transition-all focus:ring-2"
+                        />
+                      </div>
+                    )}
+                  </div>
+
+                  <Separator />
+
+                  {/* Tools Costs Section */}
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-2">
+                      <BarChart3 className="h-4 w-4 text-blue-600" />
+                      <h4 className="font-semibold text-sm">Essential Tools</h4>
+                    </div>
+
+                    <div className="space-y-2">
+                      <LabelWithTooltip
+                        htmlFor="crmPlatformCost"
+                        label="CRM Platform Cost"
+                        tooltip="Monthly cost for CRM (HubSpot, Salesforce, Pipedrive, etc.)"
+                      />
+                      <Input
+                        id="crmPlatformCost"
+                        type="number"
+                        value={crmPlatformCost || ""}
+                        onChange={(e) => handleNumberInput(e.target.value, setCrmPlatformCost)}
+                        className="font-mono transition-all focus:ring-2"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <LabelWithTooltip
+                        htmlFor="emailVerificationCost"
+                        label="Email Verification Cost"
+                        tooltip="Monthly cost for email verification tools (ZeroBounce, NeverBounce, etc.)"
+                      />
+                      <Input
+                        id="emailVerificationCost"
+                        type="number"
+                        value={emailVerificationCost || ""}
+                        onChange={(e) => handleNumberInput(e.target.value, setEmailVerificationCost)}
+                        className="font-mono transition-all focus:ring-2"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <LabelWithTooltip
+                        htmlFor="salesAnalyticsCost"
+                        label="Sales Analytics Tools"
+                        tooltip="Monthly cost for analytics tools (Gong, Chorus, etc.)"
+                      />
+                      <Input
+                        id="salesAnalyticsCost"
+                        type="number"
+                        value={salesAnalyticsCost || ""}
+                        onChange={(e) => handleNumberInput(e.target.value, setSalesAnalyticsCost)}
+                        className="font-mono transition-all focus:ring-2"
+                      />
+                    </div>
+                  </div>
+
+                  <Separator />
+
+                  {/* Additional Costs Section */}
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-2">
+                      <DollarSign className="h-4 w-4 text-blue-600" />
+                      <h4 className="font-semibold text-sm">Additional Costs</h4>
+                    </div>
+
+                    <div className="space-y-2">
+                      <LabelWithTooltip
+                        htmlFor="trainingCostPerEmployee"
+                        label="Training Cost/Employee"
+                        tooltip="Monthly training and development cost per employee"
+                      />
+                      <Input
+                        id="trainingCostPerEmployee"
+                        type="number"
+                        value={trainingCostPerEmployee || ""}
+                        onChange={(e) => handleNumberInput(e.target.value, setTrainingCostPerEmployee)}
+                        className="font-mono transition-all focus:ring-2"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <LabelWithTooltip
+                        htmlFor="overheadBundleCost"
+                        label="Overhead Bundle"
+                        tooltip="Monthly overhead costs (office, utilities, internet, insurance, etc.)"
+                      />
+                      <Input
+                        id="overheadBundleCost"
+                        type="number"
+                        value={overheadBundleCost || ""}
+                        onChange={(e) => handleNumberInput(e.target.value, setOverheadBundleCost)}
+                        className="font-mono transition-all focus:ring-2"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Total Operating Costs Display */}
+                  <div className="bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg border border-blue-200 dark:border-blue-900">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-semibold">Total Operating Costs:</span>
+                      <span className="text-lg font-bold text-blue-600">
+                        {CURRENCIES[currency].symbol}
+                        {calculations.operatingCostTotal.toLocaleString(undefined, {
+                          minimumFractionDigits: 0,
+                          maximumFractionDigits: 0,
+                        })}
+                        /mo
+                      </span>
+                    </div>
+                    <div className="mt-2 space-y-1 text-xs text-muted-foreground">
+                      <div className="flex justify-between">
+                        <span>Team:</span>
+                        <span>
+                          {CURRENCIES[currency].symbol}
+                          {calculations.teamCost.toLocaleString()}
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Tools:</span>
+                        <span>
+                          {CURRENCIES[currency].symbol}
+                          {calculations.toolsCost.toLocaleString()}
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Training:</span>
+                        <span>
+                          {CURRENCIES[currency].symbol}
+                          {calculations.trainingCost.toLocaleString()}
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Overhead:</span>
+                        <span>
+                          {CURRENCIES[currency].symbol}
+                          {overheadBundleCost.toLocaleString()}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              )}
             </Card>
 
             <Card className="transition-all hover:shadow-md border-2 border-purple-200 dark:border-purple-900">
